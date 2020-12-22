@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" th:href="@{favicon.ico}" type="image/x-icon"/>
+    <title>登陆页面</title><!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Core css -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+</head>
+<body class="font-muli theme-cyan gradient">
+<!--<form th:action="@{/user/login}">-->
+<!--    <input type="text" name="username">-->
+<!--    <input type="password" name="password">-->
+<!--    <button type="submit">111</button>-->
+<!--</form>测试用-->
+<div class="auth option2">
+    <div class="auth_left">
+        <div class="card">
+            <div class="card-body" >
+                <form class="text-center" th:action="@{/user/login}" method="post"><a class="header-brand" href="index.html"><i
+                        class="fa fa-graduation-cap brand-logo"></i></a>
+                    <div class="card-title mt-3">请登陆您的账号</div>
+                    <a style="color: #a71d2a" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></a>
+                <div class="form-group"><input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                                               aria-describedby="emailHelp" placeholder="学号/教师号"></div>
+                <div class="form-group"><label class="form-label"><a href="forgot-password.html"
+                                                                     class="float-right small">忘记密码
+                                </a></label><input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                               placeholder="密码"></div>
+                <div class="form-group"><label class="custom-control custom-checkbox"><input type="checkbox"
+                                                                                             class="custom-control-input"/><span
+                        class="custom-control-label">记住我</span></label></div>
+                <div class="text-center"><button  class="btn btn-primary btn-block" title="" type="submit">登陆</button></div>
+                    <div class="text-muted mt-4">Don't have account yet? <a href="register.html">注册</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- Start Main project js,jQuery,Bootstrap -->
+<script src="../assets/bundles/lib.vendor.bundle.js"></script><!-- Start project main js and page js -->
+<script src="../assets/js/core.js"></script>
+</body>
+</html>
