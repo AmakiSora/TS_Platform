@@ -42,14 +42,14 @@
                     class="fe fe-power"></i></a></div>
         </div>
     </div><!-- Start Rightbar setting panel 头部菜单-->
-    <div id="rightsidebar" class="right_sidebar">
+    <div id="rightsidebar" class="right_sidebar" th:fragment="RightSideBar">
         <a href="javascript:void(0)" class="p-3 settingbar float-right"><i
             class="fa fa-close"></i></a>
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Settings" aria-expanded="true">Settings</a>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Settings" aria-expanded="true">设定</a>
             </li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#activity"
-                                    aria-expanded="false">Activity</a></li>
+                                    aria-expanded="false">活动表</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane vivify fadeIn active" id="Settings" aria-expanded="true">
@@ -107,16 +107,16 @@
                                 class="custom-switch-input btn-darkmode"><span
                                 class="custom-switch-indicator"></span></label></li>
                         <li><label class="custom-switch"><span
-                                class="custom-switch-description">固定工具栏</span><input type="checkbox"
+                                class="custom-switch-description">固定顶部菜单</span><input type="checkbox"
                                                                                               name="custom-switch-checkbox"
                                                                                               class="custom-switch-input btn-fixnavbar"><span
                                 class="custom-switch-indicator"></span></label></li>
                         <li><label class="custom-switch"><span
-                                class="custom-switch-description">黑色标题</span><input type="checkbox"
+                                class="custom-switch-description">黑色顶部菜单</span><input type="checkbox"
                                                                                            name="custom-switch-checkbox"
                                                                                            class="custom-switch-input btn-pageheader"><span
                                 class="custom-switch-indicator"></span></label></li>
-                        <li><label class="custom-switch"><span class="custom-switch-description">黑色侧边</span><input
+                        <li><label class="custom-switch"><span class="custom-switch-description">黑色侧边图标</span><input
                                 type="checkbox" name="custom-switch-checkbox"
                                 class="custom-switch-input btn-min_sidebar"><span
                                 class="custom-switch-indicator"></span></label></li>
@@ -125,7 +125,7 @@
                                                                                             name="custom-switch-checkbox"
                                                                                             class="custom-switch-input btn-sidebar"><span
                                 class="custom-switch-indicator"></span></label></li>
-                        <li><label class="custom-switch"><span class="custom-switch-description">图标色</span><input
+                        <li><label class="custom-switch"><span class="custom-switch-description">彩色图标</span><input
                                 type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-iconcolor"><span
                                 class="custom-switch-indicator"></span></label></li>
                         <li><label class="custom-switch"><span
@@ -153,7 +153,7 @@
                         <div class="progress-bar" role="progressbar" aria-valuenow="77" aria-valuemin="0"
                              aria-valuemax="100" style="width: 77%;"></div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-block mt-3">Upgrade Storage</button>
+                    <button type="button" class="btn btn-primary btn-block mt-3">保存设置</button>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane vivify fadeIn" id="activity" aria-expanded="false">
@@ -199,7 +199,7 @@
                 </ul>
             </div>
         </div>
-    </div><!-- Start Theme panel do not add in project -->
+    </div><!-- Start Theme panel do not add in project 右侧设置栏 -->
     <div class="theme_div">
         <div class="card">
             <div class="card-body">
@@ -620,7 +620,7 @@
             </div>
         </div>
     </div><!-- Start Main leftbar navigation -->
-    <div id="left-sidebar" class="sidebar">
+    <div id="left-sidebar" class="sidebar" th:fragment="LeftSideBar">
         <h5 class="brand-name">[[${session.loginUser}]]<a href="javascript:void(0)"
                                                                              class="menu_option float-right"><i
             class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a>
@@ -668,16 +668,16 @@
                 </nav>
             </div>
         </div>
-    </div><!-- Start project content area -->
-    <div class="page"><!-- Start Page header -->
+    </div><!-- Start project content area 左侧菜单栏-->
+    <div class="page" ><!-- Start Page header -->
         <div class="section-body" id="page_top">
             <div class="container-fluid">
-                <div class="page-header">
+                <div class="page-header" th:fragment="PageHeader"><!--顶部菜单-->
                     <div class="left">
                         <div class="input-group"><input type="text" class="form-control"
                                                         placeholder="What you want to find">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Search</button>
+                                <button class="btn btn-outline-secondary" type="button">搜索</button>
                             </div>
                         </div>
                     </div>
@@ -685,7 +685,7 @@
                         <ul class="nav nav-pills">
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"
                                                              href="#" role="button" aria-haspopup="true"
-                                                             aria-expanded="false">Pages</a>
+                                                             aria-expanded="false">页</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" href="page-empty.html">Empty
                                     page</a><a class="dropdown-item" href="page-profile.html">Profile</a><a
                                         class="dropdown-item" href="page-search.html">Search Results</a><a
@@ -695,8 +695,8 @@
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"
                                                              href="#" role="button" aria-haspopup="true"
-                                                             aria-expanded="false">Auth</a>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="login.html">Login</a><a
+                                                             aria-expanded="false">授权</a>
+                                <div class="dropdown-menu"><a class="dropdown-item" href="login.html">登录</a><a
                                         class="dropdown-item" href="register.html">Register</a><a class="dropdown-item"
                                                                                                   href="forgot-password.html">Forgot
                                     password</a>
