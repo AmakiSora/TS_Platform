@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="icon" th:href="@{favicon.ico}" type="image/x-icon">
     <title>职工</title><!-- Bootstrap Core and vandor -->
-    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/plugins/summernote/dist/summernote.css}"/><!-- Core css -->
-    <link rel="stylesheet" th:href="@{/css/style.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
+    <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader"></div>
 </div>
 <div id="main_content"><!-- Start Main top header -->
-    <div th:insert="index::HeaderTop"></div><!-- 顶部菜单-->
-    <div th:insert="index::RightSideBar"></div><!-- 右侧设置-->
-    <div th:insert="index::ThemeDiv"></div><!-- 主题 -->
-    <div th:insert="index::UserDiv"></div><!-- 用户 -->
-    <div th:insert="index::LeftSideBar"></div><!-- 菜单 -->
+    <div th:insert="DIY::HeaderTop"></div><!-- 顶部菜单-->
+    <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
+    <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
+    <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
+    <div th:insert="DIY::LeftSideBar(active='staff.html')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
-        <div th:insert="index::PageTop"></div><!-- 顶部搜索栏 -->
+        <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center ">
@@ -842,15 +842,15 @@
                 </div>
             </div>
         </div>
-        <div th:insert="index::PageBottom"></div><!-- 底部版权栏 -->
+        <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
-<script th:src="@{/bundles/lib.vendor.bundle.js}"></script><!-- Start Plugin Js -->
-<script th:src="@{/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
-<script th:src="@{/plugins/dropify/js/dropify.min.js}"></script>
-<script th:src="@{/bundles/summernote.bundle.js}"></script><!-- Start project main js and page js -->
-<script th:src="@{/js/core.js}"></script>
-<script th:src="@{/js/form/dropify.js}"></script>
-<script th:src="@{/js/page/summernote.js}"></script>
+<script th:src="@{js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
+<script th:src="@{js/counterup.bundle.js}"></script>
+<script th:src="@{js/apexcharts.bundle.js}"></script>
+<script th:src="@{js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
+<script th:src="@{js/core.js}"></script>
+<script th:src="@{js/index.js}"></script>
+<script th:src="@{js/summernote.js}"></script>
 </body>
 </html>

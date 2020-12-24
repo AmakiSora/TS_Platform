@@ -14,6 +14,7 @@
 <div class="page-loader-wrapper">
     <div class="loader"></div>
 </div>
+<<<<<<< HEAD
 <div id="main_content"><!-- Start Main top header -->
     <div id="header_top" class="header_top" th:fragment="HeaderTop">
         <div class="container">
@@ -818,6 +819,16 @@
                 </div>
             </div>
         </div><!-- 头部搜索栏 -->
+=======
+<div id="main_content"><!-- 大页面 -->
+    <div th:insert="DIY::HeaderTop"></div><!-- 顶部菜单 -->
+    <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置 -->
+    <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
+    <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
+    <div th:insert="DIY::LeftSideBar(active='index.html')"></div><!-- 菜单 -->
+    <div class="page"><!-- 右边页面 -->
+        <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
+>>>>>>> 49bda27... TS_Platform 1.06 大量优化界面，增加DIY模板页，新增高亮显示菜单
         <div class="section-body">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center">
@@ -1489,24 +1500,7 @@
                 </div>
             </div>
         </div>
-        <div class="section-body" th:fragment="PageBottom"><!-- 网页底部 -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 © 2020 <a href="http://www.bootstrapmb.com/">高校师生交互平台</a>.
-                        </div>
-                        <div class="col-md-6 col-sm-12 text-md-right">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><a href="../doc/index.html">网络1712</a></li>
-                                <li class="list-inline-item"><a href="javascript:void(0)">林津宇</a></li>
-                                <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                class="btn btn-outline-primary btn-sm">按钮</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div><!-- 底部版权栏 -->
+        <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
 <script th:src="@{js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
