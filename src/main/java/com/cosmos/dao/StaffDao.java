@@ -18,11 +18,11 @@ public class StaffDao {
 
     static {
         staffs = new HashMap<Integer, Staff>();//创建一个职工表
-        staffs.put(1001,new Staff(1001,0,"AA","18077889900",new College(001,"马克思主义学院")));
-        staffs.put(1002,new Staff(1002,1,"BB","18077889911",new College(002,"电子信息学院")));
-        staffs.put(1003,new Staff(1003,0,"CC","18077889922",new College(003,"外国语学院")));
-        staffs.put(1004,new Staff(1004,1,"DD","18077889933",new College(004,"电气学院")));
-        staffs.put(1005,new Staff(1005,0,"EE","18077889944",new College(005,"商学院")));
+        staffs.put(1001,new Staff(1001,1,"罗翔","18077889900",new College(001,"马克思主义学院")));
+        staffs.put(1002,new Staff(1002,0,"克里斯","18077889911",new College(002,"电子信息学院")));
+        staffs.put(1003,new Staff(1003,1,"张雪峰","18077889922",new College(003,"外国语学院")));
+        staffs.put(1004,new Staff(1004,1,"李永乐","18077889933",new College(004,"电气学院")));
+        staffs.put(1005,new Staff(1005,1,"沈逸","18077889944",new College(005,"商学院")));
 
     }
     //增加职工

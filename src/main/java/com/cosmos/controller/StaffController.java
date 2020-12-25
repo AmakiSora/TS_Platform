@@ -15,10 +15,10 @@ public class StaffController {
     StaffDao staffDao;
 
     //查询所有职工列表
-    @RequestMapping("/staf")
-    public String list(Model model){
-        Collection<Staff> staff = staffDao.getAll();
-        model.addAttribute("staf",staff);//放在请求域中
+    @RequestMapping("/staffs")
+    public String staff(Model model){
+        Collection<Staff> staffs = staffDao.getAll();
+        model.addAttribute("staffs",staffs);//放在请求域中
         return "staf/staff";//thymeleaf默认会拼串  classpath:/templates/xxx.html
     }
 }
