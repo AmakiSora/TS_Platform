@@ -29,4 +29,12 @@ public class Administrators {
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Administrators{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

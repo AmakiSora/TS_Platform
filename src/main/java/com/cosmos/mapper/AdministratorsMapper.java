@@ -1,8 +1,10 @@
 package com.cosmos.mapper;
 
 import com.cosmos.pojo.Administrators;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface administratorsMapper {
+@Mapper
+public interface AdministratorsMapper {
     int deleteByPrimaryKey(Integer userid);
 
     int insert(Administrators record);
