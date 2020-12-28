@@ -3,7 +3,7 @@ spring:
   datasource:
     username: root
     password: m381610m.
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://bootzhong.top:3306/TS_Platform?useUnicode=true&charaterEncoding=UTF-8&serverTimezone=UTC
 
 #mybatis xml位置

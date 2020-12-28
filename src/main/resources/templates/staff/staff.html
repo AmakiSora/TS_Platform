@@ -62,12 +62,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="staff:${staffs}">
-                                        <td>[[${staff.getId()}]]</td>       <!--也可以这样写 <td th:text="${staff.getId()}"></td> -->
-                                        <td><div class="font-15"><strong>[[${staff.getName()}]]</strong></div></td>
-                                        <td th:text="${staff.getGender()==0?'女':'男'}"></td>
-                                        <td><span class="text-muted">[[${staff.getPhone()}]]</span></td>
-                                        <td>[[${staff.college.getCollegeName()}]]</td>
+                                    <tr th:each="staff:${staffList}">
+                                        <td th:text="${staff.id}"></td>
+                                        <td th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
+                                        <td th:text="${staff.gender==0?'女':'男'}"></td>
+                                        <td th:text="${staff.phone}"><span class="text-muted"></span></td>
+                                        <td th:text="${staff.college}"></td>
 <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
                                         <td>
                                             <button type="button" class="btn btn-icon btn-sm" title="View"><i

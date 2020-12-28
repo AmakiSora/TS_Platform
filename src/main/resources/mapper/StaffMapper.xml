@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cosmos.mapper.StaffMapper">
+    <select id="queryStaffList" resultType="com.cosmos.pojo.Staff">
+        select * from staff
+    </select>
+    <select id="queryStaffById" resultType="com.cosmos.pojo.Staff">
+        select * from staff where id = #{id}
+    </select>
+
+</mapper>
