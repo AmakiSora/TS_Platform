@@ -39,9 +39,9 @@
             </div>
             <div class="hright">
                 <a href="javascript:void(0)" class="nav-link icon right_tab"><i
-                    class="fe fe-align-right"></i></a>
+                        class="fe fe-align-right"></i></a>
                 <a th:href="@{/login.html}" class="nav-link icon settingbar"><i
-                    class="fe fe-power"></i></a></div>
+                        class="fe fe-power"></i></a></div>
         </div><!-- 最左侧菜单 -->
     </div><!-- 顶部菜单 -->
     <div id="rightsidebar" class="right_sidebar" th:fragment="RightSideBar">
@@ -637,8 +637,8 @@
                     <ul class="metismenu">
                         <li th:class="${active == 'index.html'?'active':''}"><a th:href="@{/index.html}"><i class="fa fa-dashboard"></i><span>首页</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-black-tie"></i><span>教授</span></a></li>
-                        <li th:class="${active == 'staff.html'?'active':''}"><a  th:href="@{/staffs}"><i class="fa fa-user-circle-o"></i><span>职工</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{students.html}"><i class="fa fa-users"></i><span>学生</span></a></li>
+                        <li th:class="${active == 'staff.html'?'active':''}"><a th:href="@{/staffs}"><i class="fa fa-user-circle-o"></i><span>职工</span></a></li>
+                        <li th:class="${active == 'students.html'?'active':''}"><a th:href="@{/students.html}"><i class="fa fa-users"></i><span>学生</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{courses.html}"><i class="fa fa-graduation-cap"></i><span>课程</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>
@@ -698,7 +698,7 @@
                                                              aria-expanded="false">授权</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" href="login.html">登录</a><a
                                         class="dropdown-item" href="register.html">注册</a><a class="dropdown-item"
-                                                                                                  href="forgot-password.html">忘记密码</a>
+                                                                                            href="forgot-password.html">忘记密码</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="404.html">404 error</a><a class="dropdown-item"
                                                                                              href="500.html">500
@@ -821,7 +821,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 ® 2020<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.11™ </a></div>
+                        <div class="col-md-6 col-sm-12">毕业设计 ® 2020<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.13™ </a></div>
                         <div class="col-md-6 col-sm-12 text-md-right">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item"><a href="../doc/index.html">网络1712</a></li>
