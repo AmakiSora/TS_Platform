@@ -19,22 +19,22 @@ public class MyUserDetailService implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        /*User user = userMapper.selectByName(username);//从数据库取出用户名
-        if(!user.equals(username)){
-            throw new UsernameNotFoundException("错");
+//        com.cosmos.pojo.User user = userMapper.selectByName(username);//从数据库取出用户名
+        com.cosmos.pojo.User user = userMapper.selectByName(username);
+        if(!user.getUsername().equals(username)){
+            throw new UsernameNotFoundException("错");//没有深入研究报错
         }
-        String password = passwordEncoder.encode();
-        return new User(user,password,AuthorityUtils
-                .commaSeparatedStringToAuthorityList("lv1,lv2"));
+        String password = passwordEncoder.encode(user.getPassword());
+        return new User(user.getUsername(),password,AuthorityUtils
+                .commaSeparatedStringToAuthorityList(user.getRole()));
 
-        if(!"111".equals(username)){
-            throw new UsernameNotFoundException("错");
-        }
-        String password = passwordEncoder.encode("123");//密码验证
-        return new User("111",password,AuthorityUtils
-                .commaSeparatedStringToAuthorityList("lv1,lv2"));//权限
-        }*/
-        return null;
+//        if(!"111".equals(username)){
+//            throw new UsernameNotFoundException("错");
+//        }
+//        String password = passwordEncoder.encode("123");//密码验证
+//        return new User("111",password,AuthorityUtils
+//                .commaSeparatedStringToAuthorityList("lv1,lv2"));//权限
+//        }
     }
 }
 

@@ -18,7 +18,7 @@ public class LoginController {
     }
     @RequestMapping("/student_Index")
     public String student_Index(){
-        return "/admin/index.html";
+        return "/student/index.html";
     }
 }
 //import javax.servlet.http.HttpSession;

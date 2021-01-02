@@ -18,7 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()//自定义登录页面
                 .loginPage("/login.html")//自定义登录页面设置
                 .loginProcessingUrl("/login")//登录访问路径
-                .successForwardUrl("/index")//登录后跳转路径
+//                .successForwardUrl("/index")//登录后跳转路径
+                .successHandler(new LoginSuccessHandle())
                 ;
         http.authorizeRequests()
                 .antMatchers("/login.html").permitAll()//不用登录的页面

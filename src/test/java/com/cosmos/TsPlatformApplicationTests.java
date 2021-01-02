@@ -16,7 +16,7 @@ class TsPlatformApplicationTests {
     private UserMapper userMapper;
     @Test
     void contextLoads() throws SQLException {
-        System.out.println(userMapper.selectByName("admin"));
+        System.out.println(userMapper.selectByName("stu"));
     }
 
 }
