@@ -40,7 +40,7 @@
             <div class="hright">
                 <a href="javascript:void(0)" class="nav-link icon right_tab"><i
                         class="fe fe-align-right"></i></a>
-                <a th:href="@{/login.html}" class="nav-link icon settingbar"><i
+                <a th:href="@{/logout}" class="nav-link icon settingbar"><i
                         class="fe fe-power"></i></a></div>
         </div><!-- 最左侧菜单 -->
     </div><!-- 顶部菜单 -->
@@ -636,20 +636,20 @@
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
                         <li th:class="${active == 'index.html'?'active':''}"><a th:href="@{/index.html}"><i class="fa fa-dashboard"></i><span>首页</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-black-tie"></i><span>教授</span></a></li>
-                        <li th:class="${active == 'staff.html'?'active':''}"><a th:href="@{/staffs}"><i class="fa fa-user-circle-o"></i><span>职工</span></a></li>
+                        <li th:class="${active == 'staff.html'?'active':''}"><a th:href="@{/staffs}"><i class="fa fa-black-tie"></i><span>职工</span></a></li>
                         <li th:class="${active == 'students.html'?'active':''}"><a th:href="@{/students.html}"><i class="fa fa-users"></i><span>学生</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{courses.html}"><i class="fa fa-graduation-cap"></i><span>课程</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{holiday.html}"><i class="fa fa-bullhorn"></i><span>假期</span></a></li>
-                        <li class="g_heading">额外</li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{events.html}"><i class="fa fa-calendar"></i><span>日历</span></a></li>
                         <li th:class="${active == ''?'active':''}"><a th:href="@{app-chat.html}"><i class="fa fa-comments-o"></i><span>聊天</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{app-contact.html}"><i class="fa fa-address-book"></i><span>通讯录</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{app-filemanager.html}"><i class="fa fa-folder"></i><span>文件管理</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{our-centres.html}"><i class="fa fa-map"></i><span>其他</span></a></li>
-                        <li th:class="${active == ''?'active':''}"><a th:href="@{gallery.html}"><i class="fa fa-camera-retro"></i><span>展示厅</span></a></li>
+                        <li th:class="${active == ''?'active':''}"><a th:href="@{app-filemanager.html}"><i class="fa fa-folder"></i><span>作业</span></a></li>
+<!--                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-user-circle-o"></i><span>教授</span></a></li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{holiday.html}"><i class="fa fa-bullhorn"></i><span>假期</span></a></li>-->
+<!--                        <li class="g_heading">额外</li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{app-contact.html}"><i class="fa fa-address-book"></i><span>通讯录</span></a></li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{our-centres.html}"><i class="fa fa-map"></i><span>其他</span></a></li>-->
+<!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{gallery.html}"><i class="fa fa-camera-retro"></i><span>展示厅</span></a></li>-->
                     </ul>
                 </nav>
             </div>
@@ -843,5 +843,7 @@
 <script th:src="@{js/core.js}"></script>
 <script th:src="@{js/index.js}"></script>
 <script th:src="@{js/summernote.js}"></script>
+<script th:src="@{/images}"></script>
+
 </body>
 </html>

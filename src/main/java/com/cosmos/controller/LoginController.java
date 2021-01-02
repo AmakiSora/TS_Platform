@@ -8,6 +8,18 @@ public class LoginController {
     public String index(){
         return "index";
     }
+    @RequestMapping("/admin_Index")
+    public String admin_Index(){
+        return "/admin/index.html";
+    }
+    @RequestMapping("/staff_Index")
+    public String staff_Index(){
+        return "/staff/index.html";
+    }
+    @RequestMapping("/student_Index")
+    public String student_Index(){
+        return "/admin/index.html";
+    }
 }
 //import javax.servlet.http.HttpSession;
 //import org.springframework.ui.Model;

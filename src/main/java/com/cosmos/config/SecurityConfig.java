@@ -23,12 +23,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login.html").permitAll()//不用登录的页面
                 .antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**","/favicon.ico").permitAll()//取消样式的拦截
-                .antMatchers("/admin").hasRole("admin")//hasRole角色，不能以ROLE_开头
-                .antMatchers("/student").hasRole("student")//hasAuthority权限
-                .antMatchers("/staff").hasRole("staff")
+                .antMatchers("/admin/**").hasAuthority("admin")//hasRole角色，不能以ROLE_开头,数据库要ROLE_开头
+                .antMatchers("/student/**").hasAuthority("student")//hasAuthority权限
+                .antMatchers("/staff/**").hasAuthority("staff")
                 .anyRequest().authenticated()//所有请求都被拦截
                 ;
-        http.csrf().disable();//关闭csrf防护
+//        http.rememberMe()//记住我功能，因为要存进数据库，暂时不用
+//                .tokenValiditySeconds(100000)//自定义失效时间，默认两周
+//                .rememberMeServices()//自定义功能实现逻辑
+//                .userDetailsService(userService())//自定义登录逻辑
+//                .tokenRepository(tokenRepository)//指定存储位置
+//        ;
+        http.csrf().disable();//关闭csrf(跨站请求劫持)防护
     }
 
 //    @Autowired

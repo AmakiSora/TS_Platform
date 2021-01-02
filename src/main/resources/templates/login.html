@@ -19,7 +19,8 @@
                     <a class="header-brand" href="index.html">
                         <i class="fa fa-graduation-cap brand-logo"></i></a>
                     <div class="card-title mt-3">请登陆您的账号</div>
-                    <a style="color: #a71d2a" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></a>
+<!--                    <a style="color: #a71d2a" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></a>-->
+                    <a style="color: #a71d2a" th:if="${param.error}" th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}"></a>
                 <div class="form-group">
                     <input type="text" name="username"
                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="学号/教师号"></div>
@@ -32,7 +33,7 @@
                         <input type="checkbox" class="custom-control-input"/>
                         <span class="custom-control-label">记住我</span></label></div>
                 <div class="text-center"><button  class="btn btn-primary btn-block" title="" type="submit">登陆</button></div>
-                    <div class="text-muted mt-4">还没帐号? <a href="register.html">注册</a></div>
+<!--                    <div class="text-muted mt-4">还没帐号? <a href="register.html">注册</a></div>-->
                 </form>
             </div>
         </div>
