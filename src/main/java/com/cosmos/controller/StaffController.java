@@ -5,16 +5,21 @@ import com.cosmos.pojo.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
 public class StaffController {
+    @RequestMapping("/staff/{staff}")
+    public String staff(@PathVariable("staff") String staff){
+        return "/staff/"+staff;
+    }
     @Autowired
     private StaffMapper staffMapper;
     //查询所有职工列表
-    @RequestMapping("/staffs")
+    @RequestMapping("/staff")
     public String queryStaffList(Model model){
         List<Staff> staffList = staffMapper.queryStaffList();
         model.addAttribute("staffList",staffList);

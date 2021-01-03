@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" th:href="@{favicon.ico}" type="image/x-icon">
+    <title>教师</title><!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
+    <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+</head>
+<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader"></div>
+</div>
+<div id="main_content"><!-- Start Main top header -->
+    <div th:insert="DIY::HeaderTop"></div><!-- 顶部菜单-->
+    <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
+    <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
+    <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
+    <div th:insert="/staff/index::LeftSideBar(active='Settings')" ></div><!-- 菜单 -->
+    <div class="page"><!-- 主页面 -->
+        <div class="section-body" id="page_top">
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="left">
+                            <div class="input-group"><input type="text" class="form-control"
+                                                            placeholder="What you want to find">
+                                <div class="input-group-append"><button class="btn btn-outline-secondary"
+                                                                        type="button">Search</button></div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                                                 href="setting.html#" role="button" aria-haspopup="true"
+                                                                 aria-expanded="false">Pages</a>
+                                    <div class="dropdown-menu"><a class="dropdown-item" href="page-empty.html">Empty
+                                        page</a><a class="dropdown-item" href="page-profile.html">Profile</a><a
+                                            class="dropdown-item" href="page-search.html">Search Results</a><a
+                                            class="dropdown-item" href="page-timeline.html">Timeline</a><a
+                                            class="dropdown-item" href="page-invoices.html">Invoices</a><a
+                                            class="dropdown-item" href="page-pricing.html">Pricing</a></div>
+                                </li>
+                                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                                                 href="setting.html#" role="button" aria-haspopup="true"
+                                                                 aria-expanded="false">Auth</a>
+                                    <div class="dropdown-menu"><a class="dropdown-item" href="login.html">Login</a><a
+                                            class="dropdown-item" href="register.html">Register</a><a
+                                            class="dropdown-item" href="forgot-password.html">Forgot password</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="404.html">404
+                                            error</a><a class="dropdown-item" href="500.html">500 error</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="notification d-flex">
+                                <div class="dropdown d-flex"><a
+                                        class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1"
+                                        data-toggle="dropdown"><i class="fa fa-language"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><a
+                                            class="dropdown-item" href="setting.html#"><img class="w20 mr-2"
+                                                                                            src="../assets/images/flags/us.svg" alt="">English</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item"
+                                                                               href="setting.html#"><img class="w20 mr-2"
+                                                                                                         src="../assets/images/flags/es.svg" alt="">Spanish</a><a
+                                                class="dropdown-item" href="setting.html#"><img class="w20 mr-2"
+                                                                                                src="../assets/images/flags/jp.svg" alt="">japanese</a><a
+                                                class="dropdown-item" href="setting.html#"><img class="w20 mr-2"
+                                                                                                src="../assets/images/flags/bl.svg" alt="">France</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown d-flex"><a
+                                        class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1"
+                                        data-toggle="dropdown"><i class="fa fa-envelope"></i><span
+                                        class="badge badge-success nav-unread"></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <ul class="right_chat list-unstyled w350 p-0">
+                                            <li class="online"><a href="javascript:void(0);" class="media"><img
+                                                    class="media-object" src="../assets/images/xs/avatar4.jpg"
+                                                    alt="">
+                                                <div class="media-body"><span class="name">Donald Gardner</span>
+                                                    <div class="message">It is a long established fact that a reader
+                                                    </div><small>11 mins ago</small><span
+                                                            class="badge badge-outline status"></span>
+                                                </div>
+                                            </a></li>
+                                            <li class="online"><a href="javascript:void(0);" class="media"><img
+                                                    class="media-object " src="../assets/images/xs/avatar5.jpg"
+                                                    alt="">
+                                                <div class="media-body"><span class="name">Wendy Keen</span>
+                                                    <div class="message">There are many variations of passages of
+                                                        Lorem Ipsum</div><small>18 mins ago</small><span
+                                                            class="badge badge-outline status"></span>
+                                                </div>
+                                            </a></li>
+                                            <li class="offline"><a href="javascript:void(0);" class="media"><img
+                                                    class="media-object " src="../assets/images/xs/avatar2.jpg"
+                                                    alt="">
+                                                <div class="media-body"><span class="name">Matt Rosales</span>
+                                                    <div class="message">Contrary to popular belief,Lorem Ipsum is
+                                                        not simply</div><small>27 mins ago</small><span
+                                                            class="badge badge-outline status"></span>
+                                                </div>
+                                            </a></li>
+                                            <li class="online"><a href="javascript:void(0);" class="media"><img
+                                                    class="media-object " src="../assets/images/xs/avatar3.jpg"
+                                                    alt="">
+                                                <div class="media-body"><span class="name">Phillip Smith</span>
+                                                    <div class="message">It has roots in a piece of classical Latin
+                                                        literature from 45 BC</div><small>33 mins ago</small><span
+                                                            class="badge badge-outline status"></span>
+                                                </div>
+                                            </a></li>
+                                        </ul>
+                                        <div class="dropdown-divider"></div><a href="javascript:void(0)"
+                                                                               class="dropdown-item text-center text-muted-dark readall">Ken Smith all as
+                                        read</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown d-flex"><a
+                                        class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1"
+                                        data-toggle="dropdown"><i class="fa fa-bell"></i><span
+                                        class="badge badge-primary nav-unread"></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <ul class="list-unstyled feeds_widget">
+                                            <li>
+                                                <div class="feeds-left"><span class="avatar avatar-blue"><i
+                                                        class="fa fa-check"></i></span></div>
+                                                <div class="feeds-body ml-3">
+                                                    <p class="text-muted mb-0">Campaign <strong
+                                                            class="text-blue font-weight-bold">Holiday</strong>is nearly
+                                                        reach budget limit.</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="feeds-left"><span class="avatar avatar-green"><i
+                                                        class="fa fa-user"></i></span></div>
+                                                <div class="feeds-body ml-3">
+                                                    <p class="text-muted mb-0">New admission <strong
+                                                            class="text-green font-weight-bold">32</strong>in computer
+                                                        department.</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="feeds-left"><span class="avatar avatar-red"><i
+                                                        class="fa fa-info"></i></span></div>
+                                                <div class="feeds-body ml-3">
+                                                    <p class="text-muted mb-0">6th sem result <strong
+                                                            class="text-red font-weight-bold">67%</strong>in computer
+                                                        department.</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="feeds-left"><span class="avatar avatar-azure"><i
+                                                        class="fa fa-thumbs-o-up"></i></span></div>
+                                                <div class="feeds-body ml-3">
+                                                    <p class="text-muted mb-0">New Feedback <strong
+                                                            class="text-azure font-weight-bold">53</strong>for
+                                                        university assessment.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="dropdown-divider"></div><a href="javascript:void(0)"
+                                                                               class="dropdown-item text-center text-muted-dark readall">Ken Smith all as
+                                        read</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown d-flex"><a href="javascript:void(0)" class="chip ml-3"
+                                                                data-toggle="dropdown"><span class="avatar"
+                                                                                             style="background-image: url(../assets/images/xs/avatar5.jpg)"></span>George</a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><a
+                                            class="dropdown-item" href="page-profile.html"><i
+                                            class="dropdown-icon fe fe-user"></i>Profile</a><a class="dropdown-item"
+                                                                                               href="http://v.bootstrapmb.com/2020/9/96g4y8760/university/app-setting.html"><i
+                                            class="dropdown-icon fe fe-settings"></i>Settings</a><a
+                                            class="dropdown-item" href="app-email.html"><span class="float-right"><span
+                                            class="badge badge-primary">6</span></span><i
+                                            class="dropdown-icon fe fe-mail"></i>Inbox</a><a class="dropdown-item"
+                                                                                             href="javascript:void(0)"><i
+                                            class="dropdown-icon fe fe-send"></i>Message</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item"
+                                                                               href="javascript:void(0)"><i
+                                                class="dropdown-icon fe fe-help-circle"></i>Need help?</a><a
+                                                class="dropdown-item" href="login.html"><i
+                                                class="dropdown-icon fe fe-log-out"></i>Sign out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Start Page title and tab -->
+        <div class="section-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="header-action">
+                            <h1 class="page-title">设置</h1>
+                            <ol class="breadcrumb page-breadcrumb">
+                                <li class="breadcrumb-item"><a href="setting.html#">教师</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">设置</li>
+                            </ol>
+                        </div>
+                        <ul class="nav nav-tabs page-header-tab">
+                            <li class="nav-item"><a class="nav-link active show" data-toggle="tab"
+                                                    href="#General_Settings">一般设置</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Localization">定位</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Roles_Permissions">权限</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Email_Settings">电子邮件</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Invoice_Settings">发票</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Notifications">通知 </a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                    href="#Change_Password">更改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="section-body mt-4">
+                <div class="container-fluid">
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="General_Settings">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">一般设置</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <div class="form-group"><label>名字 <span
+                                                        class="text-danger">*</span></label><input
+                                                        class="form-control" type="text" value=""></div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <div class="form-group"><label>联系人</label><input
+                                                        class="form-control" value="Louis Pierce" type="text"></div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <div class="form-group"><label>手机号<span
+                                                        class="text-danger">*</span></label><input
+                                                        class="form-control" value="+1 882-635-7531" type="text"></div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group"><label>地址</label><textarea
+                                                        class="form-control"
+                                                        placeholder="44 Shirley Ave. West Chicago, IL 60185"
+                                                        aria-label="With textarea"></textarea></div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group"><label>邮箱 <span
+                                                        class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><span
+                                                                class="input-group-text"><i
+                                                                class="icon-envelope"></i></span></div><input
+                                                            type="text" class="form-control"
+                                                            value="LouisPierce@example.com">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group"><label>个人网站</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><span
+                                                                class="input-group-text"><i
+                                                                class="icon-globe"></i></span></div><input
+                                                            type="text" class="form-control" placeholder="http://">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                                <div class="form-group"><label>国家</label><select
+                                                        class="form-control">
+                                                    <option value="">-- Select Country --</option>
+                                                    <option value="CN">China</option>
+                                                    <option value="CX">Christmas Island</option>
+                                                    <option value="ZA">South Africa</option>
+                                                    </option>
+                                                    <option value="SS">South Sudan</option>
+                                                    <option value="ES">Spain</option>
+                                                    <option value="LK">Sri Lanka</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                                <div class="form-group">
+                                                    <label>省/县</label>
+                                                    <select class="form-control">
+                                                        <option>California</option>
+                                                        <option>Alaska</option>
+                                                        <option>Alabama</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                                <div class="form-group">
+                                                    <label>城市</label>
+                                                    <input class="form-control" value="New York" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                                <div class="form-group">
+                                                    <label>邮政编码</label>
+                                                    <input class="form-control" value="91403" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>手机号</label>
+                                                    <input class="form-control" value="818-978-7102" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>传真</label>
+                                                    <input class="form-control" value="818-978-7102" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-right m-t-20">
+                                                <button type="button" class="btn btn-primary">保存</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Localization">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Basic Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Default Country</label>
+                                                    <select class="form-control">
+                                                        <option selected="selected">USA</option>
+                                                        <option>United Kingdom</option>
+                                                        <option>India</option>
+                                                        <option>French</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Date Format</label>
+                                                    <select class="form-control">
+                                                        <option value="d/m/Y">15/05/2016</option>
+                                                        <option value="d.m.Y">15.05.2016</option>
+                                                        <option value="d-m-Y">15-05-2016</option>
+                                                        <option value="m/d/Y">05/15/2016</option>
+                                                        <option value="Y/m/d">2016/05/15</option>
+                                                        <option value="Y-m-d">2016-05-15</option>
+                                                        <option value="M d Y">May 15 2016</option>
+                                                        <option selected="selected" value="d M Y">15 May 2016</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Timezone</label>
+                                                    <select class="form-control">
+                                                        <option>10:45am Chicago (GMT-6)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Default Language</label>
+                                                    <select class="form-control">
+                                                        <option selected="selected">English</option>
+                                                        <option>Russian</option>
+                                                        <option>Arabic</option>
+                                                        <option>French</option>
+                                                        <option>Hindi</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Currency Code</label>
+                                                    <select class="form-control">
+                                                        <option selected="selected">USD</option>
+                                                        <option>Pound</option>
+                                                        <option>EURO</option>
+                                                        <option>Ringgit</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Currency Symbol</label>
+                                                    <input class="form-control" value="$" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 text-right m-t-20">
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Roles_Permissions">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Roles &amp; Permissions</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group mb-3 tp-setting">
+                                        <li class="list-group-item">
+                                            Anyone seeing my profile page
+                                            <div class="float-right">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-label">&nbsp;</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Anyone send me a message
+                                            <div class="float-right">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-label">&nbsp;</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Anyone posts a comment on my post
+                                            <div class="float-right">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-label">&nbsp;</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Anyone invite me to group
+                                            <div class="float-right">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked="">
+                                                    <span class="custom-control-label">&nbsp;</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Module Permission</th>
+                                                <th>Read</th>
+                                                <th>Write</th>
+                                                <th>Create</th>
+                                                <th>Delete</th>
+                                                <th>Import</th>
+                                                <th>Export</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>Employee</td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Holidays</td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Leave Request</td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Events</td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               checked="">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-label">&nbsp;</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Email_Settings">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">SMTP Email Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="fancy-radio custom-color-green"><input name="gender3"
+                                                                                                 value="PHP Mail" type="radio" checked=""><span><i></i>PHP
+                                                    Mail</span></label>
+                                            <label class="fancy-radio custom-color-green"><input name="gender3"
+                                                                                                 value="SMTP" type="radio"><span><i></i>SMTP</span></label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Email From Address</label>
+                                                    <input class="form-control" type="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Emails From Name</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP HOST</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP USER</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP PASSWORD</label>
+                                                    <input class="form-control" type="password">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP PORT</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP Security</label>
+                                                    <select class="form-control">
+                                                        <option>None</option>
+                                                        <option>SSL</option>
+                                                        <option>TLS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>SMTP Authentication Domain</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 m-t-20 text-right">
+                                                <button type="button" class="btn btn-primary">SAVE</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Invoice_Settings">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Invoice Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Invoice prefix</label>
+                                                    <input class="form-control" type="email">
+                                                </div>
+                                                <input type="file" class="dropify">
+                                                <small id="fileHelp" class="form-text text-muted">This is some
+                                                    placeholder block-level help text for the above input. It's a bit
+                                                    lighter and easily wraps to a new line.</small>
+                                            </div>
+                                            <div class="col-sm-12 m-t-20 text-right"><button type="button"
+                                                                                             class="btn btn-primary">SAVE</button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Notifications">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Notifications Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">Anyone send me a message <div class="float-right">
+                                            <label class="custom-control custom-checkbox"><input type="checkbox"
+                                                                                                 class="custom-control-input"><span
+                                                    class="custom-control-label">&nbsp;</span></label></div>
+                                        </li>
+                                        <li class="list-group-item">Anyone seeing my profile page <div
+                                                class="float-right"><label class="custom-control custom-checkbox"><input
+                                                type="checkbox" class="custom-control-input" checked=""><span
+                                                class="custom-control-label">&nbsp;</span></label></div>
+                                        </li>
+                                        <li class="list-group-item">Anyone posts a comment on my post <div
+                                                class="float-right"><label class="custom-control custom-checkbox"><input
+                                                type="checkbox" class="custom-control-input" checked=""><span
+                                                class="custom-control-label">&nbsp;</span></label></div>
+                                        </li>
+                                        <li class="list-group-item">Anyone send me a message <div class="float-right">
+                                            <label class="custom-control custom-checkbox"><input type="checkbox"
+                                                                                                 class="custom-control-input"><span
+                                                    class="custom-control-label">&nbsp;</span></label></div>
+                                        </li>
+                                        <li class="list-group-item">Anyone seeing my profile page <div
+                                                class="float-right"><label class="custom-control custom-checkbox"><input
+                                                type="checkbox" class="custom-control-input"><span
+                                                class="custom-control-label">&nbsp;</span></label></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Change_Password">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">更改密码</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="text" class="form-control"
+                                                                           value="louispierce" disabled="" placeholder="Username"></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="email" class="form-control"
+                                                                           value="louis.info@yourdomain.com" placeholder="Email"></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="text" class="form-control"
+                                                                           placeholder="Phone Number"></div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <hr>
+                                            <h6>更改密码</h6>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="旧密码"></div>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="新密码"></div>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="确认新密码"></div>
+                                        </div>
+                                        <div class="col-sm-12 m-t-20 text-right"><button type="button"
+                                                                                         class="btn btn-primary">变更</button>&nbsp;<button type="button"
+                                                                                                                                            class="btn btn-default">取消</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--改密码-->
+                    </div>
+                </div>
+            </div><!-- Start main footer -->
+        <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
+    </div>
+</div><!-- Start Main project js,jQuery,Bootstrap -->
+<script th:src="@{/js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
+<script th:src="@{/js/counterup.bundle.js}"></script>
+<script th:src="@{/js/apexcharts.bundle.js}"></script>
+<script th:src="@{/js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
+<script th:src="@{/js/core.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+<script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/images}"></script>
+
+</body>
+</html>

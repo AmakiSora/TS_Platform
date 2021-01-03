@@ -1,25 +1,28 @@
 package com.cosmos.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
-public class LoginController {
-    @RequestMapping("/index")
-    public String index(){
-        return "index";
+public class TestController {
+    @RequestMapping("/{target}")
+    public String forward(@PathVariable("target") String target){
+        return "/"+target;
     }
-    @RequestMapping("/admin_Index")
-    public String admin_Index(){
-        return "/admin/index.html";
-    }
-    @RequestMapping("/staff_Index")
-    public String staff_Index(){
-        return "/staff/index.html";
-    }
-    @RequestMapping("/student_Index")
-    public String student_Index(){
-        return "/student/index.html";
-    }
+
+//    @RequestMapping("/admin_Index")
+//    public String admin_Index(){
+//        return "/admin/index.html";
+//    }
+//    @RequestMapping("/staff_Index")
+//    public String staff_Index(){
+//        return "/staff/index.html";
+//    }
+//    @RequestMapping("/student_Index")
+//    public String student_Index(){
+//        return "/student/index.html";
+//    }
 }
 //import javax.servlet.http.HttpSession;
 //import org.springframework.ui.Model;

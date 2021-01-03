@@ -19,33 +19,44 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置 -->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div id="left-sidebar" class="sidebar" >
+    <div id="left-sidebar" class="sidebar" th:fragment="LeftSideBar" >
         <h5 class="brand-name">学生名<a href="javascript:void(0)"
                                      class="menu_option float-right"><i
                 class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a>
         </h5>
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-uni">大学</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-admin">管理</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-uni">学生</a></li>
+<!--            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-admin">管理</a></li>-->
         </ul>
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="menu-uni" role="tabpanel">
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
-                        <li th:class=active><a th:href="@{/student_Index}"><i class="fa fa-dashboard"></i>
+                        <li th:class="${active == 'Index'?'active':''}">
+                            <a th:href="@{/student/Index.html}"><i class="fa fa-dashboard"></i>
                             <span>首页</span></a></li>
-                        <li><a th:href="@{/staffs}"><i class="fa fa-black-tie"></i>
+                        <li th:class="${active == 'staff'?'active':''}">
+                            <a th:href="@{/staff}"><i class="fa fa-black-tie"></i>
                             <span>职工</span></a></li>
-                        <li><a th:href="@{/students.html}"><i class="fa fa-users"></i>
+                        <li th:class="${active == 'students.html'?'active':''}">
+                            <a th:href="@{/student/students.html}"><i class="fa fa-users"></i>
                             <span>学生</span></a></li>
-                        <li><a th:href="@{courses.html}"><i class="fa fa-graduation-cap"></i>
+                        <li th:class="${active == 'Courses'?'active':''}">
+                            <a th:href="@{/student/Courses.html}"><i class="fa fa-graduation-cap"></i>
                             <span>课程</span></a></li>
-                        <li><a th:href="@{events.html}"><i class="fa fa-calendar"></i>
+                        <li th:class="${active == 'Calendar'?'active':''}">
+                            <a th:href="@{/student/Calendar.html}"><i class="fa fa-calendar"></i>
                             <span>日历</span></a></li>
-                        <li><a th:href="@{app-chat.html}"><i class="fa fa-comments-o"></i>
+                        <li th:class="${active == 'Chat'?'active':''}">
+                            <a th:href="@{/student/Chat.html}"><i class="fa fa-comments-o"></i>
                             <span>聊天</span></a></li>
-                        <li><a th:href="@{app-filemanager.html}"><i class="fa fa-folder"></i>
+                        <li th:class="${active == 'Task'?'active':''}">
+                            <a th:href="@{/student/Task.html}"><i class="fa fa-folder"></i>
                             <span>作业</span></a></li>
+                        <li th:class="${active == 'Settings'?'active':''}">
+                            <a th:href="@{/student/Settings.html}"><i class="fa fa-gear"></i>
+                            <span>设置</span></a></li>
+
                         <!--                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-user-circle-o"></i><span>教授</span></a></li>-->
                         <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>-->
                         <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>-->
@@ -57,20 +68,20 @@
                     </ul>
                 </nav>
             </div>
-            <div class="tab-pane fade" id="menu-admin" role="tabpanel">
-                <nav class="sidebar-nav">
-                    <ul class="metismenu">
-                        <li><a href="payments.html"><i class="fa fa-credit-card"></i><span>付款</span></a></li>
-                        <li><a href="noticeboard.html"><i class="fa fa-dashboard"></i><span>布告栏</span></a></li>
-                        <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>任务板</span></a></li>
-                        <li><a href="hostel.html"><i class="fa fa-bed"></i><span>旅馆</span></a></li>
-                        <li><a href="transport.html"><i class="fa fa-truck"></i><span>运输</span></a></li>
-                        <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>出勤</span></a></li>
-                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>休假</span></a></li>
-                        <li><a href="setting.html"><i class="fa fa-gear"></i><span>设置</span></a></li>
-                    </ul>
-                </nav>
-            </div>
+<!--            <div class="tab-pane fade" id="menu-admin" role="tabpanel">-->
+<!--                <nav class="sidebar-nav">-->
+<!--                    <ul class="metismenu">-->
+<!--                        <li><a href="payments.html"><i class="fa fa-credit-card"></i><span>付款</span></a></li>-->
+<!--                        <li><a href="noticeboard.html"><i class="fa fa-dashboard"></i><span>布告栏</span></a></li>-->
+<!--                        <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>任务板</span></a></li>-->
+<!--                        <li><a href="hostel.html"><i class="fa fa-bed"></i><span>旅馆</span></a></li>-->
+<!--                        <li><a href="transport.html"><i class="fa fa-truck"></i><span>运输</span></a></li>-->
+<!--                        <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>出勤</span></a></li>-->
+<!--                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>休假</span></a></li>-->
+<!--                        <li><a href="setting.html"><i class="fa fa-gear"></i><span>设置</span></a></li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
         </div>
     </div><!-- 菜单 -->
     <div class="page"><!-- 右边页面 -->
@@ -749,13 +760,13 @@
         <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
-<script th:src="@{js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
-<script th:src="@{js/counterup.bundle.js}"></script>
-<script th:src="@{js/apexcharts.bundle.js}"></script>
-<script th:src="@{js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
-<script th:src="@{js/core.js}"></script>
-<script th:src="@{js/index.js}"></script>
-<script th:src="@{js/summernote.js}"></script>
+<script th:src="@{/js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
+<script th:src="@{/js/counterup.bundle.js}"></script>
+<script th:src="@{/js/apexcharts.bundle.js}"></script>
+<script th:src="@{/js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
+<script th:src="@{/js/core.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+<script th:src="@{/js/summernote.js}"></script>
 <script th:src="@{/images}"></script>
 
 </body>
