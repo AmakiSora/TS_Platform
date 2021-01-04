@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <title>交流</title><!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
+    <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+</head>
+<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader"></div>
+</div>
+<div id="main_content"><!-- Start Main top header -->
+    <div th:insert="DIY::HeaderTop"></div><!-- 顶部菜单-->
+    <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
+    <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
+    <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
+    <div th:insert="/student/index::LeftSideBar(active='Chat')" ></div><!-- 菜单 -->
+    <div class="page"><!-- 主页面 -->
+        <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
+        <div class="section-body">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center ">
+                    <div class="header-action">
+                        <h1 class="page-title">交流</h1>
+                        <ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">学生</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">交流</li>
+                        </ol>
+                    </div>
+                    <ul class="list-unstyled team-info mb-0">
+                        <li class="mr-4">Rerecent Chat</li>
+                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
+                                 data-original-title="Avatar"></li>
+                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
+                                 data-original-title="Avatar"></li>
+                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
+                                 data-original-title="Avatar"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section-body mt-4 chat_app">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header bline">
+                                <h3 class="card-title">Friends Group <small>Last seen:2 hours ago</small></h3>
+                                <div class="card-options"><a href="javascript:void(0)" class="p-1 chat_list_btn"><i
+                                        class="fa fa-align-right"></i></a><a href="javascript:void(0)"
+                                                                             class="p-1"><i class="fa fa-plus"></i></a><a href="javascript:void(0)"
+                                                                                                                          class="p-1"><i class="fa fa-cog"></i></a><a href="javascript:void(0)"
+                                                                                                                                                                      class="p-1"><i class="fa fa-refresh"></i></a></div>
+                            </div>
+                            <div class="card-body chat_windows">
+                                <ul class="mb-0">
+                                    <li class="other-message"><img class="avatar mr-3"
+                                                                   src="/images/avatar2.jpeg" alt="avatar">
+                                        <div class="message">
+                                            <p class="bg-light-blue">Are we meeting today?</p><span
+                                                class="time">10:10 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="other-message"><img class="avatar mr-3"
+                                                                   src="/images/avatar3.jpeg" alt="avatar">
+                                        <div class="message">
+                                            <p class="bg-light-cyan">Hi Aiden,how are you? How is the project coming
+                                                along?</p>
+                                            <p class="bg-light-cyan">Are we meeting today?</p><span
+                                                class="time">10:15 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="my-message">
+                                        <div class="message">
+                                            <p class="bg-light-gray">Project has been already finished and I have
+                                                results to show you.</p>
+                                            <div class="file_folder"><a href="javascript:void(0);">
+                                                <div class="icon"><i
+                                                        class="fa fa-file-excel-o text-success"></i></div>
+                                                <div class="file-name">
+                                                    <p class="mb-0 text-muted">Report2017.xls</p>
+                                                    <small>Size:68KB</small>
+                                                </div>
+                                            </a><a href="javascript:void(0);">
+                                                <div class="icon"><i class="fa fa-file-word-o text-primary"></i>
+                                                </div>
+                                                <div class="file-name">
+                                                    <p class="mb-0 text-muted">Report2017.doc</p>
+                                                    <small>Size:68KB</small>
+                                                </div>
+                                            </a></div><span class="time">10:17 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="other-message"><img class="avatar mr-3"
+                                                                   src="/images/avatar4.jpeg" alt="avatar">
+                                        <div class="message">
+                                            <div class="media_img"><img src="/images/1.jpeg"
+                                                                        class="w150 img-thumbnail" alt="" /><img
+                                                    src="/images/2.jpeg" class="w150 img-thumbnail"
+                                                    alt="" /></div><span class="time">10:15 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="other-message"><span class="avatar avatar-blue mr-3">NG</span>
+                                        <div class="message">
+                                            <p class="bg-light-pink">Are we meeting today I have results?</p>
+                                            <p class="bg-light-pink">Project has been already finished and to show
+                                                you.</p><span class="time">10:18 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="my-message">
+                                        <div class="message">
+                                            <p class="bg-light-gray">Well we have good budget for the project</p>
+                                            <span class="time">10:25 AM,Today</span>
+                                        </div>
+                                    </li>
+                                    <li class="my-message">
+                                        <div class="message">
+                                            <div class="media_img"><img src="/images/2.jpeg"
+                                                                        class="w100 img-thumbnail" alt="" /><img
+                                                    src="/images/2.jpeg" class="w100 img-thumbnail"
+                                                    alt="" /><img src="/images/2.jpeg"
+                                                                  class="w100 img-thumbnail" alt="" /><img
+                                                    src="/images/2.jpeg" class="w100 img-thumbnail"
+                                                    alt="" /></div><span class="time">10:25 AM,Today</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="chat-message clearfix"><a href="javascript:void(0);"><i
+                                        class="icon-camera"></i></a><a href="javascript:void(0);"><i
+                                        class="icon-camcorder"></i></a><a href="javascript:void(0);"><i
+                                        class="icon-paper-plane"></i></a>
+                                    <div class="input-group mb-0"><input type="text" class="form-control"
+                                                                         placeholder="Enter text here..."></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Start main footer -->
+        <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
+    </div>
+</div><!-- Start Main project js,jQuery,Bootstrap -->
+<script th:src="@{/js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
+<script th:src="@{/js/counterup.bundle.js}"></script>
+<script th:src="@{/js/apexcharts.bundle.js}"></script>
+<script th:src="@{/js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
+<script th:src="@{/js/core.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+<script th:src="@{/js/summernote.js}"></script>
+</body>
+</html>

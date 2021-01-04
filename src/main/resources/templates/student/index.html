@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" th:href="@{favicon.ico}" type="image/x-icon">
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
     <title>高校师生交互平台</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
@@ -32,13 +32,13 @@
             <div class="tab-pane fade show active" id="menu-uni" role="tabpanel">
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
-                        <li th:class="${active == 'Index'?'active':''}">
+                        <li th:class="${active != ''?'':'active'}">
                             <a th:href="@{/student/Index.html}"><i class="fa fa-dashboard"></i>
                             <span>首页</span></a></li>
                         <li th:class="${active == 'staff'?'active':''}">
                             <a th:href="@{/staff}"><i class="fa fa-black-tie"></i>
                             <span>职工</span></a></li>
-                        <li th:class="${active == 'students.html'?'active':''}">
+                        <li th:class="${active == 'Student'?'active':''}">
                             <a th:href="@{/student/students.html}"><i class="fa fa-users"></i>
                             <span>学生</span></a></li>
                         <li th:class="${active == 'Courses'?'active':''}">
@@ -49,7 +49,7 @@
                             <span>日历</span></a></li>
                         <li th:class="${active == 'Chat'?'active':''}">
                             <a th:href="@{/student/Chat.html}"><i class="fa fa-comments-o"></i>
-                            <span>聊天</span></a></li>
+                            <span>交流</span></a></li>
                         <li th:class="${active == 'Task'?'active':''}">
                             <a th:href="@{/student/Task.html}"><i class="fa fa-folder"></i>
                             <span>作业</span></a></li>
@@ -279,7 +279,7 @@
                                             <tr>
                                                 <td>11</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar1.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar1.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -292,7 +292,7 @@
                                             <tr>
                                                 <td>23</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar2.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar2.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -305,7 +305,7 @@
                                             <tr>
                                                 <td>41</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar3.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar3.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -318,7 +318,7 @@
                                             <tr>
                                                 <td>17</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar4.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar4.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -331,7 +331,7 @@
                                             <tr>
                                                 <td>57</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar5.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar5.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -344,7 +344,7 @@
                                             <tr>
                                                 <td>85</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar6.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar6.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -357,7 +357,7 @@
                                             <tr>
                                                 <td>9</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar7.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar7.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -662,7 +662,7 @@
                                                 </td>
                                                 <td class="text-right">Feb 18-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar1.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar1.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -676,7 +676,7 @@
                                                 </td>
                                                 <td class="text-right">March 02-2019</td>
                                                 <td><span class="tag tag-success ml-0 mr-0">High</span></td>
-                                                <td><img src="images/avatar2.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar2.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -703,7 +703,7 @@
                                                 </td>
                                                 <td class="text-right">Feb 18-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar3.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar3.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -730,7 +730,7 @@
                                                 </td>
                                                 <td class="text-right">March 20-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar4.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar4.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -743,7 +743,7 @@
                                                 </td>
                                                 <td class="text-right">March 20-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar5.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar5.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -767,7 +767,6 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
-<script th:src="@{/images}"></script>
 
 </body>
 </html>

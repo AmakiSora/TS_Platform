@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" th:href="@{favicon.ico}" type="image/x-icon">
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
     <title>学生</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
@@ -19,7 +19,7 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div th:insert="DIY::LeftSideBar(active='student.html')" ></div><!-- 菜单 -->
+    <div th:insert="/student/index::LeftSideBar(active='Student')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
