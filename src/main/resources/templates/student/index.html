@@ -35,9 +35,9 @@
                         <li th:class="${active != ''?'':'active'}">
                             <a th:href="@{/student/Index.html}"><i class="fa fa-dashboard"></i>
                             <span>首页</span></a></li>
-                        <li th:class="${active == 'staff'?'active':''}">
-                            <a th:href="@{/staff}"><i class="fa fa-black-tie"></i>
-                            <span>职工</span></a></li>
+                        <li th:class="${active == 'Staff'?'active':''}">
+                            <a th:href="@{/student/staff.html}"><i class="fa fa-black-tie"></i>
+                            <span>教师</span></a></li>
                         <li th:class="${active == 'Student'?'active':''}">
                             <a th:href="@{/student/students.html}"><i class="fa fa-users"></i>
                             <span>学生</span></a></li>

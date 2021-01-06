@@ -9,7 +9,7 @@ import lombok.Data;
 public class User {
 
     //用户id
-    private Integer id;
+//    private Integer id;
 
     //用户名
     private String username;

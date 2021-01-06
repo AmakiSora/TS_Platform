@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
-    <title>职工</title><!-- Bootstrap Core and vandor -->
+    <title>教师</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
@@ -19,25 +19,22 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div th:insert="DIY::LeftSideBar(active='staff.html')" ></div><!-- 菜单 -->
+    <div th:insert="/student/index::LeftSideBar(active='Staff')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center ">
-                    <div class="header-action"><h1 class="page-title">职工</h1>
+                    <div class="header-action"><h1 class="page-title">教师</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="staff.html#">Ericsson</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">职工</li>
+                            <li class="breadcrumb-item"><a href="staff.html#">学生</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">教师</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Staff-all">List
-                            View</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-grid">Grid
-                            View</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-profile">Profile</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Staff-all">教师列表</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-grid">Grid View</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-profile">Profile</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-add">Add</a>
                         </li>
                     </ul>
@@ -70,10 +67,10 @@
                                         <td th:text="${staff.college}"></td>
 <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
                                         <td>
-                                            <button type="button" class="btn btn-icon btn-sm" title="View"><i
+                                            <button type="button" class="btn btn-icon btn-sm" title="查看信息"><i
                                                     class="fa fa-eye"></i></button>
-                                            <button type="button" class="btn btn-icon btn-sm" title="Edit"><i
-                                                    class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-icon btn-sm" title="交流"><i
+                                                    class="fa fa-comment"></i></button>
 <!--                                            <button type="button" class="btn btn-icon btn-sm js-sweetalert"-->
 <!--                                                    title="Delete" data-type="confirm"><i-->
 <!--                                                    class="fa fa-trash-o text-danger"></i></button>-->

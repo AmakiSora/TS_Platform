@@ -1,6 +1,6 @@
 package com.cosmos.controller;
 
-import com.cosmos.mapper.StaffMapper;
+import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +17,11 @@ public class StaffController {
         return "/staff/"+staff;
     }
     @Autowired
-    private StaffMapper staffMapper;
+    private TSMapper TSMapper;
     //查询所有职工列表
     @RequestMapping("/staff")
     public String queryStaffList(Model model){
-        List<Staff> staffList = staffMapper.queryStaffList();
+        List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);
         return "staff/staff";
     }

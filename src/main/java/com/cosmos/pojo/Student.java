@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class College {//学院表
+public class Student {//学生表
     private Integer id;
-    private String collegeName;//学院名
-
+    private String name;
+    private Integer gender;
+    private String classes;
+    private String college;
+    private String phone;
 
 }
