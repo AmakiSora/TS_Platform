@@ -14,4 +14,6 @@ public interface UserMapper {
      * @return
      */
     User selectByName(String username);
+    void addStu(User user);//增加学生帐号
+    void deleteStu(String id);
 }

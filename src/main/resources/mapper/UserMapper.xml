@@ -5,4 +5,11 @@
     <select id="selectByName" resultType="com.cosmos.pojo.User">
         select *from user where username = #{username}
     </select>
+    <insert id="addStu" parameterType="com.cosmos.pojo.User">
+        insert into user (username,password,role) values(#{username},#{password},#{role})
+    </insert>
+    <delete id="deleteStu" parameterType="string">
+        delete from user where username = #{username}
+    </delete>
+
 </mapper>

@@ -20,6 +20,15 @@
     </select>
     <select id="queryClassesByName" resultType="java.lang.String">
         select classes from student where id = #{id}
-
     </select>
+    <insert id="addStudent" parameterType="com.cosmos.pojo.Student">
+        insert into student (id,name,gender,classes,college,phone) values(#{id},#{name},#{gender},#{classes},#{college},#{phone})
+    </insert>
+    <delete id="deleteStudent" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+    <update id="updateStudent" parameterType="com.cosmos.pojo.Student">
+        update student set name=#{name},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
+    </update>
+
 </mapper>

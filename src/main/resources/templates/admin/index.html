@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <link th:insert="DIY::ico">
     <title>高校师生交互平台</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
@@ -19,33 +19,44 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置 -->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div id="left-sidebar" class="sidebar" >
+    <div id="left-sidebar" class="sidebar" th:fragment="LeftSideBar" >
         <h5 class="brand-name">管理员<a href="javascript:void(0)"
-                                                          class="menu_option float-right"><i
+                                     class="menu_option float-right"><i
                 class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a>
         </h5>
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-uni">大学</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-admin">管理</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-uni">管理员</a></li>
+<!--            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-admin">管理</a></li>-->
         </ul>
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="menu-uni" role="tabpanel">
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
-                        <li class=active><a th:href="@{/admin_Index}"><i class="fa fa-dashboard"></i>
+                        <li th:class="${active != ''?'':'active'}">
+                            <a th:href="@{/admin/Index.html}"><i class="fa fa-dashboard"></i>
                             <span>首页</span></a></li>
-                        <li><a th:href="@{/staffs}"><i class="fa fa-black-tie"></i>
-                            <span>职工</span></a></li>
-                        <li><a th:href="@{/students.html}"><i class="fa fa-users"></i>
+                        <li th:class="${active == 'Staff'?'active':''}">
+                            <a th:href="@{/admin/staff.html}"><i class="fa fa-black-tie"></i>
+                            <span>教师</span></a></li>
+                        <li th:class="${active == 'Student'?'active':''}">
+                            <a th:href="@{/admin/students.html}"><i class="fa fa-users"></i>
                             <span>学生</span></a></li>
-                        <li><a th:href="@{courses.html}"><i class="fa fa-graduation-cap"></i>
+                        <li th:class="${active == 'Courses'?'active':''}">
+                            <a th:href="@{/admin/Courses.html}"><i class="fa fa-graduation-cap"></i>
                             <span>课程</span></a></li>
-                        <li><a th:href="@{events.html}"><i class="fa fa-calendar"></i>
+                        <li th:class="${active == 'Calendar'?'active':''}">
+                            <a th:href="@{/admin/Calendar.html}"><i class="fa fa-calendar"></i>
                             <span>日历</span></a></li>
-                        <li><a th:href="@{app-chat.html}"><i class="fa fa-comments-o"></i>
-                            <span>聊天</span></a></li>
-                        <li><a th:href="@{app-filemanager.html}"><i class="fa fa-folder"></i>
+                        <li th:class="${active == 'Chat'?'active':''}">
+                            <a th:href="@{/admin/Chat.html}"><i class="fa fa-comments-o"></i>
+                            <span>交流</span></a></li>
+                        <li th:class="${active == 'Task'?'active':''}">
+                            <a th:href="@{/admin/Task.html}"><i class="fa fa-folder"></i>
                             <span>作业</span></a></li>
+                        <li th:class="${active == 'Settings'?'active':''}">
+                            <a th:href="@{/admin/Settings.html}"><i class="fa fa-gear"></i>
+                            <span>设置</span></a></li>
+
                         <!--                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-user-circle-o"></i><span>教授</span></a></li>-->
                         <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>-->
                         <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>-->
@@ -57,23 +68,22 @@
                     </ul>
                 </nav>
             </div>
-            <div class="tab-pane fade" id="menu-admin" role="tabpanel">
-                <nav class="sidebar-nav">
-                    <ul class="metismenu">
-                        <li><a href="payments.html"><i class="fa fa-credit-card"></i><span>付款</span></a></li>
-                        <li><a href="noticeboard.html"><i class="fa fa-dashboard"></i><span>布告栏</span></a></li>
-                        <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>任务板</span></a></li>
-                        <li><a href="hostel.html"><i class="fa fa-bed"></i><span>旅馆</span></a></li>
-                        <li><a href="transport.html"><i class="fa fa-truck"></i><span>运输</span></a></li>
-                        <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>出勤</span></a></li>
-                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>休假</span></a></li>
-                        <li><a href="setting.html"><i class="fa fa-gear"></i><span>设置</span></a></li>
-                    </ul>
-                </nav>
-            </div>
+<!--            <div class="tab-pane fade" id="menu-admin" role="tabpanel">-->
+<!--                <nav class="sidebar-nav">-->
+<!--                    <ul class="metismenu">-->
+<!--                        <li><a href="payments.html"><i class="fa fa-credit-card"></i><span>付款</span></a></li>-->
+<!--                        <li><a href="noticeboard.html"><i class="fa fa-dashboard"></i><span>布告栏</span></a></li>-->
+<!--                        <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>任务板</span></a></li>-->
+<!--                        <li><a href="hostel.html"><i class="fa fa-bed"></i><span>旅馆</span></a></li>-->
+<!--                        <li><a href="transport.html"><i class="fa fa-truck"></i><span>运输</span></a></li>-->
+<!--                        <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>出勤</span></a></li>-->
+<!--                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>休假</span></a></li>-->
+<!--                        <li><a href="setting.html"><i class="fa fa-gear"></i><span>设置</span></a></li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
         </div>
     </div><!-- 菜单 -->
-
     <div class="page"><!-- 右边页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
@@ -269,7 +279,7 @@
                                             <tr>
                                                 <td>11</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar1.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar1.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -282,7 +292,7 @@
                                             <tr>
                                                 <td>23</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar2.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar2.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -295,7 +305,7 @@
                                             <tr>
                                                 <td>41</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar3.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar3.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -308,7 +318,7 @@
                                             <tr>
                                                 <td>17</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar4.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar4.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -321,7 +331,7 @@
                                             <tr>
                                                 <td>57</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar5.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar5.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -334,7 +344,7 @@
                                             <tr>
                                                 <td>85</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar6.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar6.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -347,7 +357,7 @@
                                             <tr>
                                                 <td>9</td>
                                                 <td class="w40">
-                                                    <div class="avatar"><img class="avatar" src="images/avatar7.jpeg"
+                                                    <div class="avatar"><img class="avatar" src="/images/avatar7.jpeg"
                                                                              alt="avatar"></div>
                                                 </td>
                                                 <td>
@@ -652,7 +662,7 @@
                                                 </td>
                                                 <td class="text-right">Feb 18-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar1.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar1.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -666,7 +676,7 @@
                                                 </td>
                                                 <td class="text-right">March 02-2019</td>
                                                 <td><span class="tag tag-success ml-0 mr-0">High</span></td>
-                                                <td><img src="images/avatar2.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar2.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -693,7 +703,7 @@
                                                 </td>
                                                 <td class="text-right">Feb 18-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar3.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar3.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -720,7 +730,7 @@
                                                 </td>
                                                 <td class="text-right">March 20-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar4.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar4.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -733,7 +743,7 @@
                                                 </td>
                                                 <td class="text-right">March 20-2019</td>
                                                 <td><span class="tag tag-warning ml-0 mr-0">MED</span></td>
-                                                <td><img src="images/avatar5.jpeg" data-toggle="tooltip"
+                                                <td><img src="/images/avatar5.jpeg" data-toggle="tooltip"
                                                          data-placement="top" title alt="Avatar" class="avatar"
                                                          data-original-title="Avatar Name"></td>
                                             </tr>
@@ -757,6 +767,7 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+
 
 </body>
 </html>
