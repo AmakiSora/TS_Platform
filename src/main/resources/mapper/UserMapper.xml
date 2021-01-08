@@ -8,8 +8,12 @@
     <insert id="addStu" parameterType="com.cosmos.pojo.User">
         insert into user (username,password,role) values(#{username},#{password},#{role})
     </insert>
-    <delete id="deleteStu" parameterType="string">
+    <delete id="deleteStu" parameterType="java.lang.String">
         delete from user where username = #{username}
     </delete>
+    <update id="updateStu" parameterType="com.cosmos.pojo.User">
+        update user set password = #{password} where username = #{username}
+    </update>
+
 
 </mapper>

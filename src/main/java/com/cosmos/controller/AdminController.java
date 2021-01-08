@@ -39,18 +39,25 @@ public class AdminController {
 //        System.out.println(student);//测试用
         TSMapper.addStudent(student);//增加学生信息进student表
         User user = new User();
-        user.setUsername(student.getId().toString());
+        user.setUsername(student.getId());
         user.setPassword("111");//默认密码111
         user.setRole("student");//设置权限为学生
         userMapper.addStu(user);//增加帐号进user表
         return "redirect:/admin/students.html";//重定向到students页面
     }
     @GetMapping("/delete/{id}")//删除学生
-    public String deleteStu(@PathVariable("id")int id){
-        TSMapper.deleteStudent(id);
-        String username = String.valueOf(id);
-        userMapper.deleteStu(username);
+    public String deleteStu(@PathVariable("id")String id){
+        TSMapper.deleteStudent(id);//删除学生表
+        String username = id;
+        userMapper.deleteStu(username);//删除用户表
         return "redirect:/admin/students.html";
     }
+//    @GetMapping("/delete/{id}")//删除学生
+//    public String updateStu(@PathVariable("id")int id){
+//        TSMapper.deleteStudent(id);
+//        String username = String.valueOf(id);
+//        userMapper.deleteStu(username);
+//        return "redirect:/admin/students.html";
+//    }
 
 }

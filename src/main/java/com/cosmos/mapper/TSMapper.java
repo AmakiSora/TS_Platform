@@ -14,10 +14,11 @@ public interface TSMapper {
     Staff queryStaffById(int id);//根据id查询教师
     //分界线
     List<Student> queryStudentList();//列出学生表
-    Student queryStudentById(int id);//根据id搜学生
+    Student queryStudentById(String id);//根据id搜学生
+    String queryNameById(String id);//根据id搜名字
     List<Student> queryStudentByClasses(String classes);//根据班级列出学生表
     String queryClassesByName(String username);//根据名搜班级
     void addStudent(Student student);//增加学生
-    int deleteStudent(int id);//根据id删除学生
-    int updateStudent(Student student);//修改学生信息
+    void deleteStudent(String id);//根据id删除学生
+    void updateStudent(Student student);//修改学生信息
 }

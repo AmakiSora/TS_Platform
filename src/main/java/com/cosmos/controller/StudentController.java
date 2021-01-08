@@ -24,16 +24,25 @@ public class StudentController {
     public String student(@PathVariable("student") String student){
         return "/student/"+student;
     }
-    @RequestMapping("/student/staff.html")
+    @RequestMapping("/student/index.html")//首页
+    public String index(Model model){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
+        String username = userDetails.getUsername();
+        String name = TSMapper.queryNameById(username);
+        model.addAttribute("name",name);
+        return "/student/index.html";
+    }
+
+    @RequestMapping("/student/staff.html")//查询老师信息
     public String queryStaffList(Model model){
         List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);
         return "/student/staff.html";
     }
 
-    @RequestMapping("/student/students.html")
+    @RequestMapping("/student/students.html")//查询同班同学的学生信息
     public String queryStudentList(Model model){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
         String username = userDetails.getUsername();
         String classes = TSMapper.queryClassesByName(username);
         List<Student> studentList = TSMapper.queryStudentByClasses(classes);

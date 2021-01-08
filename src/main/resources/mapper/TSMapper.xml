@@ -15,6 +15,9 @@
     <select id="queryStudentById" resultType="com.cosmos.pojo.Student">
         select * from student where id = #{id}
     </select>
+    <select id="queryNameById" resultType="java.lang.String">
+        select name from student where id = #{id}
+    </select>
     <select id="queryStudentByClasses" resultType="com.cosmos.pojo.Student">
         select * from student where classes = #{classes}
     </select>
@@ -24,7 +27,7 @@
     <insert id="addStudent" parameterType="com.cosmos.pojo.Student">
         insert into student (id,name,gender,classes,college,phone) values(#{id},#{name},#{gender},#{classes},#{college},#{phone})
     </insert>
-    <delete id="deleteStudent" parameterType="int">
+    <delete id="deleteStudent" parameterType="java.lang.String">
         delete from student where id = #{id}
     </delete>
     <update id="updateStudent" parameterType="com.cosmos.pojo.Student">

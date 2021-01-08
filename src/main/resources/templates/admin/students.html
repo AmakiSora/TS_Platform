@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:insert="DIY::ico">
-    <title>学生</title><!-- Bootstrap Core and vandor -->
+    <title>学生管理</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
@@ -60,17 +60,23 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="student:${studentList}">
-                                    <td th:text="${student.id}"></td>
-                                    <td th:text="${student.name}"><span class="font-16"></span></td>
-                                    <td th:text="${student.gender==0?'女':'男'}"></td>
-                                    <td th:text="${student.classes}"></td>
-                                    <td th:text="${student.college}"></td>
-                                    <td th:text="${student.phone}"></td>
+                                    <td th:text="${student.id}" th:onclick="change([[${student.name}]])"></td>
+                                    <td th:class="${student.name}" style="display: none"><input type="text" th:placeholder="${student.name}"></td>
+                                    <td th:class="${student.name}" th:text="${student.name}"><span class="font-16"></span></td>
+                                    <td th:class="${student.name}" style="display: none"><input type="text" th:placeholder="${student.gender==0?'女':'男'}"></td>
+                                    <td th:class="${student.name}" th:text="${student.gender==0?'女':'男'}"></td>
+                                    <td th:class="${student.name}" style="display: none"><input type="text" th:placeholder="${student.classes}"></td>
+                                    <td th:class="${student.name}" th:text="${student.classes}"></td>
+                                    <td th:class="${student.name}" style="display: none"><input type="text" th:placeholder="${student.college}"></td>
+                                    <td th:class="${student.name}" th:text="${student.college}"></td>
+                                    <td th:class="${student.name}" style="display: none"><input type="text" th:placeholder="${student.phone}"></td>
+                                    <td th:class="${student.name}" th:text="${student.phone}"></td>
                                     <td>
-                                        <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button>
-                                        <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
-                                        <a type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/delete/}+${student.id}" title="Delete" data-type="confirm">
-                                            <i class="fa fa-trash-o text-danger"></i></a></td>
+                                        <a th:class="${student.name}"  type="button" class="btn btn-icon btn-sm" title="查看信息"><i class="fa fa-eye"></i></a>
+                                        <a th:class="${student.name}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="change()" title="修改"><i class="fa fa-check text-success"></i></a>
+                                        <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.name}]])" title="编辑"><i class="fa fa-edit text-blue"></i></a>
+                                        <a th:class="${student.name}" style="display: none" type="button" class="btn btn-icon btn-sm" title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                        <a th:class="${student.name}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/delete/}+${student.id}" title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -140,7 +146,7 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">添加</button>
-                                        <button type="submit" class="btn btn-outline-secondary">重置</button>
+                                        <button type="reset" class="btn btn-outline-secondary">重置</button>
                                     </form>
                                 </div>
                             </div>
@@ -159,6 +165,27 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script>
+    function change(name){
+        var display = document.getElementsByClassName(name);
+        console.log(display.length)
+        for(var i=0;i<display.length;i++) {
+            if (display[i].style.display == "") {
+                display[i].style.display = "none";
+            } else {
+                display[i].style.display = ""
+            }
+        }
+    }
+    function submit(name,gender,classes,college,phone){
+        var Cname = name;
+        var Cgender = gender;
+        var Cclasses = classes;
+        var Ccollege = college;
+        var Cphone = phone;
+
+    }
+</script>
 
 </body>
 </html>
