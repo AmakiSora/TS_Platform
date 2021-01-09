@@ -9,10 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,12 +49,11 @@ public class AdminController {
         userMapper.deleteStu(username);//删除用户表
         return "redirect:/admin/students.html";
     }
-//    @GetMapping("/delete/{id}")//删除学生
-//    public String updateStu(@PathVariable("id")int id){
-//        TSMapper.deleteStudent(id);
-//        String username = String.valueOf(id);
-//        userMapper.deleteStu(username);
-//        return "redirect:/admin/students.html";
-//    }
+    @PostMapping("/update/{id}")//更改学生信息
+    public String updateStu(@RequestBody Student student){
+//        System.out.println(student.getId());
+        TSMapper.updateStudent(student);
+        return "redirect:/admin/students.html";
+    }
 
 }

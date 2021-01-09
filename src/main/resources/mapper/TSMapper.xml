@@ -31,7 +31,7 @@
         delete from student where id = #{id}
     </delete>
     <update id="updateStudent" parameterType="com.cosmos.pojo.Student">
-        update student set name=#{name},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
+        update student set id=#{id},name=#{name},gender=#{gender},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
     </update>
 
 </mapper>
