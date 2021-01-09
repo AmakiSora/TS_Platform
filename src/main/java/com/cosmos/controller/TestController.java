@@ -1,14 +1,34 @@
 package com.cosmos.controller;
 
+import com.cosmos.pojo.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 @Controller
 public class TestController {
-    @RequestMapping("/{target}")
+    public static final int ERROR = 0;
+    public static final int SUCCESS = 1;
+   /* @RequestMapping("/{target}")
     public String forward(@PathVariable("target") String target){
         return "/"+target;
+    }*/
+
+    /**
+     * 测试ajax
+     * @param user
+     * @return
+     * @Author zhong
+     */
+    @RequestMapping("/demo/login")
+    @ResponseBody
+    public int login(@RequestBody User user){
+        System.out.println("请求登录的用户名为: "+user.getUsername());
+        System.out.println("请求登录的密码为："+user.getPassword());
+        if (user.getUsername().equals("zhong")&&user.getPassword().equals("123456")){
+            return SUCCESS;
+        } else {
+            return ERROR;
+        }
     }
 
 //    @RequestMapping("/admin_Index")
