@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TestController {
-    public static final int ERROR = 0;
-    public static final int SUCCESS = 1;
+//    public static final int ERROR = 0;
+//    public static final int SUCCESS = 1;
    /* @RequestMapping("/{target}")
     public String forward(@PathVariable("target") String target){
         return "/"+target;
@@ -19,17 +19,17 @@ public class TestController {
      * @return
      * @Author zhong
      */
-    @RequestMapping("/demo/login")
-    @ResponseBody
-    public int login(@RequestBody User user){
-        System.out.println("请求登录的用户名为: "+user.getUsername());
-        System.out.println("请求登录的密码为："+user.getPassword());
-        if (user.getUsername().equals("zhong")&&user.getPassword().equals("123456")){
-            return SUCCESS;
-        } else {
-            return ERROR;
-        }
-    }
+//    @RequestMapping("/demo/login")//ajax测试
+//    @ResponseBody
+//    public int login(@RequestBody User user){
+//        System.out.println("请求登录的用户名为: "+user.getUsername());
+//        System.out.println("请求登录的密码为："+user.getPassword());
+//        if (user.getUsername().equals("zhong")&&user.getPassword().equals("123456")){
+//            return SUCCESS;
+//        } else {
+//            return ERROR;
+//        }
+//    }
 
 //    @RequestMapping("/admin_Index")
 //    public String admin_Index(){

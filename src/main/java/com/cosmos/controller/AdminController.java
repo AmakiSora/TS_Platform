@@ -19,11 +19,12 @@ public class AdminController {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
-    @RequestMapping("/admin/{admin}")
+    @RequestMapping("/admin/{admin}")//默认转发所有
     public String admin(@PathVariable("admin") String admin){
         return "/admin/"+admin;
     }
-    @RequestMapping("/admin/students.html")
+
+    @RequestMapping("/admin/students.html")//列出学生
     public String queryStudentList(Model model){
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        String username = userDetails.getUsername();
@@ -49,11 +50,12 @@ public class AdminController {
         userMapper.deleteStu(username);//删除用户表
         return "redirect:/admin/students.html";
     }
+    @ResponseBody
     @PostMapping("/update/{id}")//更改学生信息
     public String updateStu(@RequestBody Student student){
 //        System.out.println(student.getId());
         TSMapper.updateStudent(student);
-        return "redirect:/admin/students.html";
+        return "1";//需要传值给前端才能执行success：
     }
 
 }
