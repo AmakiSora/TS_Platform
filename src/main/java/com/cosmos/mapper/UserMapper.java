@@ -14,7 +14,7 @@ public interface UserMapper {
      * @return
      */
     User selectByName(String username);
-    void addStu(User user);//增加学生帐号
-    void deleteStu(String username);//删除学生
-    void updateStu(String username);//更改信息
+    void addUser(User user);//增加帐号
+    void deleteUser(String username);//删除
+    void updateUser(String username);//更改信息
 }

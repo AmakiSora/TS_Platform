@@ -29,7 +29,7 @@
                         <h1 class="page-title">学生</h1>
                         <ol class="breadcrumb page-breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Ericsson</a></li>
+                                <a href="#">管理</a></li>
                             <li class="breadcrumb-item active" aria-current="page">学生</li></ol></div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item">
@@ -73,7 +73,8 @@
                                     <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'P'+${student.phone}" style="width:110px"></td>
                                     <td th:class="${student.id}" th:text="${student.phone}"></td>
                                     <td>
-                                        <a th:class="${student.id}"  type="button" class="btn btn-icon btn-sm" title="查看信息"><i class="fa fa-eye"></i></a>
+                                        <a th:class="${student.id}"  type="button" class="btn btn-icon btn-sm"
+                                           title="查看信息"><i class="fa fa-eye"></i></a>
                                         <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${student.id}]],
                                                                                                                                                [[${student.id}+'N'+${student.name}]],
                                                                                                                                                [[${student.id}+'G'+${student.gender==0?'女':'男'}]],
@@ -81,9 +82,12 @@
                                                                                                                                                [[${student.id}+'X'+${student.college}]],
                                                                                                                                                [[${student.id}+'P'+${student.phone}]])"
                                                                                                                                                   title="修改"><i class="fa fa-check text-success"></i></a>
-                                        <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])" title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" title="重置"><i class="fa fa-reply text-danger"></i></a>
-                                        <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/delete/}+${student.id}" title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                        <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])"
+                                           title="编辑"><i class="fa fa-edit text-blue"></i></a>
+                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm"
+                                           title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                        <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
+                                           title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -201,7 +205,7 @@
 <!--                        console.log(aid);-->
 
         $.ajax({
-            url: "/update/id",
+            url: "/updateStu/id",
             type: "post",
             //发送的数据
             data: JSON.stringify({id: id,name: Cname,gender: Cgender,classes: Cclasses,college: Ccollege,phone: Cphone}),//提交的数据

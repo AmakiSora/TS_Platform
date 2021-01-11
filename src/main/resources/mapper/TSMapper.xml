@@ -8,7 +8,18 @@
     <select id="queryStaffById" resultType="com.cosmos.pojo.Staff">
         select * from staff where id = #{id}
     </select>
-<!--    分界线-->
+    <insert id="addStaff" parameterType="com.cosmos.pojo.Staff">
+        insert into staff (id,name,gender,college,phone) values(#{id},#{name},#{gender},#{college},#{phone})
+    </insert>
+    <delete id="deleteStaff" parameterType="java.lang.String">
+        delete from staff where id = #{id}
+    </delete>
+    <update id="updateStaff" parameterType="com.cosmos.pojo.Staff">
+        update staff set id=#{id},name=#{name},gender=#{gender},college=#{college},phone=#{phone} where id = #{id}
+    </update>
+
+    <!--分界线-->
+
     <select id="queryStudentList" resultType="com.cosmos.pojo.Student">
         select * from student
     </select>

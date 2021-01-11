@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:insert="DIY::ico">
+    <title>职工</title><!-- Bootstrap Core and vandor -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
+    <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+</head>
+<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader"></div>
+</div>
+<div id="main_content"><!-- Start Main top header -->
+    <div th:insert="DIY::HeaderTop"></div><!-- 顶部菜单-->
+    <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
+    <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
+    <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
+    <div th:insert="/admin/index::LeftSideBar(active='Staff.html')" ></div><!-- 菜单 -->
+    <div class="page"><!-- 主页面 -->
+        <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
+        <div class="section-body">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center ">
+                    <div class="header-action"><h1 class="page-title">职工</h1>
+                        <ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="staff.html#">管理</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">职工</li>
+                        </ol>
+                    </div>
+                    <ul class="nav nav-tabs page-header-tab">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Staff-all">教师列表</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Staff-add">增添教师</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section-body mt-4">
+            <div class="container-fluid">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="Staff-all">
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-vcenter text-nowrap table-striped mb-0">
+                                    <thead> <!--表头 -->
+                                    <tr>
+                                        <th>教工号</th>
+                                        <th>姓名</th>
+                                        <th>性别</th>
+                                        <th>所属学院</th>
+                                        <th>联系电话</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="staff:${staffList}">
+                                        <td th:text="${staff.id}"></td>
+                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'N'+${staff.name}" style="width:70px"></td>
+                                        <td th:class="${staff.id}" th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
+                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'G'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
+                                        <td th:class="${staff.id}" th:text="${staff.gender==0?'女':'男'}"></td>
+                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.college}"            th:id="${staff.id}+'X'+${staff.college}" style="width:120px"></td>
+                                        <td th:class="${staff.id}" th:text="${staff.college}"></td>
+                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.phone}"              th:id="${staff.id}+'P'+${staff.phone}" style="width:110px"></td>
+                                        <td th:class="${staff.id}" th:text="${staff.phone}"><span class="text-muted"></span></td>
+<!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
+                                        <td>
+                                            <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm"
+                                                    title="查看信息"><i class="fa fa-eye"></i></a>
+                                            <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${staff.id}]],
+                                                                                                                                               [[${staff.id}+'N'+${staff.name}]],
+                                                                                                                                               [[${staff.id}+'G'+${staff.gender==0?'女':'男'}]],
+                                                                                                                                               [[${staff.id}+'X'+${staff.college}]],
+                                                                                                                                               [[${staff.id}+'P'+${staff.phone}]])"
+                                                    title="修改"><i class="fa fa-check text-success"></i></a>
+                                            <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${staff.id}]])"
+                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>
+                                            <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm"
+                                                    title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                            <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteTea/}+${staff.id}"
+                                                    title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Staff-add">
+                        <div class="row clearfix">
+                            <div class="col-lg-8 col-md-12 col-sm-12">
+                                <div class="card"><div class="card-header"><h3 class="card-title">教师信息</h3>
+                                    <div class="card-options ">
+                                        <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                    </div>
+                                </div>
+                                    <form class="card-body" th:action="@{/admin/staff.html}" method="post">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">姓名 <span class="text-danger">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="name" class="form-control" placeholder="姓名">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row"><label class="col-md-3 col-form-label">教工号 <span class="text-danger">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="id" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row"><label class="col-md-3 col-form-label">学院 <span class="text-danger">*</span></label>
+                                            <div class="col-md-9">
+                                                <select class="form-control input-height" name="college">
+                                                    <option value="">选择...</option>
+                                                    <option value="电子信息学院">电子信息学院</option>
+                                                    <option value="外国语学院">外国语学院</option>
+                                                    <option value="机械学院">机械学院</option>
+                                                    <option value="商学院">商学院</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--                                        <div class="form-group row"><label class="col-md-3 col-form-label">班级 <span class="text-danger">*</span></label>-->
+                                        <!--                                            <div class="col-md-9">-->
+                                        <!--                                                <select class="form-control input-height" name="classes">-->
+                                        <!--                                                    <option value="">Select...</option>-->
+                                        <!--                                                    <option value="Category 1">Computer</option>-->
+                                        <!--                                                    <option value="Category 2">Mechanical</option>-->
+                                        <!--                                                    <option value="Category 3">Mathematics</option>-->
+                                        <!--                                                    <option value="Category 3">Commerce</option>-->
+                                        <!--                                                </select>-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </div>-->
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">性别 <span class="text-danger">*</span></label>
+                                            <div class="col-md-9">
+                                                <select class="form-control input-height" name="gender">
+                                                    <option value="">选择...</option>
+                                                    <option value=1>男</option>
+                                                    <option value=0>女</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row"><label class="col-md-3 col-form-label">手机号 </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="phone" class="form-control">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">添加</button>
+                                        <button type="reset" class="btn btn-outline-secondary">重置</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
+    </div>
+</div><!-- Start Main project js,jQuery,Bootstrap -->
+<script th:src="@{/js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
+<script th:src="@{/js/counterup.bundle.js}"></script>
+<script th:src="@{/js/apexcharts.bundle.js}"></script>
+<script th:src="@{/js/summernote.bundle.js}"></script><!-- Start project main js and page js -->
+<script th:src="@{/js/core.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+<script th:src="@{/js/summernote.js}"></script>
+<script>
+    function change(id){
+        var display = document.getElementsByClassName(id);
+        <!--        console.log(display.length)-->
+        for(var i=0;i<display.length;i++) {
+            if (display[i].style.display == "") {
+                display[i].style.display = "none";
+            } else {
+                display[i].style.display = ""
+            }
+        }
+    }
+    function submit(id,name,gender,college,phone){
+        <!--        var Cid = $("#"+id).val();-->
+        var Cname = $("#"+name).val();
+        var Cgender = $("#"+gender).val();
+        var Ccollege = $("#"+college).val();
+        var Cphone = $("#"+phone).val();
+        if(Cgender=="男"){
+            Cgender = 1;
+        }else{
+            Cgender = 0;
+        }
+        <!--                        console.log(Bid);-->
+        <!--                        console.log(aid);-->
+
+        $.ajax({
+            url: "/updateTea/id",
+            type: "post",
+            //发送的数据
+            data: JSON.stringify({id: id,name: Cname,gender: Cgender,college: Ccollege,phone: Cphone}),//提交的数据
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function () {
+                window.location.reload()
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
