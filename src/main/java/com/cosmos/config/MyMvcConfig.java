@@ -1,5 +1,6 @@
 package com.cosmos.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -13,8 +14,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
 //        registry.addViewController("/index").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");//让其他链接能返回
 //        registry.addViewController("/DIY.html").setViewName("DIY");//网页模版
-
     }
+
 
 //    @Override//登录拦截器
 //    public void addInterceptors(InterceptorRegistry registry) {

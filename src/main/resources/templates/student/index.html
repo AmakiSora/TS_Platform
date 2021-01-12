@@ -20,7 +20,7 @@
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
     <div id="left-sidebar" class="sidebar" th:fragment="LeftSideBar" >
-        <h5 class="brand-name" >[[${name}]]<a href="javascript:void(0)"
+        <h5 class="brand-name" th:text="${name}"><a href="javascript:void(0)"
                                      class="menu_option float-right"><i
                 class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a>
         </h5>
@@ -32,8 +32,8 @@
             <div class="tab-pane fade show active" id="menu-uni" role="tabpanel">
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
-                        <li th:class="${active != ''?'':'active'}">
-                            <a th:href="@{/student/Index.html}"><i class="fa fa-dashboard"></i>
+                        <li th:class="${active == '1'?'active':''}">
+                            <a th:href="@{/student/index.html}"><i class="fa fa-dashboard"></i>
                             <span>首页</span></a></li>
                         <li th:class="${active == 'Staff'?'active':''}">
                             <a th:href="@{/student/staff.html}"><i class="fa fa-black-tie"></i>

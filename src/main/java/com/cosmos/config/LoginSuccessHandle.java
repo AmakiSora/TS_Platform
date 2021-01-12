@@ -1,19 +1,35 @@
 package com.cosmos.config;
 
+import com.cosmos.mapper.TSMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
-
 public class LoginSuccessHandle implements AuthenticationSuccessHandler {
+    @Autowired
+    private TSMapper TsMapper;
     @Override
+
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication)throws IOException {
+        HttpSession session = request.getSession();
+        System.out.println(session);
+        System.out.println(session.getId());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
+        String id = userDetails.getUsername();
+        System.out.println(id);
+        System.out.println(TsMapper.queryNameById("121101"));//报错
+//        String name = TSMapper.queryNameById(id);
+//        session.setAttribute("name",name);
+//        System.out.println(session.getAttribute("name"));
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         //获取到登陆者的权限，然后做跳转

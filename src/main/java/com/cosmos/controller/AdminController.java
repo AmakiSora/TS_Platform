@@ -34,6 +34,7 @@ public class AdminController {
         List<Student> studentList = TSMapper.queryStudentList();
         model.addAttribute("studentList",studentList);
         return "/admin/students.html";
+
     }
     @PostMapping("/admin/students.html")//增加学生
     public String addStu(Student student){

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,10 +27,10 @@ public class StudentController {
     }
     @RequestMapping("/student/index.html")//首页
     public String index(Model model){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
-        String username = userDetails.getUsername();
-        String name = TSMapper.queryNameById(username);
-        model.addAttribute("name",name);
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
+//        String username = userDetails.getUsername();
+//        String name = TSMapper.queryNameById(username);
+//        model.addAttribute("name",name);
         return "/student/index.html";
     }
 

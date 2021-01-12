@@ -1,17 +1,25 @@
 package com.cosmos.controller;
 
 import com.cosmos.pojo.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class TestController {
 //    public static final int ERROR = 0;
 //    public static final int SUCCESS = 1;
-   /* @RequestMapping("/{target}")
-    public String forward(@PathVariable("target") String target){
-        return "/"+target;
-    }*/
+//    @RequestMapping("/{target}")
+//    public String forward(@PathVariable("target") String target){
+//        return "/"+target;
+//    }
 
     /**
      * 测试ajax

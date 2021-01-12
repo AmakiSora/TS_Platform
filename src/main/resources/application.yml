@@ -10,3 +10,4 @@ spring:
 #mybatis xml位置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
