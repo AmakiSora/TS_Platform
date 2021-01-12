@@ -21,16 +21,10 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
                                         HttpServletResponse response,
                                         Authentication authentication)throws IOException {
         HttpSession session = request.getSession();
-        System.out.println(session);
-        System.out.println(session.getId());
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
         String id = userDetails.getUsername();
-        System.out.println(id);
-        System.out.println(TsMapper.queryNameById("121101"));//报错
-//        String name = TSMapper.queryNameById(id);
-//        session.setAttribute("name",name);
-//        System.out.println(session.getAttribute("name"));
-
+        session.setAttribute("id",id);
+//        System.out.println(TsMapper.queryNameById("121101"));//查数据库会报错，应该是项目启动顺序问题，bean没有加载
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         //获取到登陆者的权限，然后做跳转
         if (roles.contains("admin")){
@@ -38,11 +32,9 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
             return;
         }else if (roles.contains("staff")){
             response.sendRedirect("/staff/index.html");
-            System.out.println();
             return;
         }else if (roles.contains("student")){
             response.sendRedirect("/student/index.html");
-            System.out.println();
             return;
         }else {
             response.sendRedirect("/403");

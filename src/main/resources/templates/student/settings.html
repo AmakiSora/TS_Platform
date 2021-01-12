@@ -63,18 +63,16 @@
                                     <form>
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12">
-                                                <div class="form-group"><label>名字 <span
-                                                        class="text-danger">*</span></label><input
-                                                        class="form-control" type="text" value=""></div>
+                                                <div class="form-group"><label>名字</label>
+                                                    <a class="form-control" type="text" th:text="${session.name}"></a></div>
                                             </div>
                                             <div class="col-md-4 col-sm-12">
-                                                <div class="form-group"><label>联系人</label><input
-                                                        class="form-control" value="Louis Pierce" type="text"></div>
+                                                <div class="form-group"><label>性别</label>
+                                                    <a class="form-control" type="text"></a></div>
                                             </div>
                                             <div class="col-md-4 col-sm-12">
-                                                <div class="form-group"><label>手机号<span
-                                                        class="text-danger">*</span></label><input
-                                                        class="form-control" value="+1 882-635-7531" type="text"></div>
+                                                <div class="form-group"><label>手机号</label>
+                                                    <input class="form-control" value="+1 882-635-7531" type="text"></div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group"><label>地址</label><textarea

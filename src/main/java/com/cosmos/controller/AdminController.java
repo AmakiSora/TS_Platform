@@ -12,25 +12,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class AdminController {
     @Autowired
+    private HttpSession session;
+    @Autowired
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+
     @RequestMapping("/admin/{admin}")//默认转发所有
     public String admin(@PathVariable("admin") String admin){
         return "/admin/"+admin;
+    }
+
+    @RequestMapping("/admin/index.html")//首页
+    public String adminIndex(){
+        return "/admin/index.html";
     }
 
     //分割线------------------------------------------------------------------------------------
 
     @RequestMapping("/admin/students.html")//列出学生
     public String queryStudentList(Model model){
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String username = userDetails.getUsername();
         List<Student> studentList = TSMapper.queryStudentList();
         model.addAttribute("studentList",studentList);
         return "/admin/students.html";
@@ -38,7 +45,6 @@ public class AdminController {
     }
     @PostMapping("/admin/students.html")//增加学生
     public String addStu(Student student){
-//        System.out.println(student);//测试用
         TSMapper.addStudent(student);//增加学生信息进student表
         User user = new User();
         user.setUsername(student.getId());
@@ -57,9 +63,13 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/updateStu/{id}")//更改学生信息
     public String updateStu(@RequestBody Student student){
-//        System.out.println(student.getId());
         TSMapper.updateStudent(student);
         return "1";//需要传值给前端才能执行success：
+    }
+    @RequestMapping("/resetPassword/{id}")//重置密码
+    public String ResetPassword(@PathVariable("id")String id){
+        userMapper.resetPasswordUser(id);
+        return "redirect:/admin/index.html";
     }
 
     //分割线------------------------------------------------------------------------------------
@@ -72,7 +82,6 @@ public class AdminController {
     }
     @PostMapping("/admin/staff.html")//增加教师
     public String addTea(Staff staff){
-//        System.out.println(staff);//测试用
         TSMapper.addStaff(staff);//增加教师信息进staff表
         User user = new User();
         user.setUsername(staff.getId());
@@ -91,7 +100,6 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/updateTea/{id}")//更改教师信息
     public String updateTea(@RequestBody Staff staff){
-//        System.out.println(staff.getId());
         TSMapper.updateStaff(staff);
         return "1";//需要传值给前端才能执行success：
     }

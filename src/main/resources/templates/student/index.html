@@ -20,7 +20,7 @@
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
     <div id="left-sidebar" class="sidebar" th:fragment="LeftSideBar" >
-        <h5 class="brand-name" th:text="${name}"><a href="javascript:void(0)"
+        <h5 class="brand-name" th:text="${session.name}"><a href="javascript:void(0)"
                                      class="menu_option float-right"><i
                 class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a>
         </h5>

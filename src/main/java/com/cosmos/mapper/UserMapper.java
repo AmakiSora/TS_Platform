@@ -16,5 +16,5 @@ public interface UserMapper {
     User selectByName(String username);
     void addUser(User user);//增加帐号
     void deleteUser(String username);//删除
-    void updateUser(String username);//更改信息
+    void resetPasswordUser(String username);//更改信息
 }

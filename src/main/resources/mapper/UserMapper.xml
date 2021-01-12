@@ -11,8 +11,8 @@
     <delete id="deleteUser" parameterType="java.lang.String">
         delete from user where username = #{username}
     </delete>
-    <update id="updateUser" parameterType="com.cosmos.pojo.User">
-        update user set password = #{password} where username = #{username}
+    <update id="resetPasswordUser" parameterType="com.cosmos.pojo.User">
+        update user set password = "000" where username = #{username}
     </update>
 
 

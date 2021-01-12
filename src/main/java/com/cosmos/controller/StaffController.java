@@ -8,18 +8,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class StaffController {
+    @Autowired
+    private HttpSession session;
     @RequestMapping("/staff/{staff}")
     public String staff(@PathVariable("staff") String staff){
         return "/staff/"+staff;
     }
     @Autowired
     private TSMapper TSMapper;
-    //查询所有职工列表
-    @RequestMapping("/staff")
+
+    @RequestMapping("/staff/index.html")//首页
+    public String index(){
+        String name = TSMapper.queryTeaNameById((String) session.getAttribute("id"));
+        session.setAttribute("name",name);
+//        System.out.println(session.getAttribute("name"));
+        return "/staff/index.html";
+    }
+    @RequestMapping("/staff") //查询所有职工列表
     public String queryStaffList(Model model){
         List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);

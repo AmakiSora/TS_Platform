@@ -84,8 +84,8 @@
                                                                                                                                                   title="修改"><i class="fa fa-check text-success"></i></a>
                                         <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])"
                                            title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm"
-                                           title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${student.id}"
+                                           title="重置密码"><i class="fa fa-reply text-danger"></i></a>
                                         <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
                                            title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a></td>
                                 </tr>

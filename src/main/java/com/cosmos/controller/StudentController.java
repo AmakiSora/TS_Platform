@@ -20,17 +20,18 @@ import java.util.List;
 @Controller
 public class StudentController {
     @Autowired
+    private HttpSession session;
+    @Autowired
     private TSMapper TSMapper;
     @RequestMapping("/student/{student}")
     public String student(@PathVariable("student") String student){
         return "/student/"+student;
     }
+
     @RequestMapping("/student/index.html")//首页
-    public String index(Model model){
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
-//        String username = userDetails.getUsername();
-//        String name = TSMapper.queryNameById(username);
-//        model.addAttribute("name",name);
+    public String index(){
+        String name = TSMapper.queryStuNameById((String) session.getAttribute("id"));
+        session.setAttribute("name",name);//名字放进会话
         return "/student/index.html";
     }
 
@@ -43,9 +44,7 @@ public class StudentController {
 
     @RequestMapping("/student/students.html")//查询同班同学的学生信息
     public String queryStudentList(Model model){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取用户名
-        String username = userDetails.getUsername();
-        String classes = TSMapper.queryClassesByName(username);
+        String classes = TSMapper.queryClassesByName((String) session.getAttribute("id"));
         List<Student> studentList = TSMapper.queryStudentByClasses(classes);
         model.addAttribute("studentList",studentList);
         return "/student/students.html";

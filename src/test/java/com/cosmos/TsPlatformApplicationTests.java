@@ -27,7 +27,7 @@ class TsPlatformApplicationTests {
     void contextLoads() throws SQLException {
 //        System.out.println(TSMapper.queryStaffList());
 //        System.out.println(TSMapper.queryStudentList());
-        System.out.println(TSMapper.queryNameById("121101"));
+        System.out.println(TSMapper.queryStuNameById("121101"));
     }
 
 }
