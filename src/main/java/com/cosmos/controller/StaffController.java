@@ -24,9 +24,10 @@ public class StaffController {
 
     @RequestMapping("/staff/index.html")//首页
     public String index(){
-        String name = TSMapper.queryTeaNameById((String) session.getAttribute("id"));
-        session.setAttribute("name",name);
-//        System.out.println(session.getAttribute("name"));
+        String name = TSMapper.queryTeaNameById(session.getAttribute("id").toString());
+        if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
+            session.setAttribute("name",name);//名字放进会话
+        }
         return "/staff/index.html";
     }
     @RequestMapping("/staff") //查询所有职工列表

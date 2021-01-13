@@ -36,11 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .userDetailsService(userService())//自定义登录逻辑
 //                .tokenRepository(tokenRepository)//指定存储位置
 //        ;
-//        http.sessionManagement()//会话
-//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)//会话配置，默认需要用时创建会话
-//                .invalidSessionUrl("/login.html")//会话超时后跳转
-//                .sessionFixation().migrateSession()//会话保护方式，默认每次登录账户都创建新会话，旧会话无效，将旧会话属性存进新会话中
-//                ;
+        http.sessionManagement()//会话
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)//会话配置，默认需要用时创建会话
+                .invalidSessionUrl("/login.html")//会话超时后跳转
+                .sessionFixation().migrateSession()//会话保护方式，默认每次登录账户都创建新会话，旧会话无效，将旧会话属性存进新会话中
+                ;
 
 
         http.csrf().disable();//关闭csrf(跨站请求劫持)防护

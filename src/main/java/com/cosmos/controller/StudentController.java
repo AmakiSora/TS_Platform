@@ -1,6 +1,7 @@
 package com.cosmos.controller;
 
 import com.cosmos.mapper.TSMapper;
+import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
@@ -30,8 +31,10 @@ public class StudentController {
 
     @RequestMapping("/student/index.html")//首页
     public String index(){
-        String name = TSMapper.queryStuNameById((String) session.getAttribute("id"));
-        session.setAttribute("name",name);//名字放进会话
+        String name = TSMapper.queryStuNameById(session.getAttribute("id").toString());
+        if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
+            session.setAttribute("name",name);//名字放进会话
+        }
         return "/student/index.html";
     }
 
@@ -50,5 +53,13 @@ public class StudentController {
         return "/student/students.html";
     }
 
+    @RequestMapping("/student/courses.html")//课程查询
+    public String queryCourseList(Model model){
+        List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
+        model.addAttribute("coursesList",coursesList);
+        List<Course> myCoursesList = TSMapper.queryStuCourse(session.getAttribute("id").toString());//查询学生自己的课程
+        model.addAttribute("myCoursesList",myCoursesList);
+        return "/student/courses.html";
+    }
 
 }

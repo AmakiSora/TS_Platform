@@ -48,4 +48,16 @@
         update student set id=#{id},name=#{name},gender=#{gender},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
     </update>
 
+    <!--分界线-->
+
+    <select id="queryCourseList" resultType="com.cosmos.pojo.Course">
+        select * from course
+    </select>
+    <select id="queryStuCourse" resultType="com.cosmos.pojo.Course">
+        select c.*
+        from course as c,studentCourse as sc
+        where sc.courseID = c.id
+        and   sc.studentID = #{id}
+    </select>
+
 </mapper>
