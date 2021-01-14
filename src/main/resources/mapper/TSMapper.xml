@@ -59,5 +59,14 @@
         where sc.courseID = c.id
         and   sc.studentID = #{id}
     </select>
+    <select id="queryTeaCourse" resultType="com.cosmos.pojo.Course">
+        select c.*
+        from course as c
+        where c.teacher = #{name}
+    </select>
+    <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
+        insert into course (id,name,teacher,college) values(#{id},#{name},#{teacher},#{college})
+    </insert>
+
 
 </mapper>

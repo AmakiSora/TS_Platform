@@ -38,7 +38,7 @@ public class StudentController {
         return "/student/index.html";
     }
 
-    @RequestMapping("/student/staff.html")//查询老师信息
+    @RequestMapping("/student/staff.html")//查询所有老师信息
     public String queryStaffList(Model model){
         List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);

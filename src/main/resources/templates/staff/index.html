@@ -33,28 +33,28 @@
                 <nav class="sidebar-nav">
                     <ul class="metismenu">
                         <li th:class="${active == 'Index'?'active':''}">
-                            <a th:href="@{/staff/Index.html}"><i class="fa fa-dashboard"></i>
+                            <a th:href="@{/staff/index.html}"><i class="fa fa-dashboard"></i>
                                 <span>首页</span></a></li>
-                        <li th:class="${active == 'staff'?'active':''}">
-                            <a th:href="@{/staff}"><i class="fa fa-black-tie"></i>
-                                <span>职工</span></a></li>
-                        <li th:class="${active == 'students.html'?'active':''}">
-                            <a th:href="@{/staff/students.html}"><i class="fa fa-users"></i>
+                        <li th:class="${active == 'Staff'?'active':''}">
+                            <a th:href="@{/staff/staff.html}"><i class="fa fa-black-tie"></i>
                                 <span>教师</span></a></li>
+                        <li th:class="${active == 'Students.html'?'active':''}">
+                            <a th:href="@{/staff/students.html}"><i class="fa fa-users"></i>
+                                <span>学生</span></a></li>
                         <li th:class="${active == 'Courses'?'active':''}">
-                            <a th:href="@{/staff/Courses.html}"><i class="fa fa-graduation-cap"></i>
+                            <a th:href="@{/staff/courses.html}"><i class="fa fa-graduation-cap"></i>
                                 <span>课程</span></a></li>
                         <li th:class="${active == 'Calendar'?'active':''}">
-                            <a th:href="@{/staff/Calendar.html}"><i class="fa fa-calendar"></i>
+                            <a th:href="@{/staff/calendar.html}"><i class="fa fa-calendar"></i>
                                 <span>日历</span></a></li>
                         <li th:class="${active == 'Chat'?'active':''}">
-                            <a th:href="@{/staff/Chat.html}"><i class="fa fa-comments-o"></i>
+                            <a th:href="@{/staff/chat.html}"><i class="fa fa-comments-o"></i>
                                 <span>聊天</span></a></li>
                         <li th:class="${active == 'Task'?'active':''}">
-                            <a th:href="@{/staff/Task.html}"><i class="fa fa-folder"></i>
+                            <a th:href="@{/staff/task.html}"><i class="fa fa-folder"></i>
                                 <span>作业</span></a></li>
                         <li th:class="${active == 'Settings'?'active':''}">
-                            <a th:href="@{/staff/Settings.html}"><i class="fa fa-gear"></i>
+                            <a th:href="@{/staff/settings.html}"><i class="fa fa-gear"></i>
                                 <span>设置</span></a></li>
 
                         <!--                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-user-circle-o"></i><span>教授</span></a></li>-->

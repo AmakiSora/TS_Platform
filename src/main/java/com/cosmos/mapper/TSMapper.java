@@ -29,4 +29,6 @@ public interface TSMapper {
     //分界线---------------------------------------------------------------------------
     List<Course> queryCourseList();//查询所有课程
     List<Course> queryStuCourse(String id);//查询学生自己的课程
+    List<Course> queryTeaCourse(String id);//查询老师自己的课程
+    void addCourse(Course course);//开设课程
 }

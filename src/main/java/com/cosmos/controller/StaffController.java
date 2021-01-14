@@ -1,11 +1,13 @@
 package com.cosmos.controller;
 
 import com.cosmos.mapper.TSMapper;
+import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -30,11 +32,25 @@ public class StaffController {
         }
         return "/staff/index.html";
     }
-    @RequestMapping("/staff") //查询所有职工列表
+    @RequestMapping("/staff/staff.html") //查询所有职工列表
     public String queryStaffList(Model model){
         List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);
-        return "staff/staff";
+        return "staff/staff.html";
+    }
+    @RequestMapping("/staff/courses.html")//课程查询
+    public String queryCourseList(Model model){
+        List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
+        model.addAttribute("coursesList",coursesList);
+        List<Course> myCoursesList = TSMapper.queryTeaCourse(session.getAttribute("name").toString());//查询学生自己的课程
+        model.addAttribute("myCoursesList",myCoursesList);
+        return "/staff/courses.html";
+    }
+
+    @PostMapping("/staff/courses.html")//开设课程
+    public String addCourses(Course course){
+        TSMapper.addCourse(course);
+        return "redirect:/staff/courses.html";
     }
 //    @RequestMapping("/staffs")
 //    public String staff(Model model){
