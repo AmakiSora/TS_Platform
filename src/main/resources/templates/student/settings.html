@@ -63,7 +63,7 @@
                                     <form th:action="@{/student/settings.html}">
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12">
-                                                <img src="/avatar/11.jpg" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar" data-original-title="Avatar Name">
+                                                <img th:src="@{/myAvatar}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar" data-original-title="Avatar Name">
                                             </div>
 
                                             <div class="col-md-4 col-sm-12">
@@ -161,7 +161,7 @@
                                     </form>
                                 </div>
                                 <div class="card-body">
-                                    <from th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
+                                    <form th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label">Profile Picture</label>
                                             <div class="col-md-9"><div class="dropify-wrapper">
@@ -185,7 +185,7 @@
                                                 <button type="submit" class="btn btn-primary">保存</button>
                                             </div>
                                         </div>
-                                    </from>
+                                    </form>
                                 </div>
                             </div>
                         </div>

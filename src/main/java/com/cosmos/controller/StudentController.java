@@ -5,6 +5,10 @@ import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,8 +67,9 @@ public class StudentController {
         return "/student/courses.html";
     }
 
-    @RequestMapping("/setAvatar")//学生上传头像
+    @PostMapping("/setAvatar")//学生上传头像
     public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("c");
         if(file.isEmpty()){
             System.out.println("c");
             return null;
@@ -81,18 +86,27 @@ public class StudentController {
         TSMapper.setAvatar(student);
         return "/student/settings.html";
     }
-    @RequestMapping("/student/settings.html")//设置界面
-    public String getData(Model model) throws IOException {
-        System.out.println(TSMapper.queryStudentById(session.getAttribute("id").toString()));
-        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
-
+//    @RequestMapping("/student/settings.html")//设置界面
+//    public String getData(Model model) throws IOException {
+//        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
 //        if(student.getAvatar()!=null){
-//            byte[] bytes = student.getAvatar();
-//            System.out.println(bytes);
-//            ByteArrayInputStream inputStream=new ByteArrayInputStream(bytes);//将二进制字节数组 转为文件
-//            Files.copy(inputStream, Paths.get("/avatar/11.jpg"));
+//            byte[] d=student.getAvatar();//将图片转换成二进制流
+//            ResponseEntity<byte[]> b = ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(student.getAvatar());
+////            byte[] bytes = student.getAvatar();
+////            System.out.println(bytes);
+////            ByteArrayInputStream inputStream=new ByteArrayInputStream(bytes);//将二进制字节数组 转为文件
+////            Files.copy(inputStream, Paths.get("/avatar/11.jpg"));
+//            model.addAttribute("b",b);
+//            model.addAttribute("d",d);
 //        }
-        return "/student/settings.html";
+//        return "/student/settings.html";
+//    }
+    @RequestMapping("/myAvatar")
+    public ResponseEntity<byte[]> avatar (){
+        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
+        byte[] a = student.getAvatar();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<byte[]>(a,headers, HttpStatus.OK);
     }
-
 }

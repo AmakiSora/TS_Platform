@@ -17,7 +17,9 @@
 <div id="main_content"><!-- 大页面 -->
     <div id="header_top" class="header_top" th:fragment="HeaderTop">
         <div class="container">
-            <div class="hleft"><a class="header-brand"><i class="fa fa-graduation-cap brand-logo"></i></a>
+            <div class="hleft"><a class="header-brand">
+                <img th:src="@{/myAvatar}">
+            </a>
                 <div class="dropdown"><a href="javascript:void(0)" class="nav-link icon menu_toggle"><i
                         class="fe fe-align-center"></i></a><a href="page-search.html" class="nav-link icon"><i
                         class="fe fe-search" data-toggle="tooltip" data-placement="right" title="搜索"></i></a><a
