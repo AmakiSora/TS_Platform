@@ -41,8 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/login.html")//会话超时后跳转
                 .sessionFixation().migrateSession()//会话保护方式，默认每次登录账户都创建新会话，旧会话无效，将旧会话属性存进新会话中
                 ;
-
-
         http.csrf().disable();//关闭csrf(跨站请求劫持)防护
     }
 

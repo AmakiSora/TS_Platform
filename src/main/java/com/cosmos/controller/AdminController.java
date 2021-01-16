@@ -6,8 +6,6 @@ import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +21,7 @@ public class AdminController {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+    //分割线------------------------------------------------------------------------------------
 
     @RequestMapping("/admin/{admin}")//默认转发所有
     public String admin(@PathVariable("admin") String admin){

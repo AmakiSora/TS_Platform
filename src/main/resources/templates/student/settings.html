@@ -60,8 +60,12 @@
                                     <h3 class="card-title">一般设置</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form th:action="@{/student/settings.html}">
                                         <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <img src="/avatar/11.jpg" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar" data-original-title="Avatar Name">
+                                            </div>
+
                                             <div class="col-md-4 col-sm-12">
                                                 <div class="form-group"><label>名字</label>
                                                     <a class="form-control" type="text" th:text="${session.name}"></a></div>
@@ -148,12 +152,6 @@
                                                     <input class="form-control" value="818-978-7102" type="text">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>传真</label>
-                                                    <input class="form-control" value="818-978-7102" type="text">
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12 text-right m-t-20">
@@ -161,6 +159,33 @@
                                             </div>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="card-body">
+                                    <from th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">Profile Picture</label>
+                                            <div class="col-md-9"><div class="dropify-wrapper">
+                                                <div class="dropify-message">
+                                                    <span class="file-icon"></span>
+                                                    <p>Drag and drop a file here or click</p>
+                                                    <p class="dropify-error">Ooops, something wrong appended.</p>
+                                                </div>
+                                                <div class="dropify-loader" style="display: none;"></div>
+                                                <div class="dropify-errors-container"><ul></ul></div>
+                                                <input type="file" name="file" class="dropify">
+                                                <button type="button" class="dropify-clear">Remove</button>
+                                                <div class="dropify-preview" style="display: none;">
+                                                    <span class="dropify-render"></span>
+                                                    <div class="dropify-infos">
+                                                        <div class="dropify-infos-inner">
+                                                            <p class="dropify-filename">
+                                                                <span class="file-icon"></span> <span class="dropify-filename-inner">1.png</span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div><small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small></div></div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-right m-t-20">
+                                                <button type="submit" class="btn btn-primary">保存</button>
+                                            </div>
+                                        </div>
+                                    </from>
                                 </div>
                             </div>
                         </div>
@@ -659,6 +684,8 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/dropify.js}"></script>
+
 
 </body>
 </html>

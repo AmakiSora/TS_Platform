@@ -16,11 +16,9 @@ public class MyUserDetailService implements UserDetailsService, UserService {
     @Autowired
     private UserMapper userMapper;//数据库
     @Autowired
-    private TSMapper TsMapper;//数据库
-    @Autowired
     private PasswordEncoder passwordEncoder;//加密
 
-    @Override
+    @Override 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        com.cosmos.pojo.User user = userMapper.selectByName(username);//从数据库取出用户名
         com.cosmos.pojo.User user = userMapper.selectByName(username);

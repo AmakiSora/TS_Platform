@@ -14,4 +14,7 @@ public class Student {//学生表
     private String classes;
     private String college;
     private String phone;
+    private byte[] avatar;
+
+
 }

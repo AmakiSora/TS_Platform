@@ -26,6 +26,7 @@ public interface TSMapper {
     void addStudent(Student student);//增加学生
     void deleteStudent(String id);//根据id删除学生
     void updateStudent(Student student);//修改学生信息
+    void setAvatar(Student student);//上传头像
     //分界线---------------------------------------------------------------------------
     List<Course> queryCourseList();//查询所有课程
     List<Course> queryStuCourse(String id);//查询学生自己的课程

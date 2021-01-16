@@ -52,11 +52,4 @@ public class StaffController {
         TSMapper.addCourse(course);
         return "redirect:/staff/courses.html";
     }
-//    @RequestMapping("/staffs")
-//    public String staff(Model model){
-//
-//        //Collection<Staff> staffs = staffDao.getAll();
-//        //model.addAttribute("staffs",staffs);//放在请求域中
-//        return "staf/staff";//thymeleaf默认会拼串  classpath:/templates/xxx.html
-//    }
 }

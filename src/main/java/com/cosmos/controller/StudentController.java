@@ -4,19 +4,20 @@ import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
-import com.cosmos.pojo.User;
-import com.fasterxml.jackson.databind.DatabindContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class StudentController {
@@ -60,6 +61,38 @@ public class StudentController {
         List<Course> myCoursesList = TSMapper.queryStuCourse(session.getAttribute("id").toString());//查询学生自己的课程
         model.addAttribute("myCoursesList",myCoursesList);
         return "/student/courses.html";
+    }
+
+    @RequestMapping("/setAvatar")//学生上传头像
+    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+        if(file.isEmpty()){
+            System.out.println("c");
+            return null;
+        }
+//        String fileName = System.currentTimeMillis()+file.getOriginalFilename();//根据时间戳产生新的文件名
+        String fileName = session.getAttribute("name").toString();
+        System.out.println(fileName);
+        byte[] bytes=file.getBytes();//将图片转换成二进制流
+        System.out.println(bytes);
+        Student student = new Student();
+        student.setId(session.getAttribute("id").toString());
+        student.setAvatar(bytes);
+//        String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/images/download/"+fileName;
+        TSMapper.setAvatar(student);
+        return "/student/settings.html";
+    }
+    @RequestMapping("/student/settings.html")//设置界面
+    public String getData(Model model) throws IOException {
+        System.out.println(TSMapper.queryStudentById(session.getAttribute("id").toString()));
+        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
+
+//        if(student.getAvatar()!=null){
+//            byte[] bytes = student.getAvatar();
+//            System.out.println(bytes);
+//            ByteArrayInputStream inputStream=new ByteArrayInputStream(bytes);//将二进制字节数组 转为文件
+//            Files.copy(inputStream, Paths.get("/avatar/11.jpg"));
+//        }
+        return "/student/settings.html";
     }
 
 }
