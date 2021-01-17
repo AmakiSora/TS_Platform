@@ -49,6 +49,7 @@
                                     <thead> <!--表头 -->
                                     <tr>
                                         <th>教工号</th>
+                                        <th></th>
                                         <th>姓名</th>
                                         <th>性别</th>
                                         <th>所属学院</th>
@@ -58,7 +59,8 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="staff:${staffList}">
-                                        <td th:text="${staff.id}"></td>
+                                        <td th:text="${staff.id}" style="width:50px"></td>
+                                        <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
                                         <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'N'+${staff.name}" style="width:70px"></td>
                                         <td th:class="${staff.id}" th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
                                         <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'G'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
@@ -114,6 +116,7 @@
                                             <div class="col-md-9">
                                                 <select class="form-control input-height" name="college">
                                                     <option value="">选择...</option>
+                                                    <option value="马克思主义学院">马克思主义学院</option>
                                                     <option value="电子信息学院">电子信息学院</option>
                                                     <option value="外国语学院">外国语学院</option>
                                                     <option value="机械学院">机械学院</option>

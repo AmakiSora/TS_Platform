@@ -67,25 +67,29 @@ public class StudentController {
         return "/student/courses.html";
     }
 
-    @PostMapping("/setAvatar")//学生上传头像
-    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
-        System.out.println("c");
-        if(file.isEmpty()){
-            System.out.println("c");
-            return null;
-        }
-//        String fileName = System.currentTimeMillis()+file.getOriginalFilename();//根据时间戳产生新的文件名
-        String fileName = session.getAttribute("name").toString();
-        System.out.println(fileName);
-        byte[] bytes=file.getBytes();//将图片转换成二进制流
-        System.out.println(bytes);
-        Student student = new Student();
-        student.setId(session.getAttribute("id").toString());
-        student.setAvatar(bytes);
-//        String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/images/download/"+fileName;
-        TSMapper.setAvatar(student);
-        return "/student/settings.html";
-    }
+//    @PostMapping("/setAvatar")//学生上传头像
+//    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+//        if(file.isEmpty()){
+//            return null;
+//        }
+////        String fileName = System.currentTimeMillis()+file.getOriginalFilename();//根据时间戳产生新的文件名
+////        String fileName = session.getAttribute("name").toString();
+//        byte[] bytes=file.getBytes();//将图片转换成二进制流
+//        Student student = new Student();
+//        student.setId(session.getAttribute("id").toString());
+//        student.setAvatar(bytes);
+////        String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/images/download/"+fileName;
+//        TSMapper.setStuAvatar(student);
+//        return "/student/settings.html";
+//    }
+//    @RequestMapping("/stuAvatar/{id}")
+//    public ResponseEntity<byte[]> stuAvatar (){
+//        Student student = TSMapper.queryStudentById();
+//        byte[] s = student.getAvatar();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_PNG);
+//        return new ResponseEntity<byte[]>(s,headers, HttpStatus.OK);
+//    }
 //    @RequestMapping("/student/settings.html")//设置界面
 //    public String getData(Model model) throws IOException {
 //        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
@@ -101,12 +105,5 @@ public class StudentController {
 //        }
 //        return "/student/settings.html";
 //    }
-    @RequestMapping("/myAvatar")
-    public ResponseEntity<byte[]> avatar (){
-        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
-        byte[] a = student.getAvatar();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        return new ResponseEntity<byte[]>(a,headers, HttpStatus.OK);
-    }
+
 }

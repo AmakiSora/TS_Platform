@@ -29,12 +29,15 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
         //获取到登陆者的权限，然后做跳转
         if (roles.contains("admin")){
             response.sendRedirect("/admin/index.html");
+            session.setAttribute("role","admin");
             return;
         }else if (roles.contains("staff")){
             response.sendRedirect("/staff/index.html");
+            session.setAttribute("role","staff");
             return;
         }else if (roles.contains("student")){
             response.sendRedirect("/student/index.html");
+            session.setAttribute("role","student");
             return;
         }else {
             response.sendRedirect("/403");

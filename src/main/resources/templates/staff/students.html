@@ -48,6 +48,7 @@
                                 <thead>
                                 <tr>
                                     <th>学号</th>
+                                    <th></th>
                                     <th>名字</th>
                                     <th>性别</th>
                                     <th>班级</th>
@@ -58,7 +59,8 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="student:${studentList}">
-                                    <td th:text="${student.id}"></td>
+                                    <td th:text="${student.id}" style="width:50px"></td>
+                                    <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
                                     <td th:text="${student.name}"><span class="font-16"></span></td>
                                     <td th:text="${student.gender==0?'女':'男'}"></td>
                                     <td th:text="${student.classes}"></td>

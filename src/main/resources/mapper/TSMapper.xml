@@ -47,9 +47,6 @@
     <update id="updateStudent" parameterType="com.cosmos.pojo.Student">
         update student set id=#{id},name=#{name},gender=#{gender},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
     </update>
-    <update id="setAvatar" parameterType="com.cosmos.pojo.Student">
-        update student set avatar=#{avatar} where id = #{id}
-    </update>
 
     <!--分界线-->
 

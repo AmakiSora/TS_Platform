@@ -50,6 +50,7 @@
                                 <thead>
                                 <tr>
                                     <th>学号</th>
+                                    <th></th>
                                     <th>名字</th>
                                     <th>性别</th>
                                     <th>班级</th>
@@ -61,7 +62,8 @@
                                 <tbody>
                                 <tr th:each="student:${studentList}">
 <!--                                    <td th:class="${student.name}" style="display: none"><input type="text" th:value="${student.id}"                 th:id="${student.id}" style="width:80px"></td>-->
-                                    <td th:text="${student.id}"></td><!--不支持修改id -->
+                                    <td th:text="${student.id}" style="width:50px"></td><!--不支持修改id -->
+                                    <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
                                     <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.name}"               th:id="${student.id}+'N'+${student.name}" style="width:70px"></td>
                                     <td th:class="${student.id}" th:text="${student.name}"><span class="font-16"></span></td>
                                     <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.gender==0?'女':'男'}" th:id="${student.id}+'G'+${student.gender==0?'女':'男'}" style="width:25px"></td>

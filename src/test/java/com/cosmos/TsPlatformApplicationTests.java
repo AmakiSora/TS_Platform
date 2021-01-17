@@ -3,6 +3,7 @@ package com.cosmos;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
 import com.fasterxml.jackson.databind.DatabindContext;
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,9 @@ class TsPlatformApplicationTests {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    StringEncryptor encryptor;
+
     //    SecurityContextImpl securityContext = (SecurityContextImpl) request
 //            .getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 //    String username = UsernamePasswordAuthenticationToken
@@ -27,7 +31,11 @@ class TsPlatformApplicationTests {
     void contextLoads() throws SQLException {
 //        System.out.println(TSMapper.queryStaffList());
 //        System.out.println(TSMapper.queryStudentList());
-        System.out.println(TSMapper.queryStuNameById("121101"));
+
+
+
+//        String password = encryptor.encrypt("");//加密数据库密码
+//        System.out.println(password);//
     }
 
 }

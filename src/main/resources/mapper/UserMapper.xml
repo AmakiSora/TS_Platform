@@ -14,6 +14,12 @@
     <update id="resetPasswordUser" parameterType="com.cosmos.pojo.User">
         update user set password = "000" where username = #{username}
     </update>
+    <update id="setAvatar">
+        update user set avatar=#{avatar} where username = #{username}
+    </update>
+    <select id="getAvatar" resultType="com.cosmos.pojo.User">
+        select avatar from user where username = #{username}
+    </select>
 
 
 </mapper>

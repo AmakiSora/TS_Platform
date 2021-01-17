@@ -13,4 +13,5 @@ public class Staff {//教师表
     private Integer gender;//性别 0女，1男
     private String college;//学院
     private String phone;//手机号
+
 }

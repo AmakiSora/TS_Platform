@@ -54,6 +54,7 @@
                                     <thead> <!--表头 -->
                                     <tr>
                                         <th>教工号</th>
+                                        <th></th>
                                         <th>姓名</th>
                                         <th>性别</th>
                                         <th>联系电话</th>
@@ -63,7 +64,8 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="staff:${staffList}">
-                                        <td th:text="${staff.id}"></td>
+                                        <td th:text="${staff.id}" style="width:50px"></td>
+                                        <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
                                         <td th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
                                         <td th:text="${staff.gender==0?'女':'男'}"></td>
                                         <td th:text="${staff.phone}"><span class="text-muted"></span></td>

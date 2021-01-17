@@ -17,4 +17,6 @@ public interface UserMapper {
     void addUser(User user);//增加帐号
     void deleteUser(String username);//删除
     void resetPasswordUser(String username);//更改信息
+    void setAvatar(User user);//设置头像
+    User getAvatar(String username);//获得头像
 }

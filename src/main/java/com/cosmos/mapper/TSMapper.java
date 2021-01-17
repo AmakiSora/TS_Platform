@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface TSMapper {
     List<Staff> queryStaffList();//列出教师表
-    Staff queryStaffById(int id);//根据id查询教师
+    Staff queryStaffById(String id);//根据id查询教师
     String queryTeaNameById(String id);//根据id搜名字
     void addStaff(Staff staff);//增加教师
     void deleteStaff(String id);//根据id删除教师
@@ -26,7 +26,6 @@ public interface TSMapper {
     void addStudent(Student student);//增加学生
     void deleteStudent(String id);//根据id删除学生
     void updateStudent(Student student);//修改学生信息
-    void setAvatar(Student student);//上传头像
     //分界线---------------------------------------------------------------------------
     List<Course> queryCourseList();//查询所有课程
     List<Course> queryStuCourse(String id);//查询学生自己的课程
