@@ -62,10 +62,13 @@
     <select id="queryTeaCourse" resultType="com.cosmos.pojo.Course">
         select c.*
         from course as c
-        where c.teacher = #{name}
+        where c.teacherID = #{id}
+    </select>
+    <select id="queryCourse" resultType="com.cosmos.pojo.Course">
+        select * from course where id = #{id}
     </select>
     <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
-        insert into course (id,name,teacher,college) values(#{id},#{name},#{teacher},#{college})
+        insert into course (id,name,teacherID,teacher,college) values(#{id},#{name},#{teacherID},#{teacher},#{college})
     </insert>
 
 

@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:insert="DIY::ico">
-    <title>职工</title><!-- Bootstrap Core and vandor -->
+    <title>职工管理</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -44,51 +45,57 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="Staff-all">
                         <div class="card">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-vcenter text-nowrap table-striped mb-0">
-                                    <thead> <!--表头 -->
-                                    <tr>
-                                        <th>教工号</th>
-                                        <th></th>
-                                        <th>姓名</th>
-                                        <th>性别</th>
-                                        <th>所属学院</th>
-                                        <th>联系电话</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="staff:${staffList}">
-                                        <td th:text="${staff.id}" style="width:50px"></td>
-                                        <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'N'+${staff.name}" style="width:70px"></td>
-                                        <td th:class="${staff.id}" th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
-                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'G'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
-                                        <td th:class="${staff.id}" th:text="${staff.gender==0?'女':'男'}"></td>
-                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.college}"            th:id="${staff.id}+'X'+${staff.college}" style="width:120px"></td>
-                                        <td th:class="${staff.id}" th:text="${staff.college}"></td>
-                                        <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.phone}"              th:id="${staff.id}+'P'+${staff.phone}" style="width:110px"></td>
-                                        <td th:class="${staff.id}" th:text="${staff.phone}"><span class="text-muted"></span></td>
-<!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
-                                        <td>
-                                            <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm"
-                                                    title="查看信息"><i class="fa fa-eye"></i></a>
-                                            <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${staff.id}]],
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap table-striped mb-0 js-basic-example dataTable  table_custom border-style spacing5">
+                                        <thead>
+                                        <tr>
+                                            <th>教工号</th>
+                                            <th></th>
+                                            <th style="display: none"></th><!-- 加这个是为了让筛选功能有对应表头，不然会报错-->
+                                            <th>姓名</th>
+                                            <th style="display: none"></th>
+                                            <th>性别</th>
+                                            <th style="display: none"></th>
+                                            <th>所属学院</th>
+                                            <th style="display: none"></th>
+                                            <th>联系电话</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="staff:${staffList}">
+                                            <td th:text="${staff.id}" style="width:70px"></td>
+                                            <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'N'+${staff.name}" style="width:70px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'G'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.gender==0?'女':'男'}"></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.college}"            th:id="${staff.id}+'X'+${staff.college}" style="width:120px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.college}"></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.phone}"              th:id="${staff.id}+'P'+${staff.phone}" style="width:110px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.phone}"><span class="text-muted"></span></td>
+                                            <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
+                                            <td>
+                                                <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm"
+                                                   title="查看信息"><i class="fa fa-eye"></i></a>
+                                                <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${staff.id}]],
                                                                                                                                                [[${staff.id}+'N'+${staff.name}]],
                                                                                                                                                [[${staff.id}+'G'+${staff.gender==0?'女':'男'}]],
                                                                                                                                                [[${staff.id}+'X'+${staff.college}]],
                                                                                                                                                [[${staff.id}+'P'+${staff.phone}]])"
-                                                    title="修改"><i class="fa fa-check text-success"></i></a>
-                                            <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${staff.id}]])"
-                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                            <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm"
-                                                    title="重置"><i class="fa fa-reply text-danger"></i></a>
-                                            <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteTea/}+${staff.id}"
-                                                    title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                                   title="修改"><i class="fa fa-check text-success"></i></a>
+                                                <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${staff.id}]])"
+                                                   title="编辑"><i class="fa fa-edit text-blue"></i></a>
+                                                <a th:class="${staff.id}" style="display: none" type="button" class="btn btn-icon btn-sm"
+                                                   title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                                <a th:class="${staff.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteTea/}+${staff.id}"
+                                                   title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,6 +177,9 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/datatable.js}"></script>
+<script th:src="@{/js/dataTables.bundle.js}"></script>
+
 <script>
     function change(id){
         var display = document.getElementsByClassName(id);

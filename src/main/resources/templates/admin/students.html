@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -45,54 +46,64 @@
             <div class="container-fluid">
                 <div class="tab-content">
                     <div class="tab-pane active" id="Student-all">
-                        <div class="table-responsive card">
-                            <table class="table table-hover table-vcenter table-striped mb-0 text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>学号</th>
-                                    <th></th>
-                                    <th>名字</th>
-                                    <th>性别</th>
-                                    <th>班级</th>
-                                    <th>学院</th>
-                                    <th>电话</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="student:${studentList}">
-<!--                                    <td th:class="${student.name}" style="display: none"><input type="text" th:value="${student.id}"                 th:id="${student.id}" style="width:80px"></td>-->
-                                    <td th:text="${student.id}" style="width:50px"></td><!--不支持修改id -->
-                                    <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                    <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.name}"               th:id="${student.id}+'N'+${student.name}" style="width:70px"></td>
-                                    <td th:class="${student.id}" th:text="${student.name}"><span class="font-16"></span></td>
-                                    <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.gender==0?'女':'男'}" th:id="${student.id}+'G'+${student.gender==0?'女':'男'}" style="width:25px"></td>
-                                    <td th:class="${student.id}" th:text="${student.gender==0?'女':'男'}"></td>
-                                    <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.classes}"            th:id="${student.id}+'C'+${student.classes}" style="width:100px"></td>
-                                    <td th:class="${student.id}" th:text="${student.classes}"></td>
-                                    <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.college}"            th:id="${student.id}+'X'+${student.college}" style="width:120px"></td>
-                                    <td th:class="${student.id}" th:text="${student.college}"></td>
-                                    <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'P'+${student.phone}" style="width:110px"></td>
-                                    <td th:class="${student.id}" th:text="${student.phone}"></td>
-                                    <td>
-                                        <a th:class="${student.id}"  type="button" class="btn btn-icon btn-sm"
-                                           title="查看信息"><i class="fa fa-eye"></i></a>
-                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${student.id}]],
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap table-striped mb-0 js-basic-example dataTable  table_custom border-style spacing5">
+                                        <thead>
+                                        <tr>
+                                            <th>学号</th>
+                                            <th></th>
+                                            <th style="display: none"></th><!-- 加这个是为了让筛选功能有对应表头，不然会报错-->
+                                            <th>名字</th>
+                                            <th style="display: none"></th>
+                                            <th>性别</th>
+                                            <th style="display: none"></th>
+                                            <th>班级</th>
+                                            <th style="display: none"></th>
+                                            <th>学院</th>
+                                            <th style="display: none"></th>
+                                            <th>电话</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="student:${studentList}">
+                                            <!--                                    <td th:class="${student.name}" style="display: none"><input type="text" th:value="${student.id}"                 th:id="${student.id}" style="width:80px"></td>-->
+                                            <td th:text="${student.id}" style="width:50px"></td><!--不支持修改id -->
+                                            <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.name}"               th:id="${student.id}+'N'+${student.name}" style="width:70px"></td>
+                                            <td th:class="${student.id}" th:text="${student.name}"><span class="font-16"></span></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.gender==0?'女':'男'}" th:id="${student.id}+'G'+${student.gender==0?'女':'男'}" style="width:25px"></td>
+                                            <td th:class="${student.id}" th:text="${student.gender==0?'女':'男'}"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.classes}"            th:id="${student.id}+'C'+${student.classes}" style="width:100px"></td>
+                                            <td th:class="${student.id}" th:text="${student.classes}"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.college}"            th:id="${student.id}+'X'+${student.college}" style="width:120px"></td>
+                                            <td th:class="${student.id}" th:text="${student.college}"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'P'+${student.phone}" style="width:110px"></td>
+                                            <td th:class="${student.id}" th:text="${student.phone}"></td>
+                                            <td>
+                                                <a th:class="${student.id}"  type="button" class="btn btn-icon btn-sm"
+                                                   title="查看信息"><i class="fa fa-eye"></i></a>
+                                                <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${student.id}]],
                                                                                                                                                [[${student.id}+'N'+${student.name}]],
                                                                                                                                                [[${student.id}+'G'+${student.gender==0?'女':'男'}]],
                                                                                                                                                [[${student.id}+'C'+${student.classes}]],
                                                                                                                                                [[${student.id}+'X'+${student.college}]],
                                                                                                                                                [[${student.id}+'P'+${student.phone}]])"
-                                                                                                                                                  title="修改"><i class="fa fa-check text-success"></i></a>
-                                        <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])"
-                                           title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                        <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${student.id}"
-                                           title="重置密码"><i class="fa fa-reply text-danger"></i></a>
-                                        <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
-                                           title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                                   title="修改"><i class="fa fa-check text-success"></i></a>
+                                                <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])"
+                                                   title="编辑"><i class="fa fa-edit text-blue"></i></a>
+                                                <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${student.id}"
+                                                   title="重置密码"><i class="fa fa-reply text-danger"></i></a>
+                                                <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
+                                                   title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane" id="Student-add">
@@ -178,6 +189,8 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/datatable.js}"></script>
+<script th:src="@{/js/dataTables.bundle.js}"></script>
 
 <script th:inline="javascript">
     function change(id){

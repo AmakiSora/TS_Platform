@@ -50,7 +50,7 @@
                                 <div class="card">
                                     <a href="#"><img class="card-img-top" src="/images/1.jpeg" alt=""></a>
                                     <div class="card-body d-flex flex-column">
-                                        <h5><a href="courses-details.html" th:text="${myCourses.name}">课程名</a></h5>
+                                        <h5><a th:href="@{/courses/}+${myCourses.id}" th:text="${myCourses.name}">课程名</a></h5>
                                         <div class="text-muted">课程介绍字段</div>
                                     </div>
                                     <div class="table-responsive">
@@ -75,9 +75,8 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex align-items-center mt-auto"><img
-                                                class="avatar avatar-md mr-3" src="/images/avatar4.jpeg"
-                                                alt="avatar">
+                                        <div class="d-flex align-items-center mt-auto">
+                                            <img class="avatar avatar-md mr-3" th:src="@{/Avatar/}+${myCourses.teacherID}" alt="avatar">
                                             <div><a href="#" th:text="${myCourses.teacher}">教师名</a><small class="d-block text-muted">介绍</small></div>
                                             <div class="ml-auto text-muted"><a href="javascript:void(0)"
                                                                                class="icon d-none d-md-inline-block ml-3"><i
@@ -116,9 +115,8 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex align-items-center mt-auto"><img
-                                                class="avatar avatar-md mr-3" src="/images/avatar2.jpg"
-                                                alt="avatar">
+                                        <div class="d-flex align-items-center mt-auto">
+                                            <img class="avatar avatar-md mr-3" src="/images/avatar2.jpg" alt="avatar">
                                             <div><a href="#">Pro. Alan</a><small class="d-block text-muted">Head OF
                                                 Dept.</small></div>
                                             <div class="ml-auto text-muted"><a href="javascript:void(0)"
@@ -161,9 +159,8 @@
                                         </table>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex align-items-center mt-auto"><img
-                                                class="avatar avatar-md mr-3" src="/images/avatar4.jpeg"
-                                                alt="avatar">
+                                        <div class="d-flex align-items-center mt-auto">
+                                            <img class="avatar avatar-md mr-3" th:src="@{/Avatar/}+${courses.teacherID}" alt="avatar">
                                             <div><a href="#" th:text="${courses.teacher}">教师名</a><small class="d-block text-muted">介绍</small></div>
                                             <div class="ml-auto text-muted"><a href="javascript:void(0)"
                                                                                class="icon d-none d-md-inline-block ml-3"><i
@@ -227,22 +224,33 @@
                                         class="fe fe-x"></i></a></div>
                             </div>
                             <form class="card-body" th:action="@{/staff/courses.html}" method="post">
-                                <div class="form-group row" ><label class="col-md-3 col-form-label">课程名
+                                <div class="form-group row" >
+                                    <label class="col-md-3 col-form-label">课程名
                                     <span class="text-danger">*</span></label>
                                     <div class="col-md-5">
                                         <input type="text" class="form-control" name="name"></div>
                                 </div>
-                                <div class="form-group row"><label class="col-md-3 col-form-label">课程编号</label>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">课程编号</label>
                                     <div class="col-md-5">
                                         <input type="text" class="form-control" name="id"></div>
                                 </div>
-                                <div class="form-group row"><label class="col-md-3 col-form-label">任课老师
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">教工号
+                                        <span class="text-danger">*</span></label>
+                                    <div class="col-md-5">
+                                        <input data-provide="datepicker" data-date-autoclose="true" class="form-control" name="teacherID"
+                                               th:value="${session.id}"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">任课老师
                                     <span class="text-danger">*</span></label>
                                     <div class="col-md-5">
                                         <input data-provide="datepicker" data-date-autoclose="true" class="form-control" name="teacher"
                                                th:value="${session.name}"></div>
                                 </div>
-                                <div class="form-group row"><label class="col-md-3 col-form-label">所属学院 <span class="text-danger">*</span></label>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">所属学院 <span class="text-danger">*</span></label>
                                     <div class="col-md-5">
                                         <select class="form-control input-height" name="college">
                                             <option value="">选择...</option>
@@ -254,7 +262,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row"><label class="col-md-3 col-form-label">课程简介
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">课程简介
                                     <span class="text-danger">*</span></label>
                                     <div class="col-md-5">
                                         <textarea rows="4" class="form-control no-resize" placeholder="随便写点..."></textarea></div>
