@@ -50,7 +50,7 @@
                                 <div class="card">
                                     <a href="#"><img class="card-img-top" src="/images/1.jpeg" alt=""></a>
                                     <div class="card-body d-flex flex-column">
-                                        <h5><a th:href="@{/courses/}+${myCourses.id}" th:text="${myCourses.name}">课程名</a></h5>
+                                        <h5><a th:href="@{/staff/courses/}+${myCourses.id}" th:text="${myCourses.name}">课程名</a></h5>
                                         <div class="text-muted">课程介绍字段</div>
                                     </div>
                                     <div class="table-responsive">
@@ -134,7 +134,7 @@
                                 <div class="card">
                                     <a href="#"><img class="card-img-top" src="/images/1.jpeg" alt=""></a>
                                     <div class="card-body d-flex flex-column">
-                                        <h5><a href="courses-details.html" th:text="${courses.name}">课程名</a></h5>
+                                        <h5><a th:href="@{/staff/courses/}+${courses.id}" th:text="${courses.name}">课程名</a></h5>
                                         <div class="text-muted">课程介绍字段</div>
                                     </div>
                                     <div class="table-responsive">

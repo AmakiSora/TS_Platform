@@ -4,6 +4,7 @@ import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
+import com.cosmos.pojo.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -65,6 +66,18 @@ public class StudentController {
         List<Course> myCoursesList = TSMapper.queryStuCourse(session.getAttribute("id").toString());//查询学生自己的课程
         model.addAttribute("myCoursesList",myCoursesList);
         return "/student/courses.html";
+    }
+    @RequestMapping("/student/courses/{id}")//课程详细页面
+    public String coursesDetails(@PathVariable("id")String id,Model model){
+        Course course = TSMapper.queryCourse(id);//详情
+        model.addAttribute("detail",course);
+
+        List<Task> task = TSMapper.queryTaskList(id);//作业
+        model.addAttribute("taskList",task);
+
+        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
+        model.addAttribute("studentList",students);
+        return "/student/courses-details.html";
     }
 
 //    @PostMapping("/setAvatar")//学生上传头像

@@ -3,6 +3,8 @@ package com.cosmos.controller;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
+import com.cosmos.pojo.Student;
+import com.cosmos.pojo.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,10 +54,16 @@ public class StaffController {
         TSMapper.addCourse(course);
         return "redirect:/staff/courses.html";
     }
-    @RequestMapping("/courses/{id}")//课程细节
+    @RequestMapping("/staff/courses/{id}")//课程详细页面
     public String coursesDetails(@PathVariable("id")String id,Model model){
-        Course course = TSMapper.queryCourse(id);
+        Course course = TSMapper.queryCourse(id);//详情
         model.addAttribute("detail",course);
+
+        List<Task> task = TSMapper.queryTaskList(id);//作业
+        model.addAttribute("taskList",task);
+
+        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
+        model.addAttribute("studentList",students);
         return "/staff/courses-details.html";
     }
 }
