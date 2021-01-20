@@ -12,7 +12,8 @@ spring:
     password: ENC(2SvBSQ0zDkkb1sxDskCvrYz9yPsKOOmOq5uPCBaHefc=)
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.4.36.26:3306/ts_platform?useUnicode=true&charaterEncoding=UTF-8&serverTimezone=UTC
-
+    hikari:
+      max-lifetime: 500000
 
 #mybatis xml位置
 mybatis:

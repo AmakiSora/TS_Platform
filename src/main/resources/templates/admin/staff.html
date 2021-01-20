@@ -144,12 +144,15 @@
                                         <!--                                        </div>-->
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label">性别 <span class="text-danger">*</span></label>
-                                            <div class="col-md-9">
-                                                <select class="form-control input-height" name="gender">
-                                                    <option value="">选择...</option>
-                                                    <option value=1>男</option>
-                                                    <option value=0>女</option>
-                                                </select>
+                                            <div class="col-md-7">
+                                                <div class="custom-controls-stacked">
+                                                    <label class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" class="custom-control-input" name="gender" value="0" checked="">
+                                                        <span class="custom-control-label">女</span></label>
+                                                    <label class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" class="custom-control-input" name="gender" value="1">
+                                                        <span class="custom-control-label">男</span></label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row"><label class="col-md-3 col-form-label">手机号 </label>
