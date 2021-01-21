@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -60,6 +63,20 @@ public class StaffController {
         model.addAttribute("detail",course);
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
+        Date now = new Date();
+        for(Task list:task){
+            Date i = list.getIssuedDate();
+            Date j = list.getDeadline();
+            if(now.after(i)&&now.before(j)){//进行中
+                list.setState("1");
+            }else if(now.after(j)){//已截止
+                list.setState("2");
+            }else if(now.before(i)){//未开始
+                list.setState("3");
+            }else{
+                list.setState("4");
+            }
+        }
         model.addAttribute("taskList",task);
 
         List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表

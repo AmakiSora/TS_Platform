@@ -13,4 +13,5 @@ public class Task {
     private Date issuedDate;//发布日期
     private Date deadline;//截止日期
     private String url;//作业存放位置
+    private String state;//作业状态：已截止，进行中，未开始
 }

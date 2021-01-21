@@ -143,20 +143,23 @@
                                     <tr>
                                         <th>#</th>
                                         <th>作业</th>
-                                        <th>期限</th>
-                                        <th></th>
+                                        <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="task:${taskList}">
                                         <td th:text="${#strings.substring(task.id,5)}"></td>
-                                        <td style="width:1000px"><h6 class="mb-0" th:text="${task.name}"></h6></td>
+                                        <td style="width:700px"><h6 class="mb-0" ><a th:text="${task.name}" th:href="@{/student/task-details.html}"></a></h6></td>
+<!--                                        <td>-->
+<!--                                            <div class="text-info" th:text="'起始:'+${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}"></div>-->
+<!--                                            <div class="text-pink" th:text="'截止:'+${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>-->
+<!--                                        </td>-->
                                         <td>
-                                            <div class="text-info" th:text="'起始:'+${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}"></div>
-                                            <div class="text-pink" th:text="'截止:'+${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>
+                                            <span class="tag tag-orange" th:if="${task.state}=='1'">进行中</span>
+                                            <span class="tag tag-green"  th:if="${task.state}=='2'">已截止</span>
+                                            <span class="tag tag-grey"   th:if="${task.state}=='3'">未开始</span>
                                         </td>
-                                        <td><span class="tag tag-blue">完成</span></td>
                                         <td><button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit text-blue"></i></button></td>
                                     </tr>
                                     </tbody>
