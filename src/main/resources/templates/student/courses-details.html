@@ -30,13 +30,13 @@
                         <h1 class="page-title">课程详情</h1>
                         <ol class="breadcrumb page-breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Ericsson</a></li>
-                            <li class="breadcrumb-item"><a href="courses.html">课程</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">详情</li>
+                            <li class="breadcrumb-item"><a href="">课程</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">课程详情</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Courses-detail">课程详情</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
+<!--                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>-->
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">学生名单</a></li>
                         <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-chat">留言</a></li>
                     </ul>
@@ -111,22 +111,7 @@
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in some form, by injected humour, or randomised words which don't look
                                     even slightly believable.</p>
-                                <h5 class="mt-4">Course Syllabus</h5>
-                                <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">Microsoft
-                                        Application Tools such MS Word,MS Excel,MS PowerPoint. <span
-                                                class="badge badge-primary badge-pill">1 Month</span></li>
-                                    <li class="list-group-item">Computer Organizations and Operating Systems.</li>
-                                    <li class="list-group-item">Programming in C.</li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">Introduction
-                                        to Computer and Internet. <span class="badge badge-primary badge-pill">1 Month</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">RDBMS and Data
-                                        Management <span class="badge badge-primary badge-pill">2Month</span></li>
-                                    <li class="list-group-item">Web Technologies such as creation of dynamic website.</li>
-                                    <li class="list-group-item">Object Oriented Programming Languages such as C++/Java.</li>
-                                </ul>
-                                <h5 class="mt-4">作业:</h5>
+                                <a th:href="@{/student/task/}+${detail.id}"><h5 class="mt-4" >作业:</h5></a>
                                 <ul class="list-group">
                                     <li class="list-group-item" th:each="task:${taskList}">[[${task.name}]]</li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">Computer Organizations and Operating Systems.<span class="badge badge-primary badge-pill">6Month</span></li>
@@ -135,36 +120,6 @@
                         </div>
                     </div>
                 </div>
-                    </div>
-                    <div class="tab-pane" id="Courses-task">
-                        <div class="table-responsive card">
-                                <table class="table table-hover table-vcenter mb-0 table_custom spacing8 text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>作业</th>
-                                        <th>状态</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="task:${taskList}">
-                                        <td th:text="${#strings.substring(task.id,5)}"></td>
-                                        <td style="width:700px"><h6 class="mb-0" ><a th:text="${task.name}" th:href="@{/student/task-details.html}"></a></h6></td>
-<!--                                        <td>-->
-<!--                                            <div class="text-info" th:text="'起始:'+${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}"></div>-->
-<!--                                            <div class="text-pink" th:text="'截止:'+${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>-->
-<!--                                        </td>-->
-                                        <td>
-                                            <span class="tag tag-orange" th:if="${task.state}=='1'">进行中</span>
-                                            <span class="tag tag-green"  th:if="${task.state}=='2'">已截止</span>
-                                            <span class="tag tag-grey"   th:if="${task.state}=='3'">未开始</span>
-                                        </td>
-                                        <td><button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit text-blue"></i></button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                     </div>
                     <div class="tab-pane" id="Courses-students">
                         <div class="table-responsive">

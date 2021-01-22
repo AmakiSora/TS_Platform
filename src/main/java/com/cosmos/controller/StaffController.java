@@ -63,6 +63,15 @@ public class StaffController {
         model.addAttribute("detail",course);
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
+        model.addAttribute("taskList",task);
+
+        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
+        model.addAttribute("studentList",students);
+        return "/staff/courses-details.html";
+    }
+    @RequestMapping("/staff/task/{id}")//作业详情页
+    public String taskDetails(@PathVariable("id")String id,Model model){
+        List<Task> task = TSMapper.queryTaskList(id);//作业
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();
@@ -78,9 +87,6 @@ public class StaffController {
             }
         }
         model.addAttribute("taskList",task);
-
-        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
-        model.addAttribute("studentList",students);
-        return "/staff/courses-details.html";
+        return "/staff/task-details.html";
     }
 }
