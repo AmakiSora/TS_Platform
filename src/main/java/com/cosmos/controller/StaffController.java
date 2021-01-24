@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,5 +91,12 @@ public class StaffController {
         }
         model.addAttribute("taskList",task);
         return "/staff/task-details.html";
+    }
+    @RequestMapping("/addTask")
+    public String addTask(MultipartFile file)throws IOException {
+        String fileName = file.getOriginalFilename();
+        file.transferTo(new File("/Users/cosmos/Desktop/"+fileName));
+        return "/index.html";
+
     }
 }
