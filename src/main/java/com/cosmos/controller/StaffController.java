@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -20,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class StaffController {
@@ -75,6 +78,7 @@ public class StaffController {
     @RequestMapping("/staff/task/{id}")//作业详情页
     public String taskDetails(@PathVariable("id")String id,Model model){
         List<Task> task = TSMapper.queryTaskList(id);//作业
+        session.setAttribute("courseID",id);
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();
@@ -92,11 +96,20 @@ public class StaffController {
         model.addAttribute("taskList",task);
         return "/staff/task-details.html";
     }
-    @RequestMapping("/addTask")
-    public String addTask(MultipartFile file)throws IOException {
-        String fileName = file.getOriginalFilename();
-        file.transferTo(new File("/Users/cosmos/Desktop/"+fileName));
-        return "/index.html";
-
+    @PostMapping("/addTask")
+    public String addTask(MultipartFile file, Task task)throws IOException {
+        System.out.println(task);
+        task.setCourseID(session.getAttribute("courseID").toString());
+        String taskID = session.getAttribute("courseID")+"_"+task.getId();
+        task.setId(taskID);
+        if(!file.isEmpty()){
+            String fileName = task.getId()+"_"+file.getOriginalFilename();
+            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+            String url = "D:/cosmos/tete/"+fileName;
+            task.setUrl(url);//设置路径
+        }
+        System.out.println(task);
+        TSMapper.addTask(task);
+        return "redirect:/staff/task/"+session.getAttribute("courseID");
     }
 }

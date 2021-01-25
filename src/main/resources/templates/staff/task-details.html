@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -34,7 +36,7 @@
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item"><a class="nav-link active" id="Primary-tab" data-toggle="tab"
-                                                href="#Primary">作业详情</a></li>
+                                                href="#Task">作业详情</a></li>
                         <li class="nav-item"><a class="nav-link" id="Updates-tab" data-toggle="tab"
                                                 href="#addTask">增加作业</a></li>
 <!--                        <li class="nav-item"><a href="app-compose.html" class="btn btn-primary" title="">Compose</a>-->
@@ -47,7 +49,7 @@
         <div class="section-body mt-4">
             <div class="container-fluid">
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="Primary">
+                    <div class="tab-pane fade show active" id="Task">
                         <div class="accordion" id="accordionExample">
                             <div class="card inbox unread" th:each="task:${taskList}">
                                 <div class="card-header" id="headingOne">
@@ -209,10 +211,58 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="addTask">
-                        <form th:action="@{/addTask}" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file">
-                            <input type="submit" value="sub">
-                        </form>
+<!--                        <form th:action="@{/addTask}" method="post" enctype="multipart/form-data">-->
+<!--                            <input type="file" >-->
+<!--                            <input type="submit" value="sub">-->
+<!--                        </form>-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">增添作业信息</h3>
+<!--                                <div class="card-options ">-->
+<!--                                    <a href="#" class="card-options-collapse" data-toggle="card-collapse">-->
+<!--                                        <i class="fe fe-chevron-up"></i></a>-->
+<!--                                    <a href="#" class="card-options-remove" data-toggle="card-remove">-->
+<!--                                        <i class="fe fe-x"></i></a>-->
+<!--                                </div>-->
+                            </div>
+                            <form class="card-body" th:action="@{/addTask}" method="post" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业名<span class="text-danger">*</span></label>
+                                    <div class="col-md-9"><input type="text" name="name" class="form-control"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业编号<span class="text-danger">*</span></label>
+                                    <div class="col-md-9"><input type="text" name="id" class="form-control"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">期限<span class="text-danger">*</span></label>
+                                    <div class="col-md-7">
+                                        <div class="input-daterange input-group" data-provide="datepicker">
+                                            <input type="text" class="form-control" name="issuedDate">
+                                            <span class="input-group-addon"> 至 </span>
+                                            <input type="text" class="form-control" name="deadline"></div>
+                                    </div>
+                                </div>
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-md-3 col-form-label">起始日期<span class="text-danger">*</span></label>-->
+<!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-md-3 col-form-label">截止日期<span class="text-danger">*</span></label>-->
+<!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+<!--                                </div>-->
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业文件</label>
+                                    <div class="col-md-9">
+                                        <input type="file" class="dropify" name="file">
+                                        <small id="fileHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-right m-t-20">
+                                    <button type="submit" class="btn btn-primary">添加</button></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -227,5 +277,9 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/dropify.js}"></script>
+<script th:src="@{/js/dropify.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+
 </body>
 </html>
