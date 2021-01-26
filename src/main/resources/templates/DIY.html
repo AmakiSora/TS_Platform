@@ -220,11 +220,11 @@
     </div><!-- 主题 -->
     <div class="user_div" th:fragment="UserDiv">
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#righttab-statistics">Statistics</a>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#righttab-statistics">通知</a>
             </li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Result">Result</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Students">Student</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Todo">Todo</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Result">作业</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Students">学生</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Todo">留空</a></li>
         </ul>
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="righttab-statistics" role="tabpanel">
@@ -795,9 +795,11 @@
                                        class="dropdown-item text-center text-muted-dark readall">Mark all as read</a>
                                 </div>
                             </div>
-                            <div class="dropdown d-flex"><a href="javascript:void(0)" class="chip ml-3"
-                                                            data-toggle="dropdown"><span class="avatar"
-                                                                                         style="background-image: url(/images/avatar5.jpeg)"></span>用户名</a>
+                            <div class="dropdown d-flex">
+                                <a href="javascript:void(0)" class="chip ml-3" data-toggle="dropdown">
+                                    <span >
+                                        <img th:src="@{/Avatar/}+${session.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar">
+                                    </span>[[${session.name}]]</a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><a
                                         class="dropdown-item" href="page-profile.html"><i
                                         class="dropdown-icon fe fe-user"></i>Profile</a><a class="dropdown-item"
@@ -823,7 +825,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.42™ </a></div>
+                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.43™ </a></div>
                         <div class="col-md-6 col-sm-12 text-md-right">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item"><a href="../doc/index.html">网络1712</a></li>

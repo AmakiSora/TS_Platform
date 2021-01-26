@@ -72,6 +72,11 @@ public class MainController {
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
         String realPath = "D:/cosmos/tete/"+fileName;
         response.setHeader("content-disposition","attachment;filename="+fileName);//设置响应头 告知浏览器要保存内容 filename=浏览器显示的下载文件名
-        IOUtils.copy(new FileInputStream(realPath),response.getOutputStream());
+        FileInputStream in= new FileInputStream(realPath);
+        OutputStream out = response.getOutputStream();
+        IOUtils.copy(in,out);
+        IOUtils.closeQuietly(out);//关闭流
+        IOUtils.closeQuietly(in);
+        System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
 }

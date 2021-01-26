@@ -9,6 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
+
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -159,23 +162,12 @@
                                 <div class="card-body">
                                     <form th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                            <label class="col-md-3 col-form-label">Profile Picture</label>
-                                            <div class="col-md-9"><div class="dropify-wrapper">
-                                                <div class="dropify-message">
-                                                    <span class="file-icon"></span>
-                                                    <p>Drag and drop a file here or click</p>
-                                                    <p class="dropify-error">Ooops, something wrong appended.</p>
-                                                </div>
-                                                <div class="dropify-loader" style="display: none;"></div>
-                                                <div class="dropify-errors-container"><ul></ul></div>
-                                                <input type="file" name="file" class="dropify">
-                                                <button type="button" class="dropify-clear">Remove</button>
-                                                <div class="dropify-preview" style="display: none;">
-                                                    <span class="dropify-render"></span>
-                                                    <div class="dropify-infos">
-                                                        <div class="dropify-infos-inner">
-                                                            <p class="dropify-filename">
-                                                                <span class="file-icon"></span> <span class="dropify-filename-inner">1.png</span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div><small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small></div></div>
+                                            <label class="col-md-3 col-form-label">设置头像</label>
+                                            <div class="col-md-7">
+                                                <input type="file" class="dropify" name="file">
+                                                <small id="fileHelp" class="form-text text-muted"></small>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-sm-12 text-right m-t-20">
                                                 <button type="submit" class="btn btn-primary">保存</button>
@@ -681,6 +673,8 @@
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
 <script th:src="@{/js/dropify.js}"></script>
+<script th:src="@{/js/dropify.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 
 
 </body>
