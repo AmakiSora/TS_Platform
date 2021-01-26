@@ -98,17 +98,16 @@ public class StaffController {
     }
     @PostMapping("/addTask")
     public String addTask(MultipartFile file, Task task)throws IOException {
-        System.out.println(task);
         task.setCourseID(session.getAttribute("courseID").toString());
         String taskID = session.getAttribute("courseID")+"_"+task.getId();
         task.setId(taskID);
         if(!file.isEmpty()){
-            String fileName = task.getId()+"_"+file.getOriginalFilename();
+            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
             file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-            String url = "D:/cosmos/tete/"+fileName;
-            task.setUrl(url);//设置路径
+//            String url = "D:/cosmos/tete/"+fileName;
+            task.setFileName(fileName);//将文件名加入数据库
         }
-        System.out.println(task);
+//        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
         TSMapper.addTask(task);
         return "redirect:/staff/task/"+session.getAttribute("courseID");
     }

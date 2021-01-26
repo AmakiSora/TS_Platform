@@ -79,49 +79,21 @@
                                      data-parent="#accordionExample">
                                     <div class="card-body detail">
                                         <div class="mail-cnt">
-                                            <p>作业要求如下：</p><br>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's standard dummy text
-                                                ever since the 1500s, when an unknown printer took a galley of type
-                                                and scrambled it to make a type specimen book. It has survived not
-                                                only five centuries, but also the leap into electronic typesetting,
-                                                remaining essentially unchanged.</p>
+                                            <p>作业详情：</p><br>
+                                            <p>作业，《辞海》解释：为完成生产、学习等方面的既定任务而进行的活动。而《教育大辞典》则把完成学习任务的作业分为课堂作业和课外作业两大类。课堂作业是教师在上课时布置学生当堂进行检测的各种练习，课外作业是学生在课外时间独立进行的学习的活动，是检测学生是否学会了课上的知识点的一种方法，一般都是家庭作业。</p>
                                             <ul>
-                                                <li>standard dummy text ever since the 1500s, when an unknown
-                                                    printer</li>
-                                                <li>Lorem Ipsum has been the industry's standard dummy</li>
+                                                <li>学校布置的功课。例：家庭作业。</li>
+                                                <li>为完成生产和军事训练任务等而布置的活动。例：野外作业。</li>
                                             </ul>
-                                            <p>printing and typesetting industry. Lorem Ipsum has been the
-                                                industry's standard dummy text ever since the 1500s, when an unknown
-                                                printer took a galley of type and scrnturies, but also the leap into
-                                                electronic typesetting, remaining essentially unchanged.</p>
+                                            <p>这个作业明天交</p>
                                             <br>
-                                            <div class="file_folder">
-                                                <a href="javascript:void(0);">
+                                            <div class="file_folder" th:if="${task.fileName}!=null" >
+                                                <a th:href="@{/download/}+${task.fileName}">
                                                     <div class="icon">
-                                                        <i class="fa fa-file-excel-o text-success"></i>
+                                                        <i class="fa fa-file-o "></i>
                                                     </div>
                                                     <div class="file-name">
-                                                        <p class="mb-0 text-muted">Report2017.xls</p>
-                                                        <small>Size: 68KB</small>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0);">
-                                                    <div class="icon">
-                                                        <i class="fa fa-file-word-o text-primary"></i>
-                                                    </div>
-                                                    <div class="file-name">
-                                                        <p class="mb-0 text-muted">Report2017.doc</p>
-                                                        <small>Size: 68KB</small>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0);">
-                                                    <div class="icon">
-                                                        <i class="fa fa-file-pdf-o text-danger"></i>
-                                                    </div>
-                                                    <div class="file-name">
-                                                        <p class="mb-0 text-muted">Report2017.pdf</p>
-                                                        <small>Size: 68KB</small>
+                                                        <p class="mb-0 text-muted" th:text="${#strings.substringAfter(task.fileName,task.id+'_')}"></p>
                                                     </div>
                                                 </a>
                                             </div>
