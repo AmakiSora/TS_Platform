@@ -35,6 +35,7 @@ public interface TSMapper {
     void addCourse(Course course);//开设课程
     List<Student> queryCourseStuList(String id);//查询课程学生名单(根据课程id)
     //分界线---------------------------------------------------------------------------
-    List<Task> queryTaskList(String id);//查询课程作业
+    List<Task> queryTaskList(String id);//查询课程的所有作业
+    Task queryTask(String id);//查询作业详情
     void addTask(Task task);//增加作业
 }

@@ -35,11 +35,14 @@
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
-                        <li class="nav-item"><a class="nav-link active" id="Primary-tab" data-toggle="tab"
-                                                href="#Task">作业详情</a></li>
-                        <li class="nav-item"><a class="nav-link" id="Updates-tab" data-toggle="tab"
-                                                href="#addTask">增加作业</a></li>
-<!--                        <li class="nav-item"><a href="app-compose.html" class="btn btn-primary" title="">Compose</a>-->
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#task">作业详情</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#taskEdit">编辑作业</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#taskCorrecting">批改作业</a>
                         </li>
                     </ul>
 <!--                    <button type="button" class="btn btn-primary"><i class="fa fa-cloud-upload mr-2"></i>上传按钮</button>-->
@@ -49,125 +52,104 @@
         <div class="section-body mt-4">
             <div class="container-fluid">
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="Task">
-                        <div class="accordion" id="accordionExample">
-                            <div class="card inbox unread" th:each="task:${taskList}">
-                                <div class="card-header" id="headingOne">
-                                    <a th:text="${#strings.substring(task.id,5)}"></a>
-                                    <h6 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" th:data-target="'#'+${task.id}" th:aria-expanded="true"
-                                                             th:aria-controls="${task.id}" th:text="${task.name}"></button></h6>
-                                    <div class="card-options">
-                                        <span class="tag tag-orange" th:if="${task.state}=='1'">进行中</span>
-                                        <span class="tag tag-green"  th:if="${task.state}=='2'">已截止</span>
-                                        <span class="tag tag-grey"   th:if="${task.state}=='3'">未开始</span>
-<!--                                        <a class="text-muted" href="javascript:void(0)">-->
-<!--                                            <i class="fa fa-reply"></i></a>-->
-<!--                                        <a class="text-muted" href="javascript:void(0)">-->
-<!--                                            <i class="fa fa-archive"></i></a>-->
-                                        <a class="text-muted" href="javascript:void(0)">
-                                            <i class="fa fa-upload text-blue"></i></a>
-                                        <a class="text-muted" href="javascript:void(0)">
-                                            <i class="fa fa-download"></i></a>
-<!--                                        <a class="text-muted" href="javascript:void(0)">-->
-<!--                                            <i class="fa fa-trash"></i></a>-->
-<!--                                        <a class="text-muted" href="">-->
-<!--                                            <i class="fa fa-eye"></i></a>-->
-                                    </div>
+                    <div class="tab-pane fade show active" id="task">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">[[${task.name}]]</h3>
+                                <div class="card-options">
+                                    <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen">
+                                        <i class="fe fe-maximize"></i>
+                                    </a>
                                 </div>
-                                <div th:id="${task.id}" class="collapse" th:aria-labelledby="${task.id}+'1'"
-                                     data-parent="#accordionExample">
-                                    <div class="card-body detail">
-                                        <div class="mail-cnt">
-                                            <div th:utext="${task.introduction}"></div>
-
-                                            <div class="file_folder" th:if="${task.fileName}!=null" >
-                                                <a th:href="@{/download/}+${task.fileName}">
-                                                    <div class="icon">
-                                                        <i class="fa fa-file-o "></i>
-                                                    </div>
-                                                    <div class="file-name">
-                                                        <p class="mb-0 text-muted" th:text="${#strings.substringAfter(task.fileName,task.id+'_')}"></p>
-                                                    </div>
-                                                </a>
+                            </div>
+                            <div class="card-body detail">
+                                <div class="mail-cnt">
+                                    <div th:utext="${task.introduction}"></div>
+                                    <div class="file_folder" th:if="${task.fileName}!=null" >
+                                        <a th:href="@{/download/}+${task.fileName}">
+                                            <div class="icon">
+                                                <i class="fa fa-file-o "></i>
                                             </div>
-                                            <div class="text-info" th:text="'起始日期:'+${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}"></div>
-                                            <div class="text-pink" th:text="'截止日期:'+${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>
-                                            <hr>
-                                            <strong>问题交流</strong>
+                                            <div class="file-name">
+                                                <p class="mb-0 text-muted" th:text="${#strings.substringAfter(task.fileName,task.id+'_')}"></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="text-info" th:text="'起始日期:'+${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}"></div>
+                                    <div class="text-pink" th:text="'截止日期:'+${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>
+                                    <hr>
+                                    <strong>问题交流</strong>
 
-                                            <form class="well">
-                                                <div class="form-group">
-                                                                <textarea rows="2"
-                                                                          class="form-control no-resize"
-                                                                          placeholder="内容"></textarea>
-                                                </div><button class="btn btn-primary">Submit</button>
-                                            </form>
-                                            <div class="timeline_item ">
-                                                <img class="tl_avatar"
-                                                     src="/images/avatar4.jpeg" alt="" /><span><a
-                                                    href="javascript:void(0);" title="">Dessie Parks</a>Oakland,CA
-                                                    <small class="float-right text-right">19-April-2019 -
-                                                        Yesterday</small></span>
-                                                <h6 class="font600">Oeehhh,that's awesome.. Me too!</h6>
-                                                <div class="msg">
-                                                    <p>I'm speaking with myself,number one,because I have a very good
-                                                        brain and I've said a lot of things. on the web by far... While
-                                                        that's mock-ups and this is politics,are they really so
-                                                        different? I think the only card she has is the Lorem card.</p>
-                                                    <div class="timeline_img mb-20"><img class="width100"
-                                                                                         src="/images/1.jpeg"
-                                                                                         alt="Awesome Image"><img class="width100"
-                                                                                                                  src="/images/2.jpeg" alt="Awesome Image">
-                                                    </div><a href="javascript:void(0);" class="mr-20 text-muted"><i
-                                                        class="fa fa-heart text-pink"></i>23 Love</a><a
-                                                        class="text-muted" role="button" data-toggle="collapse"
-                                                        href="#collapseExample1" aria-expanded="false"
-                                                        aria-controls="collapseExample1"><i class="fa fa-comments"></i>2
-                                                    Comment</a>
-                                                    <div class="collapse p-4 section-gray mt-2" id="collapseExample1">
-                                                        <form class="well">
-                                                            <div class="form-group">
-                                                                <textarea rows="2"
-                                                                          class="form-control no-resize"
-                                                                          placeholder="Enter here for tweet..."></textarea>
-                                                            </div><button class="btn btn-primary">Submit</button>
-                                                        </form>
-                                                        <ul class="recent_comments list-unstyled mt-4 mb-0">
-                                                            <li>
-                                                                <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                             src="/images/avatar4.jpeg" alt="">
-                                                                </div>
-                                                                <div class="comment_body">
-                                                                    <h6>Donald Gardner <small
-                                                                            class="float-right font-14">Just now</small>
-                                                                    </h6>
-                                                                    <p>Lorem ipsum Veniam aliquip culpa laboris minim
-                                                                        tempor</p>
-                                                                    <div class="timeline_img mb-20"><img
-                                                                            class="width150"
-                                                                            src="/images/1.jpeg"
-                                                                            alt="Awesome Image"><img class="width150"
-                                                                                                     src="/images/1.jpeg"
-                                                                                                     alt="Awesome Image"></div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                             src="/images/avatar3.jpeg" alt="">
-                                                                </div>
-                                                                <div class="comment_body">
-                                                                    <h6>Dessie Parks <small
-                                                                            class="float-right font-14">1min ago</small>
-                                                                    </h6>
-                                                                    <p>It is a long established fact that a reader will
-                                                                        be distracted by the readable content of a page
-                                                                        when looking</p>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                    <form class="well">
+                                        <div class="form-group">
+                                    <textarea rows="2"
+                                              class="form-control no-resize"
+                                              placeholder="内容"></textarea>
+                                        </div><button class="btn btn-primary">提交</button>
+                                    </form>
+                                    <div class="timeline_item ">
+                                        <img class="tl_avatar"
+                                             src="/images/avatar4.jpeg" alt="" /><span><a
+                                            href="javascript:void(0);" title="">Dessie Parks</a>Oakland,CA
+                        <small class="float-right text-right">19-April-2019 -
+                            Yesterday</small></span>
+                                        <h6 class="font600">Oeehhh,that's awesome.. Me too!</h6>
+                                        <div class="msg">
+                                            <p>I'm speaking with myself,number one,because I have a very good
+                                                brain and I've said a lot of things. on the web by far... While
+                                                that's mock-ups and this is politics,are they really so
+                                                different? I think the only card she has is the Lorem card.</p>
+                                            <div class="timeline_img mb-20"><img class="width100"
+                                                                                 src="/images/1.jpeg"
+                                                                                 alt="Awesome Image"><img class="width100"
+                                                                                                          src="/images/2.jpeg" alt="Awesome Image">
+                                            </div><a href="javascript:void(0);" class="mr-20 text-muted"><i
+                                                class="fa fa-heart text-pink"></i>23 Love</a><a
+                                                class="text-muted" role="button" data-toggle="collapse"
+                                                href="#collapseExample1" aria-expanded="false"
+                                                aria-controls="collapseExample1"><i class="fa fa-comments"></i>2
+                                            Comment</a>
+                                            <div class="collapse p-4 section-gray mt-2" id="collapseExample1">
+                                                <form class="well">
+                                                    <div class="form-group">
+                                    <textarea rows="2"
+                                              class="form-control no-resize"
+                                              placeholder="Enter here for tweet..."></textarea>
+                                                    </div><button class="btn btn-primary">Submit</button>
+                                                </form>
+                                                <ul class="recent_comments list-unstyled mt-4 mb-0">
+                                                    <li>
+                                                        <div class="avatar_img"><img class="rounded img-fluid"
+                                                                                     src="/images/avatar4.jpeg" alt="">
+                                                        </div>
+                                                        <div class="comment_body">
+                                                            <h6>Donald Gardner <small
+                                                                    class="float-right font-14">Just now</small>
+                                                            </h6>
+                                                            <p>Lorem ipsum Veniam aliquip culpa laboris minim
+                                                                tempor</p>
+                                                            <div class="timeline_img mb-20"><img
+                                                                    class="width150"
+                                                                    src="/images/1.jpeg"
+                                                                    alt="Awesome Image"><img class="width150"
+                                                                                             src="/images/1.jpeg"
+                                                                                             alt="Awesome Image"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="avatar_img"><img class="rounded img-fluid"
+                                                                                     src="/images/avatar3.jpeg" alt="">
+                                                        </div>
+                                                        <div class="comment_body">
+                                                            <h6>Dessie Parks <small
+                                                                    class="float-right font-14">1min ago</small>
+                                                            </h6>
+                                                            <p>It is a long established fact that a reader will
+                                                                be distracted by the readable content of a page
+                                                                when looking</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -175,52 +157,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="addTask">
-<!--                        <form th:action="@{/addTask}" method="post" enctype="multipart/form-data">-->
-<!--                            <input type="file" >-->
-<!--                            <input type="submit" value="sub">-->
-<!--                        </form>-->
+                    <div class="tab-pane fade" id="taskEdit">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">增添作业信息</h3>
-<!--                                <div class="card-options ">-->
-<!--                                    <a href="#" class="card-options-collapse" data-toggle="card-collapse">-->
-<!--                                        <i class="fe fe-chevron-up"></i></a>-->
-<!--                                    <a href="#" class="card-options-remove" data-toggle="card-remove">-->
-<!--                                        <i class="fe fe-x"></i></a>-->
-<!--                                </div>-->
+                                <h3 class="card-title">编辑作业信息</h3>
                             </div>
-                            <form class="card-body" th:action="@{/addTask}" method="post" enctype="multipart/form-data">
+                            <form class="card-body" th:action="@{/updateTask}" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">作业名<span class="text-danger">*</span></label>
-                                    <div class="col-md-9"><input type="text" name="name" class="form-control"></div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="name" class="form-control" th:value="${task.name}">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">作业编号<span class="text-danger">*</span></label>
-                                    <div class="col-md-9"><input type="text" name="id" class="form-control"></div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="id" class="form-control" th:value="${#strings.substring(task.id,5)}">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">期限<span class="text-danger">*</span></label>
                                     <div class="col-md-7">
                                         <div class="input-daterange input-group" data-provide="datepicker">
-                                            <input type="text" class="form-control" name="issuedDate">
+                                            <input type="text" class="form-control" name="issuedDate" th:value="${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}">
                                             <span class="input-group-addon"> 至 </span>
-                                            <input type="text" class="form-control" name="deadline"></div>
+                                            <input type="text" class="form-control" name="deadline"   th:value="${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>
                                     </div>
                                 </div>
-<!--                                <div class="form-group row">-->
-<!--                                    <label class="col-md-3 col-form-label">起始日期<span class="text-danger">*</span></label>-->
-<!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
-<!--                                </div>-->
-<!--                                <div class="form-group row">-->
-<!--                                    <label class="col-md-3 col-form-label">截止日期<span class="text-danger">*</span></label>-->
-<!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
-<!--                                </div>-->
+                                <!--                                <div class="form-group row">-->
+                                <!--                                    <label class="col-md-3 col-form-label">起始日期<span class="text-danger">*</span></label>-->
+                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="form-group row">-->
+                                <!--                                    <label class="col-md-3 col-form-label">截止日期<span class="text-danger">*</span></label>-->
+                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+                                <!--                                </div>-->
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">作业说明</label>
                                     <div class="col-md-9" onmouseleave="change()">
                                         <div class="summernote" id="summernote" >
-                                            作业说明：
                                         </div>
                                         <input style="display: none" id="note" name="introduction">
                                     </div>
@@ -233,9 +208,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 text-right m-t-20">
-                                    <button type="submit" class="btn btn-primary">添加</button></div>
+                                    <button type="submit" class="btn btn-primary">变更</button></div>
                             </form>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="taskCorrecting">
+
                     </div>
                 </div>
             </div>

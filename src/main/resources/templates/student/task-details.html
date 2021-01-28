@@ -77,14 +77,7 @@
                                      data-parent="#accordionExample">
                                     <div class="card-body detail">
                                         <div class="mail-cnt">
-                                            <p>作业详情：</p><br>
-                                            <p>作业，《辞海》解释：为完成生产、学习等方面的既定任务而进行的活动。而《教育大辞典》则把完成学习任务的作业分为课堂作业和课外作业两大类。课堂作业是教师在上课时布置学生当堂进行检测的各种练习，课外作业是学生在课外时间独立进行的学习的活动，是检测学生是否学会了课上的知识点的一种方法，一般都是家庭作业。</p>
-                                            <ul>
-                                                <li>学校布置的功课。例：家庭作业。</li>
-                                                <li>为完成生产和军事训练任务等而布置的活动。例：野外作业。</li>
-                                            </ul>
-                                            <p>这个作业明天交</p>
-                                            <br>
+                                            <div th:utext="${task.introduction}"></div>
                                             <div class="file_folder" th:if="${task.fileName}!=null" >
                                                 <a th:href="@{/download/}+${task.fileName}">
                                                     <div class="icon">

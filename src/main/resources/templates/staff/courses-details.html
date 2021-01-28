@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
@@ -36,6 +38,8 @@
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Courses-detail">课程详情</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-addTask">增添作业</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">学生名单</a></li>
                         <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-chat">留言</a></li>
                     </ul>
@@ -110,7 +114,7 @@
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in some form, by injected humour, or randomised words which don't look
                                     even slightly believable.</p>
-                                <a th:href="@{/staff/task/}+${detail.id}"><h5 class="mt-4" >作业:</h5></a>
+                                <h5 class="mt-4" >作业:</h5>
                                 <ul class="list-group">
                                     <li class="list-group-item" th:each="task:${taskList}">[[${task.name}]]</li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">Computer Organizations and Operating Systems.<span class="badge badge-primary badge-pill">6Month</span></li>
@@ -119,6 +123,83 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                    <div class="tab-pane" id="Courses-task">
+
+                        <div class="tab-pane active" id="pro-all">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-vcenter table_custom text-nowrap spacing5 border-style mb-0">
+                                    <tbody>
+                                    <tr th:each="task:${taskList}">
+                                        <td><a th:text="${#strings.substring(task.id,5)}"></a></td>
+                                        <td>
+                                            <h6 class="mb-0">
+                                            <a class="btn btn-link text-blue" th:text="${task.name}" th:href="@{/staff/task/}+${task.id}"></a>
+                                            </h6>
+                                        </td>
+                                        <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+                                        <td>
+                                            <span class="tag tag-orange" th:if="${task.state}=='1'">进行中</span>
+                                            <span class="tag tag-green"  th:if="${task.state}=='2'">已截止</span>
+                                            <span class="tag tag-grey"   th:if="${task.state}=='3'">未开始</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Courses-addTask">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">增添作业信息</h3>
+                            </div>
+                            <form class="card-body" th:action="@{/addTask}" method="post" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业名<span class="text-danger">*</span></label>
+                                    <div class="col-md-9"><input type="text" name="name" class="form-control"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业编号<span class="text-danger">*</span></label>
+                                    <div class="col-md-9"><input type="text" name="id" class="form-control"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">期限<span class="text-danger">*</span></label>
+                                    <div class="col-md-7">
+                                        <div class="input-daterange input-group" data-provide="datepicker">
+                                            <input type="text" class="form-control" name="issuedDate">
+                                            <span class="input-group-addon"> 至 </span>
+                                            <input type="text" class="form-control" name="deadline"></div>
+                                    </div>
+                                </div>
+                                <!--                                <div class="form-group row">-->
+                                <!--                                    <label class="col-md-3 col-form-label">起始日期<span class="text-danger">*</span></label>-->
+                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="form-group row">-->
+                                <!--                                    <label class="col-md-3 col-form-label">截止日期<span class="text-danger">*</span></label>-->
+                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
+                                <!--                                </div>-->
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业说明</label>
+                                    <div class="col-md-9" onmouseleave="change()">
+                                        <div class="summernote" id="summernote" >
+                                            作业说明：
+                                        </div>
+                                        <input style="display: none" id="note" name="introduction">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">作业文件</label>
+                                    <div class="col-md-9">
+                                        <input type="file" class="dropify" name="file">
+                                        <small id="fileHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-right m-t-20">
+                                    <button type="submit" class="btn btn-primary">添加</button></div>
+                            </form>
+                        </div>
                     </div>
                     <div class="tab-pane" id="Courses-students">
                         <div class="table-responsive">
@@ -348,7 +429,11 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/summernote-zh-CN.js}"></script>
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
+<script th:src="@{/js/dropify.js}"></script>
+<script th:src="@{/js/dropify.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 </body>
 </html>

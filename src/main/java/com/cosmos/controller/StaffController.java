@@ -69,15 +69,6 @@ public class StaffController {
         model.addAttribute("detail",course);
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
-        model.addAttribute("taskList",task);
-
-        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
-        model.addAttribute("studentList",students);
-        return "/staff/courses-details.html";
-    }
-    @RequestMapping("/staff/task/{id}")//作业详情页
-    public String taskDetails(@PathVariable("id")String id,Model model){
-        List<Task> task = TSMapper.queryTaskList(id);//作业
         session.setAttribute("courseID",id);
         Date now = new Date();
         for(Task list:task){
@@ -94,10 +85,34 @@ public class StaffController {
             }
         }
         model.addAttribute("taskList",task);
+
+        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
+        model.addAttribute("studentList",students);
+        return "/staff/courses-details.html";
+    }
+    @RequestMapping("/staff/task/{id}")//作业详情页
+    public String taskDetails(@PathVariable("id")String id,Model model){
+        Task task = TSMapper.queryTask(id);//查询作业详情
+        model.addAttribute("task",task);
         return "/staff/task-details.html";
     }
-    @PostMapping("/addTask")
+    @PostMapping("/addTask")//增添作业
     public String addTask(MultipartFile file, Task task)throws IOException {
+        task.setCourseID(session.getAttribute("courseID").toString());
+        String taskID = session.getAttribute("courseID")+"_"+task.getId();
+        task.setId(taskID);
+        if(!file.isEmpty()){
+            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
+            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+//            String url = "D:/cosmos/tete/"+fileName;
+            task.setFileName(fileName);//将文件名加入数据库
+        }
+//        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
+        TSMapper.addTask(task);
+        return "redirect:/staff/task/"+session.getAttribute("courseID");
+    }
+    @PostMapping("/updateTask")//编辑作业
+    public String updateTask(MultipartFile file, Task task)throws IOException {
         task.setCourseID(session.getAttribute("courseID").toString());
         String taskID = session.getAttribute("courseID")+"_"+task.getId();
         task.setId(taskID);

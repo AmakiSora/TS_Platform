@@ -82,6 +82,9 @@
     <select id="queryTaskList" resultType="com.cosmos.pojo.Task">
         select * from task where courseID = #{id}
     </select>
+    <select id="queryTask" resultType="com.cosmos.pojo.Task">
+        select * from task where id = #{id}
+    </select>
     <insert id="addTask" parameterType="com.cosmos.pojo.Task">
         insert into task (id,name,courseID,issuedDate,deadline,fileName,introduction)
         values(#{id},#{name},#{courseID},#{issuedDate},#{deadline},#{fileName},#{introduction})
