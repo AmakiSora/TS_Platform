@@ -89,5 +89,25 @@
         insert into task (id,name,courseID,issuedDate,deadline,fileName,introduction)
         values(#{id},#{name},#{courseID},#{issuedDate},#{deadline},#{fileName},#{introduction})
     </insert>
+    <update id="updateTask" >
+        update task set
+        id=#{task.id},
+        name=#{task.name},
+        issuedDate=#{task.issuedDate},
+        deadline=#{task.deadline},
+        introduction=#{task.introduction}
+        where id = #{oldID}
+    </update>
+    <update id="updateTaskF" >
+        update task set
+        id=#{task.id},
+        name=#{task.name},
+        issuedDate=#{task.issuedDate},
+        deadline=#{task.deadline},
+        fileName=#{task.fileName},
+        introduction=#{task.introduction}
+        where id = #{oldID}
+    </update>
+
 
 </mapper>

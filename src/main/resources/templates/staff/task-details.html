@@ -21,25 +21,26 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div th:insert="/staff/index::LeftSideBar(active='Task')" ></div><!-- 菜单 -->
+    <div th:insert="/staff/index::LeftSideBar(active='Courses')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center ">
                     <div class="header-action">
-                        <h1 class="page-title">作业</h1>
+                        <h1 class="page-title">作业详情</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">课程</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">作业</li>
+                            <li class="breadcrumb-item"><a th:href="@{/staff/courses.html}">课程</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/staff/courses/}+${session.courseID}">课程详情</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">作业详情</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#task">作业详情</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#taskEdit">编辑作业</a>
+                        <li class="nav-item" >
+                            <a class="nav-link" data-toggle="tab" href="#taskEdit" th:onclick="show([[${task.introduction}]])">编辑作业</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#taskCorrecting">批改作业</a>
@@ -158,7 +159,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taskEdit">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <h3 class="card-title">编辑作业信息</h3>
                             </div>
@@ -179,9 +180,9 @@
                                     <label class="col-md-3 col-form-label">期限<span class="text-danger">*</span></label>
                                     <div class="col-md-7">
                                         <div class="input-daterange input-group" data-provide="datepicker">
-                                            <input type="text" class="form-control" name="issuedDate" th:value="${#dates.format(task.issuedDate, 'yyyy年MM月dd日 HH:mm')}">
+                                            <input type="text" class="form-control" name="issuedDate" th:value="${#dates.format(task.issuedDate, 'MM/dd/yyyy HH:mm')}">
                                             <span class="input-group-addon"> 至 </span>
-                                            <input type="text" class="form-control" name="deadline"   th:value="${#dates.format(task.deadline, 'yyyy年MM月dd日 HH:mm')}"></div>
+                                            <input type="text" class="form-control" name="deadline"   th:value="${#dates.format(task.deadline, 'MM/dd/yyyy HH:mm')}"></div>
                                     </div>
                                 </div>
                                 <!--                                <div class="form-group row">-->
@@ -197,7 +198,7 @@
                                     <div class="col-md-9" onmouseleave="change()">
                                         <div class="summernote" id="summernote" >
                                         </div>
-                                        <input style="display: none" id="note" name="introduction">
+                                        <input style="display: none" id="note" name="introduction" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -234,8 +235,12 @@
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script>
     function change() {
-    var code = $('#summernote').summernote('code');
-    document.getElementById("note").value=code;
+        var code = $('#summernote').summernote('code');
+        document.getElementById("note").value=code;
+	}
+	function show(str){
+        $('#summernote').summernote('code', str);
+<!--        console.log(1);-->
 	}
 </script>
 

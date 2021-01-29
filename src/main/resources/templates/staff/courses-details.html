@@ -31,15 +31,14 @@
                     <div class="header-action">
                         <h1 class="page-title">课程详情</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Ericsson</a></li>
-                            <li class="breadcrumb-item"><a href="courses.html">课程</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">详情</li>
+                            <li class="breadcrumb-item"><a th:href="@{/staff/courses.html}">课程</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">课程详情</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Courses-detail">课程详情</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-addTask">增添作业</a></li>
+                        <li class="nav-item" th:if="${session.id==detail.teacherID}"><a class="nav-link" data-toggle="tab" href="#Courses-addTask">增添作业</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">学生名单</a></li>
                         <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-chat">留言</a></li>
                     </ul>
@@ -114,18 +113,12 @@
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in some form, by injected humour, or randomised words which don't look
                                     even slightly believable.</p>
-                                <h5 class="mt-4" >作业:</h5>
-                                <ul class="list-group">
-                                    <li class="list-group-item" th:each="task:${taskList}">[[${task.name}]]</li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">Computer Organizations and Operating Systems.<span class="badge badge-primary badge-pill">6Month</span></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                     </div>
                     <div class="tab-pane" id="Courses-task">
-
                         <div class="tab-pane active" id="pro-all">
                             <div class="table-responsive">
                                 <table class="table table-hover table-vcenter table_custom text-nowrap spacing5 border-style mb-0">
@@ -134,7 +127,8 @@
                                         <td><a th:text="${#strings.substring(task.id,5)}"></a></td>
                                         <td>
                                             <h6 class="mb-0">
-                                            <a class="btn btn-link text-blue" th:text="${task.name}" th:href="@{/staff/task/}+${task.id}"></a>
+                                            <a class="btn btn-link text-blue" th:text="${task.name}" th:if="${session.id==detail.teacherID}" th:href="@{/staff/task/}+${task.id}"></a>
+                                            <a class="btn btn-link text-blue" th:text="${task.name}" th:if="${session.id!=detail.teacherID}" ></a>
                                             </h6>
                                         </td>
                                         <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
@@ -149,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="Courses-addTask">
+                    <div class="tab-pane" id="Courses-addTask" th:if="${session.id==detail.teacherID}">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">增添作业信息</h3>
@@ -166,10 +160,10 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">期限<span class="text-danger">*</span></label>
                                     <div class="col-md-7">
-                                        <div class="input-daterange input-group" data-provide="datepicker">
-                                            <input type="text" class="form-control" name="issuedDate">
+                                        <div class="input-daterange input-group" data-provide="datepicker" >
+                                            <input type="text" class="form-control" name="issuedDate" >
                                             <span class="input-group-addon"> 至 </span>
-                                            <input type="text" class="form-control" name="deadline"></div>
+                                            <input type="text" class="form-control" name="deadline" ></div>
                                     </div>
                                 </div>
                                 <!--                                <div class="form-group row">-->
@@ -435,5 +429,11 @@
 <script th:src="@{/js/dropify.js}"></script>
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script>
+    function change() {
+        var code = $('#summernote').summernote('code');
+        document.getElementById("note").value=code;
+	}
+</script>
 </body>
 </html>

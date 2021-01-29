@@ -5,6 +5,7 @@ import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.pojo.Task;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +39,6 @@ public interface TSMapper {
     List<Task> queryTaskList(String id);//查询课程的所有作业
     Task queryTask(String id);//查询作业详情
     void addTask(Task task);//增加作业
+    void updateTask(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,不改文件)
+    void updateTaskF(Task task,String oldID);//编辑作业(根据旧id,改变文件)
 }

@@ -49,7 +49,7 @@ public class StaffController {
         model.addAttribute("staffList",staffList);
         return "staff/staff.html";
     }
-    @RequestMapping("/staff/courses.html")//课程查询
+    @RequestMapping("/staff/courses.html")//课程列表查询
     public String queryCourseList(Model model){
         List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
         model.addAttribute("coursesList",coursesList);
@@ -69,7 +69,7 @@ public class StaffController {
         model.addAttribute("detail",course);
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
-        session.setAttribute("courseID",id);
+        session.setAttribute("courseID",id);//为后面增添作业设置课程id
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();
@@ -93,6 +93,7 @@ public class StaffController {
     @RequestMapping("/staff/task/{id}")//作业详情页
     public String taskDetails(@PathVariable("id")String id,Model model){
         Task task = TSMapper.queryTask(id);//查询作业详情
+        session.setAttribute("taskID",id);//为后面增添编辑作业保留旧id
         model.addAttribute("task",task);
         return "/staff/task-details.html";
     }
@@ -109,21 +110,23 @@ public class StaffController {
         }
 //        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
         TSMapper.addTask(task);
-        return "redirect:/staff/task/"+session.getAttribute("courseID");
+        return "redirect:/staff/task/"+task.getId();
     }
     @PostMapping("/updateTask")//编辑作业
     public String updateTask(MultipartFile file, Task task)throws IOException {
-        task.setCourseID(session.getAttribute("courseID").toString());
-        String taskID = session.getAttribute("courseID")+"_"+task.getId();
-        task.setId(taskID);
-        if(!file.isEmpty()){
+        String oldID = session.getAttribute("taskID").toString();//旧id
+        String id= session.getAttribute("courseID").toString()+'_'+task.getId();
+        task.setId(id);
+        if(!file.isEmpty()){//如果有文件更新文件
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
             file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
 //            String url = "D:/cosmos/tete/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
+            TSMapper.updateTaskF(task,oldID);
+            return "redirect:/staff/task/"+task.getId();
+        }else {//如果没有文件不更新文件名
+            TSMapper.updateTask(task,oldID);
+            return "redirect:/staff/task/"+task.getId();
         }
-//        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
-        TSMapper.addTask(task);
-        return "redirect:/staff/task/"+session.getAttribute("courseID");
     }
 }
