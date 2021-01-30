@@ -100,6 +100,12 @@ public class StudentController {
         model.addAttribute("taskList",task);
         return "/student/task-details.html";
     }
+    @RequestMapping("/student/settings.html")
+    public String settings(Model model){
+        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
+        model.addAttribute("student",student);
+        return "/student/settings.html";
+    }
 
 //    @PostMapping("/setAvatar")//学生上传头像
 //    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {

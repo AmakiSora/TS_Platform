@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +22,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -56,16 +55,36 @@ public class MainController {
             user.setAvatar(bytes);
             userMapper.setAvatar(user);
             if(session.getAttribute("role")=="staff"){
-                return "/staff/settings.html";
+                return "redirect:/staff/settings.html";
             }else if(session.getAttribute("role")=="student"){
-                return "/student/settings.html";
+                return "redirect:/student/settings.html";
             }else {
-                return "/admin/settings.html";
+                return "redirect:/admin/settings.html";
             }
         }else {
             return null;
         }
 
+    }
+    @PostMapping("/changePassword")
+    @ResponseBody
+    public int changePassword(@RequestBody Map<String,String> Password){
+        System.out.println(Password);
+        System.out.println(userMapper.queryPasswordByName(session.getAttribute("id").toString()));
+        System.out.println(Password.get("oldPassword"));
+        if(Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
+            System.out.println(11);
+            if(Password.get("newPassword").equals(Password.get("confirmPassword"))){
+                userMapper.changePassword(session.getAttribute("id").toString(),Password.get("newPassword"));
+                return 1;//改密成功
+            }else {
+                System.out.println(22);
+                return 2;//新密码不一致
+            }
+        }else {
+            System.out.println(33);
+            return 3;//旧密码不正确
+        }
     }
     @RequestMapping("/download/{fileName}")//下载文件
     public void download(@PathVariable("fileName")String fileName, HttpSession session, HttpServletResponse response) throws IOException{

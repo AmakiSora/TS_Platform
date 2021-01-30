@@ -123,10 +123,9 @@ public class StaffController {
 //            String url = "D:/cosmos/tete/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
             TSMapper.updateTaskF(task,oldID);
-            return "redirect:/staff/task/"+task.getId();
         }else {//如果没有文件不更新文件名
             TSMapper.updateTask(task,oldID);
-            return "redirect:/staff/task/"+task.getId();
         }
+        return "redirect:/staff/task/"+task.getId();
     }
 }
