@@ -125,7 +125,8 @@
                                         <td><a th:text="${#strings.substring(task.id,5)}"></a></td>
                                         <td>
                                             <h6 class="mb-0">
-                                            <a class="btn btn-link text-blue" th:text="${task.name}" th:href="@{/student/task/}+${task.id}"></a>
+                                            <a class="btn btn-link text-blue" th:if="${state}==1" th:text="${task.name}" th:href="@{/student/task/}+${task.id}"></a>
+                                            <a class="btn btn-link text-blue" th:if="${state}!=1" th:text="${task.name}" ></a>
                                             </h6>
                                         </td>
                                         <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>

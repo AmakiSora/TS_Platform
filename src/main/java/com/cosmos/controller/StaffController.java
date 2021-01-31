@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -95,11 +96,16 @@ public class StaffController {
     }
 
     @RequestMapping("/staff/task/{id}")//作业详情页
-    public String taskDetails(@PathVariable("id")String id,Model model){
-        Task task = TSMapper.queryTask(id);//查询作业详情
-        session.setAttribute("taskID",id);//为后面增添编辑作业保留旧id
-        model.addAttribute("task",task);
-        return "/staff/task-details.html";
+    public String taskDetails(@PathVariable("id")String id, Model model, HttpServletRequest request){
+        if(request.getHeader("Referer")==null){//Referer可以获得来源页地址，如果是地址栏输入则值为null
+            return "/404";//防止直接从地址栏直接进入此界面
+        }else {
+            Task task = TSMapper.queryTask(id);//查询作业详情
+            session.setAttribute("taskID",id);//为后面增添编辑作业保留旧id
+            model.addAttribute("task",task);
+            return "/staff/task-details.html";
+        }
+
     }
 
     @PostMapping("/addTask")//增添作业

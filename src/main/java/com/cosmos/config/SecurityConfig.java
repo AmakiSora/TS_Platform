@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new LoginSuccessHandle())
                 ;
         http.authorizeRequests()
-                .antMatchers("/login.html").permitAll()//不用登录的页面
+                .antMatchers("/login.html","/404.html").permitAll()//不用登录的页面
                 .antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**","/static/favicon.ico").permitAll()//取消样式的拦截
                 .antMatchers("/admin/**").hasAuthority("admin")//hasRole角色，不能以ROLE_开头,数据库要ROLE_开头
                 .antMatchers("/student/**").hasAuthority("student")//hasAuthority权限

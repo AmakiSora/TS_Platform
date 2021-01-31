@@ -40,7 +40,7 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
             session.setAttribute("role","student");
             return;
         }else {
-            response.sendRedirect("/403");
+            response.sendRedirect("/404");
         }
 
     }
