@@ -42,6 +42,7 @@ public class MainController {
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<byte[]>(b,headers, HttpStatus.OK);
     }
+
     @PostMapping("/setAvatar")//上传头像
     public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
         if(file.isEmpty()){
@@ -66,26 +67,22 @@ public class MainController {
         }
 
     }
+
     @PostMapping("/changePassword")
     @ResponseBody
     public int changePassword(@RequestBody Map<String,String> Password){
-        System.out.println(Password);
-        System.out.println(userMapper.queryPasswordByName(session.getAttribute("id").toString()));
-        System.out.println(Password.get("oldPassword"));
         if(Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
-            System.out.println(11);
             if(Password.get("newPassword").equals(Password.get("confirmPassword"))){
                 userMapper.changePassword(session.getAttribute("id").toString(),Password.get("newPassword"));
                 return 1;//改密成功
             }else {
-                System.out.println(22);
                 return 2;//新密码不一致
             }
         }else {
-            System.out.println(33);
             return 3;//旧密码不正确
         }
     }
+
     @RequestMapping("/download/{fileName}")//下载文件
     public void download(@PathVariable("fileName")String fileName, HttpSession session, HttpServletResponse response) throws IOException{
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
@@ -98,4 +95,6 @@ public class MainController {
         IOUtils.closeQuietly(in);
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
+
+
 }

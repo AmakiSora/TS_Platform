@@ -17,10 +17,12 @@
     <delete id="deleteStaff" parameterType="java.lang.String">
         delete from staff where id = #{id}
     </delete>
-    <update id="updateStaff" parameterType="com.cosmos.pojo.Staff">
+    <update id="AdminUpdateStaff" parameterType="com.cosmos.pojo.Staff">
         update staff set id=#{id},name=#{name},gender=#{gender},college=#{college},phone=#{phone} where id = #{id}
     </update>
-
+    <update id="TeaUpdateStaff" parameterType="com.cosmos.pojo.Staff">
+        update staff set phone=#{phone} where id = #{id}
+    </update>
     <!--分界线-->
 
     <select id="queryStudentList" resultType="com.cosmos.pojo.Student">
@@ -44,10 +46,19 @@
     <delete id="deleteStudent" parameterType="java.lang.String">
         delete from student where id = #{id}
     </delete>
-    <update id="updateStudent" parameterType="com.cosmos.pojo.Student">
-        update student set id=#{id},name=#{name},gender=#{gender},classes=#{classes},college=#{college},phone=#{phone} where id = #{id}
+    <update id="AdminUpdateStudent" parameterType="com.cosmos.pojo.Student">
+        update student set
+        id=#{id},
+        name=#{name},
+        gender=#{gender},
+        classes=#{classes},
+        college=#{college},
+        phone=#{phone} where id = #{id}
     </update>
-
+    <update id="StuUpdateStudent" parameterType="com.cosmos.pojo.Student">
+        update student set
+        phone=#{phone} where id = #{id}
+    </update>
     <!--分界线-->
 
     <select id="queryCourseList" resultType="com.cosmos.pojo.Course">
@@ -68,7 +79,9 @@
         select * from course where id = #{id}
     </select>
     <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
-        insert into course (id,name,teacherID,teacher,college) values(#{id},#{name},#{teacherID},#{teacher},#{college})
+        insert into course
+        (id,name,teacherID,teacher,college)
+        values(#{id},#{name},#{teacherID},#{teacher},#{college})
     </insert>
     <select id="queryCourseStuList" resultType="com.cosmos.pojo.Student">
         select s.*
@@ -86,7 +99,8 @@
         select * from task where id = #{id}
     </select>
     <insert id="addTask" parameterType="com.cosmos.pojo.Task">
-        insert into task (id,name,courseID,issuedDate,deadline,fileName,introduction)
+        insert into task
+        (id,name,courseID,issuedDate,deadline,fileName,introduction)
         values(#{id},#{name},#{courseID},#{issuedDate},#{deadline},#{fileName},#{introduction})
     </insert>
     <update id="updateTask" >

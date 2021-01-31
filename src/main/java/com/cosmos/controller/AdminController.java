@@ -42,6 +42,7 @@ public class AdminController {
         return "/admin/students.html";
 
     }
+
     @PostMapping("/admin/students.html")//增加学生
     public String addStu(Student student){
         TSMapper.addStudent(student);//增加学生信息进student表
@@ -52,6 +53,7 @@ public class AdminController {
         userMapper.addUser(user);//增加帐号进user表
         return "redirect:/admin/students.html";//重定向到students页面
     }
+
     @GetMapping("/deleteStu/{id}")//删除学生
     public String deleteStu(@PathVariable("id")String id){
         TSMapper.deleteStudent(id);//删除学生表
@@ -59,15 +61,18 @@ public class AdminController {
         userMapper.deleteUser(username);//删除用户表
         return "redirect:/admin/students.html";
     }
+
     @ResponseBody
     @PostMapping("/updateStu/{id}")//更改学生信息
     public String updateStu(@RequestBody Student student){
-        TSMapper.updateStudent(student);
+        TSMapper.AdminUpdateStudent(student);
         return "1";//需要传值给前端才能执行success：
     }
+
     @RequestMapping("/resetPassword/{id}")//重置密码
     public String ResetPassword(@PathVariable("id")String id){
-        userMapper.resetPasswordUser(id);
+        String Password = "000";//重设的密码
+        userMapper.resetPasswordUser(id,Password);
         return "redirect:/admin/index.html";
     }
 
@@ -79,6 +84,7 @@ public class AdminController {
         model.addAttribute("staffList", staffList);
         return "/admin/staff.html";
     }
+
     @PostMapping("/admin/staff.html")//增加教师
     public String addTea(Staff staff){
         TSMapper.addStaff(staff);//增加教师信息进staff表
@@ -89,6 +95,7 @@ public class AdminController {
         userMapper.addUser(user);//增加帐号进user表
         return "redirect:/admin/staff.html";//重定向到staff页面
     }
+
     @GetMapping("/deleteTea/{id}")//删除教师
     public String deleteTea(@PathVariable("id")String id){
         TSMapper.deleteStaff(id);//删除教师表
@@ -96,10 +103,23 @@ public class AdminController {
         userMapper.deleteUser(username);//删除用户表
         return "redirect:/admin/staff.html";
     }
+
     @ResponseBody
     @PostMapping("/updateTea/{id}")//更改教师信息
     public String updateTea(@RequestBody Staff staff){
-        TSMapper.updateStaff(staff);
+        TSMapper.AdminUpdateStaff(staff);
         return "1";//需要传值给前端才能执行success：
+    }
+
+    @RequestMapping("/admin/settings.html")//设置页面
+    public String settings(Model model){
+
+        return "/admin/settings.html";
+    }
+
+    @PostMapping("/admin/settings.html")//修改管理员个人信息
+    public String setInformation(){
+
+        return "redirect:/admin/settings.html";
     }
 }

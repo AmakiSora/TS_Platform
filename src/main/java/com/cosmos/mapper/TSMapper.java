@@ -18,7 +18,8 @@ public interface TSMapper {
     String queryTeaNameById(String id);//搜名字(根据id)
     void addStaff(Staff staff);//增加教师
     void deleteStaff(String id);//删除教师(根据id)
-    void updateStaff(Staff staff);//修改教师信息
+    void AdminUpdateStaff(Staff staff);//管理员修改教师信息
+    void TeaUpdateStaff(Staff staff);//教师修改教师信息
     //分界线---------------------------------------------------------------------------
     List<Student> queryStudentList();//列出学生表
     Student queryStudentById(String id);//搜学生(根据id)
@@ -27,7 +28,8 @@ public interface TSMapper {
     String queryClassesByName(String username);//搜班级(根据名)
     void addStudent(Student student);//增加学生
     void deleteStudent(String id);//删除学生(根据id)
-    void updateStudent(Student student);//修改学生信息
+    void AdminUpdateStudent(Student student);//管理员修改学生信息
+    void StuUpdateStudent(Student student);//学生修改学生信息
     //分界线---------------------------------------------------------------------------
     List<Course> queryCourseList();//查询所有课程
     List<Course> queryStuCourse(String id);//查询学生的课程(根据id)
@@ -41,4 +43,5 @@ public interface TSMapper {
     void addTask(Task task);//增加作业
     void updateTask(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,不改文件)
     void updateTaskF(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,改变文件)
+
 }

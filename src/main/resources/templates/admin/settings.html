@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:insert="DIY::ico">
-    <title>管理员设置</title><!-- Bootstrap Core and vandor -->
+    <title>设置</title><!-- Bootstrap Core and vandor -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
     <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
+
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -30,13 +31,12 @@
                         <div class="header-action">
                             <h1 class="page-title">设置</h1>
                             <ol class="breadcrumb page-breadcrumb">
-                                <li class="breadcrumb-item"><a href="setting.html#">管理员</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">设置</li>
                             </ol>
                         </div>
                         <ul class="nav nav-tabs page-header-tab">
                             <li class="nav-item"><a class="nav-link active show" data-toggle="tab"
-                                                    href="#General_Settings">一般设置</a></li>
+                                                    href="#General_Settings">设置</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                     href="#Localization">定位</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -57,119 +57,66 @@
                 <div class="container-fluid">
                     <div class="tab-content">
                         <div class="tab-pane active show" id="General_Settings">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">一般设置</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form th:action="@{/student/settings.html}">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12">
-                                                <div class="form-group"><label>名字</label>
-                                                    <input type="text" class="form-control" th:value="${session.name}" disabled="" placeholder="Username">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-12">
-                                                <div class="form-group"><label>手机号</label>
-                                                    <input class="form-control" value="+1 882-635-7531" type="text"></div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group"><label>地址</label><textarea
-                                                        class="form-control"
-                                                        placeholder="44 Shirley Ave. West Chicago, IL 60185"
-                                                        aria-label="With textarea"></textarea></div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group"><label>邮箱 <span
-                                                        class="text-danger">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend"><span
-                                                                class="input-group-text"><i
-                                                                class="icon-envelope"></i></span></div><input
-                                                            type="text" class="form-control"
-                                                            value="LouisPierce@example.com">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group"><label>个人网站</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend"><span
-                                                                class="input-group-text"><i
-                                                                class="icon-globe"></i></span></div><input
-                                                            type="text" class="form-control" placeholder="http://">
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">基本信息</h3>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-3">
-                                                <div class="form-group"><label>国家</label><select
-                                                        class="form-control">
-                                                    <option value="">-- Select Country --</option>
-                                                    <option value="CN">China</option>
-                                                    <option value="CX">Christmas Island</option>
-                                                    <option value="ZA">South Africa</option>
-                                                    </option>
-                                                    <option value="SS">South Sudan</option>
-                                                    <option value="ES">Spain</option>
-                                                    <option value="LK">Sri Lanka</option>
-                                                </select>
+                                        <form class="card-body" th:action="@{/admin/settings.html}" method="post">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">账号</label>
+                                                <div class="col-md-9">
+                                                    <p type="text" class="form-control" th:text="${session.id}"></p>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3">
-                                                <div class="form-group">
-                                                    <label>省/县</label>
-                                                    <select class="form-control">
-                                                        <option>California</option>
-                                                        <option>Alaska</option>
-                                                        <option>Alabama</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3">
-                                                <div class="form-group">
-                                                    <label>城市</label>
-                                                    <input class="form-control" value="New York" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3">
-                                                <div class="form-group">
-                                                    <label>邮政编码</label>
-                                                    <input class="form-control" value="91403" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>手机号</label>
-                                                    <input class="form-control" value="818-978-7102" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-sm-12 text-right m-t-20">
-                                                <button type="button" class="btn btn-primary">保存</button>
+                                                <button type="submit" class="btn btn-primary">修改</button>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <form th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label">设置头像</label>
-                                            <div class="col-md-7">
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">修改密码</h3>
+                                        </div>
+                                        <form class="card-body" method="post" id="changePassword">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>旧密码</label>
+                                                        <input type="text" class="form-control" name="oldPassword"></div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>新密码</label>
+                                                        <input type="text" class="form-control" name="newPassword"></div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>确认新密码</label>
+                                                        <input type="text" class="form-control" name="confirmPassword"></div>
+                                                </div>
+                                                <div class="col-sm-12 text-right m-t-20">
+                                                    <button type="button" class="btn btn-primary" onclick="changePassword()" >修改</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">设置头像</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <form class="card-body" th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
                                                 <input type="file" class="dropify" name="file">
-                                                <small id="fileHelp" class="form-text text-muted"></small>
-                                            </div>
+                                                <div class="col-sm-12 text-right m-t-20">
+                                                    <button type="submit" class="btn btn-primary">上传</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 text-right m-t-20">
-                                                <button type="submit" class="btn btn-primary">保存</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -624,33 +571,35 @@
                                 <div class="card-header">
                                     <h3 class="card-title">更改密码</h3>
                                 </div>
-                                <form class="card-body form-horizontal">
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">旧密码 <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control">
+                                <div class="card-body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="text" class="form-control"
+                                                                           value="louispierce" disabled="" placeholder="Username"></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">新密码 <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="email" class="form-control"
+                                                                           value="louis.info@yourdomain.com" placeholder="Email"></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">确认新密码 <span class="text-danger">*</span></label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group"><input type="text" class="form-control"
+                                                                           placeholder="Phone Number"></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label"></label>
-                                        <div class="col-md-7">
-                                            <button type="submit" class="btn btn-primary">更改</button>
-                                            <button type="reset" class="btn btn-outline-secondary">取消</button>
+                                        <div class="col-lg-12 col-md-12">
+                                            <hr>
+                                            <h6>更改密码</h6>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="旧密码"></div>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="新密码"></div>
+                                            <div class="form-group"><input type="password" class="form-control"
+                                                                           placeholder="确认新密码"></div>
                                         </div>
+                                        <div class="col-sm-12 m-t-20 text-right"><button type="button"
+                                                                                         class="btn btn-primary">变更</button>&nbsp;<button type="button"
+                                                                                                                                            class="btn btn-default">取消</button></div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div><!--改密码-->
                     </div>
@@ -669,6 +618,31 @@
 <script th:src="@{/js/dropify.js}"></script>
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script>
+    function changePassword(){
+        var a = $("#changePassword").serializeArray();
+        console.log(a);
+        var data={};
+        for (var i = 0; i < a.length; i++) {
+            data[a[i].name] = a[i]['value']//形成键值对应
+        }
+            $.ajax({
+            url: "/changePassword",
+            type: "post",
+            data:JSON.stringify(data),
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                if(data == 1){
+                    alert("密码更改成功");
+                }else if(data == 2){
+                    alert("新密码不一致");
+                }else {
+                    alert("旧密码不正确");
+                }
+            }
+        });
+    }
+</script>
 
 
 </body>

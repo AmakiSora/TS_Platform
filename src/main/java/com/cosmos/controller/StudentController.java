@@ -1,5 +1,6 @@
 package com.cosmos.controller;
 
+import com.cosmos.TsPlatformApplication;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
@@ -31,7 +32,7 @@ public class StudentController {
     private HttpSession session;
     @Autowired
     private TSMapper TSMapper;
-    @RequestMapping("/student/{student}")
+    @RequestMapping("/student/{student}")//默认转发所有学生页面
     public String student(@PathVariable("student") String student){
         return "/student/"+student;
     }
@@ -68,21 +69,14 @@ public class StudentController {
         model.addAttribute("myCoursesList",myCoursesList);
         return "/student/courses.html";
     }
+
     @RequestMapping("/student/courses/{id}")//课程详细页面
     public String coursesDetails(@PathVariable("id")String id,Model model){
         Course course = TSMapper.queryCourse(id);//详情
         model.addAttribute("detail",course);
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
-        model.addAttribute("taskList",task);
-
-        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
-        model.addAttribute("studentList",students);
-        return "/student/courses-details.html";
-    }
-    @RequestMapping("/student/task/{id}")//作业详情页
-    public String taskDetails(@PathVariable("id")String id,Model model){
-        List<Task> task = TSMapper.queryTaskList(id);//作业
+        session.setAttribute("courseID",id);//为后面增添作业设置课程id
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();
@@ -98,52 +92,32 @@ public class StudentController {
             }
         }
         model.addAttribute("taskList",task);
+
+        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
+        model.addAttribute("studentList",students);
+        return "/student/courses-details.html";
+    }
+
+    @RequestMapping("/student/task/{id}")//作业详情页
+    public String taskDetails(@PathVariable("id")String id,Model model){
+        Task task = TSMapper.queryTask(id);//查询作业详情
+        session.setAttribute("taskID",id);//保存作业id
+        model.addAttribute("task",task);
         return "/student/task-details.html";
     }
-    @RequestMapping("/student/settings.html")
+
+    @RequestMapping("/student/settings.html")//设置页面
     public String settings(Model model){
         Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
         model.addAttribute("student",student);
         return "/student/settings.html";
     }
 
-//    @PostMapping("/setAvatar")//学生上传头像
-//    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
-//        if(file.isEmpty()){
-//            return null;
-//        }
-////        String fileName = System.currentTimeMillis()+file.getOriginalFilename();//根据时间戳产生新的文件名
-////        String fileName = session.getAttribute("name").toString();
-//        byte[] bytes=file.getBytes();//将图片转换成二进制流
-//        Student student = new Student();
-//        student.setId(session.getAttribute("id").toString());
-//        student.setAvatar(bytes);
-////        String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/images/download/"+fileName;
-//        TSMapper.setStuAvatar(student);
-//        return "/student/settings.html";
-//    }
-//    @RequestMapping("/stuAvatar/{id}")
-//    public ResponseEntity<byte[]> stuAvatar (){
-//        Student student = TSMapper.queryStudentById();
-//        byte[] s = student.getAvatar();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_PNG);
-//        return new ResponseEntity<byte[]>(s,headers, HttpStatus.OK);
-//    }
-//    @RequestMapping("/student/settings.html")//设置界面
-//    public String getData(Model model) throws IOException {
-//        Student student = TSMapper.queryStudentById(session.getAttribute("id").toString());
-//        if(student.getAvatar()!=null){
-//            byte[] d=student.getAvatar();//将图片转换成二进制流
-//            ResponseEntity<byte[]> b = ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(student.getAvatar());
-////            byte[] bytes = student.getAvatar();
-////            System.out.println(bytes);
-////            ByteArrayInputStream inputStream=new ByteArrayInputStream(bytes);//将二进制字节数组 转为文件
-////            Files.copy(inputStream, Paths.get("/avatar/11.jpg"));
-//            model.addAttribute("b",b);
-//            model.addAttribute("d",d);
-//        }
-//        return "/student/settings.html";
-//    }
+    @PostMapping("/student/settings.html")//修改学生个人信息
+    public String setInformation(Student student){
+        student.setId(session.getAttribute("id").toString());
+        TSMapper.StuUpdateStudent(student);
+        return "redirect:/student/settings.html";
+    }
 
 }

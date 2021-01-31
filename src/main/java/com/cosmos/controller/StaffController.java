@@ -43,12 +43,14 @@ public class StaffController {
         }
         return "/staff/index.html";
     }
+
     @RequestMapping("/staff/staff.html") //查询所有职工列表
     public String queryStaffList(Model model){
         List<Staff> staffList = TSMapper.queryStaffList();
         model.addAttribute("staffList",staffList);
         return "staff/staff.html";
     }
+
     @RequestMapping("/staff/courses.html")//课程列表查询
     public String queryCourseList(Model model){
         List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
@@ -63,6 +65,7 @@ public class StaffController {
         TSMapper.addCourse(course);
         return "redirect:/staff/courses.html";
     }
+
     @RequestMapping("/staff/courses/{id}")//课程详细页面
     public String coursesDetails(@PathVariable("id")String id,Model model){
         Course course = TSMapper.queryCourse(id);//详情
@@ -90,6 +93,7 @@ public class StaffController {
         model.addAttribute("studentList",students);
         return "/staff/courses-details.html";
     }
+
     @RequestMapping("/staff/task/{id}")//作业详情页
     public String taskDetails(@PathVariable("id")String id,Model model){
         Task task = TSMapper.queryTask(id);//查询作业详情
@@ -97,6 +101,7 @@ public class StaffController {
         model.addAttribute("task",task);
         return "/staff/task-details.html";
     }
+
     @PostMapping("/addTask")//增添作业
     public String addTask(MultipartFile file, Task task)throws IOException {
         task.setCourseID(session.getAttribute("courseID").toString());
@@ -112,6 +117,7 @@ public class StaffController {
         TSMapper.addTask(task);
         return "redirect:/staff/task/"+task.getId();
     }
+
     @PostMapping("/updateTask")//编辑作业
     public String updateTask(MultipartFile file, Task task)throws IOException {
         String oldID = session.getAttribute("taskID").toString();//旧id
@@ -127,5 +133,19 @@ public class StaffController {
             TSMapper.updateTask(task,oldID);
         }
         return "redirect:/staff/task/"+task.getId();
+    }
+
+    @RequestMapping("/staff/settings.html")//设置页面
+    public String settings(Model model){
+        Staff staff = TSMapper.queryStaffById(session.getAttribute("id").toString());
+        model.addAttribute("staff",staff);
+        return "/staff/settings.html";
+    }
+
+    @PostMapping("/staff/settings.html")//修改教师个人信息
+    public String setInformation(Staff staff){
+        staff.setId(session.getAttribute("id").toString());
+        TSMapper.TeaUpdateStaff(staff);
+        return "redirect:/staff/settings.html";
     }
 }

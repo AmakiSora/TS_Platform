@@ -12,7 +12,7 @@
         delete from user where username = #{username}
     </delete>
     <update id="resetPasswordUser" parameterType="com.cosmos.pojo.User">
-        update user set password = "000" where username = #{username}
+        update user set password = #{Password} where username = #{username}
     </update>
     <select id="queryPasswordByName" resultType="java.lang.String">
         select password from user where username = #{username}
