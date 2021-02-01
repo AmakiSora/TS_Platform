@@ -115,8 +115,8 @@ public class StaffController {
         task.setId(taskID);
         if(!file.isEmpty()){
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-//            String url = "D:/cosmos/tete/"+fileName;
+            file.transferTo(new File("D:/cosmos/tete/task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+//            String url = "D:/cosmos/tete/task/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
         }
 //        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
@@ -131,8 +131,8 @@ public class StaffController {
         task.setId(id);
         if(!file.isEmpty()){//如果有文件更新文件
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-//            String url = "D:/cosmos/tete/"+fileName;
+            file.transferTo(new File("D:/cosmos/tete/task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+//            String url = "D:/cosmos/tete/task/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
             TSMapper.updateTaskF(task,oldID);
         }else {//如果没有文件不更新文件名

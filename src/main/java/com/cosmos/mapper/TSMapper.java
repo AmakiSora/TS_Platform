@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -43,5 +44,7 @@ public interface TSMapper {
     void addTask(Task task);//增加作业
     void updateTask(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,不改文件)
     void updateTaskF(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,改变文件)
-
+    void submitTask(String studentID, String taskID, Date submitDate, Integer score, String fileName);//第一次提交作业
+    void submitTaskS(Date submitDate,String fileName);//后续提交作业
+    int queryScore(String studentID,String taskID);//查询作业分
 }

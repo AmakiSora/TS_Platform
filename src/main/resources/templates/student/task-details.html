@@ -40,7 +40,7 @@
                             <a class="nav-link active" data-toggle="tab" href="#task">作业详情</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#taskCorrecting">批改作业</a>
+                            <a class="nav-link" data-toggle="tab" href="#taskCorrecting">我的作业</a>
                         </li>
                     </ul>
 <!--                    <button type="button" class="btn btn-primary"><i class="fa fa-cloud-upload mr-2"></i>上传按钮</button>-->
@@ -80,17 +80,17 @@
 
                                     <form class="well">
                                         <div class="form-group">
-                                    <textarea rows="2"
-                                              class="form-control no-resize"
-                                              placeholder="内容"></textarea>
-                                        </div><button class="btn btn-primary">提交</button>
+                                            <textarea rows="2" class="form-control no-resize" placeholder="内容"></textarea>
+                                        </div>
+                                        <div class="col-sm-12 text-right m-t-20">
+                                            <button type="button" class="btn btn-primary">提交</button>
+                                        </div>
                                     </form>
                                     <div class="timeline_item ">
                                         <img class="tl_avatar"
                                              src="/images/avatar4.jpeg" alt="" /><span><a
                                             href="javascript:void(0);" title="">Dessie Parks</a>Oakland,CA
-                        <small class="float-right text-right">19-April-2019 -
-                            Yesterday</small></span>
+                        <small class="float-right text-right">19-April-2019 -Yesterday</small></span>
                                         <h6 class="font600">Oeehhh,that's awesome.. Me too!</h6>
                                         <div class="msg">
                                             <p>I'm speaking with myself,number one,because I have a very good
@@ -156,7 +156,38 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taskCorrecting">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">我的作业</h3>
+                            </div>
+                            <div class="card-body">
 
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">提交作业</h3>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-12" >
+                                            <div class="form-group">
+                                                <label>文件名</label>
+                                                <input class="form-control" type="text" name="fileName" id="fileName" placeholder="不填默认为原文件名">
+                                            </div>
+                                            <input type="file" class="dropify" name="file" id="file">
+                                            <small id="fileHelp" class="form-text text-muted">This is some
+                                                placeholder block-level help text for the above input. It's a bit
+                                                lighter and easily wraps to a new line.</small>
+                                        </div>
+                                        <div class="col-sm-12 m-t-20 text-right">
+                                            <button type="button" class="btn btn-primary" th:onclick="submitTask([[${#dates.format(task.issuedDate, 'yyyy-MM-dd HH:mm:ss')}]],[[${#dates.format(task.deadline, 'yyyy-MM-dd HH:mm:ss')}]])">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,14 +207,36 @@
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script>
-    function change() {
-        var code = $('#summernote').summernote('code');
-        document.getElementById("note").value=code;
+    function submitTask(a,b){
+    if ($('#file').val() == "") {
+			alert("请选择上传的目标文件! ");
+			return false;
 	}
-	function show(str){
-        $('#summernote').summernote('code', str);
-<!--        console.log(1);-->
-	}
+    var myFormData = new FormData();
+    myFormData.append('fileName',$("#fileName").val());
+    myFormData.append('issuedDate',a);
+    myFormData.append('deadline',b);
+    myFormData.append("file",$('#file')[0].files[0]);
+            $.ajax({
+            url: "/submitTask",
+            type: "post",
+            data: myFormData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data == 1){
+                    alert("提交成功");
+                    window.location.reload();
+                }else if(data == 2){
+                    alert("作业已截止");
+                }else if(data == 3){
+                    alert("作业未发布");
+                }else{
+                    alert("???");
+                }
+            }
+        });
+    }
 </script>
 
 </body>

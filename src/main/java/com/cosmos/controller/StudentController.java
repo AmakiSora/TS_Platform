@@ -25,8 +25,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -134,18 +138,57 @@ public class StudentController {
     }
 
     @PostMapping("/submitTask")//提交作业
-    public String submitTask(MultipartFile file, Task task)throws IOException {
-        task.setCourseID(session.getAttribute("courseID").toString());
-        String taskID = session.getAttribute("courseID")+"_"+task.getId();
-        task.setId(taskID);
-        if(!file.isEmpty()){
-            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-//            String url = "D:/cosmos/tete/"+fileName;
-            task.setFileName(fileName);//将文件名加入数据库
+    @ResponseBody
+    public int submitTask(@RequestParam Map<String,String> task,@RequestParam("file") MultipartFile file) throws IOException, ParseException {
+        Date now = new Date();//当前时间
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String now1 = sdf.format(now);
+        if(sdf.parse(now1).getTime()<sdf.parse(task.get("issuedDate")).getTime()){//转成long类型比较
+            return 3;//作业未发布
+        }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("deadline")).getTime()){
+            return 2;//作业已截止
+        }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("issuedDate")).getTime()&&
+                 sdf.parse(now1).getTime()<sdf.parse(task.get("deadline")).getTime()){
+            if(task.get("fileName").equals("")){//如果文件名为空
+                String taskName = session.getAttribute("taskID").toString()+"-"+
+                                  session.getAttribute("id").toString()+"-"+
+                                  file.getOriginalFilename();//原始文件名
+                file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+            }else {//不为空
+                String f = file.getOriginalFilename();//原始文件名
+                String taskName = session.getAttribute("taskID").toString()+"-"+
+                                  session.getAttribute("id").toString()+"-"+
+                                  task.get("fileName")+
+                                  f.substring(f.lastIndexOf("."));//后缀名
+                file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+            }
+            return 1;//提交成功
+        }else {
+            System.out.println("出错啦，快来修bug");
+            return 666;
         }
-//        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
-        TSMapper.addTask(task);
-        return "redirect:/staff/task/"+task.getId();
+
+
+
+
+
+
+
+
+
+
+
+
+//        task.setCourseID(session.getAttribute("courseID").toString());
+//        String taskID = session.getAttribute("courseID")+"_"+task.getId();
+//        task.setId(taskID);
+//        if(!file.isEmpty()){
+//            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
+//            file.transferTo(new File("D:/cosmos/tete/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+////            String url = "D:/cosmos/tete/"+fileName;
+//            task.setFileName(fileName);//将文件名加入数据库
+//        }
+////        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
+//        TSMapper.addTask(task);
     }
 }

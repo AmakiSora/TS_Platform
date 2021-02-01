@@ -122,6 +122,21 @@
         introduction=#{task.introduction}
         where id = #{oldID}
     </update>
-
+    <insert id="submitTask">
+        insert into taskStudent
+        (studentID,taskID,submitDate,score,fileName)
+        values(#{studentID},#{taskID},#{submitDate},#{score},#{fileName})
+    </insert>
+    <update id="submitTaskS">
+        update taskStudent set
+        submitDate=#{submitDate},
+        fileName=#{task.fileName}
+        where studentID = #{studentID}
+    </update>
+    <select id="queryScore" resultType="java.lang.Integer">
+        select score from taskStudent
+        where studentID = #{studentID}
+        and taskID = #{taskID}
+    </select>
 
 </mapper>
