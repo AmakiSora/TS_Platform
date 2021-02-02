@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -38,13 +39,15 @@ public interface TSMapper {
     Course queryCourse(String id);//查询课程细节()
     void addCourse(Course course);//开设课程
     List<Student> queryCourseStuList(String id);//查询课程学生名单(根据课程id)
+    List<String> queryCourseStuID(String id);//查询课程学生的id(根据课程id)
     //分界线---------------------------------------------------------------------------
     List<Task> queryTaskList(String id);//查询课程的所有作业
     Task queryTask(String id);//查询作业详情
     void addTask(Task task);//增加作业
     void updateTask(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,不改文件)
     void updateTaskF(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,改变文件)
-    void submitTask(String studentID, String taskID, Date submitDate, Integer score, String fileName);//第一次提交作业
-    void submitTaskS(Date submitDate,String fileName);//后续提交作业
-    int queryScore(String studentID,String taskID);//查询作业分
+    void changeTaskID(String id,String oldID);//变更作业-学生联系表里的作业id(当作业编号改变时(编辑作业))
+    void addTaskStudent(String studentID, String taskID);//创建作业-学生联系表(在增添作业或者课程增加学生时进行)
+    void submitTask(Date submitDate,String fileName,String studentID,String taskID);//提交作业
+    Map<String,Object> queryMyTaskFile(String studentID, String taskID);//查询我的作业
 }

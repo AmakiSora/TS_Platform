@@ -89,6 +89,11 @@
         where sc.studentID = s.id
         and   sc.courseID = #{id}
     </select>
+    <select id="queryCourseStuID" resultType="java.lang.String">
+        select sc.studentID
+        from studentCourse as sc
+        where courseID = #{id}
+    </select>
 
     <!--分界线-->
 
@@ -122,19 +127,26 @@
         introduction=#{task.introduction}
         where id = #{oldID}
     </update>
-    <insert id="submitTask">
+    <update id="changeTaskID">
+        update taskStudent set
+        taskID = #{id}
+        where taskID = #{oldID}
+    </update>
+    <insert id="addTaskStudent">
         insert into taskStudent
-        (studentID,taskID,submitDate,score,fileName)
-        values(#{studentID},#{taskID},#{submitDate},#{score},#{fileName})
+        (studentID,taskID)
+        values(#{studentID},#{taskID})
     </insert>
-    <update id="submitTaskS">
+    <update id="submitTask">
         update taskStudent set
         submitDate=#{submitDate},
-        fileName=#{task.fileName}
+        fileName=#{fileName}
         where studentID = #{studentID}
+        and taskID = #{taskID}
     </update>
-    <select id="queryScore" resultType="java.lang.Integer">
-        select score from taskStudent
+    <select id="queryMyTaskFile" resultType="map">
+        select ts.submitDate,ts.score,ts.fileName
+        from taskStudent as ts
         where studentID = #{studentID}
         and taskID = #{taskID}
     </select>

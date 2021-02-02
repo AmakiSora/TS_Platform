@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class TsPlatformApplicationTests {
@@ -32,18 +33,19 @@ class TsPlatformApplicationTests {
 
     @Test
     void contextLoads() throws SQLException {
-//        System.out.println(TSMapper.queryStaffList());
-//        System.out.println(TSMapper.queryStudentList());
-        List<Task> task = TSMapper.queryTaskList("A002");//作业
-        System.out.println(task);
-        for(Task list:task) {
-            Date i = list.getIssuedDate();
-            Date j = list.getDeadline();
-            list.setState("1");
-        }
-        System.out.println(task);
 
+//        System.out.println(TSMapper.queryMyTaskFile("121102","A001_5"));
+//        Map<String,Object> MyTask = TSMapper.queryMyTaskFile("121102","A001_4");
+//        if(MyTask.isEmpty())
+//        System.out.println(MyTask);
+//        System.out.println(MyTask.get("submitDate"));
+//        System.out.println(MyTask.get("submitDate").getClass());
+//        System.out.println(MyTask.get("fileName"));
+//        System.out.println(MyTask.get("score"));
+//
+//
 
+//        System.out.println(MyTask.get());
 
 //        String password = encryptor.encrypt("");//加密数据库密码
 //        System.out.println(password);//

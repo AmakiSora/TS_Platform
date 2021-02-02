@@ -116,18 +116,30 @@ public class StaffController {
         if(!file.isEmpty()){
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
             file.transferTo(new File("D:/cosmos/tete/task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-//            String url = "D:/cosmos/tete/task/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
         }
 //        String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
         TSMapper.addTask(task);
+
+        //下面是添加学生和作业的联系进taskStudent表里
+        List<String> studentID = TSMapper.queryCourseStuID(session.getAttribute("courseID").toString());
+        if(!studentID.isEmpty()){//如果名单不是空的
+            for(String id:studentID){
+                System.out.println(id);
+                TSMapper.addTaskStudent(id,taskID);
+            }
+        }
+
         return "redirect:/staff/task/"+task.getId();
     }
 
     @PostMapping("/updateTask")//编辑作业
     public String updateTask(MultipartFile file, Task task)throws IOException {
         String oldID = session.getAttribute("taskID").toString();//旧id
-        String id= session.getAttribute("courseID").toString()+'_'+task.getId();
+        String id= session.getAttribute("courseID").toString()+'_'+task.getId();//新id
+        if(!oldID.equals(id)){//如果改变了作业id，作业-学生表也需改变
+            TSMapper.changeTaskID(id,oldID);
+        }
         task.setId(id);
         if(!file.isEmpty()){//如果有文件更新文件
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称

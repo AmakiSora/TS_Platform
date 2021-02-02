@@ -161,7 +161,30 @@
                                 <h3 class="card-title">我的作业</h3>
                             </div>
                             <div class="card-body">
-
+                                <div class="alert alert-warning" th:if="${xxx}==1">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                    您尚未提交作业！！！
+                                </div>
+                                <table class="table table-hover table-vcenter table_custom text-nowrap spacing5 text-nowrap mb-0" th:if="${xxx}!=1">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>文件名</th>
+                                        <th>提交时间</th>
+                                        <th class="text-center">成绩</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="width45">
+                                            <i class="fa fa-folder"></i>
+                                        </td>
+                                        <td><span class="folder-name" th:text="${myTask.fileName}"></span></td>
+                                        <td class="width100"><span th:text="${#dates.format(myTask.submitDate, 'yyyy年MM月dd日 HH:mm')}"></span></td>
+                                        <td class="width100 text-center"><span class="size" th:text="${myTask.score}"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="card">

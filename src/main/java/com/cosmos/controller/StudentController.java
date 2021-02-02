@@ -119,6 +119,16 @@ public class StudentController {
             Task task = TSMapper.queryTask(id);//查询作业详情
             session.setAttribute("taskID",id);//保存作业id
             model.addAttribute("task",task);
+            //查询我的作业
+            Map<String,Object> myTask = TSMapper.queryMyTaskFile(session.getAttribute("id").toString(),id);
+            if(myTask==null){
+                model.addAttribute("xxx",1);
+            }else {
+                if(myTask.get("score")==null){
+                    myTask.put("score","未批改");
+                }
+                model.addAttribute("myTask",myTask);
+            }
             return "/student/task-details.html";
         }
     }
@@ -154,6 +164,8 @@ public class StudentController {
                                   session.getAttribute("id").toString()+"-"+
                                   file.getOriginalFilename();//原始文件名
                 file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+                //将提交时间和文件名存进数据库
+                TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
             }else {//不为空
                 String f = file.getOriginalFilename();//原始文件名
                 String taskName = session.getAttribute("taskID").toString()+"-"+
@@ -161,6 +173,8 @@ public class StudentController {
                                   task.get("fileName")+
                                   f.substring(f.lastIndexOf("."));//后缀名
                 file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+                //将提交时间和文件名存进数据库
+                TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
             }
             return 1;//提交成功
         }else {
