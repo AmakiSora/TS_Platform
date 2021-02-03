@@ -38,7 +38,7 @@
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Courses-detail">课程详情</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">同班同学</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">课程同学</a></li>
                         <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-chat">讨论区</a></li>
                     </ul>
                 </div>
@@ -147,7 +147,6 @@
                                 <thead>
                                 <tr>
                                     <th>学号</th>
-                                    <th></th>
                                     <th>名字</th>
                                     <th>性别</th>
                                     <th>班级</th>
@@ -158,13 +157,15 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="student:${studentList}">
-                                    <td th:text="${student.id}" style="width:70px"></td>
-                                    <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                    <td th:text="${student.name}"><span class="font-16"></span></td>
-                                    <td th:text="${student.gender==0?'女':'男'}"></td>
-                                    <td th:text="${student.classes}"></td>
-                                    <td th:text="${student.college}"></td>
-                                    <td th:text="${student.phone}"></td>
+                                    <td th:text="${student.id}" style="vertical-align:middle"></td>
+                                    <td>
+                                        <img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" title="" alt="Avatar" class="avatar" style="vertical-align:middle">
+                                        <span th:text="${student.name}" style="vertical-align:middle"></span>
+                                    </td>
+                                    <td th:text="${student.gender==0?'女':'男'}" style="vertical-align:middle"></td>
+                                    <td th:text="${student.classes}" style="vertical-align:middle"></td>
+                                    <td th:text="${student.college}" style="vertical-align:middle"></td>
+                                    <td th:text="${student.phone}" style="vertical-align:middle"></td>
                                     <td>
                                         <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye text-blue"></i></button>
                                         <!--                                        <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></button>-->

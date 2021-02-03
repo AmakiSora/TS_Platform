@@ -64,7 +64,7 @@
                                 <div class="mail-cnt">
                                     <div th:utext="${task.introduction}"></div>
                                     <div class="file_folder" th:if="${task.fileName}!=null" >
-                                        <a th:href="@{/download/}+${task.fileName}">
+                                        <a th:href="@{/download/task/}+${task.fileName}">
                                             <div class="icon">
                                                 <i class="fa fa-file-o "></i>
                                             </div>
@@ -172,6 +172,7 @@
                                         <th>文件名</th>
                                         <th>提交时间</th>
                                         <th class="text-center">成绩</th>
+                                        <th class="text-center">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -182,6 +183,11 @@
                                         <td><span class="folder-name" th:text="${myTask.fileName}"></span></td>
                                         <td class="width100"><span th:text="${#dates.format(myTask.submitDate, 'yyyy年MM月dd日 HH:mm')}"></span></td>
                                         <td class="width100 text-center"><span class="size" th:text="${myTask.score}"></span></td>
+                                        <td class="width100 text-center">
+                                            <button type="button" class="btn btn-icon btn-sm" title="下载">
+                                                <a class="fa fa-cloud-download text-blue" th:href="@{/download/taskStudent/}+${myTask.fileName}"></a>
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

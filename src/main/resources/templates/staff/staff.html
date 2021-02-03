@@ -44,12 +44,11 @@
                     <div class="tab-pane active" id="Staff-all">
                         <div class="card">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <span class="table-responsive">
                                     <table class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
                                         <thead>
                                         <tr>
                                             <th>教工号</th>
-                                            <th></th>
                                             <th>姓名</th>
                                             <th>性别</th>
                                             <th>联系电话</th>
@@ -59,12 +58,14 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="staff:${staffList}">
-                                            <td th:text="${staff.id}" style="width:70px"></td>
-                                            <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                            <td th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
-                                            <td th:text="${staff.gender==0?'女':'男'}"></td>
-                                            <td th:text="${staff.phone}"><span class="text-muted"></span></td>
-                                            <td th:text="${staff.college}"></td>
+                                            <td th:text="${staff.id}" style="vertical-align:middle"></td>
+                                            <td>
+                                                <img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" title="" alt="Avatar" class="avatar" style="vertical-align:middle">
+                                                <span th:text="${staff.name}" style="vertical-align:middle"></span>
+                                            </td>
+                                            <td th:text="${staff.gender==0?'女':'男'}" style="vertical-align:middle"></td>
+                                            <td th:text="${staff.phone}" style="vertical-align:middle"><span class="text-muted"></span></td>
+                                            <td th:text="${staff.college}" style="vertical-align:middle"></td>
                                             <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
                                             <td>
                                                 <button type="button" class="btn btn-icon btn-sm" title="View"><i

@@ -50,4 +50,5 @@ public interface TSMapper {
     void addTaskStudent(String studentID, String taskID);//创建作业-学生联系表(在增添作业或者课程增加学生时进行)
     void submitTask(Date submitDate,String fileName,String studentID,String taskID);//提交作业
     Map<String,Object> queryMyTaskFile(String studentID, String taskID);//查询我的作业
+    List<Map<String,Object>> queryStuTaskFileList(String taskID);//查询该作业的学生文件
 }

@@ -83,10 +83,10 @@ public class MainController {
         }
     }
 
-    @RequestMapping("/download/{fileName}")//下载文件
-    public void download(@PathVariable("fileName")String fileName, HttpSession session, HttpServletResponse response) throws IOException{
+    @RequestMapping("/download/{url}/{fileName}")//下载文件
+    public void download(@PathVariable("fileName")String fileName,@PathVariable("url")String url, HttpSession session, HttpServletResponse response) throws IOException{
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
-        String realPath = "D:/cosmos/tete/"+fileName;
+        String realPath = "D:/cosmos/tete/"+url+"/"+fileName;
         response.setHeader("content-disposition","attachment;filename="+fileName);//设置响应头 告知浏览器要保存内容 filename=浏览器显示的下载文件名
         FileInputStream in= new FileInputStream(realPath);
         OutputStream out = response.getOutputStream();

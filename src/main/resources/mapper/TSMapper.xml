@@ -144,11 +144,16 @@
         where studentID = #{studentID}
         and taskID = #{taskID}
     </update>
-    <select id="queryMyTaskFile" resultType="map">
+    <select id="queryMyTaskFile" resultType="java.util.Map">
         select ts.submitDate,ts.score,ts.fileName
         from taskStudent as ts
         where studentID = #{studentID}
         and taskID = #{taskID}
+    </select>
+    <select id="queryStuTaskFileList" resultType="java.util.Map">
+        select ts.studentID,ts.submitDate,ts.fileName,ts.score
+        from taskStudent as ts
+        where taskID = #{taskID}
     </select>
 
 </mapper>

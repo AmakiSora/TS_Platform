@@ -124,9 +124,7 @@ public class StudentController {
             if(myTask==null){
                 model.addAttribute("xxx",1);
             }else {
-                if(myTask.get("score")==null){
-                    myTask.put("score","未批改");
-                }
+                myTask.putIfAbsent("score", "未批改");//如果score为null，则显示“未批改”
                 model.addAttribute("myTask",myTask);
             }
             return "/student/task-details.html";

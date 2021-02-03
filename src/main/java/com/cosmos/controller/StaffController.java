@@ -20,10 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class StaffController {
@@ -103,6 +100,16 @@ public class StaffController {
             Task task = TSMapper.queryTask(id);//查询作业详情
             session.setAttribute("taskID",id);//为后面增添编辑作业保留旧id
             model.addAttribute("task",task);
+
+            //作业批改
+            List<Map<String,Object>> StuFileList = TSMapper.queryStuTaskFileList(id);
+            for (Map<String,Object> list:StuFileList){
+                list.putIfAbsent("fileName", "未提交");
+                list.putIfAbsent("score", "未批改");
+                list.putIfAbsent("submitDate",null);
+            }
+            model.addAttribute("StuFileList",StuFileList);
+
             return "/staff/task-details.html";
         }
 
@@ -125,7 +132,6 @@ public class StaffController {
         List<String> studentID = TSMapper.queryCourseStuID(session.getAttribute("courseID").toString());
         if(!studentID.isEmpty()){//如果名单不是空的
             for(String id:studentID){
-                System.out.println(id);
                 TSMapper.addTaskStudent(id,taskID);
             }
         }

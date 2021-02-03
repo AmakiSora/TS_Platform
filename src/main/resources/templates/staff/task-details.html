@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
     <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -67,7 +68,7 @@
                                 <div class="mail-cnt">
                                     <div th:utext="${task.introduction}"></div>
                                     <div class="file_folder" th:if="${task.fileName}!=null" >
-                                        <a th:href="@{/download/}+${task.fileName}">
+                                        <a th:href="@{/download/task/}+${task.fileName}">
                                             <div class="icon">
                                                 <i class="fa fa-file-o "></i>
                                             </div>
@@ -214,7 +215,44 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taskCorrecting">
-
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover js-basic-example dataTable table-vcenter table_custom text-nowrap spacing5">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>学号</th>
+                                            <th>文件名</th>
+                                            <th>提交时间</th>
+                                            <th class="text-center">成绩</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="StuFile:${StuFileList}">
+                                            <td class="width45"><i class="fa fa-folder"></i></td>
+                                            <td><span th:text="${StuFile.studentID}"></span></td>
+                                            <td>
+                                                <span class="folder-name" th:if="${StuFile.fileName=='未提交'}" th:text="未提交"></span>
+                                                <span class="folder-name" th:text="${#strings.substringAfter(StuFile.fileName,StuFile.studentID+'-')}"></span>
+                                            </td>
+                                            <td class="width500"><span th:text="${#dates.format(StuFile.submitDate, 'yyyy年MM月dd日 HH:mm')}"></span></td>
+                                            <td class="width100 text-center"><span class="size" th:text="${StuFile.score}"></span></td>
+                                            <td class="width100 text-center">
+                                                <button type="button" class="btn btn-icon btn-sm" title="下载">
+                                                    <a class="fa fa-cloud-download text-blue" th:href="@{/download/taskStudent/}+${StuFile.fileName}"></a>
+                                                </button>
+                                                <button type="button" class="btn btn-icon btn-sm" title="评分">
+                                                    <a class="fa fa-pencil-square-o "></a>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,6 +271,8 @@
 <script th:src="@{/js/dropify.js}"></script>
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/datatable.js}"></script>
+<script th:src="@{/js/dataTables.bundle.js}"></script>
 <script>
     function change() {
         var code = $('#summernote').summernote('code');
