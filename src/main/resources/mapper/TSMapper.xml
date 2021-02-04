@@ -162,5 +162,17 @@
         and taskID = #{taskID}
     </update>
 
+    <!--分界线-->
+
+    <select id="queryCommentList" resultType="com.cosmos.pojo.Comment">
+        select * from comment where position = #{position}
+    </select>
+    <insert id="discuss">
+        insert into comment
+        (id,name,date,text,position,replier)
+        values(#{id},#{name},#{date},#{text},#{position},#{replier})
+    </insert>
+
+
 
 </mapper>

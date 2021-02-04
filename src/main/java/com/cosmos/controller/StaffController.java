@@ -1,10 +1,7 @@
 package com.cosmos.controller;
 
 import com.cosmos.mapper.TSMapper;
-import com.cosmos.pojo.Course;
-import com.cosmos.pojo.Staff;
-import com.cosmos.pojo.Student;
-import com.cosmos.pojo.Task;
+import com.cosmos.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,8 +67,8 @@ public class StaffController {
     public String coursesDetails(@PathVariable("id")String id,Model model){
         Course course = TSMapper.queryCourse(id);//详情
         model.addAttribute("detail",course);
-
-        List<Task> task = TSMapper.queryTaskList(id);//作业
+        //作业
+        List<Task> task = TSMapper.queryTaskList(id);
         session.setAttribute("courseID",id);//为后面增添作业设置课程id
         Date now = new Date();
         for(Task list:task){
@@ -88,9 +85,18 @@ public class StaffController {
             }
         }
         model.addAttribute("taskList",task);
+        //课程学生列表
+        model.addAttribute("studentList",TSMapper.queryCourseStuList(id));
+        //讨论
+        List<Comment> commentList = TSMapper.queryCommentList(id);
+        for (Comment list:commentList){
+            if(!list.getRepliesNum().equals(0)){//如果回复人数不为零
+                String a = list.getNO().toString();
+                model.addAttribute(a,TSMapper.queryCommentList(a));
+            }
+        }
+        model.addAttribute("comment",commentList);
 
-        List<Student> students = TSMapper.queryCourseStuList(id);//课程学生列表
-        model.addAttribute("studentList",students);
         return "/staff/courses-details.html";
     }
 

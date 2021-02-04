@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -96,5 +97,11 @@ public class MainController {
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
 
-
+    @PostMapping("/discuss/{position}")//发表评论
+    public String discuss(@PathVariable("position")String position,String text,HttpServletRequest request){
+        TSMapper.discuss(session.getAttribute("id").toString(),
+                session.getAttribute("name").toString(),
+                new Date(),text,position,null);
+        return "redirect:"+request.getHeader("Referer");
+    }
 }

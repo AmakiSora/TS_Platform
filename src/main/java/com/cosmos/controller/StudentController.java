@@ -2,10 +2,7 @@ package com.cosmos.controller;
 
 import com.cosmos.TsPlatformApplication;
 import com.cosmos.mapper.TSMapper;
-import com.cosmos.pojo.Course;
-import com.cosmos.pojo.Staff;
-import com.cosmos.pojo.Student;
-import com.cosmos.pojo.Task;
+import com.cosmos.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.http.HttpHeaders;
@@ -108,6 +105,17 @@ public class StudentController {
             }
         }
         model.addAttribute("studentList",students);
+
+        //讨论
+        List<Comment> commentList = TSMapper.queryCommentList(id);
+        for (Comment list:commentList){
+            if(!list.getRepliesNum().equals(0)){//如果回复人数不为零
+                String a = list.getNO().toString();
+                model.addAttribute(a,TSMapper.queryCommentList(a));
+            }
+        }
+        model.addAttribute("comment",commentList);
+
         return "/student/courses-details.html";
     }
 

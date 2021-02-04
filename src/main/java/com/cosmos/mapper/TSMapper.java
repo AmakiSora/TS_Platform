@@ -1,9 +1,6 @@
 package com.cosmos.mapper;
 
-import com.cosmos.pojo.Course;
-import com.cosmos.pojo.Staff;
-import com.cosmos.pojo.Student;
-import com.cosmos.pojo.Task;
+import com.cosmos.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -52,4 +49,7 @@ public interface TSMapper {
     Map<String,Object> queryMyTaskFile(String studentID, String taskID);//查询我的作业
     List<Map<String,Object>> queryStuTaskFileList(String taskID);//查询该作业的学生文件
     void taskCorrecting(String studentID,String taskID,Integer score);//批改作业
+    //分界线---------------------------------------------------------------------------
+    List<Comment> queryCommentList(String position);//查询所有评论
+    void discuss(String id,String name,Date date,String text,String position,String replier);//发表评论
 }
