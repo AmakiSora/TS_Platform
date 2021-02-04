@@ -155,5 +155,12 @@
         from taskStudent as ts
         where taskID = #{taskID}
     </select>
+    <update id="taskCorrecting">
+        update taskStudent set
+        score = #{score}
+        where studentID = #{studentID}
+        and taskID = #{taskID}
+    </update>
+
 
 </mapper>

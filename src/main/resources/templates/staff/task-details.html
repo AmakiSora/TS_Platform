@@ -238,14 +238,19 @@
                                                 <span class="folder-name" th:text="${#strings.substringAfter(StuFile.fileName,StuFile.studentID+'-')}"></span>
                                             </td>
                                             <td class="width500"><span th:text="${#dates.format(StuFile.submitDate, 'yyyy年MM月dd日 HH:mm')}"></span></td>
-                                            <td class="width100 text-center"><span class="size" th:text="${StuFile.score}"></span></td>
                                             <td class="width100 text-center">
-                                                <button type="button" class="btn btn-icon btn-sm" title="下载">
+                                                <input th:class="${StuFile.studentID}" style="display: none;width:50px" type="text" th:id="${StuFile.studentID}">
+                                                <span th:class="${StuFile.studentID}" th:text="${StuFile.score}" th:onclick="change1([[${StuFile.studentID}]])" th:id="re+${StuFile.studentID}"></span>
+                                                <span th:class="${StuFile.studentID}" style="display: none"  th:onclick="taskCorrecting([[${StuFile.studentID}]])"><a class="fa fa-check-circle text-success"></a></span>
+                                                <span th:class="${StuFile.studentID}" style="display: none"  th:onclick="change1([[${StuFile.studentID}]])"><a class="fa fa-times-circle text-danger"></a></span>
+                                            </td>
+                                            <td class="width100 text-center">
+                                                <span type="button" class="btn btn-icon btn-sm" title="下载">
                                                     <a class="fa fa-cloud-download text-blue" th:href="@{/download/taskStudent/}+${StuFile.fileName}"></a>
-                                                </button>
-                                                <button type="button" class="btn btn-icon btn-sm" title="评分">
-                                                    <a class="fa fa-pencil-square-o "></a>
-                                                </button>
+                                                </span>
+                                                <span type="button" class="btn btn-icon btn-sm" title="评分">
+                                                    <a class="fa fa-pencil-square-o" th:onclick="change1([[${StuFile.studentID}]])"></a>
+                                                </span>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -282,6 +287,30 @@
         $('#summernote').summernote('code', str);
 <!--        console.log(1);-->
 	}
+    function change1(id){
+        var display = document.getElementsByClassName(id);
+        <!--        console.log(display.length)-->
+        for(var i=0;i<display.length;i++) {
+            if (display[i].style.display == "") {
+                display[i].style.display = "none";
+            } else {
+                display[i].style.display = "";
+            }
+        }
+    }
+    function taskCorrecting(id){
+        var score = $("#"+id).val();
+        $.ajax({
+            url: "/staff/taskCorrecting/"+id,
+            type: "post",
+            //发送的数据
+            data: {'score':score},//提交的数据
+            success: function () {
+                $("#re"+id).text(score);
+                change1(id);
+            }
+        });
+    }
 </script>
 
 </body>

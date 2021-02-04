@@ -51,4 +51,5 @@ public interface TSMapper {
     void submitTask(Date submitDate,String fileName,String studentID,String taskID);//提交作业
     Map<String,Object> queryMyTaskFile(String studentID, String taskID);//查询我的作业
     List<Map<String,Object>> queryStuTaskFileList(String taskID);//查询该作业的学生文件
+    void taskCorrecting(String studentID,String taskID,Integer score);//批改作业
 }

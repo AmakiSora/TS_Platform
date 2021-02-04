@@ -105,7 +105,7 @@ public class AdminController {
     }
 
     @ResponseBody
-    @PostMapping("/updateTea/{id}")//更改教师信息
+    @PostMapping("/updateTea")//更改教师信息
     public String updateTea(@RequestBody Staff staff){
         TSMapper.AdminUpdateStaff(staff);
         return "1";//需要传值给前端才能执行success：

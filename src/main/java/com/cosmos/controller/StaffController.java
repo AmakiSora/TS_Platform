@@ -11,12 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -157,6 +159,13 @@ public class StaffController {
             TSMapper.updateTask(task,oldID);
         }
         return "redirect:/staff/task/"+task.getId();
+    }
+
+    @ResponseBody
+    @PostMapping("/staff/taskCorrecting/{id}")//批改作业
+    public String taskCorrecting(@PathVariable("id")String id,Integer score){
+        TSMapper.taskCorrecting(id,session.getAttribute("taskID").toString(),score);
+        return "1";
     }
 
     @RequestMapping("/staff/settings.html")//设置页面
