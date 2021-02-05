@@ -224,12 +224,13 @@
                                         <div class="msg">
                                             <p>[[${comment.text}]]</p>
                                             <!--                                            <a href="javascript:void(0);" class="mr-20 text-muted"><i class="fa fa-heart text-pink"></i>12 Love</a>-->
-                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.id}" aria-expanded="false" th:aria-controls="'collapse'+${comment.id}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
-                                            <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.id}">
-                                                <form class="well">
+                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
+                                            <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.NO}">
+                                                <form class="well" th:action="@{/reply/}+${comment.NO}" method="post">
                                                     <div class="form-group">
-                                                        <textarea rows="2" class="form-control no-resize" placeholder="回复内容..."></textarea>
+                                                        <textarea rows="2" class="form-control no-resize" required="required" placeholder="回复内容..." name="text"></textarea>
                                                     </div>
+                                                    <input name="replier" th:value="${comment.name}" style="display: none">
                                                     <button class="btn btn-primary">回复</button>
                                                 </form>
                                                 <ul class="recent_comments list-unstyled mt-4 mb-0" th:if="${comment.repliesNum}!=0">

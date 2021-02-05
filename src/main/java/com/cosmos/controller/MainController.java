@@ -69,8 +69,8 @@ public class MainController {
 
     }
 
-    @PostMapping("/changePassword")
     @ResponseBody
+    @PostMapping("/changePassword")
     public int changePassword(@RequestBody Map<String,String> Password){
         if(Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
             if(Password.get("newPassword").equals(Password.get("confirmPassword"))){
@@ -96,12 +96,20 @@ public class MainController {
         IOUtils.closeQuietly(in);
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
-
+    @ResponseBody
     @PostMapping("/discuss/{position}")//发表评论
-    public String discuss(@PathVariable("position")String position,String text,HttpServletRequest request){
+    public String discuss( @PathVariable("position")String position,String text){
         TSMapper.discuss(session.getAttribute("id").toString(),
                 session.getAttribute("name").toString(),
-                new Date(),text,position,null);
+                new Date(),text,position);
+        return "1";
+    }
+    @PostMapping("/reply/{position}")//回复评论
+    public String reply(@PathVariable("position")String position,String text,String replier,HttpServletRequest request){
+        TSMapper.reply(session.getAttribute("id").toString(),
+                session.getAttribute("name").toString(),
+                new Date(),text,position,replier);
+        TSMapper.upRepliesNum(Integer.valueOf(position));//评论数+1
         return "redirect:"+request.getHeader("Referer");
     }
 }

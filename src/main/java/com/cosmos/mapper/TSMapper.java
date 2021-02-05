@@ -51,5 +51,7 @@ public interface TSMapper {
     void taskCorrecting(String studentID,String taskID,Integer score);//批改作业
     //分界线---------------------------------------------------------------------------
     List<Comment> queryCommentList(String position);//查询所有评论
-    void discuss(String id,String name,Date date,String text,String position,String replier);//发表评论
+    void discuss(String id,String name,Date date,String text,String position);//发表评论
+    void reply(String id,String name,Date date,String text,String position,String replier);//回复评论
+    void upRepliesNum(Integer NO);//增加评论数
 }

@@ -42,7 +42,6 @@
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">学生名单</a></li>
                         <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-comment">课程评价</a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -263,11 +262,11 @@
                                             </div>
                                         </div>
                                 <div class="card-body">
-                                    <form class="well" th:action="@{/discuss/}+${detail.id}" method="post">
+                                    <form class="well">
                                         <div class="form-group">
-                                            <textarea rows="2" class="form-control no-resize" required="required" placeholder="内容" name="text"></textarea>
+                                            <textarea rows="2" class="form-control no-resize" placeholder="内容" name="text" id="discussText"></textarea>
                                         </div>
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-primary" type="button" th:onclick="discuss([[${detail.id}]])">提交</button>
                                     </form>
                                     <div class="timeline_item" th:each="comment:${comment}">
                                         <img class="tl_avatar" th:src="@{/Avatar/}+${comment.id}" alt="avatar" />
@@ -278,12 +277,13 @@
                                         <div class="msg">
                                             <p>[[${comment.text}]]</p>
 <!--                                            <a href="javascript:void(0);" class="mr-20 text-muted"><i class="fa fa-heart text-pink"></i>12 Love</a>-->
-                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.id}" aria-expanded="false" th:aria-controls="'collapse'+${comment.id}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
-                                            <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.id}">
-                                                <form class="well">
+                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
+                                            <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.NO}">
+                                                <form class="well" th:action="@{/reply/}+${comment.NO}" method="post">
                                                     <div class="form-group">
-                                                        <textarea rows="2" class="form-control no-resize" placeholder="回复内容..."></textarea>
+                                                        <textarea rows="2" class="form-control no-resize" required="required" placeholder="回复内容..." name="text"></textarea>
                                                     </div>
+                                                    <input name="replier" th:value="${comment.name}" style="display: none">
                                                     <button class="btn btn-primary">回复</button>
                                                 </form>
                                                 <ul class="recent_comments list-unstyled mt-4 mb-0" th:if="${comment.repliesNum}!=0">
@@ -329,6 +329,19 @@
     function change() {
         var code = $('#summernote').summernote('code');
         document.getElementById("note").value=code;
+	}
+	function discuss(position){
+	    var text = $("#discussText").val();
+        console.log(text);
+            $.ajax({
+            url: "/discuss/"+position,
+            type: "post",
+            data: {'text':text},
+            success: function (data) {
+                    window.location.reload()
+                    $("#Courses-comment").focus();
+            }
+        });
 	}
 </script>
 </body>

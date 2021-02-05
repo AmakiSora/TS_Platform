@@ -169,10 +169,19 @@
     </select>
     <insert id="discuss">
         insert into comment
+        (id,name,date,text,position)
+        values(#{id},#{name},#{date},#{text},#{position})
+    </insert>
+    <insert id="reply">
+        insert into comment
         (id,name,date,text,position,replier)
         values(#{id},#{name},#{date},#{text},#{position},#{replier})
     </insert>
-
+    <update id="upRepliesNum">
+        update comment set
+        repliesNum = repliesNum+1
+        where NO = #{NO}
+    </update>
 
 
 </mapper>
