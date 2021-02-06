@@ -80,8 +80,8 @@
     </select>
     <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
         insert into course
-        (id,name,teacherID,teacher,college)
-        values(#{id},#{name},#{teacherID},#{teacher},#{college})
+        (id,name,teacherID,teacher,college,startDate,endDate)
+        values(#{id},#{name},#{teacherID},#{teacher},#{college},#{startDate},#{endDate})
     </insert>
     <select id="queryCourseStuList" resultType="com.cosmos.pojo.Student">
         select s.*
@@ -165,7 +165,9 @@
     <!--分界线-->
 
     <select id="queryCommentList" resultType="com.cosmos.pojo.Comment">
-        select * from comment where position = #{position}
+        select * from comment
+        where position = #{position}
+        and state is null
     </select>
     <insert id="discuss">
         insert into comment
@@ -180,6 +182,11 @@
     <update id="upRepliesNum">
         update comment set
         repliesNum = repliesNum+1
+        where NO = #{NO}
+    </update>
+    <update id="deleteComment">
+        update comment set
+        state = "delete"
         where NO = #{NO}
     </update>
 

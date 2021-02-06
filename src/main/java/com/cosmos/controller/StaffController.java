@@ -48,6 +48,13 @@ public class StaffController {
         return "staff/staff.html";
     }
 
+    @RequestMapping("/staff/students.html")//列出学生
+    public String queryStudentList(Model model){
+        List<Student> studentList = TSMapper.queryStudentList();
+        model.addAttribute("studentList",studentList);
+        return "/staff/students.html";
+    }
+
     @RequestMapping("/staff/courses.html")//课程列表查询
     public String queryCourseList(Model model){
         List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
@@ -59,6 +66,8 @@ public class StaffController {
 
     @PostMapping("/staff/courses.html")//开设课程
     public String addCourse(Course course){
+        course.setTeacher(session.getAttribute("name").toString());
+        course.setTeacherID(session.getAttribute("id").toString());
         TSMapper.addCourse(course);
         return "redirect:/staff/courses.html";
     }

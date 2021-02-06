@@ -134,7 +134,7 @@
                                         </div>
                                         <div class="card-body">
                                             <form class="card-body" th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
-                                                <input type="file" class="dropify" name="file">
+                                                <input type="file" class="dropify" required="required" name="file">
                                                 <div class="col-sm-12 text-right m-t-20">
                                                     <button type="submit" class="btn btn-primary">上传</button>
                                                 </div>

@@ -38,10 +38,15 @@ public class MainController {
     @RequestMapping("/Avatar/{id}")//显示用户头像
     public ResponseEntity<byte[]> myAvatar (@PathVariable("id")String id){
         User user=  userMapper.getAvatar(id);
-        byte[] b = user.getAvatar();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        return new ResponseEntity<byte[]>(b,headers, HttpStatus.OK);
+        if(user.getAvatar()!=null){
+            byte[] b = user.getAvatar();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            return new ResponseEntity<byte[]>(b,headers, HttpStatus.OK);
+        }else {
+            return null;
+        }
+
     }
 
     @PostMapping("/setAvatar")//上传头像
@@ -116,5 +121,10 @@ public class MainController {
             return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
         }
         return "redirect:"+request.getHeader("Referer");
+    }
+    @GetMapping("/deleteComment/{NO}")//删除评论
+    public String deleteComment(@PathVariable("NO")int NO,HttpServletRequest request){
+        TSMapper.deleteComment(NO);
+            return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
     }
 }

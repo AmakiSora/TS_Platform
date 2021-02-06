@@ -54,4 +54,5 @@ public interface TSMapper {
     void discuss(String id,String name,Date date,String text,String position);//发表评论
     void reply(String id,String name,Date date,String text,String position,String replier);//回复评论
     void upRepliesNum(Integer NO);//增加评论数
+    void deleteComment(Integer NO);//删除评论
 }

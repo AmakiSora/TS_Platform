@@ -165,14 +165,6 @@
                                             <input type="text" class="form-control" name="deadline" ></div>
                                     </div>
                                 </div>
-                                <!--                                <div class="form-group row">-->
-                                <!--                                    <label class="col-md-3 col-form-label">起始日期<span class="text-danger">*</span></label>-->
-                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="form-group row">-->
-                                <!--                                    <label class="col-md-3 col-form-label">截止日期<span class="text-danger">*</span></label>-->
-                                <!--                                    <div class="col-md-9"><input data-provide="datepicker" data-date-autoclose="true" class="form-control" ></div>-->
-                                <!--                                </div>-->
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">作业说明</label>
                                     <div class="col-md-9" onmouseleave="change()">
@@ -271,13 +263,14 @@
                                     <div class="timeline_item" th:each="comment:${comment}">
                                         <img class="tl_avatar" th:src="@{/Avatar/}+${comment.id}" alt="avatar" />
                                         <span>
-                                            <h6 href="javascript:void(0);">[[${comment.name}]]</h6>
+                                            <a>[[${comment.name}]]</a>
                                             <small class="float-right text-right" th:text="${#dates.format(comment.Date, 'yyyy年MM月dd日 HH:mm')}"></small>
                                         </span>
                                         <div class="msg">
                                             <p>[[${comment.text}]]</p>
 <!--                                            <a href="javascript:void(0);" class="mr-20 text-muted"><i class="fa fa-heart text-pink"></i>12 Love</a>-->
-                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
+                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论&nbsp;&nbsp;</a>
+                                            <a th:href="@{/deleteComment/}+${comment.NO}" class="text-danger"><i class="fa fa-trash"></i>删除</a>
                                             <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.NO}">
                                                 <form class="well" th:action="@{/reply/}+${comment.NO}" method="post">
                                                     <div class="form-group">
