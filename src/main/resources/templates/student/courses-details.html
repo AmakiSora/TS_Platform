@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
-<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
+<body class="font-muli theme-cyan gradient" th:onload="href()"><!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader"></div>
 </div>
@@ -39,7 +39,7 @@
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Courses-detail">课程详情</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">课程同学</a></li>
-                        <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-chat">讨论区</a></li>
+                        <li class="nav-item"><a class="nav-link" id="#Courses-comment" data-toggle="tab" href="#Courses-comment">讨论区</a></li>
                     </ul>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane" id="Courses-chat">
+                    <div class="tab-pane" id="Courses-comment">
                         <div class="row">
                             <div class="card">
                                 <div class="card-header">
@@ -254,8 +254,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
         <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
@@ -276,6 +276,12 @@
     function change() {
         var code = $('#summernote').summernote('code');
         document.getElementById("note").value=code;
+	}
+	function href(){
+	    url = window.location.hash;
+	    if(url!=''){
+	        document.getElementById(url).click();
+	    }
 	}
 </script>
 </body>

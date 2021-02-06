@@ -78,73 +78,41 @@
                                     <hr>
                                     <strong>问题交流</strong>
 
-                                    <form class="well">
+                                    <form class="well" th:action="@{/discuss/}+${task.id}" method="post">
                                         <div class="form-group">
-                                            <textarea rows="2" class="form-control no-resize" placeholder="内容"></textarea>
+                                            <textarea rows="2" class="form-control no-resize" required="required" placeholder="内容" name="text"></textarea>
                                         </div>
-                                        <div class="col-sm-12 text-right m-t-20">
-                                            <button type="button" class="btn btn-primary">提交</button>
-                                        </div>
+                                        <button class="btn btn-primary" type="submit">提交</button>
                                     </form>
-                                    <div class="timeline_item ">
-                                        <img class="tl_avatar"
-                                             src="/images/avatar4.jpeg" alt="" /><span><a
-                                            href="javascript:void(0);" title="">Dessie Parks</a>Oakland,CA
-                        <small class="float-right text-right">19-April-2019 -Yesterday</small></span>
-                                        <h6 class="font600">Oeehhh,that's awesome.. Me too!</h6>
+                                    <div class="timeline_item" th:each="comment:${comment}">
+                                        <img class="tl_avatar" th:src="@{/Avatar/}+${comment.id}" alt="avatar" />
+                                        <span>
+                                            <h6 href="javascript:void(0);">[[${comment.name}]]</h6>
+                                            <small class="float-right text-right" th:text="${#dates.format(comment.Date, 'yyyy年MM月dd日 HH:mm')}"></small>
+                                        </span>
                                         <div class="msg">
-                                            <p>I'm speaking with myself,number one,because I have a very good
-                                                brain and I've said a lot of things. on the web by far... While
-                                                that's mock-ups and this is politics,are they really so
-                                                different? I think the only card she has is the Lorem card.</p>
-                                            <div class="timeline_img mb-20"><img class="width100"
-                                                                                 src="/images/1.jpeg"
-                                                                                 alt="Awesome Image"><img class="width100"
-                                                                                                          src="/images/2.jpeg" alt="Awesome Image">
-                                            </div><a href="javascript:void(0);" class="mr-20 text-muted"><i
-                                                class="fa fa-heart text-pink"></i>23 Love</a><a
-                                                class="text-muted" role="button" data-toggle="collapse"
-                                                href="#collapseExample1" aria-expanded="false"
-                                                aria-controls="collapseExample1"><i class="fa fa-comments"></i>2
-                                            Comment</a>
-                                            <div class="collapse p-4 section-gray mt-2" id="collapseExample1">
-                                                <form class="well">
+                                            <p>[[${comment.text}]]</p>
+                                            <!--                                            <a href="javascript:void(0);" class="mr-20 text-muted"><i class="fa fa-heart text-pink"></i>12 Love</a>-->
+                                            <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
+                                            <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.NO}">
+                                                <form class="well" th:action="@{/reply/}+${comment.NO}" method="post">
                                                     <div class="form-group">
-                                    <textarea rows="2"
-                                              class="form-control no-resize"
-                                              placeholder="Enter here for tweet..."></textarea>
-                                                    </div><button class="btn btn-primary">Submit</button>
+                                                        <textarea rows="2" class="form-control no-resize" required="required" placeholder="回复内容..." name="text"></textarea>
+                                                    </div>
+                                                    <input name="replier" th:value="${comment.name}" style="display: none">
+                                                    <button class="btn btn-primary">回复</button>
                                                 </form>
-                                                <ul class="recent_comments list-unstyled mt-4 mb-0">
-                                                    <li>
-                                                        <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                     src="/images/avatar4.jpeg" alt="">
+                                                <ul class="recent_comments list-unstyled mt-4 mb-0" th:if="${comment.repliesNum}!=0">
+                                                    <li th:each="reply:${[comment.NO]}">
+                                                        <div class="avatar_img">
+                                                            <img class="rounded img-fluid" th:src="@{/Avatar/}+${reply.id}" alt="avatar">
                                                         </div>
                                                         <div class="comment_body">
-                                                            <h6>Donald Gardner <small
-                                                                    class="float-right font-14">Just now</small>
+                                                            <h6>
+                                                                [[${reply.name}]]
+                                                                <small class="float-right font-14" th:text="${#dates.format(reply.Date, 'yyyy年MM月dd日 HH:mm')}"></small>
                                                             </h6>
-                                                            <p>Lorem ipsum Veniam aliquip culpa laboris minim
-                                                                tempor</p>
-                                                            <div class="timeline_img mb-20"><img
-                                                                    class="width150"
-                                                                    src="/images/1.jpeg"
-                                                                    alt="Awesome Image"><img class="width150"
-                                                                                             src="/images/1.jpeg"
-                                                                                             alt="Awesome Image"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                     src="/images/avatar3.jpeg" alt="">
-                                                        </div>
-                                                        <div class="comment_body">
-                                                            <h6>Dessie Parks <small
-                                                                    class="float-right font-14">1min ago</small>
-                                                            </h6>
-                                                            <p>It is a long established fact that a reader will
-                                                                be distracted by the readable content of a page
-                                                                when looking</p>
+                                                            <p>[[${reply.text}]]</p>
                                                         </div>
                                                     </li>
                                                 </ul>

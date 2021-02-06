@@ -135,6 +135,15 @@ public class StudentController {
                 myTask.putIfAbsent("score", "未批改");//如果score为null，则显示“未批改”
                 model.addAttribute("myTask",myTask);
             }
+            //讨论
+            List<Comment> commentList = TSMapper.queryCommentList(id);
+            for (Comment list:commentList){
+                if(!list.getRepliesNum().equals(0)){//如果回复人数不为零
+                    String a = list.getNO().toString();
+                    model.addAttribute(a,TSMapper.queryCommentList(a));
+                }
+            }
+            model.addAttribute("comment",commentList);
             return "/student/task-details.html";
         }
     }

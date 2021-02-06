@@ -96,13 +96,15 @@ public class MainController {
         IOUtils.closeQuietly(in);
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
-    @ResponseBody
     @PostMapping("/discuss/{position}")//发表评论
-    public String discuss( @PathVariable("position")String position,String text){
+    public String discuss(@PathVariable("position")String position,String text,HttpServletRequest request){
         TSMapper.discuss(session.getAttribute("id").toString(),
                 session.getAttribute("name").toString(),
                 new Date(),text,position);
-        return "1";
+        if(position.equals(session.getAttribute("courseID").toString())){//返回课程评论区
+            return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
+        }
+        return "redirect:"+request.getHeader("Referer");
     }
     @PostMapping("/reply/{position}")//回复评论
     public String reply(@PathVariable("position")String position,String text,String replier,HttpServletRequest request){
@@ -110,6 +112,9 @@ public class MainController {
                 session.getAttribute("name").toString(),
                 new Date(),text,position,replier);
         TSMapper.upRepliesNum(Integer.valueOf(position));//评论数+1
+        if(position.equals(session.getAttribute("courseID").toString())){//返回课程评论区
+            return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
+        }
         return "redirect:"+request.getHeader("Referer");
     }
 }

@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
-<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
+<body class="font-muli theme-cyan gradient" th:onload="href()"><!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader"></div>
 </div>
@@ -40,7 +40,7 @@
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-task">课程作业</a></li>
                         <li class="nav-item" th:if="${session.id==detail.teacherID}"><a class="nav-link" data-toggle="tab" href="#Courses-addTask">增添作业</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Courses-students">学生名单</a></li>
-                        <li class="nav-item"><a class="nav-link" id="Courses-tab-Boot" data-toggle="tab" href="#Courses-comment">课程评价</a></li>
+                        <li class="nav-item"><a class="nav-link" id="#Courses-comment" data-toggle="tab" href="#Courses-comment">课程评价</a></li>
                     </ul>
                 </div>
             </div>
@@ -262,11 +262,11 @@
                                             </div>
                                         </div>
                                 <div class="card-body">
-                                    <form class="well">
+                                    <form class="well" th:action="@{/discuss/}+${detail.id}" method="post">
                                         <div class="form-group">
-                                            <textarea rows="2" class="form-control no-resize" placeholder="内容" name="text" id="discussText"></textarea>
+                                            <textarea rows="2" class="form-control no-resize" required="required" placeholder="内容" name="text"></textarea>
                                         </div>
-                                        <button class="btn btn-primary" type="button" th:onclick="discuss([[${detail.id}]])">提交</button>
+                                        <button class="btn btn-primary" type="submit">提交</button>
                                     </form>
                                     <div class="timeline_item" th:each="comment:${comment}">
                                         <img class="tl_avatar" th:src="@{/Avatar/}+${comment.id}" alt="avatar" />
@@ -307,8 +307,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
         <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
@@ -330,18 +330,11 @@
         var code = $('#summernote').summernote('code');
         document.getElementById("note").value=code;
 	}
-	function discuss(position){
-	    var text = $("#discussText").val();
-        console.log(text);
-            $.ajax({
-            url: "/discuss/"+position,
-            type: "post",
-            data: {'text':text},
-            success: function (data) {
-                    window.location.reload()
-                    $("#Courses-comment").focus();
-            }
-        });
+	function href(){
+	    url = window.location.hash;
+	    if(url!=''){
+	        document.getElementById(url).click();
+	    }
 	}
 </script>
 </body>
