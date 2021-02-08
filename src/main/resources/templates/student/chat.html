@@ -31,13 +31,13 @@
                     <div class="input-group mt-2 mb-2">
                         <input type="text" class="form-control search" placeholder="Search Student"></div>
                     <ul class="right_chat list-unstyled list" id="userlist">
-                        <li>
-                            <a href="javascript:void(0);" class="media">
-                            <img class="media-object" src="/images/avatar1.jpeg" alt>
-                            <div class="media-body"><span class="name">Abigail Churchill</span><span class="message">Art & Design</span>
-                            </div>
-                            </a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="javascript:void(0);" class="media">-->
+<!--                            <img class="media-object" src="/images/avatar1.jpeg" alt>-->
+<!--                            <div class="media-body"><span class="name">Abigail Churchill</span><span class="message">Art & Design</span>-->
+<!--                            </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -355,7 +355,6 @@
             </div>
         </div>
     </div><!-- 用户 -->
-
     <div th:insert="/student/index::LeftSideBar(active='Chat')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
@@ -370,7 +369,7 @@
                         </ol>
                     </div>
                     <ul class="list-unstyled team-info mb-0">
-                        <li class="mr-4">Rerecent Chat</li>
+                        <li class="mr-4">最近聊天</li>
                         <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
                                  data-original-title="Avatar"></li>
                         <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
@@ -387,92 +386,49 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header bline">
-                                <h3 class="card-title">Friends Group <small>Last seen:2 hours ago</small></h3>
-                                <div class="card-options"><a href="javascript:void(0)" class="p-1 chat_list_btn"><i
-                                        class="fa fa-align-right"></i></a><a href="javascript:void(0)"
-                                                                             class="p-1"><i class="fa fa-plus"></i></a><a href="javascript:void(0)"
-                                                                                                                          class="p-1"><i class="fa fa-cog"></i></a><a href="javascript:void(0)"
-                                                                                                                                                                      class="p-1"><i class="fa fa-refresh"></i></a></div>
+                                <h3 class="card-title" id="chatName"><small>Last seen:2 hours ago</small></h3>
+                                <div class="card-options">
+                                    <a href="javascript:void(0)" class="p-1 chat_list_btn">
+                                        <i class="fa fa-align-right"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="p-1">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="p-1">
+                                        <i class="fa fa-cog"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="p-1">
+                                        <i class="fa fa-refresh"></i>
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body chat_windows">
-                                <ul class="mb-0">
-                                    <li class="other-message"><img class="avatar mr-3"
-                                                                   src="/images/avatar2.jpeg" alt="avatar">
+                                <ul class="mb-0" id="msgs">
+                                    <li class="other-message">
+                                        <img class="avatar mr-3" src="/images/avatar3.jpeg" alt="avatar">
                                         <div class="message">
-                                            <p class="bg-light-blue">Are we meeting today?</p><span
-                                                class="time">10:10 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="other-message"><img class="avatar mr-3"
-                                                                   src="/images/avatar3.jpeg" alt="avatar">
-                                        <div class="message">
-                                            <p class="bg-light-cyan">Hi Aiden,how are you? How is the project coming
-                                                along?</p>
-                                            <p class="bg-light-cyan">Are we meeting today?</p><span
-                                                class="time">10:15 AM,Today</span>
+                                            <p class="bg-light-cyan">11</p>
+                                            <span class="time">10:15 AM,Today</span>
                                         </div>
                                     </li>
                                     <li class="my-message">
                                         <div class="message">
                                             <p class="bg-light-gray">Project has been already finished and I have
                                                 results to show you.</p>
-                                            <div class="file_folder"><a href="javascript:void(0);">
-                                                <div class="icon"><i
-                                                        class="fa fa-file-excel-o text-success"></i></div>
-                                                <div class="file-name">
-                                                    <p class="mb-0 text-muted">Report2017.xls</p>
-                                                    <small>Size:68KB</small>
-                                                </div>
-                                            </a><a href="javascript:void(0);">
-                                                <div class="icon"><i class="fa fa-file-word-o text-primary"></i>
-                                                </div>
-                                                <div class="file-name">
-                                                    <p class="mb-0 text-muted">Report2017.doc</p>
-                                                    <small>Size:68KB</small>
-                                                </div>
-                                            </a></div><span class="time">10:17 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="other-message"><img class="avatar mr-3"
-                                                                   src="/images/avatar4.jpeg" alt="avatar">
-                                        <div class="message">
-                                            <div class="media_img"><img src="/images/1.jpeg"
-                                                                        class="w150 img-thumbnail" alt="" /><img
-                                                    src="/images/2.jpeg" class="w150 img-thumbnail"
-                                                    alt="" /></div><span class="time">10:15 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="other-message"><span class="avatar avatar-blue mr-3">NG</span>
-                                        <div class="message">
-                                            <p class="bg-light-pink">Are we meeting today I have results?</p>
-                                            <p class="bg-light-pink">Project has been already finished and to show
-                                                you.</p><span class="time">10:18 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="my-message">
-                                        <div class="message">
-                                            <p class="bg-light-gray">Well we have good budget for the project</p>
-                                            <span class="time">10:25 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="my-message">
-                                        <div class="message">
-                                            <div class="media_img"><img src="/images/2.jpeg"
-                                                                        class="w100 img-thumbnail" alt="" /><img
-                                                    src="/images/2.jpeg" class="w100 img-thumbnail"
-                                                    alt="" /><img src="/images/2.jpeg"
-                                                                  class="w100 img-thumbnail" alt="" /><img
-                                                    src="/images/2.jpeg" class="w100 img-thumbnail"
-                                                    alt="" /></div><span class="time">10:25 AM,Today</span>
+                                            <span class="time">10:17 AM,Today</span>
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="chat-message clearfix"><a href="javascript:void(0);"><i
-                                        class="icon-camera"></i></a><a href="javascript:void(0);"><i
-                                        class="icon-camcorder"></i></a><a href="javascript:void(0);"><i
-                                        class="icon-paper-plane"></i></a>
-                                    <div class="input-group mb-0"><input type="text" class="form-control"
-                                                                         placeholder="Enter text here..."></div>
+                                <div class="chat-message clearfix">
+                                    <a href="javascript:void(0);"><i class="icon-camera"></i></a>
+                                    <a href="javascript:void(0);"><i class="icon-camcorder"></i></a>
+                                    <a href="javascript:void(0);"><i class="icon-paper-plane"></i></a>
+                                    <div class="input-group mb-0">
+                                        <textarea type="text" rows="2" class="form-control" placeholder="在此处输入信息..." id="message"></textarea>
+                                    </div>
+                                    <div class="col-sm-12 m-t-20 text-right">
+                                        <button type="button" class="btn btn-primary" id="send"><i class="fa fa-cloud-upload mr-2"></i>发送</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -512,11 +468,10 @@
                 //好友列表展示
                 console.log(res.message);
                 console.log(names);
-                //系统广播展示
                 var userlistStr = "";
                 for(var name of names){
                     if(name != username){
-                        userlistStr +="<li><a href=\"javascript:void(0);\"class=\"media\"><img class=\"media-object\"src=\"/images/avatar1.jpeg\"alt><div class=\"media-body\"><span class=\"name\">"+name+"</span><span class=\"message\">在线</span></div></a></li>";
+                        userlistStr +="<li><a onclick='showChat(\""+name+"\")' class=\"media\"><img class=\"media-object\"src=\"/images/avatar1.jpeg\"alt><div class=\"media-body\"><span class=\"name\">"+name+"</span><span class=\"message\">在线</span></div></a></li>";
                     }
                 }
                 console.log(userlistStr+23);
@@ -524,12 +479,54 @@
 
             }else{
             //不是系统信息
+                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"/images/avatar3.jpeg\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">10:15 AM</span></div></li>"
+                //如果是当前聊天的用户则推送
+                if(toName == res.name){
+                    $("#msgs").append(Str);
+                }
+                //历史记录存进session里
+                var chatData = sessionStorage.getItem(res.name);
+                if(chatData != null){
+                    Str = chatData + Str;
+                }
+                sessionStorage.setItem(res.name,Str);
 
             }
         }
         ws.onclose = function(){
             console.log(333);
         }
+        //展示信息
+        showChat = function(name){
+            //清空聊天区
+            toName = name
+            $("#msgs").html("");
+            $("#chatName").html(toName);
+            //将保留的消息展示出来
+            var chatData = sessionStorage.getItem(toName);
+            if (chatData != null){
+                $("#msgs").html(chatData);
+            }
+        };
+        //发送信息
+        $("#send").click(function(){
+            var data = $("#message").val();
+            //清除输入框
+            $("#message").val("");
+            //推送
+            var json = {"name":toName,"message":data};
+            ws.send(JSON.stringify(json));
+            //将信息展示在自己的区域
+            var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">10:17 AM</span></div></li>";
+            $("#msgs").append(Str);
+            //历史记录存进session里
+            var chatData = sessionStorage.getItem(toName);
+            if(chatData != null){
+                Str = chatData + Str;
+            }
+            sessionStorage.setItem(toName,Str);
+        });
+
     })
 </script>
 </body>

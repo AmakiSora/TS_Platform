@@ -1,5 +1,7 @@
 package com.cosmos.ws;
 
+import com.cosmos.pojo.Message;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
@@ -55,10 +57,28 @@ public class ChatEndpoint {
     }
     @OnMessage//收到客户端发送数据时调用
     public void onMessage(String message,Session session){
+        try {
+            //将message转换成message对象
+            ObjectMapper mapper = new ObjectMapper();
+            Message mess = mapper.readValue(message, Message.class);
+            //发送给用户
+            String name = mess.getName();
+            String data = mess.getMessage();
+            String username = (String) httpSession.getAttribute("name");
+            String resultMessage= MessageUtils.getMessage(false,username,data);
+            onlineUsers.get(name).session.getBasicRemote().sendText(resultMessage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     @OnClose//连接断开时调用
     public void onClose(Session session){
-
+        String username = httpSession.getAttribute("name").toString();
+        //从容器中删除指定的用户
+        onlineUsers.remove(username);
+        //推送
+        String message = MessageUtils.getMessage(true,null,getNames());
+        broadcastAllUsers(message);
     }
 }
