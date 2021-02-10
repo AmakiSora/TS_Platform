@@ -427,7 +427,7 @@
                                         <textarea type="text" rows="2" class="form-control" placeholder="在此处输入信息..." id="message"></textarea>
                                     </div>
                                     <div class="col-sm-12 m-t-20 text-right">
-                                        <button type="button" class="btn btn-primary" id="send"><i class="fa fa-cloud-upload mr-2"></i>发送</button>
+                                        <button type="button" class="btn btn-primary" id="send"><i class="fa fa-paper-plane mr-2"></i>发送</button>
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +448,7 @@
 <script th:src="@{/js/summernote.js}"></script>
 <script>
     $(function(){
-        var ws = new WebSocket("ws://localhost:8080/student/chat.html");
+        var ws = new WebSocket("ws://localhost:8080/chat.html");
         var userID = '[[${session.id}]]';
         var username = '[[${session.name}]]';
         ws.onopen = function(){
@@ -471,23 +471,26 @@
                 var userlistStr = "";
                 for(let key of Keys){
                     if(key.id != userID){
-                        userlistStr +="<li><a onclick='showChat(\""+key.id+"\"\,\""+key.name+"\")' class=\"media\"><img class=\"media-object\"src=\"/images/avatar1.jpeg\"alt><div class=\"media-body\"><span class=\"id\">"+key.name+"</span><span class=\"message\">在线</span></div></a></li>";
+                        var avatar = '[[@{/Avatar/}]]'+key.id;
+                        userlistStr +="<li><a onclick='showChat(\""+key.id+"\"\,\""+key.name+"\")' class=\"media\"><img class=\"media-object\" src=\""+avatar+"\" alt><div class=\"media-body\"><span class=\"id\">"+key.name+"</span><span class=\"message\">在线</span></div></a></li>";
                     }
                 }
                 $("#userlist").html(userlistStr);
 
             }else{
             //不是系统信息
+                var Key = res.key;
                 var time = new Date(res.time);
                 var t =  time.getMonth() + "-"
                  + time.getDate() + " "
                  + time.getHours() + ":"
                  + time.getMinutes();
-                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"/images/avatar3.jpeg\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">"+t+"</span></div></li>"
+                var avatar = '[[@{/Avatar/}]]'+Key.id;
+                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\""+avatar+"\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">"+t+"</span></div></li>"
                 //如果是当前聊天的用户则推送
-                var Key = res.key;
                 if(toID == Key.id){
                     $("#msgs").append(Str);
+                    $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
                 }
                 var chatData = sessionStorage.getItem(Key.id);
                 if(chatData != null){
@@ -514,6 +517,7 @@
             var chatData = sessionStorage.getItem(toKey.id);
             if (chatData != null){
                 $("#msgs").html(chatData);
+                $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
             }
         };
         //发送信息
@@ -533,6 +537,7 @@
              + time.getMinutes();
             var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">"+t+"</span></div></li>";
             $("#msgs").append(Str);
+            $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
             //历史记录存进session里
             var chatData = sessionStorage.getItem(toKey.id);
             if(chatData != null){

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ServerEndpoint(value = "/student/chat.html",configurator = GetHttpSessionConfigurator.class)
+@ServerEndpoint(value = "/chat.html",configurator = GetHttpSessionConfigurator.class)
 @Component
 public class ChatEndpoint {
     //用于存储每个客户端对象对应的chatEndpoint对象
