@@ -449,6 +449,7 @@
 <script>
     $(function(){
         var ws = new WebSocket("ws://localhost:8080/student/chat.html");
+        var userID = '[[${session.id}]]';
         var username = '[[${session.name}]]';
         ws.onopen = function(){
         //建立连接后触发
@@ -464,32 +465,36 @@
             //判断是否是系统信息
             if(res.system){
             //是系统信息
-                var names = res.message;
+                var Keys = res.message;
                 //好友列表展示
-                console.log(res.message);
-                console.log(names);
+                console.log(Keys);
                 var userlistStr = "";
-                for(var name of names){
-                    if(name != username){
-                        userlistStr +="<li><a onclick='showChat(\""+name+"\")' class=\"media\"><img class=\"media-object\"src=\"/images/avatar1.jpeg\"alt><div class=\"media-body\"><span class=\"name\">"+name+"</span><span class=\"message\">在线</span></div></a></li>";
+                for(let key of Keys){
+                    if(key.id != userID){
+                        userlistStr +="<li><a onclick='showChat(\""+key.id+"\"\,\""+key.name+"\")' class=\"media\"><img class=\"media-object\"src=\"/images/avatar1.jpeg\"alt><div class=\"media-body\"><span class=\"id\">"+key.name+"</span><span class=\"message\">在线</span></div></a></li>";
                     }
                 }
-                console.log(userlistStr+23);
                 $("#userlist").html(userlistStr);
 
             }else{
             //不是系统信息
-                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"/images/avatar3.jpeg\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">10:15 AM</span></div></li>"
+                var time = new Date(res.time);
+                var t =  time.getMonth() + "-"
+                 + time.getDate() + " "
+                 + time.getHours() + ":"
+                 + time.getMinutes();
+                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"/images/avatar3.jpeg\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">"+t+"</span></div></li>"
                 //如果是当前聊天的用户则推送
-                if(toName == res.name){
+                var Key = res.key;
+                if(toID == Key.id){
                     $("#msgs").append(Str);
                 }
-                //历史记录存进session里
-                var chatData = sessionStorage.getItem(res.name);
+                var chatData = sessionStorage.getItem(Key.id);
                 if(chatData != null){
                     Str = chatData + Str;
                 }
-                sessionStorage.setItem(res.name,Str);
+                //历史记录存进session里
+                sessionStorage.setItem(Key.id,Str);
 
             }
         }
@@ -497,13 +502,16 @@
             console.log(333);
         }
         //展示信息
-        showChat = function(name){
+        showChat = function(id,name){
             //清空聊天区
-            toName = name
+            toID = id;
+            toKey = {'id':id,'name':name};
             $("#msgs").html("");
-            $("#chatName").html(toName);
+            console.log(toKey);
+            console.log(toKey.name);
+            $("#chatName").html(name);
             //将保留的消息展示出来
-            var chatData = sessionStorage.getItem(toName);
+            var chatData = sessionStorage.getItem(toKey.id);
             if (chatData != null){
                 $("#msgs").html(chatData);
             }
@@ -514,17 +522,23 @@
             //清除输入框
             $("#message").val("");
             //推送
-            var json = {"name":toName,"message":data};
+            console.log(toKey);
+            var json = {"key":toKey,"message":data};
             ws.send(JSON.stringify(json));
             //将信息展示在自己的区域
-            var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">10:17 AM</span></div></li>";
+            var time = new Date();
+            var t =  time.getMonth() + "-"
+             + time.getDate() + " "
+             + time.getHours() + ":"
+             + time.getMinutes();
+            var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">"+t+"</span></div></li>";
             $("#msgs").append(Str);
             //历史记录存进session里
-            var chatData = sessionStorage.getItem(toName);
+            var chatData = sessionStorage.getItem(toKey.id);
             if(chatData != null){
                 Str = chatData + Str;
             }
-            sessionStorage.setItem(toName,Str);
+            sessionStorage.setItem(toKey.id,Str);
         });
 
     })

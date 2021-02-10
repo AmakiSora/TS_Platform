@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ChatEndpoint {
     //用于存储每个客户端对象对应的chatEndpoint对象
-    private static Map<String,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
+    private static Map<Map<String,Object>,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
 
     //声明session对象，通过该对象可以发送消息给指定的用户
     private Session session;
@@ -30,21 +31,25 @@ public class ChatEndpoint {
         HttpSession httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.httpSession = httpSession;
         //从httpSession中获取用户名
-        String name = (String)httpSession.getAttribute("name");
+        String id = httpSession.getAttribute("id").toString();
+        String name = httpSession.getAttribute("name").toString();
+        Map<String,Object> key = new HashMap<>();
+        key.put("id",id);
+        key.put("name",name);
         //将当前对象存储到容器中
-        onlineUsers.put(name,this);
+        onlineUsers.put(key,this);
         //将当前用户推送给所有人
         //1，获取消息
-        String message = MessageUtils.getMessage(true,null,getNames());
+        String message = MessageUtils.getMessage(true,null,getKeys());
         //2，调用方法进行系统消息推送
         broadcastAllUsers(message);
 
     }
     private void broadcastAllUsers(String message){//将信息推送给所有客户端
         try {
-            Set<String> names = onlineUsers.keySet();
-            for(String name:names){
-                ChatEndpoint chatEndpoint = onlineUsers.get(name);
+            Set<Map<String,Object>> key = onlineUsers.keySet();
+            for(Map<String,Object> date:key){
+                ChatEndpoint chatEndpoint = onlineUsers.get(date);
                 chatEndpoint.session.getBasicRemote().sendText(message);
             }
         }catch (Exception e){
@@ -52,7 +57,7 @@ public class ChatEndpoint {
         }
 
     }
-    private Set<String> getNames(){//获取名单列表
+    private Set<Map<String,Object>> getKeys(){//获取名单列表
         return onlineUsers.keySet();
     }
     @OnMessage//收到客户端发送数据时调用
@@ -62,11 +67,15 @@ public class ChatEndpoint {
             ObjectMapper mapper = new ObjectMapper();
             Message mess = mapper.readValue(message, Message.class);
             //发送给用户
-            String name = mess.getName();
+            Map<String,Object> toKey = mess.getKey();
             String data = mess.getMessage();
-            String username = (String) httpSession.getAttribute("name");
-            String resultMessage= MessageUtils.getMessage(false,username,data);
-            onlineUsers.get(name).session.getBasicRemote().sendText(resultMessage);
+            String userID = httpSession.getAttribute("id").toString();
+            String userName = httpSession.getAttribute("name").toString();
+            Map<String,Object> key = new HashMap<>();
+            key.put("id",userID);
+            key.put("name",userName);
+            String resultMessage= MessageUtils.getMessage(false,key,data);
+            onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -74,11 +83,15 @@ public class ChatEndpoint {
     }
     @OnClose//连接断开时调用
     public void onClose(Session session){
+        String userID = httpSession.getAttribute("id").toString();
         String username = httpSession.getAttribute("name").toString();
+        Map<String,Object> key = new HashMap<>();
+        key.put("id",userID);
+        key.put("name",username);
         //从容器中删除指定的用户
-        onlineUsers.remove(username);
+        onlineUsers.remove(key);
         //推送
-        String message = MessageUtils.getMessage(true,null,getNames());
+        String message = MessageUtils.getMessage(true,null,getKeys());
         broadcastAllUsers(message);
     }
 }
