@@ -1,19 +1,26 @@
 package com.cosmos.ws;
 
+import com.cosmos.mapper.TSMapper;
+import com.cosmos.pojo.ChatRecord;
 import com.cosmos.pojo.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint(value = "/chat.html",configurator = GetHttpSessionConfigurator.class)
 @Component
+@Controller
 public class ChatEndpoint {
     //用于存储每个客户端对象对应的chatEndpoint对象
     private static Map<Map<String,Object>,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
@@ -23,6 +30,14 @@ public class ChatEndpoint {
 
     //声明一个HttpSession对象，用于显示存储的用户名
     private HttpSession httpSession;
+
+    //数据库,因为Spring管理的都是单例，和websocket（多对象）相冲突。
+    private static TSMapper TsMapper;
+    //所以使用spring注入一次后，后面的对象就不会再注入了
+    @Autowired
+    public void setChatEndpoint(TSMapper TsMapper) {
+        ChatEndpoint.TsMapper = TsMapper;
+    }
 
     @OnOpen//连接建立时调用
     public void onOpen(Session session, EndpointConfig config){
@@ -48,8 +63,8 @@ public class ChatEndpoint {
     private void broadcastAllUsers(String message){//将信息推送给所有客户端
         try {
             Set<Map<String,Object>> key = onlineUsers.keySet();
-            for(Map<String,Object> date:key){
-                ChatEndpoint chatEndpoint = onlineUsers.get(date);
+            for(Map<String,Object> data:key){
+                ChatEndpoint chatEndpoint = onlineUsers.get(data);
                 chatEndpoint.session.getBasicRemote().sendText(message);
             }
         }catch (Exception e){
@@ -60,6 +75,7 @@ public class ChatEndpoint {
     private Set<Map<String,Object>> getKeys(){//获取名单列表
         return onlineUsers.keySet();
     }
+
     @OnMessage//收到客户端发送数据时调用
     public void onMessage(String message,Session session){
         try {
@@ -76,6 +92,14 @@ public class ChatEndpoint {
             key.put("name",userName);
             String resultMessage= MessageUtils.getMessage(false,key,data);
             onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
+            //存进数据库
+            ChatRecord chatRecord = new ChatRecord();
+            chatRecord.setId(userID);
+            chatRecord.setMessage(data);
+            chatRecord.setTime(new Date());
+            chatRecord.setChatID(toKey.get("id").toString());
+            TsMapper.saveMessage(chatRecord);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -93,5 +117,11 @@ public class ChatEndpoint {
         //推送
         String message = MessageUtils.getMessage(true,null,getKeys());
         broadcastAllUsers(message);
+    }
+    @ResponseBody
+    @PostMapping("/chatRecord")//查询聊天记录
+    public List<ChatRecord> chatRecordList(@RequestParam("id")String id, @RequestParam("chatID")String chatID){
+        List<ChatRecord> CR = TsMapper.showMessage(id,chatID);
+        return CR;
     }
 }

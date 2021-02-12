@@ -48,7 +48,11 @@ class TsPlatformApplicationTests {
 //        System.out.println(MyTask.get());
 
 //        String password = encryptor.encrypt("");//加密数据库密码
-//        System.out.println(password);//
+//        System.out.println(password);
+        //Iin72SzbDDMw49y6EwyuPqiztQcbZJiGOjMp5pa4Ol7z3RMfhmmBU/vKXe/hbZx/1tZG1XnGGbxK9+UC9QZ+8SKZiZdxT5ev5v5Vt7Lv8nvtFIeRRNQa3rVDqTSrDY9rHH59oxkXIm503J2/M08rcw==
+        //JUj0I76WRQIWrZa1bJj8Og0LAmlUi4zS
+        //S9wJL+/9zyKw+wHtMcIBpXDS6cmcM8rVSTJU13NyfSA=
+
     }
 
 }

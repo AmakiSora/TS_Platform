@@ -55,4 +55,7 @@ public interface TSMapper {
     void reply(String id,String name,Date date,String text,String position,String replier);//回复评论
     void upRepliesNum(Integer NO);//增加评论数
     void deleteComment(Integer NO);//删除评论
+    //分界线---------------------------------------------------------------------------
+    void saveMessage(ChatRecord chatRecord);//保存聊天记录
+    List<ChatRecord> showMessage(String id,String chatID);//查询聊天记录
 }

@@ -404,20 +404,20 @@
                             </div>
                             <div class="card-body chat_windows">
                                 <ul class="mb-0" id="msgs">
-                                    <li class="other-message">
-                                        <img class="avatar mr-3" src="/images/avatar3.jpeg" alt="avatar">
-                                        <div class="message">
-                                            <p class="bg-light-cyan">11</p>
-                                            <span class="time">10:15 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="my-message">
-                                        <div class="message">
-                                            <p class="bg-light-gray">Project has been already finished and I have
-                                                results to show you.</p>
-                                            <span class="time">10:17 AM,Today</span>
-                                        </div>
-                                    </li>
+<!--                                    <li class="other-message">-->
+<!--                                        <img class="avatar mr-3" src="/images/avatar3.jpeg" alt="avatar">-->
+<!--                                        <div class="message">-->
+<!--                                            <p class="bg-light-cyan">11</p>-->
+<!--                                            <span class="time">10:15 AM,Today</span>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+<!--                                    <li class="my-message">-->
+<!--                                        <div class="message">-->
+<!--                                            <p class="bg-light-gray">Project has been already finished and I have-->
+<!--                                                results to show you.</p>-->
+<!--                                            <span class="time">10:17 AM,Today</span>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
                                 </ul>
                                 <div class="chat-message clearfix">
                                     <a href="javascript:void(0);"><i class="icon-camera"></i></a>
@@ -452,16 +452,18 @@
         var userID = '[[${session.id}]]';
         var username = '[[${session.name}]]';
         ws.onopen = function(){
-        //建立连接后触发
+            //建立连接后触发
+            console.log(111);
         }
         ws.onmessage = function(evt){
-        //接受到服务器推送的消息触发
+            //接受到服务器推送的消息触发
+            console.log(222);
             var dataStr = evt.data;
             //将dataStr转换为json对象
             var res = JSON.parse(dataStr);
             //判断是否是系统信息
             if(res.system){
-            //是系统信息
+                //是系统信息
                 var Keys = res.message;
                 //好友列表展示
                 var userlistStr = "";
@@ -474,13 +476,13 @@
                 $("#userlist").html(userlistStr);
 
             }else{
-            //不是系统信息
+                //不是系统信息
                 var Key = res.key;
                 var time = new Date(res.time);
                 var t =  time.getMonth() + "-"
-                 + time.getDate() + " "
-                 + time.getHours() + ":"
-                 + time.getMinutes();
+                    + time.getDate() + " "
+                    + time.getHours() + ":"
+                    + time.getMinutes();
                 var avatar = '[[@{/Avatar/}]]'+Key.id;
                 var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\""+avatar+"\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">"+t+"</span></div></li>"
                 //如果是当前聊天的用户则推送
@@ -498,7 +500,7 @@
             }
         }
         ws.onclose = function(){
-        //连接关闭触发
+            console.log(333);
         }
         //展示信息
         showChat = function(id,name){
@@ -512,6 +514,40 @@
             if (chatData != null){
                 $("#msgs").html(chatData);
                 $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
+            }else{
+                //查数据库里的聊天记录
+                $.ajax({
+                    url: "/chatRecord",
+                    type: "post",
+                    data: {'id':userID,'chatID':toID},
+                    success: function (data) {
+                        chatData = "";
+                        var avatar = '[[@{/Avatar/}]]'+toID;
+                        for(var i in data){
+                            if(data[i].id==userID){
+                                var time = new Date(data[i].time);
+                                var t =  time.getMonth() + "-"
+                                    + time.getDate() + " "
+                                    + time.getHours() + ":"
+                                    + time.getMinutes();
+                                var StrA = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data[i].message+"</p><span class=\"time\">"+t+"</span></div></li>";
+                                $("#msgs").append(StrA);
+                                chatData = chatData+StrA;
+                            }else {
+                                var time = new Date(data[i].time);
+                                var t =  time.getMonth() + "-"
+                                    + time.getDate() + " "
+                                    + time.getHours() + ":"
+                                    + time.getMinutes();
+                                var StrA = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"" + avatar + "\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">" + data[i].message + "</p><span class=\"time\">" + t + "</span></div></li>";
+                                chatData = chatData+StrA;
+                                $("#msgs").append(StrA);
+                            }
+                        }
+                        $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
+                        sessionStorage.setItem(toID,chatData);
+                    }
+                });
             }
         };
         //发送信息
@@ -525,9 +561,9 @@
             //将信息展示在自己的区域
             var time = new Date();
             var t =  time.getMonth() + "-"
-             + time.getDate() + " "
-             + time.getHours() + ":"
-             + time.getMinutes();
+                + time.getDate() + " "
+                + time.getHours() + ":"
+                + time.getMinutes();
             var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">"+t+"</span></div></li>";
             $("#msgs").append(Str);
             $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);

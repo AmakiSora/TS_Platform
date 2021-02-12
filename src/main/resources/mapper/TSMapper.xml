@@ -190,5 +190,17 @@
         where NO = #{NO}
     </update>
 
+    <!--分界线-->
+
+    <insert id="saveMessage">
+        insert into chat
+        (id,message,time,chatID)
+        values(#{id},#{message},#{time},#{chatID})
+    </insert>
+    <select id="showMessage" resultType="com.cosmos.pojo.ChatRecord">
+        select * from chat
+        where id in (#{id},#{chatID})
+          and chatID in (#{id},#{chatID})
+    </select>
 
 </mapper>

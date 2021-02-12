@@ -386,7 +386,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header bline">
-                                <h3 class="card-title" id="chatName"><small>Last seen:2 hours ago</small></h3>
+                                <h3 class="card-title" id="chatName"></h3>
                                 <div class="card-options">
                                     <a href="javascript:void(0)" class="p-1 chat_list_btn">
                                         <i class="fa fa-align-right"></i>
@@ -404,20 +404,20 @@
                             </div>
                             <div class="card-body chat_windows">
                                 <ul class="mb-0" id="msgs">
-                                    <li class="other-message">
-                                        <img class="avatar mr-3" src="/images/avatar3.jpeg" alt="avatar">
-                                        <div class="message">
-                                            <p class="bg-light-cyan">11</p>
-                                            <span class="time">10:15 AM,Today</span>
-                                        </div>
-                                    </li>
-                                    <li class="my-message">
-                                        <div class="message">
-                                            <p class="bg-light-gray">Project has been already finished and I have
-                                                results to show you.</p>
-                                            <span class="time">10:17 AM,Today</span>
-                                        </div>
-                                    </li>
+<!--                                    <li class="other-message">-->
+<!--                                        <img class="avatar mr-3" src="/images/avatar3.jpeg" alt="avatar">-->
+<!--                                        <div class="message">-->
+<!--                                            <p class="bg-light-cyan">11</p>-->
+<!--                                            <span class="time">10:15 AM,Today</span>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+<!--                                    <li class="my-message">-->
+<!--                                        <div class="message">-->
+<!--                                            <p class="bg-light-gray">Project has been already finished and I have-->
+<!--                                                results to show you.</p>-->
+<!--                                            <span class="time">10:17 AM,Today</span>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
                                 </ul>
                                 <div class="chat-message clearfix">
                                     <a href="javascript:void(0);"><i class="icon-camera"></i></a>
@@ -459,7 +459,6 @@
         //接受到服务器推送的消息触发
             console.log(222);
             var dataStr = evt.data;
-            console.log(dataStr);
             //将dataStr转换为json对象
             var res = JSON.parse(dataStr);
             //判断是否是系统信息
@@ -467,7 +466,6 @@
             //是系统信息
                 var Keys = res.message;
                 //好友列表展示
-                console.log(Keys);
                 var userlistStr = "";
                 for(let key of Keys){
                     if(key.id != userID){
@@ -481,7 +479,7 @@
             //不是系统信息
                 var Key = res.key;
                 var time = new Date(res.time);
-                var t =  time.getMonth() + "-"
+                var t =  time.getMonth()+1 + "-"
                  + time.getDate() + " "
                  + time.getHours() + ":"
                  + time.getMinutes();
@@ -510,14 +508,46 @@
             toID = id;
             toKey = {'id':id,'name':name};
             $("#msgs").html("");
-            console.log(toKey);
-            console.log(toKey.name);
             $("#chatName").html(name);
             //将保留的消息展示出来
             var chatData = sessionStorage.getItem(toKey.id);
             if (chatData != null){
                 $("#msgs").html(chatData);
                 $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
+            }else{
+                //查数据库里的聊天记录
+                $.ajax({
+                    url: "/chatRecord",
+                    type: "post",
+                    data: {'id':userID,'chatID':toID},
+                    success: function (data) {
+                        chatData = "";
+                        var avatar = '[[@{/Avatar/}]]'+toID;
+                        for(var i in data){
+                            if(data[i].id==userID){
+                                var time = new Date(data[i].time);
+                                var t =  time.getMonth()+1 + "-"
+                                    + time.getDate() + " "
+                                    + time.getHours() + ":"
+                                    + time.getMinutes();
+                                var StrA = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data[i].message+"</p><span class=\"time\">"+t+"</span></div></li>";
+                                $("#msgs").append(StrA);
+                                chatData = chatData+StrA;
+                            }else {
+                                var time = new Date(data[i].time);
+                                var t =  time.getMonth()+1 + "-"
+                                    + time.getDate() + " "
+                                    + time.getHours() + ":"
+                                    + time.getMinutes();
+                                var StrA = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"" + avatar + "\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">" + data[i].message + "</p><span class=\"time\">" + t + "</span></div></li>";
+                                chatData = chatData+StrA;
+                                $("#msgs").append(StrA);
+                            }
+                        }
+                        $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
+                        sessionStorage.setItem(toID,chatData);
+                    }
+                });
             }
         };
         //发送信息
@@ -526,12 +556,11 @@
             //清除输入框
             $("#message").val("");
             //推送
-            console.log(toKey);
             var json = {"key":toKey,"message":data};
             ws.send(JSON.stringify(json));
             //将信息展示在自己的区域
             var time = new Date();
-            var t =  time.getMonth() + "-"
+            var t =  time.getMonth()+1 + "-"
              + time.getDate() + " "
              + time.getHours() + ":"
              + time.getMinutes();
