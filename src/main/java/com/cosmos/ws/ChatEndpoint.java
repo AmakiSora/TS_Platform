@@ -106,7 +106,7 @@ public class ChatEndpoint {
 
     }
     @OnClose//连接断开时调用
-    public void onClose(Session session){
+    public void onClose(){
         String userID = httpSession.getAttribute("id").toString();
         String username = httpSession.getAttribute("name").toString();
         Map<String,Object> key = new HashMap<>();

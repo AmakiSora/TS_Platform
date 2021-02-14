@@ -8,10 +8,10 @@
 #
 spring:
   datasource:
-    username: ENC(JUj0I76WRQIWrZa1bJj8Og0LAmlUi4zS)
-    password: ENC(S9wJL+/9zyKw+wHtMcIBpXDS6cmcM8rVSTJU13NyfSA=)
+    username: ENC(qPz2O5QdB0RTNZ7MkTLPxoE3ugSFtF7E)
+    password: ENC(FSB4LTA1D1Lhvj7/BkU02B8A+vOXLtS1Q94HRd/mxXU=)
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ENC(Iin72SzbDDMw49y6EwyuPqiztQcbZJiGOjMp5pa4Ol7z3RMfhmmBU/vKXe/hbZx/1tZG1XnGGbxK9+UC9QZ+8SKZiZdxT5ev5v5Vt7Lv8nvtFIeRRNQa3rVDqTSrDY9rHH59oxkXIm503J2/M08rcw==)
+    url: ENC(sNatVRWXHu1SKZPzKo661M9omxHU8dhrODV46FL9V/j+3s4KMaY6Cgo8eX8UpvY7PUCi3ZG4U9aEmMoG1s8Ol1aUFx6a1O0QacohOhEP/VS/7JULPsMrVEOpirTheL2MEwFWyJDZN3xv3n9iUmjn+g==)
     hikari:
       max-lifetime: 500000
 
