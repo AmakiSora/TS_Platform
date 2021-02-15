@@ -1,4 +1,4 @@
-package com.cosmos.ws;
+package com.cosmos.utils;
 
 import com.cosmos.pojo.ResultMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;

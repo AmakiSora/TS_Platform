@@ -1,4 +1,4 @@
-package com.cosmos.ws;
+package com.cosmos.config;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.HandshakeResponse;

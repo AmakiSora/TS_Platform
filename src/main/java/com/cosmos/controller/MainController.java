@@ -7,6 +7,8 @@ import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,22 +37,24 @@ public class MainController {
     @Autowired
     private UserMapper userMapper;
     //分割线------------------------------------------------------------------------------------
+    @Cacheable(value = "Avatar",key = "'Avatar'+#id")//存进redis缓存减少请求次数
     @RequestMapping("/Avatar/{id}")//显示用户头像
-    public ResponseEntity<byte[]> myAvatar (@PathVariable("id")String id){
+    @ResponseBody
+    public byte[] Avatar (@PathVariable("id")String id){
         User user=  userMapper.getAvatar(id);
         if(user.getAvatar()!=null){
             byte[] b = user.getAvatar();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
-            return new ResponseEntity<byte[]>(b,headers, HttpStatus.OK);
+            return b;
         }else {
             return null;
         }
 
     }
-
-    @PostMapping("/setAvatar")//上传头像
-    public String setAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+    @CacheEvict(value = "Avatar",key = "'Avatar'+#id")//清除缓存
+    @PostMapping("/setAvatar/{id}")//上传头像
+    public String setAvatar(@RequestParam("file") MultipartFile file,@PathVariable("id")String id) throws IOException {
         if(file.isEmpty()){
             return null;
         }
@@ -58,7 +62,8 @@ public class MainController {
         if("image/jpeg".equals(type)||"image/png".equals(type)){//判断文件是不是图片
             byte[] bytes=file.getBytes();//将图片转换成二进制流
             User user = new User();
-            user.setUsername(session.getAttribute("id").toString());
+            id = session.getAttribute("id").toString();//防止篡改
+            user.setUsername(id);
             user.setAvatar(bytes);
             userMapper.setAvatar(user);
             if(session.getAttribute("role")=="staff"){

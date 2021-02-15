@@ -1,13 +1,14 @@
-package com.cosmos.ws;
+package com.cosmos.controller;
 
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.ChatRecord;
 import com.cosmos.pojo.Message;
+import com.cosmos.config.GetHttpSessionConfigurator;
+import com.cosmos.utils.MessageUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;

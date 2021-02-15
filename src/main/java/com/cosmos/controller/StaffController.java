@@ -59,7 +59,7 @@ public class StaffController {
     public String queryCourseList(Model model){
         List<Course> coursesList = TSMapper.queryCourseList();//查询全部课程
         model.addAttribute("coursesList",coursesList);
-        List<Course> myCoursesList = TSMapper.queryTeaCourse(session.getAttribute("id").toString());//查询学生自己的课程
+        List<Course> myCoursesList = TSMapper.queryTeaCourse(session.getAttribute("id").toString());//查询教师自己的课程
         model.addAttribute("myCoursesList",myCoursesList);
         return "/staff/courses.html";
     }

@@ -139,7 +139,7 @@
                                             <h3 class="card-title">设置头像</h3>
                                         </div>
                                         <div class="card-body">
-                                            <form class="card-body" th:action="@{/setAvatar}" method="post" enctype="multipart/form-data">
+                                            <form class="card-body" th:action="@{/setAvatar/}+${session.id}" method="post" enctype="multipart/form-data">
                                                 <input type="file" class="dropify" name="file">
                                                 <div class="col-sm-12 text-right m-t-20">
                                                     <button type="submit" class="btn btn-primary">上传</button>
