@@ -7,8 +7,10 @@ import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,8 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -36,6 +37,9 @@ public class MainController {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    @Qualifier("redisTemplate")
+    private RedisTemplate redisTemplate;
     //分割线------------------------------------------------------------------------------------
     @Cacheable(value = "Avatar",key = "'Avatar'+#id")//存进redis缓存减少请求次数
     @RequestMapping("/Avatar/{id}")//显示用户头像
@@ -132,4 +136,29 @@ public class MainController {
         TSMapper.deleteComment(NO);
             return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
     }
+    @RequestMapping("/news")//消息
+    @ResponseBody
+    public List news(){
+        String key="news"+session.getAttribute("id").toString();
+        long i = redisTemplate.opsForHash().size(key);
+        if(i == 0){//没有通知
+            return null;
+        }else {//有通知
+            List list = redisTemplate.opsForHash().values(key);
+            System.out.println(redisTemplate.opsForHash().values(key));
+            return list;
+        }
+    }
+//    @RequestMapping("/send/news")//测试发消息
+//    @ResponseBody
+//    public String sendNews(){
+//        Map map = new HashMap();
+//        map.put("1","第一条通知");
+//        map.put("2","第二条通知");
+//        redisTemplate.opsForHash().put("news1101","1","第一条通知");
+//        redisTemplate.opsForHash().put("news1101","2","第2条通知");
+//        redisTemplate.opsForHash().put("news1102","1","第1条通知");
+//
+//        return "";
+//    }
 }

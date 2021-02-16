@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker3.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
-<body class="font-muli theme-cyan gradient" th:onload="href()"><!-- Page Loader -->
+<body class="font-muli theme-cyan gradient"><!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader"></div>
 </div>
@@ -259,6 +259,7 @@
         <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->
     </div>
 </div><!-- Start Main project js,jQuery,Bootstrap -->
+</div>
 <script th:src="@{/js/lib.vendor.bundle.js}"></script><!-- Start all plugin js -->
 <script th:src="@{/js/counterup.bundle.js}"></script>
 <script th:src="@{/js/apexcharts.bundle.js}"></script>
@@ -272,17 +273,18 @@
 <script th:src="@{/js/dropify.js}"></script>
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/Myjs/News.js}"></script>
 <script>
     function change() {
         var code = $('#summernote').summernote('code');
         document.getElementById("note").value=code;
 	}
-	function href(){
+	$(function href(){
 	    url = window.location.hash;
 	    if(url!=''){
 	        document.getElementById(url).click();
 	    }
-	}
+	})
 </script>
 </body>
 </html>

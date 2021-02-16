@@ -182,11 +182,11 @@
 <script th:src="@{/js/summernote.js}"></script>
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
+<script th:src="@{/Myjs/News.js}"></script>
 
 <script>
     function change(id){
         var display = document.getElementsByClassName(id);
-        <!--        console.log(display.length)-->
         for(var i=0;i<display.length;i++) {
             if (display[i].style.display == "") {
                 display[i].style.display = "none";
@@ -196,7 +196,6 @@
         }
     }
     function submit(id,name,gender,college,phone){
-        <!--        var Cid = $("#"+id).val();-->
         var Cname = $("#"+name).val();
         var Cgender = $("#"+gender).val();
         var Ccollege = $("#"+college).val();
@@ -206,9 +205,6 @@
         }else{
             Cgender = 0;
         }
-        <!--                        console.log(Bid);-->
-        <!--                        console.log(aid);-->
-
         $.ajax({
             url: "/updateTea",
             type: "post",
