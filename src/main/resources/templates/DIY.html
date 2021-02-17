@@ -715,14 +715,16 @@
                                     class="badge badge-success nav-unread"></span></a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                     <ul class="right_chat list-unstyled w350 p-0">
-                                        <li class="online"><a href="javascript:void(0);" class="media"><img
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media"><img
                                                 class="media-object" src="/images/avatar4.jpeg" alt>
                                             <div class="media-body"><span class="name">Donald Gardner</span>
                                                 <div class="message"></div>
                                                 <small>11 mins ago</small><span
                                                         class="badge badge-outline status"></span></div>
                                         </a></li>
-                                        <li class="online"><a href="javascript:void(0);" class="media"><img
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media"><img
                                                 class="media-object " src="/images/avatar5.jpeg" alt>
                                             <div class="media-body"><span class="name">Wendy Keen</span>
                                                 <div class="message">There are many variations of passages of Lorem
@@ -731,7 +733,8 @@
                                                 <small>18 mins ago</small><span
                                                         class="badge badge-outline status"></span></div>
                                         </a></li>
-                                        <li class="offline"><a href="javascript:void(0);" class="media"><img
+                                        <li class="offline">
+                                            <a href="javascript:void(0);" class="media"><img
                                                 class="media-object " src="/images/avatar2.jpeg" alt>
                                             <div class="media-body"><span class="name">Matt Rosales</span>
                                                 <div class="message">Contrary to popular belief,Lorem Ipsum is not
@@ -740,7 +743,8 @@
                                                 <small>27 mins ago</small><span
                                                         class="badge badge-outline status"></span></div>
                                         </a></li>
-                                        <li class="online"><a href="javascript:void(0);" class="media"><img
+                                        <li class="online">
+                                            <a href="javascript:void(0);" class="media"><img
                                                 class="media-object " src="/images/avatar3.jpeg" alt>
                                             <div class="media-body"><span class="name">Phillip Smith</span>
                                                 <div class="message">It has roots in a piece of classical Latin
@@ -755,12 +759,14 @@
                                        class="dropdown-item text-center text-muted-dark readall">Mark all as read</a>
                                 </div>
                             </div>
-                            <div class="dropdown d-flex"><a
-                                    class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1"
-                                    data-toggle="dropdown"><i class="fa fa-bell"></i><span
-                                    class="badge badge-primary nav-unread"></span></a>
+                            <div class="dropdown d-flex">
+                                <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1" data-toggle="dropdown">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="badge badge-primary nav-unread" id="point"></span>
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                    <ul class="list-unstyled feeds_widget" id="news">
+<!--                                    <ul class="list-unstyled feeds_widget" id="news">-->
+                                    <ul class="right_chat list-unstyled w350 p-0" id="news">
                                         <li>
                                             <div class="feeds-left"><span class="avatar avatar-blue"><i
                                                     class="fa fa-check"></i></span></div>
@@ -792,8 +798,8 @@
                                         </li>
                                     </ul>
                                     <div class="dropdown-divider"></div>
-                                    <a th:href="@{/send/news}"
-                                       class="dropdown-item text-center text-muted-dark readall">更多消息</a>
+                                    <a href="javascript:void(0)" id="newsClear"
+                                       class="dropdown-item text-center text-muted-dark readall">清空消息</a>
                                 </div>
                             </div>
                             <div class="dropdown d-flex">
@@ -826,7 +832,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.65™ </a></div>
+                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.66™ </a></div>
                         <div class="col-md-6 col-sm-12 text-md-right">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item"><a href="../doc/index.html">网络1712</a></li>

@@ -81,6 +81,7 @@ public class StudentController {
 
         List<Task> task = TSMapper.queryTaskList(id);//作业
         session.setAttribute("courseID",id);//为后面增添作业设置课程id
+        session.setAttribute("teacherID",course.getTeacherID());//为消息通知获取用
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();

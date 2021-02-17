@@ -1,5 +1,6 @@
 package com.cosmos.controller;
 
+import com.cosmos.aspect.NewsAOP;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
 import com.cosmos.pojo.Staff;
@@ -110,6 +111,7 @@ public class MainController {
         IOUtils.closeQuietly(in);
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
+    @NewsAOP
     @PostMapping("/discuss/{position}")//发表评论
     public String discuss(@PathVariable("position")String position,String text,HttpServletRequest request){
         TSMapper.discuss(session.getAttribute("id").toString(),
@@ -136,18 +138,24 @@ public class MainController {
         TSMapper.deleteComment(NO);
             return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
     }
-    @RequestMapping("/news")//消息
+    @GetMapping("/news")//消息通知
     @ResponseBody
-    public List news(){
+    public Map news(){
         String key="news"+session.getAttribute("id").toString();
         long i = redisTemplate.opsForHash().size(key);
         if(i == 0){//没有通知
             return null;
         }else {//有通知
-            List list = redisTemplate.opsForHash().values(key);
-            System.out.println(redisTemplate.opsForHash().values(key));
-            return list;
+            Map map = redisTemplate.opsForHash().entries(key);
+            return map;
         }
+    }
+    @GetMapping("/newsClear")//清空通知
+    @ResponseBody
+    public Integer newsClear(){
+        String id = session.getAttribute("id").toString();
+        redisTemplate.delete("news"+id);
+        return 1;
     }
 //    @RequestMapping("/send/news")//测试发消息
 //    @ResponseBody

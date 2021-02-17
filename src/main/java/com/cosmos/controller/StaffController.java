@@ -79,6 +79,7 @@ public class StaffController {
         //作业
         List<Task> task = TSMapper.queryTaskList(id);
         session.setAttribute("courseID",id);//为后面增添作业设置课程id
+        session.setAttribute("teacherID",course.getTeacherID());//为消息通知获取ID用
         Date now = new Date();
         for(Task list:task){
             Date i = list.getIssuedDate();

@@ -37,14 +37,13 @@ class TsPlatformApplicationTests {
     @Test
     void contextLoads() throws SQLException {
 //        redisTemplate.opsForValue().set("hello","yes");
-        System.out.println(redisTemplate.opsForHash().keys("news1101"));
-        System.out.println(redisTemplate.opsForHash().size("news1101"));
-        redisTemplate.opsForHash().put("news121102","2","<a href=\"/student/index.html\">555</a>");
-
-        System.out.println(redisTemplate.opsForHash().size("news1101"));
-        System.out.println(redisTemplate.opsForHash().keys("news1101"));
-
-
+//        System.out.println(redisTemplate.opsForHash().keys("news1101"));
+//        System.out.println(redisTemplate.opsForHash().size("news1101"));
+//        redisTemplate.opsForHash().put("news121102","2","<a href=\"/student/index.html\">555</a>");
+//
+//        System.out.println(redisTemplate.opsForHash().size("news1101"));
+//
+//        redisTemplate.delete("news121102");
 
 
 

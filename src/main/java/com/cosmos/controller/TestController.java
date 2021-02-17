@@ -1,6 +1,8 @@
 package com.cosmos.controller;
 
+import com.cosmos.aspect.NewsAOP;
 import com.cosmos.pojo.User;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,38 @@ import java.io.IOException;
 
 @Controller
 public class TestController {
+//    @NewsAOP
+//    @GetMapping("/t/{i}")
+//    @ResponseBody
+//    public void add1(@PathVariable("i")String i,String a){
+//        System.out.println(i+"???");
+//        System.out.println("add1");
+//    }
+//    @NewsAOP
+//    @GetMapping("/s/{i}")
+//    @ResponseBody
+//    public void add2(@PathVariable("i")String i){
+//        System.out.println("@@@@@");
+//    }
+//    @NewsAOP
+//    @GetMapping("/g")
+//    @ResponseBody
+//    public void add3(){
+//
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    public static final int ERROR = 0;
 //    public static final int SUCCESS = 1;
 //    @RequestMapping("/{target}")
