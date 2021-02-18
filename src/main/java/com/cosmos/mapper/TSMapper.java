@@ -52,9 +52,10 @@ public interface TSMapper {
     //分界线---------------------------------------------------------------------------
     List<Comment> queryCommentList(String position);//查询所有评论
     void discuss(String id,String name,Date date,String text,String position);//发表评论
-    void reply(String id,String name,Date date,String text,String position,String replier);//回复评论
+    void reply(String id,String name,Date date,String text,String position,String replier,String replierID);//回复评论
     void upRepliesNum(Integer NO);//增加评论数
     void deleteComment(Integer NO);//删除评论
+    void downRepliesNum(Integer NO);//减少评论数
     //分界线---------------------------------------------------------------------------
     void saveMessage(ChatRecord chatRecord);//保存聊天记录
     List<ChatRecord> showMessage(String id,String chatID);//查询聊天记录

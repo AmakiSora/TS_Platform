@@ -176,8 +176,8 @@
     </insert>
     <insert id="reply">
         insert into comment
-        (id,name,date,text,position,replier)
-        values(#{id},#{name},#{date},#{text},#{position},#{replier})
+        (id,name,date,text,position,replier,replierID)
+        values(#{id},#{name},#{date},#{text},#{position},#{replier},#{replierID})
     </insert>
     <update id="upRepliesNum">
         update comment set
@@ -187,6 +187,11 @@
     <update id="deleteComment">
         update comment set
         state = "delete"
+        where NO = #{NO}
+    </update>
+    <update id="downRepliesNum">
+        update comment set
+        repliesNum = repliesNum-1
         where NO = #{NO}
     </update>
 

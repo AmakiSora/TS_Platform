@@ -94,12 +94,14 @@
                                             <p>[[${comment.text}]]</p>
                                             <!--                                            <a href="javascript:void(0);" class="mr-20 text-muted"><i class="fa fa-heart text-pink"></i>12 Love</a>-->
                                             <a class="text-muted" role="button" data-toggle="collapse" th:href="'#'+'collapse'+${comment.NO}" aria-expanded="false" th:aria-controls="'collapse'+${comment.NO}"><i class="fa fa-comments"></i>[[${comment.repliesNum}]]个评论</a>
+                                            <a th:href="@{/deleteComment/}+${comment.NO}" class="text-danger" th:if="${comment.id}==${session.id}"><i class="fa fa-trash"></i>删除</a>
                                             <div class="collapse p-4 section-gray mt-2" th:id="'collapse'+${comment.NO}">
                                                 <form class="well" th:action="@{/reply/}+${comment.NO}" method="post">
                                                     <div class="form-group">
-                                                        <textarea rows="2" class="form-control no-resize" required="required" placeholder="回复内容..." name="text"></textarea>
+                                                        <textarea rows="2" th:id="'placeholder'+${comment.NO}" class="form-control no-resize" required="required" th:placeholder="'回复'+'@'+${comment.name}" name="text"></textarea>
                                                     </div>
-                                                    <input name="replier" th:value="${comment.name}" style="display: none">
+                                                    <input name="replier" th:id="'replier'+${comment.NO}" th:value="${comment.name}" style="display: none">
+                                                    <input name="replierID" th:id="'replierID'+${comment.NO}" th:value="${comment.id}" style="display: none">
                                                     <button class="btn btn-primary">回复</button>
                                                 </form>
                                                 <ul class="recent_comments list-unstyled mt-4 mb-0" th:if="${comment.repliesNum}!=0">
@@ -109,10 +111,13 @@
                                                         </div>
                                                         <div class="comment_body">
                                                             <h6>
-                                                                [[${reply.name}]]
+                                                                [[${reply.name}]]&nbsp;&nbsp;&nbsp;
+                                                                <small th:if="${reply.replier}!=${comment.name}">回复&nbsp;&nbsp;@[[${reply.replier}]]</small>
                                                                 <small class="float-right font-14" th:text="${#dates.format(reply.Date, 'yyyy年MM月dd日 HH:mm')}"></small>
                                                             </h6>
                                                             <p>[[${reply.text}]]</p>
+                                                            <a th:href="@{/deleteReply/}+${reply.NO}+'/'+${comment.NO}" th:if="${reply.id}==${session.id}" class="text-danger"><i class="fa fa-trash"></i>删除</a>
+                                                            <a href="javascript:void(0)" th:onclick="replyChange([[${reply.id}]],[[${reply.name}]],[[${comment.NO}]])" class="text-gray"><i class="fa fa-reply"></i>回复</a>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -235,6 +240,11 @@
                 }
             }
         });
+    }
+    function replyChange(id,name,NO){
+        $("#replier"+NO).val(name);
+        $("#replierID"+NO).val(id);
+        $("#placeholder"+NO).attr('placeholder','回复'+'@'+name)
     }
 </script>
 

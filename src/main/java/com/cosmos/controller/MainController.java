@@ -111,7 +111,7 @@ public class MainController {
         IOUtils.closeQuietly(in);
         System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
     }
-    @NewsAOP
+    @NewsAOP.comment
     @PostMapping("/discuss/{position}")//发表评论
     public String discuss(@PathVariable("position")String position,String text,HttpServletRequest request){
         TSMapper.discuss(session.getAttribute("id").toString(),
@@ -122,11 +122,12 @@ public class MainController {
         }
         return "redirect:"+request.getHeader("Referer");
     }
+    @NewsAOP.comment
     @PostMapping("/reply/{position}")//回复评论
-    public String reply(@PathVariable("position")String position,String text,String replier,HttpServletRequest request){
+    public String reply(@PathVariable("position")String position,String text,String replier,String replierID,HttpServletRequest request){
         TSMapper.reply(session.getAttribute("id").toString(),
                 session.getAttribute("name").toString(),
-                new Date(),text,position,replier);
+                new Date(),text,position,replier,replierID);
         TSMapper.upRepliesNum(Integer.valueOf(position));//评论数+1
         if(position.equals(session.getAttribute("courseID").toString())){//返回课程评论区
             return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
@@ -137,6 +138,12 @@ public class MainController {
     public String deleteComment(@PathVariable("NO")int NO,HttpServletRequest request){
         TSMapper.deleteComment(NO);
             return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
+    }
+    @GetMapping("/deleteReply/{NO}/{N}")//删除回复
+    public String deleteReply(@PathVariable("NO")int NO,@PathVariable("N")int N,HttpServletRequest request){
+        TSMapper.deleteComment(NO);
+        TSMapper.downRepliesNum(N);
+        return "redirect:"+request.getHeader("Referer")+"#Courses-comment";
     }
     @GetMapping("/news")//消息通知
     @ResponseBody
