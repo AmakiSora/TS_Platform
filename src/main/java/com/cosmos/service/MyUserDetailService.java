@@ -1,6 +1,5 @@
 package com.cosmos.service;
 
-import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyUserDetailService implements UserDetailsService, UserService {
+public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;//数据库
     @Autowired
