@@ -107,9 +107,11 @@ public class MainController {
         FileInputStream in= new FileInputStream(realPath);
         OutputStream out = response.getOutputStream();
         IOUtils.copy(in,out);
-        IOUtils.closeQuietly(out);//关闭流
-        IOUtils.closeQuietly(in);
-        System.gc();//关闭流有bug，文件大于600kb时会一直占用，目前原因不明，只能调用jvm进行垃圾回收
+        out.close();//关闭流
+        in.close();
+//        IOUtils.closeQuietly(out);
+//        IOUtils.closeQuietly(in);
+//        System.gc();//调用jvm进行垃圾回收
     }
     @NewsAOP.comment
     @PostMapping("/discuss/{position}")//发表评论

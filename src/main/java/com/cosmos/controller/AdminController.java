@@ -1,14 +1,18 @@
 package com.cosmos.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.service.AdminService;
+import com.cosmos.serviceImpl.excelListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class AdminController {
@@ -99,5 +103,15 @@ public class AdminController {
     public String setInformation(){
 
         return "redirect:/admin/settings.html";
+    }
+    @PostMapping("/uploadExcel/{role}")//上传表格,批量增加
+    @ResponseBody
+    public String uploadExcel(@PathVariable("role")String role, MultipartFile file) throws IOException {
+        if(role.equals("student")){//批量增加学生
+            EasyExcel.read(file.getInputStream(),Student.class,new excelListener(adminService,role)).sheet().doRead();
+        }else if(role.equals("staff")){//批量增加教师
+            EasyExcel.read(file.getInputStream(),Staff.class,new excelListener(adminService,role)).sheet().doRead();
+        }
+        return "1";
     }
 }

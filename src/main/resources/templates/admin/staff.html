@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><!-- Plugins css -->
     <link rel="stylesheet" th:href="@{/css/summernote.css}"><!-- Core css -->
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dropify.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
 </head>
 <body class="font-muli theme-cyan gradient"><!-- Page Loader -->
@@ -165,6 +166,21 @@
                                     </form>
                                 </div>
                             </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Excel上传</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="card-body" th:action="@{/uploadExcel/staff}" method="post" enctype="multipart/form-data">
+                                            <input type="file" class="dropify" name="file">
+                                            <div class="col-sm-12 text-right m-t-20">
+                                                <button type="submit" class="btn btn-primary">上传</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,6 +196,8 @@
 <script th:src="@{/js/core.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
+<script th:src="@{/js/dropify.js}"></script>
+<script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>

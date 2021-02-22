@@ -12,7 +12,7 @@
         select name from staff where id = #{id}
     </select>
     <insert id="addStaff" parameterType="com.cosmos.pojo.Staff">
-        insert into staff (id,name,gender,college,phone) values(#{id},#{name},#{gender},#{college},#{phone})
+        insert ignore into staff (id,name,gender,college,phone) values(#{id},#{name},#{gender},#{college},#{phone})
     </insert>
     <delete id="deleteStaff" parameterType="java.lang.String">
         delete from staff where id = #{id}
@@ -41,7 +41,7 @@
         select classes from student where id = #{id}
     </select>
     <insert id="addStudent" parameterType="com.cosmos.pojo.Student">
-        insert into student (id,name,gender,classes,college,phone) values(#{id},#{name},#{gender},#{classes},#{college},#{phone})
+        insert ignore into student (id,name,gender,classes,college,phone) values(#{id},#{name},#{gender},#{classes},#{college},#{phone})
     </insert>
     <delete id="deleteStudent" parameterType="java.lang.String">
         delete from student where id = #{id}
@@ -186,7 +186,7 @@
     </update>
     <update id="deleteComment">
         update comment set
-        state = "delete"
+        state = 'delete'
         where NO = #{NO}
     </update>
     <update id="downRepliesNum">

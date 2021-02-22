@@ -6,7 +6,7 @@
         select *from user where username = #{username}
     </select>
     <insert id="addUser" parameterType="com.cosmos.pojo.User">
-        insert into user (username,password,role) values(#{username},#{password},#{role})
+        insert ignore into user (username,password,role) values(#{username},#{password},#{role})
     </insert>
     <delete id="deleteUser" parameterType="java.lang.String">
         delete from user where username = #{username}

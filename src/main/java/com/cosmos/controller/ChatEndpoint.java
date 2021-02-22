@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Controller
 public class ChatEndpoint {
     //用于存储每个客户端对象对应的chatEndpoint对象
-    private static Map<Map<String,Object>,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
+    private static final Map<Map<String,Object>,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
 
     //声明session对象，通过该对象可以发送消息给指定的用户
     private Session session;
@@ -40,20 +40,23 @@ public class ChatEndpoint {
         ChatEndpoint.TsMapper = TsMapper;
     }
 
+    public Map<String,Object> UserKey(){//获取当前用户key
+        String id = httpSession.getAttribute("id").toString();
+        String name = httpSession.getAttribute("name").toString();
+        Map<String,Object> key = new HashMap<>();
+        key.put("id",id);
+        key.put("name",name);
+        return key;
+    }
+
     @OnOpen//连接建立时调用
     public void onOpen(Session session, EndpointConfig config){
         this.session = session;
         //获取httpSession对象
         HttpSession httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.httpSession = httpSession;
-        //从httpSession中获取用户名
-        String id = httpSession.getAttribute("id").toString();
-        String name = httpSession.getAttribute("name").toString();
-        Map<String,Object> key = new HashMap<>();
-        key.put("id",id);
-        key.put("name",name);
         //将当前对象存储到容器中
-        onlineUsers.put(key,this);
+        onlineUsers.put(UserKey(),this);
         //将当前用户推送给所有人
         //1，获取消息
         String message = MessageUtils.getMessage(true,null,getKeys());
@@ -86,16 +89,11 @@ public class ChatEndpoint {
             //发送给用户
             Map<String,Object> toKey = mess.getKey();
             String data = mess.getMessage();
-            String userID = httpSession.getAttribute("id").toString();
-            String userName = httpSession.getAttribute("name").toString();
-            Map<String,Object> key = new HashMap<>();
-            key.put("id",userID);
-            key.put("name",userName);
-            String resultMessage= MessageUtils.getMessage(false,key,data);
+            String resultMessage= MessageUtils.getMessage(false,UserKey(),data);
             onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
             //存进数据库
             ChatRecord chatRecord = new ChatRecord();
-            chatRecord.setId(userID);
+            chatRecord.setId(UserKey().get("id").toString());
             chatRecord.setMessage(data);
             chatRecord.setTime(new Date());
             chatRecord.setChatID(toKey.get("id").toString());
@@ -108,13 +106,8 @@ public class ChatEndpoint {
     }
     @OnClose//连接断开时调用
     public void onClose(){
-        String userID = httpSession.getAttribute("id").toString();
-        String username = httpSession.getAttribute("name").toString();
-        Map<String,Object> key = new HashMap<>();
-        key.put("id",userID);
-        key.put("name",username);
         //从容器中删除指定的用户
-        onlineUsers.remove(key);
+        onlineUsers.remove(UserKey());
         //推送
         String message = MessageUtils.getMessage(true,null,getKeys());
         broadcastAllUsers(message);
