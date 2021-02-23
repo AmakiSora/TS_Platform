@@ -84,20 +84,20 @@
                                             <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'P'+${student.phone}" style="width:110px"></td>
                                             <td th:class="${student.id}" th:text="${student.phone}"></td>
                                             <td>
-                                                <a th:class="${student.id}"  type="button" class="btn btn-icon btn-sm"
-                                                   title="查看信息"><i class="fa fa-eye"></i></a>
-                                                <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:onclick="submit([[${student.id}]],
+                                                <a href="#" th:class="${student.id}" class="btn btn-icon btn-sm" title="查看信息">
+                                                    <i class="fa fa-eye"></i></a>
+                                                <a href="#" th:class="${student.id}" style="display: none" class="btn btn-icon btn-sm" th:onclick="submitStu([[${student.id}]],
                                                                                                                                                [[${student.id}+'N'+${student.name}]],
                                                                                                                                                [[${student.id}+'G'+${student.gender==0?'女':'男'}]],
                                                                                                                                                [[${student.id}+'C'+${student.classes}]],
                                                                                                                                                [[${student.id}+'X'+${student.college}]],
                                                                                                                                                [[${student.id}+'P'+${student.phone}]])"
                                                    title="修改"><i class="fa fa-check text-success"></i></a>
-                                                <a type="button" class="btn btn-icon btn-sm" th:onclick="change([[${student.id}]])"
+                                                <a href="#" class="btn btn-icon btn-sm" th:onclick="changeDisplay([[${student.id}]])"
                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                                <a th:class="${student.id}" style="display: none" type="button" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${student.id}"
+                                                <a href="#" th:class="${student.id}" style="display: none" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${student.id}"
                                                    title="重置密码"><i class="fa fa-reply text-danger"></i></a>
-                                                <a th:class="${student.id}" type="button" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
+                                                <a href="#" th:class="${student.id}" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteStu/}+${student.id}"
                                                    title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
                                             </td>
                                         </tr>
@@ -200,10 +200,10 @@
                                         <h3 class="card-title">Excel上传</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form class="card-body" th:action="@{/uploadExcel/student}" method="post" enctype="multipart/form-data">
-                                            <input type="file" class="dropify" name="file">
+                                        <form class="card-body" method="post" enctype="multipart/form-data">
+                                            <input type="file" class="dropify" name="file" id="uploadFile">
                                             <div class="col-sm-12 text-right m-t-20">
-                                                <button type="submit" class="btn btn-primary">上传</button>
+                                                <button type="button" class="btn btn-primary" th:onclick="AddByExcel('student')">上传</button>
                                             </div>
                                         </form>
                                     </div>
@@ -229,41 +229,6 @@
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
-
-<script>
-    function change(id){
-        var display = document.getElementsByClassName(id);
-        for(var i=0;i<display.length;i++) {
-            if (display[i].style.display == "") {
-                display[i].style.display = "none";
-            } else {
-                display[i].style.display = ""
-            }
-        }
-    }
-    function submit(id,name,gender,classes,college,phone){
-        var Cname = $("#"+name).val();
-        var Cgender = $("#"+gender).val();
-        var Cclasses = $("#"+classes).val();
-        var Ccollege = $("#"+college).val();
-        var Cphone = $("#"+phone).val();
-        if(Cgender=="男"){
-            Cgender = 1;
-        }else{
-            Cgender = 0;
-        }
-        $.ajax({
-            url: "/updateStu/id",
-            type: "post",
-            //发送的数据
-            data: JSON.stringify({id: id,name: Cname,gender: Cgender,classes: Cclasses,college: Ccollege,phone: Cphone}),//提交的数据
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            success: function () {
-            window.location.reload()
-            }
-        });
-    }
-</script>
+<script th:src="@{/Myjs/Admin.js}"></script>
 </body>
 </html>

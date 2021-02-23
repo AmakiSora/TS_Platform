@@ -1,4 +1,4 @@
-package com.cosmos.service;
+package com.cosmos.serviceImpl;
 
 import com.cosmos.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -25,7 +25,7 @@ public class StaffController {
     private MainService mainService;
     @Autowired
     private StaffService staffService;
-    @RequestMapping("/staff/index.html")//首页
+    @GetMapping("/staff/index.html")//首页
     public String index(){
         String name = staffService.queryTeaNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
@@ -34,7 +34,7 @@ public class StaffController {
         return "/staff/index.html";
     }
 
-    @RequestMapping("/staff/staff.html") //职工页面
+    @GetMapping("/staff/staff.html") //职工页面
     public String staff(Model model){
         model.addAttribute("staffList",staffService.queryStaffList());
         return "staff/staff.html";

@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">作业说明</label>
-                                    <div class="col-md-9" onmouseleave="change()">
+                                    <div class="col-md-9" onmouseleave="changeNote()">
                                         <div class="summernote" id="summernote" >
                                             作业说明：
                                         </div>
@@ -293,7 +293,7 @@
                                                             </h6>
                                                             <p>[[${reply.text}]]</p>
                                                             <a th:href="@{/deleteReply/}+${reply.NO}+'/'+${comment.NO}" class="text-danger"><i class="fa fa-trash"></i>删除</a>
-                                                            <a href="javascript:void(0)" th:onclick="replyChange([[${reply.id}]],[[${reply.name}]],[[${comment.NO}]])" class="text-gray"><i class="fa fa-reply"></i>回复</a>
+                                                            <a href="javascript:void(0)" th:onclick="changeReply([[${reply.id}]],[[${reply.name}]],[[${comment.NO}]])" class="text-gray"><i class="fa fa-reply"></i>回复</a>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -324,23 +324,7 @@
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
+<script th:src="@{/Myjs/User.js}"></script>
 
-<script>
-    function change() {
-        var code = $('#summernote').summernote('code');
-        document.getElementById("note").value=code;
-	}
-    $(function href(){
-	    url = window.location.hash;
-	    if(url!=''){
-	        document.getElementById(url).click();
-	    }
-	})
-    function replyChange(id,name,NO){
-        $("#replier"+NO).val(name);
-        $("#replierID"+NO).val(id);
-        $("#placeholder"+NO).attr('placeholder','回复'+'@'+name)
-    }
-</script>
 </body>
 </html>

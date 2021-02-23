@@ -79,10 +79,18 @@
         select * from course where id = #{id}
     </select>
     <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
-        insert into course
+        insert ignore into course
         (id,name,teacherID,teacher,college,startDate,endDate)
         values(#{id},#{name},#{teacherID},#{teacher},#{college},#{startDate},#{endDate})
     </insert>
+    <insert id="addStudentCourse" parameterType="Object">
+        insert ignore into studentCourse
+            (courseID,studentID)
+        values(#{courseID},#{studentID})
+    </insert>
+    <select id="queryCourseTaskIDList" resultType="java.lang.String">
+        select task.id from task where courseID = #{courseID}
+    </select>
     <select id="queryCourseStuList" resultType="com.cosmos.pojo.Student">
         select s.*
         from student as s,studentCourse as sc
@@ -133,7 +141,7 @@
         where taskID = #{oldID}
     </update>
     <insert id="addTaskStudent">
-        insert into taskStudent
+        insert ignore into taskStudent
         (studentID,taskID)
         values(#{studentID},#{taskID})
     </insert>

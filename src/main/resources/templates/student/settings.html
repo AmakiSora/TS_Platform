@@ -649,30 +649,7 @@
 <script th:src="@{/js/dropify.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
-<script>
-    function changePassword(){
-        var a = $("#changePassword").serializeArray();
-        console.log(a);
-        var data={};
-        for (var i = 0; i < a.length; i++) {
-            data[a[i].name] = a[i]['value']//形成键值对应
-        }
-            $.ajax({
-            url: "/changePassword",
-            type: "post",
-            data:JSON.stringify(data),
-            contentType: "application/json;charset=UTF-8",
-            success: function (data) {
-                if(data == 1){
-                    alert("密码更改成功");
-                }else if(data == 2){
-                    alert("新密码不一致");
-                }else {
-                    alert("旧密码不正确");
-                }
-            }
-        });
-    }
-</script>
+<script th:src="@{/Myjs/User.js}"></script>
+
 </body>
 </html>

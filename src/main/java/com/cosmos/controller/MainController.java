@@ -85,7 +85,7 @@ public class MainController {
     }
 
     @ResponseBody
-    @PostMapping("/changePassword")
+    @PostMapping("/changePassword")//改密码
     public int changePassword(@RequestBody Map<String,String> Password){
         if(Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
             if(Password.get("newPassword").equals(Password.get("confirmPassword"))){

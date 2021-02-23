@@ -1,9 +1,11 @@
 package com.cosmos.service;
 
+import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AdminService {
     //列出学生
@@ -24,4 +26,11 @@ public interface AdminService {
     void deleteTeacher(String teacherID);
     //更改教师信息
     void updateTeacher(Staff staff);
+    //查询所有课程
+    List<Course> queryCourseList();
+    //增加课程
+    void addCourse(Course course);
+    //增加课程学生
+    void addStudentCourse(String courseID,String studentID);
+
 }

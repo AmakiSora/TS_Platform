@@ -1,10 +1,11 @@
 package com.cosmos.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.service.AdminService;
-import com.cosmos.serviceImpl.excelListener;
+import com.cosmos.serviceImpl.ExcelListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -93,9 +95,23 @@ public class AdminController {
         return "1";//需要传值给前端才能执行success：
     }
 
+    //分割线------------------------------------------------------------------------------------
+
+    @GetMapping("/admin/courses.html")//课程页面
+    public String courses(Model model){
+        model.addAttribute("coursesList",adminService.queryCourseList());//查询全部课程
+        return "/admin/courses.html";
+    }
+
+    @PostMapping("/admin/courses.html")//增加课程
+    public String addCourse(Course course){
+        adminService.addCourse(course);
+        return "redirect:/admin/courses.html";
+    }
+    //分割线------------------------------------------------------------------------------------
+
     @RequestMapping("/admin/settings.html")//设置页面
     public String settings(Model model){
-
         return "/admin/settings.html";
     }
 
@@ -106,11 +122,20 @@ public class AdminController {
     }
     @PostMapping("/uploadExcel/{role}")//上传表格,批量增加
     @ResponseBody
-    public String uploadExcel(@PathVariable("role")String role, MultipartFile file) throws IOException {
-        if(role.equals("student")){//批量增加学生
-            EasyExcel.read(file.getInputStream(),Student.class,new excelListener(adminService,role)).sheet().doRead();
-        }else if(role.equals("staff")){//批量增加教师
-            EasyExcel.read(file.getInputStream(),Staff.class,new excelListener(adminService,role)).sheet().doRead();
+    public String uploadExcel(@PathVariable("role")String role, @RequestParam("file")MultipartFile file) throws IOException {
+        switch (role) {
+            case "student": //批量增加学生
+                EasyExcel.read(file.getInputStream(), Student.class, new ExcelListener(adminService, role)).sheet().doRead();
+                break;
+            case "staff": //批量增加教师
+                EasyExcel.read(file.getInputStream(), Staff.class, new ExcelListener(adminService, role)).sheet().doRead();
+                break;
+            case "course": //批量增加课程
+                EasyExcel.read(file.getInputStream(), Course.class, new ExcelListener(adminService, role)).sheet().doRead();
+                break;
+            case "studentCourse": //批量增加课程学生
+                EasyExcel.read(file.getInputStream(), new ExcelListener(adminService, role)).sheet().doRead();
+
         }
         return "1";
     }

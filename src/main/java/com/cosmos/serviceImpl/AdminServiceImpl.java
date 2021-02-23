@@ -2,6 +2,7 @@ package com.cosmos.serviceImpl;
 
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
+import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -80,5 +83,28 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateTeacher(Staff staff) {
         TSMapper.AdminUpdateStaff(staff);
+    }
+
+    //查询所有课程
+    @Override
+    public List<Course> queryCourseList() {
+        return TSMapper.queryCourseList();
+    }
+
+    //增加课程
+    @Override
+    public void addCourse(Course course) {
+        TSMapper.addCourse(course);
+    }
+    //增加课程学生
+    @Override
+    public void addStudentCourse(String courseID,String studentID) {
+            TSMapper.addStudentCourse(courseID,studentID);//加入课程学生表
+            List<String> list = TSMapper.queryCourseTaskIDList(courseID);//查询课程的作业id
+            if(!list.isEmpty()) {//如果课程里有作业id
+                for (String taskID : list) {
+                    TSMapper.addTaskStudent(studentID, taskID);//加入作业学生表
+                }
+            }
     }
 }

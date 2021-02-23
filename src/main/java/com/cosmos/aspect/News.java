@@ -1,6 +1,5 @@
 package com.cosmos.aspect;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -39,14 +38,13 @@ public class News {
                 redisTemplate.opsForHash().put("news"+teaID,"/staff/courses/"+position,name+"同学发表了课程评价");
             }
         }else {//管理员
-            System.out.println("这3");
+            System.out.println("管理员");
         }
     }
     @AfterReturning("comment()&&args(position,text,replier,replierID,request)")//回复评论
     public void replyNews(String position,String text,String replier,String replierID,HttpServletRequest request){
         String name = session.getAttribute("name").toString();
         String url = request.getHeader("Referer");
-        System.out.println(url);
         if(url.contains("courses")){//课程
             String courseID = session.getAttribute("courseID").toString();
             redisTemplate.opsForHash().put("news"+replierID,"/staff/task/"+courseID,name+"回复了你");
