@@ -6,7 +6,7 @@ import java.util.Date;
 
 
 @Data
-public class ChatRecord {
+public class ChatRecord {//聊天记录
     private Integer NO;
     private String id;
     private String message;

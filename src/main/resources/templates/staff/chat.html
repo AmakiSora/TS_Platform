@@ -21,7 +21,7 @@
     <div class="user_div">
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#righttab-statistics">在线</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Result">作业</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Staff">教师</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Students">学生</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#righttab-Todo">留空</a></li>
         </ul>
@@ -29,7 +29,7 @@
             <div class="tab-pane fade show active" id="righttab-statistics" role="tabpanel">
                 <div id="usersOnline">
                     <div class="input-group mt-2 mb-2">
-                        <input type="text" class="form-control search" placeholder="Search Student"></div>
+                        <input type="text" class="form-control search" placeholder="搜索用户"></div>
                     <ul class="right_chat list-unstyled list" id="userlist">
 <!--                        <li>-->
 <!--                            <a href="javascript:void(0);" class="media">-->
@@ -41,287 +41,36 @@
                     </ul>
                 </div>
             </div>
-            <div class="tab-pane fade" id="righttab-Result" role="tabpanel">
-                <div class="card">
-                    <div class="card-header"><h3 class="card-title">Result 2019</h3>
-                        <div class="card-options"><a href="#"><i class="fa fa-file-excel-o" data-toggle="tooltip"
-                                                                 title="Export Excel"></i></a></div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>87%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Art & Design</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-azure" role="progressbar" style="width: 87%"
-                                         aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>80%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Fashion</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-green" role="progressbar" style="width: 80%"
-                                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>63%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Sports Science</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-orange" role="progressbar" style="width: 63%"
-                                         aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>91%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Computers</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-indigo" role="progressbar" style="width: 91%"
-                                         aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>35%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Biological Sciences</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-pink" role="progressbar" style="width: 35%"
-                                         aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row text-center">
-                            <div class="col-6 border-right"><label class="mb-0">Total Pass</label>
-                                <div class="font-20 font-weight-bold">1,052</div>
-                            </div>
-                            <div class="col-6"><label class="mb-0">Total Fail</label>
-                                <div class="font-20 font-weight-bold">198</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header"><h3 class="card-title">Result 2018</h3>
-                        <div class="card-options"><a href="#"><i class="fa fa-file-excel-o" data-toggle="tooltip"
-                                                                 title="Export Excel"></i></a></div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>80%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Fashion</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-green" role="progressbar" style="width: 80%"
-                                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>87%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Art & Design</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-azure" role="progressbar" style="width: 87%"
-                                         aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>91%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Computers</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-indigo" role="progressbar" style="width: 91%"
-                                         aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li class="mb-3">
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>35%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Biological Sciences</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-pink" role="progressbar" style="width: 35%"
-                                         aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix">
-                                    <div class="float-left"><strong>63%</strong></div>
-                                    <div class="float-right"><small class="text-muted">Sports Science</small></div>
-                                </div>
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar bg-orange" role="progressbar" style="width: 63%"
-                                         aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row text-center">
-                            <div class="col-6 border-right"><label class="mb-0">Total Pass</label>
-                                <div class="font-20 font-weight-bold">845</div>
-                            </div>
-                            <div class="col-6"><label class="mb-0">Total Fail</label>
-                                <div class="font-20 font-weight-bold">142</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="righttab-Students" role="tabpanel">
-                <div id="users">
-                    <div class="input-group mt-2 mb-2"><input type="text" class="form-control search"
-                                                              placeholder="Search Student"></div>
+            <div class="tab-pane fade" id="righttab-Staff" role="tabpanel"><!--侧栏教师名单-->
+                <div id="Staffs">
+                    <div class="input-group mt-2 mb-2">
+                        <input type="text" class="form-control search" placeholder="搜索教师"></div>
                     <ul class="right_chat list-unstyled list">
-                        <li class="alfabet">A</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar1.jpeg" alt>
-                            <div class="media-body"><span class="name">Abigail Churchill</span><span class="message">Art & Design</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar2.jpeg" alt>
-                            <div class="media-body"><span class="name">Alexandra Carr</span><span class="message">Fashion</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar3.jpeg" alt>
-                            <div class="media-body"><span class="name">Alison Berry</span><span
-                                    class="message">Fashion</span></div>
-                        </a></li>
-                        <li class="alfabet">B</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar4.jpeg" alt>
-                            <div class="media-body"><span class="name">Bella Alan</span><span class="message">Sports Science</span>
-                            </div>
-                        </a></li>
-                        <li class="alfabet">C</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar5.jpeg" alt>
-                            <div class="media-body"><span class="name">Caroline Alan</span><span class="message">Sports Science</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar6.jpeg" alt>
-                            <div class="media-body"><span class="name">Connor Campbell</span><span class="message">Computers</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar7.jpeg" alt>
-                            <div class="media-body"><span class="name">Charles Campbell</span><span class="message">Computers</span>
-                            </div>
-                        </a></li>
-                        <li class="alfabet">D</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar8.jpeg" alt>
-                            <div class="media-body"><span class="name">Donna Hudson</span><span class="message">Computers</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar9.jpeg" alt>
-                            <div class="media-body"><span class="name">Dylan Jones</span><span
-                                    class="message">Computers</span></div>
-                        </a></li>
-                        <li class="alfabet">G</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar8.jpeg" alt>
-                            <div class="media-body"><span class="name">Gordon Hudson</span><span class="message">Sports Science</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar9.jpeg" alt>
-                            <div class="media-body"><span class="name">Gabrielle Walker</span><span class="message">Computers</span>
-                            </div>
-                        </a></li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar10.jpeg" alt>
-                            <div class="media-body"><span class="name">Gavin North</span><span
-                                    class="message">Computers</span></div>
-                        </a></li>
-                        <li class="alfabet">S</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar1.jpeg" alt>
-                            <div class="media-body"><span class="name">Stephanie Hudson</span><span class="message">Sports Science</span>
-                            </div>
-                        </a></li>
-                        <li class="alfabet">W</li>
-                        <li><a href="javascript:void(0);" class="media"><img class="media-object"
-                                                                             src="/images/avatar1.jpeg" alt>
-                            <div class="media-body"><span class="name">William Paige</span><span
-                                    class="message">Fashion</span></div>
-                        </a></li>
+                        <li th:each="staff:${staffList}" th:if="${staff.id}!=${session.id}">
+                            <a href="#" th:onclick="showChat([[${staff.id}]],[[${staff.name}]])" class="media">
+                                <img class="media-object" th:src="@{/Avatar/}+${staff.id}" alt>
+                                <div class="media-body"><span class="name">[[${staff.name}]]</span>
+                                    <span class="message">[[${staff.college}]]</span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                <div class="user_chatbody chat_app">
-                    <div class="card-header bline pt-1 pl-0 pr-0"><h3 class="card-title">Abigail Churchill
-                        <small>Online</small></h3>
-                        <div class="card-options"><a href="javascript:void(0)" class="p-1" data-toggle="dropdown"><i
-                                class="fa fa-cog"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><a
-                                    class="dropdown-item active" href="#">Online</a><a class="dropdown-item" href="#">Away</a><a
-                                    class="dropdown-item" href="#">Do not disturb</a><a class="dropdown-item" href="#">Invisible</a>
+            </div>
+            <div class="tab-pane fade" id="righttab-Students" role="tabpanel"><!--侧栏学生名单-->
+                <div id="users">
+                    <div class="input-group mt-2 mb-2">
+                        <input type="text" class="form-control search" placeholder="搜索学生"></div>
+                    <ul class="right_chat list-unstyled list">
+                        <li th:each="student:${studentList}">
+                            <a href="#" th:onclick="showChat([[${student.id}]],[[${student.name}]])" class="media">
+                                <img class="media-object" th:src="@{/Avatar/}+${student.id}" alt>
+                            <div class="media-body"><span class="name">[[${student.name}]]</span>
+                                <span class="message">[[${student.classes}]]</span>
                             </div>
-                            <a href="javascript:void(0)" class="p-1 chat_close"><i class="fa fa-close"></i></a></div>
-                    </div>
-                    <div class="chat_windows">
-                        <ul class="mb-0">
-                            <li class="other-message"><img class="avatar mr-3" src="/images/avatar1.jpeg" alt="avatar">
-                                <div class="message"><p class="bg-light-blue">Are we meeting today?</p><span
-                                        class="time">10:10 AM,Today</span></div>
-                            </li>
-                            <li class="other-message"><img class="avatar mr-3" src="/images/avatar1.jpeg" alt="avatar">
-                                <div class="message"><p class="bg-light-blue">Hi Aiden,how are you? How is the project
-                                    coming along?</p>
-                                    <p class="bg-light-blue">Are we meeting today?</p><span
-                                            class="time">10:15 AM,Today</span></div>
-                            </li>
-                            <li class="my-message">
-                                <div class="message"><p class="bg-light-gray">Project has been already finished and I
-                                    have results to show you.</p>
-                                    <div class="file_folder"><a href="javascript:void(0);">
-                                        <div class="icon"><i class="fa fa-file-excel-o text-success"></i></div>
-                                        <div class="file-name"><p class="mb-0 text-muted">Report2017.xls</p><small>Size:68KB</small>
-                                        </div>
-                                    </a></div>
-                                    <span class="time">10:17 AM,Today</span></div>
-                            </li>
-                            <li class="other-message"><img class="avatar mr-3" src="/images/avatar1.jpeg" alt="avatar">
-                                <div class="message">
-                                    <div class="media_img"><img src="/images/1.jpeg" class="w100 img-thumbnail" alt><img
-                                            src="/images/2.jpeg" class="w100 img-thumbnail" alt></div>
-                                    <span class="time">10:15 AM,Today</span></div>
-                            </li>
-                            <li class="other-message"><img class="avatar mr-3" src="/images/avatar1.jpeg" alt="avatar">
-                                <div class="message"><p class="bg-light-blue">Are we meeting today I have results?</p>
-                                    <span class="time">10:18 AM,Today</span></div>
-                            </li>
-                            <li class="my-message">
-                                <div class="message"><p class="bg-light-gray">Well we have good budget for the
-                                    project</p><span class="time">10:25 AM,Today</span></div>
-                            </li>
-                        </ul>
-                        <div class="chat-message clearfix"><a href="javascript:void(0);"><i class="icon-camera"></i></a><a
-                                href="javascript:void(0);"><i class="icon-camcorder"></i></a><a
-                                href="javascript:void(0);"><i class="icon-paper-plane"></i></a>
-                            <div class="input-group mb-0"><input type="text" class="form-control"
-                                                                 placeholder="Enter text here..."></div>
-                        </div>
-                    </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="tab-pane fade" id="righttab-Todo" role="tabpanel">
@@ -368,15 +117,15 @@
                             <li class="breadcrumb-item active" aria-current="page">交流</li>
                         </ol>
                     </div>
-                    <ul class="list-unstyled team-info mb-0">
-                        <li class="mr-4">最近聊天</li>
-                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
-                                 data-original-title="Avatar"></li>
-                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
-                                 data-original-title="Avatar"></li>
-                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"
-                                 data-original-title="Avatar"></li>
-                    </ul>
+<!--                    <ul class="list-unstyled team-info mb-0">-->
+<!--                        <li class="mr-4">最近聊天</li>-->
+<!--                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"-->
+<!--                                 data-original-title="Avatar"></li>-->
+<!--                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"-->
+<!--                                 data-original-title="Avatar"></li>-->
+<!--                        <li><img src="/images/avatar4.jpeg" data-toggle="tooltip" title="" alt="Avatar"-->
+<!--                                 data-original-title="Avatar"></li>-->
+<!--                    </ul>-->
                 </div>
             </div>
         </div>
@@ -386,21 +135,21 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header bline">
-                                <h3 class="card-title" id="chatName"><small>Last seen:2 hours ago</small></h3>
-                                <div class="card-options">
-                                    <a href="javascript:void(0)" class="p-1 chat_list_btn">
-                                        <i class="fa fa-align-right"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="p-1">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="p-1">
-                                        <i class="fa fa-cog"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="p-1">
-                                        <i class="fa fa-refresh"></i>
-                                    </a>
-                                </div>
+                                <h3 class="card-title" id="chatName"><small>点击侧栏用户进行聊天</small></h3>
+<!--                                <div class="card-options">-->
+<!--                                    <a href="javascript:void(0)" class="p-1 chat_list_btn">-->
+<!--                                        <i class="fa fa-align-right"></i>-->
+<!--                                    </a>-->
+<!--                                    <a href="javascript:void(0)" class="p-1">-->
+<!--                                        <i class="fa fa-plus"></i>-->
+<!--                                    </a>-->
+<!--                                    <a href="javascript:void(0)" class="p-1">-->
+<!--                                        <i class="fa fa-cog"></i>-->
+<!--                                    </a>-->
+<!--                                    <a href="javascript:void(0)" class="p-1">-->
+<!--                                        <i class="fa fa-refresh"></i>-->
+<!--                                    </a>-->
+<!--                                </div>-->
                             </div>
                             <div class="card-body chat_windows">
                                 <ul class="mb-0" id="msgs">
@@ -420,9 +169,9 @@
 <!--                                    </li>-->
                                 </ul>
                                 <div class="chat-message clearfix">
-                                    <a href="javascript:void(0);"><i class="icon-camera"></i></a>
-                                    <a href="javascript:void(0);"><i class="icon-camcorder"></i></a>
-                                    <a href="javascript:void(0);"><i class="icon-paper-plane"></i></a>
+<!--                                    <a href="javascript:void(0);"><i class="icon-camera"></i></a>-->
+<!--                                    <a href="javascript:void(0);"><i class="icon-camcorder"></i></a>-->
+<!--                                    <a href="javascript:void(0);"><i class="icon-paper-plane"></i></a>-->
                                     <div class="input-group mb-0">
                                         <textarea type="text" rows="2" class="form-control" placeholder="在此处输入信息..." id="message"></textarea>
                                     </div>
@@ -447,137 +196,14 @@
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
-
+<script th:src="@{/Myjs/Chat.js}"></script>
 <script>
-    $(function(){
-        var ws = new WebSocket("ws://localhost:8080/chat.html");
-        var userID = '[[${session.id}]]';
-        var username = '[[${session.name}]]';
-        ws.onopen = function(){
-            //建立连接后触发
-            console.log(111);
-        }
-        ws.onmessage = function(evt){
-            //接受到服务器推送的消息触发
-            console.log(222);
-            var dataStr = evt.data;
-            //将dataStr转换为json对象
-            var res = JSON.parse(dataStr);
-            //判断是否是系统信息
-            if(res.system){
-                //是系统信息
-                var Keys = res.message;
-                //好友列表展示
-                var userlistStr = "";
-                for(let key of Keys){
-                    if(key.id != userID){
-                        var avatar = '[[@{/Avatar/}]]'+key.id;
-                        userlistStr +="<li><a onclick='showChat(\""+key.id+"\"\,\""+key.name+"\")' class=\"media\"><img class=\"media-object\" src=\""+avatar+"\" alt><div class=\"media-body\"><span class=\"id\">"+key.name+"</span><span class=\"message\">在线</span></div></a></li>";
-                    }
-                }
-                $("#userlist").html(userlistStr);
-
-            }else{
-                //不是系统信息
-                var Key = res.key;
-                var time = new Date(res.time);
-                var t =  time.getMonth() + "-"
-                    + time.getDate() + " "
-                    + time.getHours() + ":"
-                    + time.getMinutes();
-                var avatar = '[[@{/Avatar/}]]'+Key.id;
-                var Str = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\""+avatar+"\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">"+res.message+"</p><span class=\"time\">"+t+"</span></div></li>"
-                //如果是当前聊天的用户则推送
-                if(toID == Key.id){
-                    $("#msgs").append(Str);
-                    $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
-                }
-                var chatData = sessionStorage.getItem(Key.id);
-                if(chatData != null){
-                    Str = chatData + Str;
-                }
-                //历史记录存进session里
-                sessionStorage.setItem(Key.id,Str);
-
-            }
-        }
-        ws.onclose = function(){
-            console.log(333);
-        }
-        //展示信息
-        showChat = function(id,name){
-            //清空聊天区
-            toID = id;
-            toKey = {'id':id,'name':name};
-            $("#msgs").html("");
-            $("#chatName").html(name);
-            //将保留的消息展示出来
-            var chatData = sessionStorage.getItem(toKey.id);
-            if (chatData != null){
-                $("#msgs").html(chatData);
-                $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
-            }else{
-                //查数据库里的聊天记录
-                $.ajax({
-                    url: "/chatRecord",
-                    type: "post",
-                    data: {'id':userID,'chatID':toID},
-                    success: function (data) {
-                        chatData = "";
-                        var avatar = '[[@{/Avatar/}]]'+toID;
-                        for(var i in data){
-                            if(data[i].id==userID){
-                                var time = new Date(data[i].time);
-                                var t =  time.getMonth() + "-"
-                                    + time.getDate() + " "
-                                    + time.getHours() + ":"
-                                    + time.getMinutes();
-                                var StrA = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data[i].message+"</p><span class=\"time\">"+t+"</span></div></li>";
-                                $("#msgs").append(StrA);
-                                chatData = chatData+StrA;
-                            }else {
-                                var time = new Date(data[i].time);
-                                var t =  time.getMonth() + "-"
-                                    + time.getDate() + " "
-                                    + time.getHours() + ":"
-                                    + time.getMinutes();
-                                var StrA = "<li class=\"other-message\"><img class=\"avatar mr-3\" src=\"" + avatar + "\" alt=\"avatar\"><div class=\"message\"><p class=\"bg-light-cyan\">" + data[i].message + "</p><span class=\"time\">" + t + "</span></div></li>";
-                                chatData = chatData+StrA;
-                                $("#msgs").append(StrA);
-                            }
-                        }
-                        $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
-                        sessionStorage.setItem(toID,chatData);
-                    }
-                });
-            }
-        };
-        //发送信息
-        $("#send").click(function(){
-            var data = $("#message").val();
-            //清除输入框
-            $("#message").val("");
-            //推送
-            var json = {"key":toKey,"message":data};
-            ws.send(JSON.stringify(json));
-            //将信息展示在自己的区域
-            var time = new Date();
-            var t =  time.getMonth() + "-"
-                + time.getDate() + " "
-                + time.getHours() + ":"
-                + time.getMinutes();
-            var Str = "<li class=\"my-message\"><div class=\"message\"><p class=\"bg-light-gray\">"+data+"</p><span class=\"time\">"+t+"</span></div></li>";
-            $("#msgs").append(Str);
-            $('#msgs').animate({scrollTop: $('#msgs').get(0).scrollHeight}, 1500);
-            //历史记录存进session里
-            var chatData = sessionStorage.getItem(toKey.id);
-            if(chatData != null){
-                Str = chatData + Str;
-            }
-            sessionStorage.setItem(toKey.id,Str);
-        });
-
-    })
+    function getUserID(){
+        return '[[${session.id}]]';
+    }
+    function getAvatar(ID){
+        return '[[@{/Avatar/}]]' + ID;
+    }
 </script>
 </body>
 </html>

@@ -89,8 +89,10 @@ public class ChatEndpoint {
             //发送给用户
             Map<String,Object> toKey = mess.getKey();
             String data = mess.getMessage();
-            String resultMessage= MessageUtils.getMessage(false,UserKey(),data);
-            onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
+            if(onlineUsers.get(toKey) != null){//如果在线
+                String resultMessage= MessageUtils.getMessage(false,UserKey(),data);
+                onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
+            }
             //存进数据库
             ChatRecord chatRecord = new ChatRecord();
             chatRecord.setId(UserKey().get("id").toString());

@@ -46,14 +46,18 @@ public class MainController {
     @RequestMapping("/Avatar/{id}")//显示用户头像
     @ResponseBody
     public byte[] Avatar (@PathVariable("id")String id){
-        User user=  userMapper.getAvatar(id);
-        if(user.getAvatar()!=null){
+        User user = userMapper.getAvatar(id);
+        if(user!=null){
             byte[] b = user.getAvatar();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
             return b;
-        }else {
-            return null;
+        }else {//默认头像
+            User u = userMapper.getAvatar("Avatar");
+            byte[] b = u.getAvatar();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            return b;
         }
 
     }

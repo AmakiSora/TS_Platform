@@ -92,6 +92,12 @@ public class StudentController {
             return "/student/task-details.html";
         }
     }
+    @GetMapping("/student/chat.html")//聊天页面
+    public String chat(Model model){
+        model.addAttribute("studentList",studentService.queryClassmateList());
+        model.addAttribute("staffList",studentService.queryStaffList());
+        return "/student/chat.html";
+    }
 
     @RequestMapping("/student/settings.html")//设置页面
     public String settings(Model model){

@@ -104,6 +104,13 @@ public class StaffController {
         return "1";
     }
 
+    @GetMapping("/staff/chat.html")//聊天页面
+    public String chat(Model model){
+        model.addAttribute("studentList",staffService.queryStudentList());
+        model.addAttribute("staffList",staffService.queryStaffList());
+        return "/staff/chat.html";
+    }
+
     @GetMapping("/staff/settings.html")//设置页面
     public String settings(Model model){
         model.addAttribute("staff",staffService.queryStaffById(session.getAttribute("id").toString()));
