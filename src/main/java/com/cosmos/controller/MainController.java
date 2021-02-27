@@ -170,6 +170,30 @@ public class MainController {
         redisTemplate.delete("news"+id);
         return 1;
     }
+    @GetMapping("/news/{X}")//消息重定向
+    public String newsReturn(@PathVariable("X")String X){
+        String role = userMapper.queryRoleByName(session.getAttribute("id").toString());
+        if (role.equals("student")){
+            return "redirect:/student/"+X;
+        }else if (role.equals("staff")){
+            return "redirect:/staff/"+X;
+        }else {
+            return null;
+        }
+    }
+    @GetMapping("/news/{X}/{Y}")//消息重定向
+    public String newsReturn(@PathVariable("X")String X,@PathVariable("Y")String Y){
+        String role = userMapper.queryRoleByName(session.getAttribute("id").toString());
+        System.out.println(X+"/"+Y);
+        if (role.equals("student")){
+            return "redirect:/student/"+X+"/"+Y;
+        }else if (role.equals("staff")){
+            return "redirect:/staff/"+X+"/"+Y;
+        }else {
+            return null;
+        }
+    }
+
 //    @RequestMapping("/send/news")//测试发消息
 //    @ResponseBody
 //    public String sendNews(){

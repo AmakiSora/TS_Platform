@@ -26,6 +26,9 @@
     <select id="getAvatar" resultType="com.cosmos.pojo.User">
         select avatar from user where username = #{username}
     </select>
+    <select id="queryRoleByName" resultType="java.lang.String">
+        select role from user where username = #{username}
+    </select>
 
 
 </mapper>

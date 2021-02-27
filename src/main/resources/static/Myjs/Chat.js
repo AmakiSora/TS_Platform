@@ -29,7 +29,7 @@ $(function(){
             //不是系统信息
             var Key = res.key;
             var time = new Date(res.time);
-            var t =  time.getMonth() + "-"
+            var t =  time.getMonth()+1 + "-"
                 + time.getDate() + " "
                 + time.getHours() + ":"
                 + time.getMinutes();
@@ -76,7 +76,7 @@ $(function(){
                     for(var i in data){
                         if(data[i].id==userID){
                             var time = new Date(data[i].time);
-                            var t =  time.getMonth() + "-"
+                            var t =  time.getMonth()+1 + "-"
                                 + time.getDate() + " "
                                 + time.getHours() + ":"
                                 + time.getMinutes();
@@ -85,7 +85,7 @@ $(function(){
                             chatData = chatData+StrA;
                         }else {
                             var time = new Date(data[i].time);
-                            var t =  time.getMonth() + "-"
+                            var t =  time.getMonth()+1 + "-"
                                 + time.getDate() + " "
                                 + time.getHours() + ":"
                                 + time.getMinutes();
@@ -110,7 +110,7 @@ $(function(){
         ws.send(JSON.stringify(json));
         //将信息展示在自己的区域
         var time = new Date();
-        var t =  time.getMonth() + "-"
+        var t =  time.getMonth()+1 + "-"
             + time.getDate() + " "
             + time.getHours() + ":"
             + time.getMinutes();

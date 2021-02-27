@@ -1,5 +1,6 @@
-package com.cosmos.controller;
+package com.cosmos.serviceImpl;
 
+import com.cosmos.aspect.NewsAOP;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.ChatRecord;
 import com.cosmos.pojo.Message;
@@ -7,6 +8,7 @@ import com.cosmos.config.GetHttpSessionConfigurator;
 import com.cosmos.utils.MessageUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,10 +36,12 @@ public class ChatEndpoint {
 
     //数据库,因为Spring管理的都是单例，和websocket（多对象）相冲突。
     private static TSMapper TsMapper;
+    private static RedisTemplate redisTemplate;
     //所以使用spring注入一次后，后面的对象就不会再注入了
     @Autowired
-    public void setChatEndpoint(TSMapper TsMapper) {
+    public void setChatEndpoint(TSMapper TsMapper,RedisTemplate redisTemplate) {
         ChatEndpoint.TsMapper = TsMapper;
+        ChatEndpoint.redisTemplate = redisTemplate;
     }
 
     public Map<String,Object> UserKey(){//获取当前用户key
@@ -53,8 +57,7 @@ public class ChatEndpoint {
     public void onOpen(Session session, EndpointConfig config){
         this.session = session;
         //获取httpSession对象
-        HttpSession httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
-        this.httpSession = httpSession;
+        this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         //将当前对象存储到容器中
         onlineUsers.put(UserKey(),this);
         //将当前用户推送给所有人
@@ -76,12 +79,13 @@ public class ChatEndpoint {
         }
 
     }
+
     private Set<Map<String,Object>> getKeys(){//获取名单列表
         return onlineUsers.keySet();
     }
 
     @OnMessage//收到客户端发送数据时调用
-    public void onMessage(String message,Session session){
+    public void onMessage(String message){
         try {
             //将message转换成message对象
             ObjectMapper mapper = new ObjectMapper();
@@ -92,6 +96,8 @@ public class ChatEndpoint {
             if(onlineUsers.get(toKey) != null){//如果在线
                 String resultMessage= MessageUtils.getMessage(false,UserKey(),data);
                 onlineUsers.get(toKey).session.getBasicRemote().sendText(resultMessage);
+            }else {//离线则发送通知
+                redisTemplate.opsForHash().put("news"+toKey.get("id"),"/news/chat.html",httpSession.getAttribute("name")+"给您发了一条信息");
             }
             //存进数据库
             ChatRecord chatRecord = new ChatRecord();

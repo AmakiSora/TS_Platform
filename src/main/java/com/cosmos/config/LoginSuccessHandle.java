@@ -1,7 +1,4 @@
 package com.cosmos.config;
-
-import com.cosmos.mapper.TSMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,10 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 public class LoginSuccessHandle implements AuthenticationSuccessHandler {
-    @Autowired
-    private TSMapper TsMapper;
     @Override
-
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication)throws IOException {
@@ -30,15 +24,12 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
         if (roles.contains("admin")){
             response.sendRedirect("/admin/index.html");
             session.setAttribute("role","admin");
-            return;
         }else if (roles.contains("staff")){
             response.sendRedirect("/staff/index.html");
             session.setAttribute("role","staff");
-            return;
         }else if (roles.contains("student")){
             response.sendRedirect("/student/index.html");
             session.setAttribute("role","student");
-            return;
         }else {
             response.sendRedirect("/404");
         }

@@ -1,5 +1,6 @@
 package com.cosmos.aspect;
 
+import com.cosmos.mapper.UserMapper;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -17,13 +18,10 @@ public class News {
     private HttpSession session;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private UserMapper userMapper;
     @Pointcut("@annotation(com.cosmos.aspect.NewsAOP.comment)")//评论切面
-    public void comment(){
-
-    }
-    @Pointcut("@annotation(com.cosmos.aspect.NewsAOP.chat)")//聊天切面
-    public void chat(){}
-
+    public void comment(){}
     @AfterReturning("comment()&&args(position,text,request)")//发表评论,参数要一一对应
     public void discussNews(String position,String text,HttpServletRequest request){
         String role = session.getAttribute("role").toString();
@@ -47,11 +45,20 @@ public class News {
         String url = request.getHeader("Referer");
         if(url.contains("courses")){//课程
             String courseID = session.getAttribute("courseID").toString();
-            redisTemplate.opsForHash().put("news"+replierID,"/staff/task/"+courseID,name+"回复了你");
+            redisTemplate.opsForHash().put("news"+replierID,"/news/courses/"+courseID,name+"回复了你");
         }else if(url.contains("task")){//作业
             String taskID = session.getAttribute("taskID").toString();
-            redisTemplate.opsForHash().put("news"+replierID,"/staff/courses/"+taskID,name+"回复了你");
+            redisTemplate.opsForHash().put("news"+replierID,"/news/task/"+taskID,name+"回复了你");
         }
     }
+
+//    @Pointcut("@annotation(com.cosmos.aspect.NewsAOP.chat)")//聊天切面（弃用）
+//    public void chat(){}
+//    @AfterReturning("chat()&&args(id,name)")
+//    public void chatNews(String id,String name){
+//        System.out.println(id);
+//        System.out.println(name);
+//        System.out.println("离线聊天");
+//    }
 
 }
