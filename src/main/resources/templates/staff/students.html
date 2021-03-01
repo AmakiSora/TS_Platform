@@ -29,8 +29,7 @@
                     <div class="header-action">
                         <h1 class="page-title">学生</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="#">Ericsson</a></li>
+<!--                            <li class="breadcrumb-item"><a href="#">Ericsson</a></li>-->
                             <li class="breadcrumb-item active" aria-current="page">学生</li></ol></div>
                     <ul class="nav nav-tabs page-header-tab">
                         <li class="nav-item">
@@ -72,6 +71,8 @@
                                             <td th:text="${student.phone}" style="vertical-align:middle"></td>
                                             <td>
                                                 <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye text-blue"></i></button>
+                                                <button type="button" class="btn btn-icon btn-sm" title="交流" th:onclick="jumpToChat([[${student.id}]],[[${student.name}]],'staff')">
+                                                    <i class="fa fa-comment text-green"></i></button>
 <!--                                        <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></button>-->
 <!--                                        <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>-->
                                             </td>
@@ -98,6 +99,7 @@
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
+<script th:src="@{/Myjs/User.js}"></script>
 
 </body>
 </html>

@@ -27,8 +27,21 @@ function submitTea(id,name,gender,college,phone) {
         data: JSON.stringify({id: id, name: Cname, gender: Cgender, college: Ccollege, phone: Cphone}),//提交的数据
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
-        success: function () {
-            window.location.reload()
+        success: function (data) {
+            if(data=="1"){
+                if(Cgender===1){
+                    Cgender = "男";
+                }else {
+                    Cgender = "女";
+                }
+                $("#"+name+'-').text(Cname);
+                $("#"+gender+'-').text(Cgender);
+                $("#"+college+'-').text(Ccollege);
+                $("#"+phone+'-').text(Cphone);
+                changeDisplay(id);
+            }else {
+                alert("修改失败");
+            }
         }
     });
 }
@@ -39,7 +52,7 @@ function submitStu(id,name,gender,classes,college,phone){
     var Cclasses = $("#"+classes).val();
     var Ccollege = $("#"+college).val();
     var Cphone = $("#"+phone).val();
-    if(Cgender=="男"){
+    if(Cgender==="男"){
         Cgender = 1;
     }else{
         Cgender = 0;
@@ -51,8 +64,22 @@ function submitStu(id,name,gender,classes,college,phone){
         data: JSON.stringify({id: id,name: Cname,gender: Cgender,classes: Cclasses,college: Ccollege,phone: Cphone}),//提交的数据
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
-        success: function () {
-            window.location.reload();
+        success: function (data) {
+            if(data=="1"){
+                if(Cgender===1){
+                    Cgender = "男";
+                }else {
+                    Cgender = "女";
+                }
+                $("#"+name+'-').text(Cname);
+                $("#"+gender+'-').text(Cgender);
+                $("#"+classes+'-').text(Cclasses);
+                $("#"+college+'-').text(Ccollege);
+                $("#"+phone+'-').text(Cphone);
+                changeDisplay(id);
+            }else {
+                alert("修改失败");
+            }
         }
     });
 }
@@ -72,7 +99,7 @@ function AddByExcel(role){
         processData: false,
         contentType: false,
         success: function (data) {
-            if(data == 1){
+            if(data === 1){
                 alert("上传成功");
                 window.location.reload();
             }

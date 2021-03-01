@@ -35,7 +35,15 @@ function changeNote() {
 $(function href(){
     //评论后刷新并返回评论区
     url = window.location.hash;
-    if(url!=''){
+    if(url.includes("Courses")){
         document.getElementById(url).click();
     }
 })
+function jumpToChat(id,name,role){
+    //跳转到聊天页面（指定联系人）
+    if(role=="student"){
+        window.open("/student/chat.html#"+id+"-"+name);
+    }else if(role=="staff"){
+        window.open("/staff/chat.html#"+id+"-"+name);
+    }
+}

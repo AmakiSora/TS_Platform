@@ -126,3 +126,12 @@ $(function(){
     });
 
 })
+$(function otherToChat(){
+    //从其他页面跳转过来的聊天
+    url = window.location.hash;
+    if(url!=''){
+        let id = url.substring(url.indexOf("#")+1,url.indexOf("-"));
+        let name = decodeURI(url.substring(url.indexOf("-")+1));
+        showChat(id,name)
+    }
+})

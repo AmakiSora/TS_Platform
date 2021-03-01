@@ -28,8 +28,8 @@
                 <div class="d-flex justify-content-between align-items-center ">
                     <div class="header-action"><h1 class="page-title">教师</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="staff.html#">学生</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">教师</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="#">教师</a></li>
+<!--                            <li class="breadcrumb-item " aria-current="page">教师</li>-->
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
@@ -72,10 +72,10 @@
                                             <td th:text="${staff.college}" style="vertical-align:middle"></td>
 <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
                                             <td>
-                                                <button type="button" class="btn btn-icon btn-sm" title="查看信息"><i
-                                                        class="fa fa-eye"></i></button>
-                                                <button type="button" class="btn btn-icon btn-sm" title="交流"><i
-                                                        class="fa fa-comment text-green"></i></button>
+                                                <button type="button" class="btn btn-icon btn-sm" title="查看信息">
+                                                    <i class="fa fa-eye"></i></button>
+                                                <button type="button" class="btn btn-icon btn-sm" title="交流" th:onclick="jumpToChat([[${staff.id}]],[[${staff.name}]],'student')">
+                                                    <i class="fa fa-comment text-green"></i></button>
 <!--                                            <button type="button" class="btn btn-icon btn-sm js-sweetalert"-->
 <!--                                                    title="Delete" data-type="confirm"><i-->
 <!--                                                    class="fa fa-trash-o text-danger"></i></button>-->
@@ -92,7 +92,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar1.jpg"
+                                                                            src="/images/avatar1.jpg"
                                                                             alt=""><h5 class="mb-0">Peter Richards</h5>
                                         <span>Librarian</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -106,7 +106,7 @@
                                     <div class="card-body text-center ribbon">
                                         <div class="ribbon-box orange" data-toggle="tooltip" title="Permanent"><i
                                                 class="fa fa-star"></i></div>
-                                        <img class="card-profile-img" src="../assets/images/sm/avatar2.jpg" alt=""><h5
+                                        <img class="card-profile-img" src="/images/0sm/avatar2.jpg" alt=""><h5
                                             class="mb-0">Ken Smith</h5><span>Clerk</span>
                                         <div class="text-muted">+(916) 369-7180</div>
                                         <p class="mb-4 mt-3">449 Thompson St,Conway,SC,29527</p>
@@ -117,7 +117,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar3.jpg"
+                                                                            src="/images/avatar3.jpg"
                                                                             alt=""><h5 class="mb-0">Alan Johnson</h5>
                                         <span>Librarian</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -129,7 +129,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar4.jpg"
+                                                                            src="/images/avatar4.jpg"
                                                                             alt=""><h5 class="mb-0">Alice A Smith</h5>
                                         <span>Clerk</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -143,7 +143,7 @@
                                     <div class="card-body text-center ribbon">
                                         <div class="ribbon-box orange" data-toggle="tooltip" title="Permanent"><i
                                                 class="fa fa-star"></i></div>
-                                        <img class="card-profile-img" src="../assets/images/sm/avatar5.jpg" alt=""><h5
+                                        <img class="card-profile-img" src="/images/avatar5.jpg" alt=""><h5
                                             class="mb-0">Gerald K Smith</h5><span>Receptionist</span>
                                         <div class="text-muted">+(916) 369-7180</div>
                                         <p class="mb-4 mt-3">449 Thompson St,Conway,SC,29527</p>
@@ -155,7 +155,7 @@
                                 <div class="card">
                                     <div class="card-status bg-yellow"></div>
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar6.jpg"
+                                                                            src="/images/avatar6.jpg"
                                                                             alt=""><h5 class="mb-0">Peter Richards</h5>
                                         <span>Purchase Officer</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -167,7 +167,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar3.jpg"
+                                                                            src="/images/avatar3.jpg"
                                                                             alt=""><h5 class="mb-0">Alan Johnson</h5>
                                         <span>Peon</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -181,7 +181,7 @@
                                     <div class="card-body text-center ribbon">
                                         <div class="ribbon-box green" data-toggle="tooltip" title="Assistent"><i
                                                 class="fa fa-star"></i></div>
-                                        <img class="card-profile-img" src="../assets/images/sm/avatar2.jpg" alt=""><h5
+                                        <img class="card-profile-img" src="/images/avatar2.jpg" alt=""><h5
                                             class="mb-0">Ken Smith</h5><span>Lab Assistent</span>
                                         <div class="text-muted">+(916) 369-7180</div>
                                         <p class="mb-4 mt-3">449 Thompson St,Conway,SC,29527</p>
@@ -194,7 +194,7 @@
                                     <div class="card-body text-center ribbon">
                                         <div class="ribbon-box orange" data-toggle="tooltip" title="Permanent"><i
                                                 class="fa fa-star"></i></div>
-                                        <img class="card-profile-img" src="../assets/images/sm/avatar5.jpg" alt=""><h5
+                                        <img class="card-profile-img" src="/images/avatar5.jpg" alt=""><h5
                                             class="mb-0">Gerald K Smith</h5><span>Peon</span>
                                         <div class="text-muted">+(916) 369-7180</div>
                                         <p class="mb-4 mt-3">449 Thompson St,Conway,SC,29527</p>
@@ -205,7 +205,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body text-center"><img class="card-profile-img"
-                                                                            src="../assets/images/sm/avatar4.jpg"
+                                                                            src="/images/avatar4.jpg"
                                                                             alt=""><h5 class="mb-0">Alice A Smith</h5>
                                         <span>Driver</span>
                                         <div class="text-muted">+(916) 369-7180</div>
@@ -222,7 +222,7 @@
                                 <div class="card">
                                     <div class="card-body w_user">
                                         <div class="user_avtar"><img class="rounded-circle"
-                                                                     src="../assets/images/sm/avatar1.jpg" alt=""></div>
+                                                                     src="/images/avatar1.jpg" alt=""></div>
                                         <div class="wid-u-info"><h5>Dessie Parks</h5>
                                             <p class="text-muted m-b-0">119 Peepee Way,Hilo,HI,96720</p>
                                             <ul class="list-unstyled">
@@ -351,7 +351,7 @@
                                                 more.</p>
                                             <p>Please try <b>paste some texts</b>here</p></div>
                                         <div class="timeline_item "><img class="tl_avatar"
-                                                                         src="../assets/images/xs/avatar1.jpg"
+                                                                         src="/images/avatar1.jpg"
                                                                          alt=""/><span><a href="javascript:void(0);">Elisse Joson</a>San Francisco,CA <small
                                                 class="float-right text-right">20-April-2019 - Today</small></span><h6
                                                 class="font600">Hello,'Im a single div responsive timeline without media
@@ -379,7 +379,7 @@
                                                     <ul class="recent_comments list-unstyled mt-4 mb-0">
                                                         <li>
                                                             <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                         src="../assets/images/xs/avatar4.jpg"
+                                                                                         src="/images/avatar4.jpg"
                                                                                          alt=""></div>
                                                             <div class="comment_body"><h6>Donald Gardner <small
                                                                     class="float-right font-14">Just now</small></h6>
@@ -391,7 +391,7 @@
                                             </div>
                                         </div>
                                         <div class="timeline_item "><img class="tl_avatar"
-                                                                         src="../assets/images/xs/avatar4.jpg"
+                                                                         src="/images/avatar4.jpg"
                                                                          alt=""/><span><a href="javascript:void(0);"
                                                                                           title="">Dessie Parks</a>Oakland,CA <small
                                                 class="float-right text-right">19-April-2019 - Yesterday</small></span>
@@ -402,9 +402,9 @@
                                                     mock-ups and this is politics,are they really so different? I think
                                                     the only card she has is the Lorem card.</p>
                                                 <div class="timeline_img mb-20"><img class="width100"
-                                                                                     src="../assets/images/gallery/1.jpg"
+                                                                                     src="/images/1.jpg"
                                                                                      alt="Awesome Image"><img
-                                                        class="width100" src="../assets/images/gallery/2.jpg"
+                                                        class="width100" src="/images/2.jpg"
                                                         alt="Awesome Image"></div>
                                                 <a href="javascript:void(0);" class="mr-20 text-muted"><i
                                                         class="fa fa-heart text-pink"></i>23 Love</a><a
@@ -423,23 +423,23 @@
                                                     <ul class="recent_comments list-unstyled mt-4 mb-0">
                                                         <li>
                                                             <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                         src="../assets/images/xs/avatar4.jpg"
+                                                                                         src="/images/avatar4.jpg"
                                                                                          alt=""></div>
                                                             <div class="comment_body"><h6>Donald Gardner <small
                                                                     class="float-right font-14">Just now</small></h6>
                                                                 <p>Lorem ipsum Veniam aliquip culpa laboris minim
                                                                     tempor</p>
                                                                 <div class="timeline_img mb-20"><img class="width150"
-                                                                                                     src="../assets/images/gallery/7.jpg"
+                                                                                                     src="/images/7.jpg"
                                                                                                      alt="Awesome Image"><img
                                                                         class="width150"
-                                                                        src="../assets/images/gallery/8.jpg"
+                                                                        src="/images/8.jpg"
                                                                         alt="Awesome Image"></div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="avatar_img"><img class="rounded img-fluid"
-                                                                                         src="../assets/images/xs/avatar3.jpg"
+                                                                                         src="/images/avatar3.jpg"
                                                                                          alt=""></div>
                                                             <div class="comment_body"><h6>Dessie Parks <small
                                                                     class="float-right font-14">1min ago</small></h6>
@@ -452,7 +452,7 @@
                                             </div>
                                         </div>
                                         <div class="timeline_item "><img class="tl_avatar"
-                                                                         src="../assets/images/xs/avatar7.jpg"
+                                                                         src="/images/avatar7.jpg"
                                                                          alt=""/><span><a href="javascript:void(0);"
                                                                                           title="">Rochelle Barton</a>San Francisco,CA <small
                                                 class="float-right text-right">12-April-2019</small></span><h6
@@ -640,6 +640,7 @@
 <script th:src="@{/js/datatable.js}"></script>
 <script th:src="@{/js/dataTables.bundle.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
+<script th:src="@{/Myjs/User.js}"></script>
 
 </body>
 </html>

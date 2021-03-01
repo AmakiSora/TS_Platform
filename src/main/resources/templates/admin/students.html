@@ -73,25 +73,25 @@
                                             <!--                                    <td th:class="${student.name}" style="display: none"><input type="text" th:value="${student.id}"                 th:id="${student.id}" style="width:80px"></td>-->
                                             <td th:text="${student.id}" style="width:50px"></td><!--不支持修改id -->
                                             <td style="width:70px"><img th:src="@{/Avatar/}+${student.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.name}"               th:id="${student.id}+'N'+${student.name}" style="width:70px"></td>
-                                            <td th:class="${student.id}" th:text="${student.name}"><span class="font-16"></span></td>
-                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.gender==0?'女':'男'}" th:id="${student.id}+'G'+${student.gender==0?'女':'男'}" style="width:25px"></td>
-                                            <td th:class="${student.id}" th:text="${student.gender==0?'女':'男'}"></td>
-                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.classes}"            th:id="${student.id}+'C'+${student.classes}" style="width:100px"></td>
-                                            <td th:class="${student.id}" th:text="${student.classes}"></td>
-                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.college}"            th:id="${student.id}+'X'+${student.college}" style="width:120px"></td>
-                                            <td th:class="${student.id}" th:text="${student.college}"></td>
-                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'P'+${student.phone}" style="width:110px"></td>
-                                            <td th:class="${student.id}" th:text="${student.phone}"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.name}"               th:id="${student.id}+'---'+${student.name}" style="width:70px"></td>
+                                            <td th:class="${student.id}" th:text="${student.name}"                                               th:id="${student.id}+'---'+${student.name}+'-'" ><span class="font-16"></span></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.gender==0?'女':'男'}" th:id="${student.id}+'---'+${student.gender==0?'女':'男'}" style="width:25px"></td>
+                                            <td th:class="${student.id}" th:text="${student.gender==0?'女':'男'}"                                 th:id="${student.id}+'---'+${student.gender==0?'女':'男'}+'-'"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.classes}"            th:id="${student.id}+'---'+${student.classes}" style="width:100px"></td>
+                                            <td th:class="${student.id}" th:text="${student.classes}"                                            th:id="${student.id}+'---'+${student.classes}+'-'"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.college}"            th:id="${student.id}+'---'+${student.college}" style="width:120px"></td>
+                                            <td th:class="${student.id}" th:text="${student.college}"                                            th:id="${student.id}+'---'+${student.college}+'-'"></td>
+                                            <td th:class="${student.id}" style="display: none"><input type="text" th:value="${student.phone}"              th:id="${student.id}+'---'+${student.phone}" style="width:110px"></td>
+                                            <td th:class="${student.id}" th:text="${student.phone}"                                              th:id="${student.id}+'---'+${student.phone}+'-'"></td>
                                             <td>
                                                 <a href="#" th:class="${student.id}" class="btn btn-icon btn-sm" title="查看信息">
                                                     <i class="fa fa-eye"></i></a>
                                                 <a href="#" th:class="${student.id}" style="display: none" class="btn btn-icon btn-sm" th:onclick="submitStu([[${student.id}]],
-                                                                                                                                               [[${student.id}+'N'+${student.name}]],
-                                                                                                                                               [[${student.id}+'G'+${student.gender==0?'女':'男'}]],
-                                                                                                                                               [[${student.id}+'C'+${student.classes}]],
-                                                                                                                                               [[${student.id}+'X'+${student.college}]],
-                                                                                                                                               [[${student.id}+'P'+${student.phone}]])"
+                                                                                                                                               [[${student.id}+'---'+${student.name}]],
+                                                                                                                                               [[${student.id}+'---'+${student.gender==0?'女':'男'}]],
+                                                                                                                                               [[${student.id}+'---'+${student.classes}]],
+                                                                                                                                               [[${student.id}+'---'+${student.college}]],
+                                                                                                                                               [[${student.id}+'---'+${student.phone}]])"
                                                    title="修改"><i class="fa fa-check text-success"></i></a>
                                                 <a href="#" class="btn btn-icon btn-sm" th:onclick="changeDisplay([[${student.id}]])"
                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>

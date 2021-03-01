@@ -111,41 +111,56 @@
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
                             <div class="card-body ribbon">
-                                <div class="ribbon-box green" data-toggle="tooltip" title="New Professors">5</div>
-                                <a href="professors.html" class="my_sort_cut text-muted"><i class="fa fa-black-tie"></i><span>Professors</span></a>
+<!--                                <div class="ribbon-box green" data-toggle="tooltip" title="New Professors">5</div>-->
+                                <a th:href="@{/staff/staff.html}" class="my_sort_cut text-muted">
+                                    <i class="fa fa-black-tie"></i><span>教师</span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
-                            <div class="card-body"><a href="app-contact.html" class="my_sort_cut text-muted"><i
-                                    class="fa fa-address-book"></i><span>Contact</span></a></div>
+                            <div class="card-body">
+                                <a th:href="@{/staff/students.html}" class="my_sort_cut text-muted">
+                                    <i class="fa fa-address-book"></i><span>学生</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
                             <div class="card-body ribbon">
-                                <div class="ribbon-box orange" data-toggle="tooltip" title="New Staff">8</div>
-                                <a href="staf/staff.html" class="my_sort_cut text-muted"><i
-                                        class="fa fa-user-circle-o"></i><span>Staff</span></a></div>
+<!--                                <div class="ribbon-box orange" data-toggle="tooltip" title="New Staff">8</div>-->
+                                <a th:href="@{/staff/courses.html}" class="my_sort_cut text-muted"><i
+                                        class="fa fa-graduation-cap"></i><span>课程</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
-                            <div class="card-body"><a href="app-filemanager.html" class="my_sort_cut text-muted"><i
-                                    class="fa fa-folder"></i><span>FileManager</span></a></div>
+                            <div class="card-body">
+                                <a th:href="@{/staff/calendar.html}" class="my_sort_cut text-muted">
+                                    <i class="fa fa-calendar"></i><span>日历</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
-                            <div class="card-body"><a href="library.html" class="my_sort_cut text-muted"><i
-                                    class="fa fa-book"></i><span>Library</span></a></div>
+                            <div class="card-body">
+                                <a th:href="@{/staff/chat.html}" class="my_sort_cut text-muted">
+                                    <i class="fa fa-comments-o"></i><span>聊天</span>
+                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-xl-2">
                         <div class="card">
-                            <div class="card-body"><a href="holiday.html" class="my_sort_cut text-muted"><i
-                                    class="fa fa-bullhorn"></i><span>Holiday</span></a></div>
+                            <div class="card-body">
+                                <a th:href="@{/staff/settings.html}" class="my_sort_cut text-muted">
+                                    <i class="fa fa-gear"></i><span>设置</span>
+                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

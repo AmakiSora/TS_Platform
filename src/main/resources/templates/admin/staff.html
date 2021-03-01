@@ -68,23 +68,23 @@
                                         <tr th:each="staff:${staffList}">
                                             <td th:text="${staff.id}" style="width:70px"></td>
                                             <td style="width:70px"><img th:src="@{/Avatar/}+${staff.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar"></td>
-                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'N'+${staff.name}" style="width:70px"></td>
-                                            <td th:class="${staff.id}" th:text="${staff.name}"><div class="font-15"><strong></strong></div></td>
-                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'G'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
-                                            <td th:class="${staff.id}" th:text="${staff.gender==0?'女':'男'}"></td>
-                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.college}"            th:id="${staff.id}+'X'+${staff.college}" style="width:120px"></td>
-                                            <td th:class="${staff.id}" th:text="${staff.college}"></td>
-                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.phone}"              th:id="${staff.id}+'P'+${staff.phone}" style="width:110px"></td>
-                                            <td th:class="${staff.id}" th:text="${staff.phone}"><span class="text-muted"></span></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.name}"               th:id="${staff.id}+'---'+${staff.name}" style="width:70px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.name}"                                               th:id="${staff.id}+'---'+${staff.name}+'-'"><div class="font-15"><strong></strong></div></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.gender==0?'女':'男'}" th:id="${staff.id}+'---'+${staff.gender==0?'女':'男'}" style="width:25px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.gender==0?'女':'男'}"                                 th:id="${staff.id}+'---'+${staff.gender==0?'女':'男'}+'-'"></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.college}"            th:id="${staff.id}+'---'+${staff.college}" style="width:120px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.college}"                                            th:id="${staff.id}+'---'+${staff.college}+'-'"></td>
+                                            <td th:class="${staff.id}" style="display: none"><input type="text" th:value="${staff.phone}"              th:id="${staff.id}+'---'+${staff.phone}" style="width:110px"></td>
+                                            <td th:class="${staff.id}" th:text="${staff.phone}"                                              th:id="${staff.id}+'---'+${staff.phone}+'-'"><span class="text-muted"></span></td>
                                             <!--                                        <td><span class="tag tag-success">Full-time</span></td>   备用图标-->
                                             <td>
                                                 <a href="#" th:class="${staff.id}" class="btn btn-icon btn-sm"
                                                    title="查看信息"><i class="fa fa-eye"></i></a>
                                                 <a href="#" th:class="${staff.id}" style="display: none" class="btn btn-icon btn-sm" th:onclick="submitTea([[${staff.id}]],
-                                                                                                                                               [[${staff.id}+'N'+${staff.name}]],
-                                                                                                                                               [[${staff.id}+'G'+${staff.gender==0?'女':'男'}]],
-                                                                                                                                               [[${staff.id}+'X'+${staff.college}]],
-                                                                                                                                               [[${staff.id}+'P'+${staff.phone}]])"
+                                                                                                                                               [[${staff.id}+'---'+${staff.name}]],
+                                                                                                                                               [[${staff.id}+'---'+${staff.gender==0?'女':'男'}]],
+                                                                                                                                               [[${staff.id}+'---'+${staff.college}]],
+                                                                                                                                               [[${staff.id}+'---'+${staff.phone}]])"
                                                    title="修改"><i class="fa fa-check text-success"></i></a>
                                                 <a href="#" class="btn btn-icon btn-sm" th:onclick="changeDisplay([[${staff.id}]])"
                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>
