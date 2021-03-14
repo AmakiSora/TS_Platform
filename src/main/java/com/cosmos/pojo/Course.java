@@ -13,4 +13,6 @@ public class Course {
     private String college;//所属学院
     private Date startDate;//开课日期
     private Date endDate;//结课日期
+    private Integer studentNum;//课程学生人数
+    private String introduce;//课程介绍
 }

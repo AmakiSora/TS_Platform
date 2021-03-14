@@ -36,6 +36,7 @@ public interface TSMapper {
     Course queryCourse(String id);//查询课程细节()
     void addCourse(Course course);//开设课程
     void addStudentCourse(String courseID, String studentID);//增加课程学生
+    void updateCourseStudentNum(String courseID);//更新课程的学生人数信息
     List<String> queryCourseTaskIDList(String courseID);//查询此课的所有作业ID
     List<Student> queryCourseStuList(String id);//查询课程学生名单(根据课程id)
     List<String> queryCourseStuID(String id);//查询课程学生的id(根据课程id)
@@ -46,7 +47,7 @@ public interface TSMapper {
     void updateTask(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,不改文件)
     void updateTaskF(@Param("task")Task task,@Param("oldID")String oldID);//编辑作业(根据旧id,改变文件)
     void changeTaskID(String id,String oldID);//变更作业-学生联系表里的作业id(当作业编号改变时(编辑作业))
-    void addTaskStudent(String studentID, String taskID);//创建作业-学生联系表(在增添作业或者课程增加学生时进行)
+    void addTaskStudent(String studentID,String name, String taskID);//创建作业-学生联系表(在增添作业或者课程增加学生时进行)
     void submitTask(Date submitDate,String fileName,String studentID,String taskID);//提交作业
     Map<String,Object> queryMyTaskFile(String studentID, String taskID);//查询我的作业
     List<Map<String,Object>> queryStuTaskFileList(String taskID);//查询该作业的学生文件

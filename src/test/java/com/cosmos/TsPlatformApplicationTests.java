@@ -46,10 +46,8 @@ class TsPlatformApplicationTests {
 //        redisTemplate.delete("news121102");
 
 
-
 //        String password = encryptor.encrypt("");//加密数据库密码
 //        System.out.println(password);
-
     }
 
 }

@@ -97,7 +97,7 @@ public class StaffServiceImpl implements StaffService {
         List<String> studentID = TSMapper.queryCourseStuID(session.getAttribute("courseID").toString());
         if(!studentID.isEmpty()){//如果名单不是空的
             for(String id:studentID){
-                TSMapper.addTaskStudent(id,taskID);
+                TSMapper.addTaskStudent(id,TSMapper.queryStuNameById(id),taskID);
             }
         }
     }

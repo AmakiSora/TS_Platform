@@ -103,8 +103,9 @@ public class AdminServiceImpl implements AdminService {
             List<String> list = TSMapper.queryCourseTaskIDList(courseID);//查询课程的作业id
             if(!list.isEmpty()) {//如果课程里有作业id
                 for (String taskID : list) {
-                    TSMapper.addTaskStudent(studentID, taskID);//加入作业学生表
+                    TSMapper.addTaskStudent(studentID,TSMapper.queryStuNameById(studentID), taskID);//加入作业学生表
                 }
             }
+            TSMapper.updateCourseStudentNum(courseID);//更新课程的学生人数
     }
 }

@@ -80,14 +80,19 @@
     </select>
     <insert id="addCourse" parameterType="com.cosmos.pojo.Course">
         insert ignore into course
-        (id,name,teacherID,teacher,college,startDate,endDate)
-        values(#{id},#{name},#{teacherID},#{teacher},#{college},#{startDate},#{endDate})
+        (id,name,teacherID,teacher,college,startDate,endDate,introduce)
+        values(#{id},#{name},#{teacherID},#{teacher},#{college},#{startDate},#{endDate},#{introduce})
     </insert>
     <insert id="addStudentCourse" parameterType="Object">
         insert ignore into studentCourse
             (courseID,studentID)
         values(#{courseID},#{studentID})
     </insert>
+    <update id="updateCourseStudentNum" parameterType="java.lang.String">
+        update course set studentNum =
+            (SELECT COUNT(1) FROM studentCourse WHERE courseID=#{courseID})
+        WHERE id = #{courseID}
+        </update>
     <select id="queryCourseTaskIDList" resultType="java.lang.String">
         select task.id from task where courseID = #{courseID}
     </select>
@@ -142,8 +147,8 @@
     </update>
     <insert id="addTaskStudent">
         insert ignore into taskStudent
-        (studentID,taskID)
-        values(#{studentID},#{taskID})
+        (studentID,name,taskID)
+        values(#{studentID},#{name},#{taskID})
     </insert>
     <update id="submitTask">
         update taskStudent set
@@ -159,7 +164,7 @@
         and taskID = #{taskID}
     </select>
     <select id="queryStuTaskFileList" resultType="java.util.Map">
-        select ts.studentID,ts.submitDate,ts.fileName,ts.score
+        select ts.studentID,ts.name,ts.submitDate,ts.fileName,ts.score
         from taskStudent as ts
         where taskID = #{taskID}
     </select>

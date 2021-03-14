@@ -5,19 +5,17 @@
 #    password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://bootzhong.top:3306/TS_Platform?useUnicode=true&charaterEncoding=UTF-8&serverTimezone=UTC
-#
 spring:
   datasource:
     username: ENC(qPz2O5QdB0RTNZ7MkTLPxoE3ugSFtF7E)
     password: ENC(FSB4LTA1D1Lhvj7/BkU02B8A+vOXLtS1Q94HRd/mxXU=)
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(sNatVRWXHu1SKZPzKo661M9omxHU8dhrODV46FL9V/j+3s4KMaY6Cgo8eX8UpvY7PUCi3ZG4U9aEmMoG1s8Ol1aUFx6a1O0QacohOhEP/VS/7JULPsMrVEOpirTheL2MEwFWyJDZN3xv3n9iUmjn+g==)
-    hikari:
-      minimum-idle: 3  # 最小空闲连接数量
-      maximum-pool-size: 5  # 连接池最大连接数，默认是10
-      max-lifetime: 1800000  # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
-      connection-test-query: SELECT 1
-
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: ENC(PQzHLWFc/WL7YgJT5cepYgFYfL/yy1x2)
+    port: 6379
+    password: ENC(KPXfxRXaucQvFiQmAZozMvc6MHKYVP0y)
 #mybatis xml位置
 mybatis:
   mapper-locations: classpath:mapper/*.xml

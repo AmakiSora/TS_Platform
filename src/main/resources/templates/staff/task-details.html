@@ -195,6 +195,7 @@
                                         <tr>
                                             <th></th>
                                             <th>学号</th>
+                                            <th>名字</th>
                                             <th>文件名</th>
                                             <th>提交时间</th>
                                             <th class="text-center">成绩</th>
@@ -205,6 +206,7 @@
                                         <tr th:each="StuFile:${StuFileList}">
                                             <td class="width45"><i class="fa fa-folder"></i></td>
                                             <td><span th:text="${StuFile.studentID}"></span></td>
+                                            <td><span th:text="${StuFile.name}"></span></td>
                                             <td>
                                                 <span class="folder-name" th:if="${StuFile.fileName=='未提交'}" th:text="未提交"></span>
                                                 <span class="folder-name" th:text="${#strings.substringAfter(StuFile.fileName,StuFile.studentID+'-')}"></span>
