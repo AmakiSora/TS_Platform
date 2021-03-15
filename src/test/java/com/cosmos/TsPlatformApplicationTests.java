@@ -3,6 +3,7 @@ package com.cosmos;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
 import com.cosmos.pojo.Task;
+import com.cosmos.utils.DateUtils;
 import com.fasterxml.jackson.databind.DatabindContext;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +38,7 @@ class TsPlatformApplicationTests {
 //    SecurityContextImpl securityContext = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 
     @Test
-    void contextLoads() throws SQLException {
+    void contextLoads() throws ParseException {
 //        redisTemplate.opsForValue().set("hello","yes");
 //        System.out.println(redisTemplate.opsForHash().keys("news1101"));
 //        System.out.println(redisTemplate.opsForHash().size("news1101"));
@@ -44,7 +47,11 @@ class TsPlatformApplicationTests {
 //        System.out.println(redisTemplate.opsForHash().size("news1101"));
 //
 //        redisTemplate.delete("news121102");
-
+        String i = "2022-04-16 10:00";
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        Date b=new Date();
+        Date a = s.parse(i);
+        System.out.println(DateUtils.DateInterval(a, b, "months"));
 
 //        String password = encryptor.encrypt("");//加密数据库密码
 //        System.out.println(password);

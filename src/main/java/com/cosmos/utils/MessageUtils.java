@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 import java.util.Map;
 
-public class MessageUtils {//工具类
+public class MessageUtils {//在线聊天信息工具类
     public static String getMessage(boolean isSystem, Map<String,Object> key, Object message){
         try {
             ResultMessage resultMessage = new ResultMessage();
