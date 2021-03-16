@@ -15,4 +15,5 @@ public class Course {
     private Date endDate;//结课日期
     private Integer studentNum;//课程学生人数
     private String introduce;//课程介绍
+    private String schedule;//课程安排信息
 }

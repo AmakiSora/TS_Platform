@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,9 @@ class TsPlatformApplicationTests {
         Date b=new Date();
         Date a = s.parse(i);
         System.out.println(DateUtils.DateInterval(a, b, "months"));
-
+        System.out.println(DateUtils.DateInterval(DateUtils.startDay, new Date(), "weeks"));
+        System.out.println(DateUtils.startDay);
+        System.out.println(DateUtils.currentWeeks);
 //        String password = encryptor.encrypt("");//加密数据库密码
 //        System.out.println(password);
     }

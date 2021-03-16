@@ -227,37 +227,37 @@
             <div class="tab-pane fade show active" id="righttab-statistics" role="tabpanel">
                 <ul class="right_chat list-unstyled list">
                     <li class="alfabet">上午</li>
-                    <li>
+                    <li th:each="schedule:${schedule}">
                         <a href="javascript:void(0);" class="media">
                             <div class="media-body">
-                                <h6 class="name">马克思主义思想</h6><span class="message">1-2节 理论课A教502</span>
+                                <h6 class="name" th:text="${schedule.name}"></h6>
+                                <span class="message" th:text="${schedule.lesson}+'节'+' '+${schedule.message}"></span>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);" class="media">
-                            <div class="media-body">
-                                <h6 class="name">刑法学1</h6><span class="message">3-4节 理论课A教101</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="alfabet">下午</li>
-                    <li>
-                        <a href="javascript:void(0);" class="media">
-                            <div class="media-body">
-                                <h6 class="name">刑法学1</h6><span class="message">5-6节 理论课B教213</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="media">
-                            <div class="media-body">
-                                <h6 class="name">犯罪心理学</h6><span class="message">7-8节 理论课D教401</span>
-                            </div>
-                        </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="javascript:void(0);" class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h6 class="name">刑法学1</h6><span class="message">3-4节 理论课A教101</span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="alfabet">下午</li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:void(0);" class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h6 class="name">刑法学1</h6><span class="message">5-6节 理论课B教213</span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:void(0);" class="media">-->
+<!--                            <div class="media-body">-->
+<!--                                <h6 class="name">犯罪心理学</h6><span class="message">7-8节 理论课D教401</span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
                 </ul>
-
 <!--                <div class="fc-time-grid-event fc-v-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable">123</div>-->
             </div>
             <div class="tab-pane fade" id="righttab-Result" role="tabpanel">
@@ -561,7 +561,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.75™ </a></div>
+                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.76™ </a></div>
                         <div class="col-md-6 col-sm-12 text-md-right">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item"><a href="#">网络1712</a></li>
