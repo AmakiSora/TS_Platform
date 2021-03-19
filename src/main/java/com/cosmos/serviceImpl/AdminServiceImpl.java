@@ -9,11 +9,10 @@ import com.cosmos.pojo.User;
 import com.cosmos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -30,6 +29,7 @@ public class AdminServiceImpl implements AdminService {
     }
     //增加学生
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void addStudent(Student student) {
         TSMapper.addStudent(student);//增加学生信息进student表
         User user = new User();
@@ -40,17 +40,20 @@ public class AdminServiceImpl implements AdminService {
     }
     //删除学生
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void deleteStudent(String studentID) {
         TSMapper.deleteStudent(studentID);//删除学生表
         userMapper.deleteUser(studentID);//删除用户表
     }
     //更改学生信息
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void updateStudent(Student student) {
         TSMapper.AdminUpdateStudent(student);
     }
     //重置密码
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void ResetPassword(String id) {
         String Password = "000";//重设的密码
         userMapper.resetPasswordUser(id,Password);
@@ -63,6 +66,7 @@ public class AdminServiceImpl implements AdminService {
 
     //增加教师
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void addTeacher(Staff staff) {
         TSMapper.addStaff(staff);//增加教师信息进staff表
         User user = new User();
@@ -74,6 +78,7 @@ public class AdminServiceImpl implements AdminService {
 
     //删除教师
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void deleteTeacher(String teacherID) {
         TSMapper.deleteStaff(teacherID);//删除教师表
         userMapper.deleteUser(teacherID);//删除用户表
@@ -81,6 +86,7 @@ public class AdminServiceImpl implements AdminService {
 
     //更改教师信息
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void updateTeacher(Staff staff) {
         TSMapper.AdminUpdateStaff(staff);
     }
@@ -93,11 +99,13 @@ public class AdminServiceImpl implements AdminService {
 
     //增加课程
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void addCourse(Course course) {
         TSMapper.addCourse(course);
     }
     //增加课程学生
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void addStudentCourse(String courseID,String studentID) {
             TSMapper.addStudentCourse(courseID,studentID);//加入课程学生表
             List<String> list = TSMapper.queryCourseTaskIDList(courseID);//查询课程的作业id

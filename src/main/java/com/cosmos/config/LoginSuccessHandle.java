@@ -22,14 +22,14 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         //获取到登陆者的权限，然后做跳转
         if (roles.contains("admin")){
-            response.sendRedirect("/admin/index.html");
             session.setAttribute("role","admin");
+            response.sendRedirect("/admin/index.html");
         }else if (roles.contains("staff")){
-            response.sendRedirect("/staff/index.html");
             session.setAttribute("role","staff");
+            response.sendRedirect("/staff/index.html");
         }else if (roles.contains("student")){
-            response.sendRedirect("/student/index.html");
             session.setAttribute("role","student");
+            response.sendRedirect("/student/index.html");
         }else {
             response.sendRedirect("/404");
         }

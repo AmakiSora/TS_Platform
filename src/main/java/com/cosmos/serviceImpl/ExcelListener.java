@@ -5,9 +5,8 @@ import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.service.AdminService;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -16,6 +15,7 @@ public class ExcelListener extends AnalysisEventListener<Object> {//表格处理
     private final String role ;
 //  有个很重要的点 StudentListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void invoke(Object obj, AnalysisContext context) {
         System.out.println(obj);
         switch (role) {

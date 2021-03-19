@@ -8,6 +8,7 @@ import com.cosmos.pojo.Task;
 import com.cosmos.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,6 +83,7 @@ public class StudentServiceImpl implements StudentService {
     }
     //提交作业
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public int submitTask(Map<String, String> task, MultipartFile file) throws ParseException, IOException {
         Date now = new Date();//当前时间
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -122,6 +124,7 @@ public class StudentServiceImpl implements StudentService {
     }
     //修改学生个人信息
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void StuUpdateStudent(Student student) {
         student.setId(session.getAttribute("id").toString());//防止乱改
         TSMapper.StuUpdateStudent(student);

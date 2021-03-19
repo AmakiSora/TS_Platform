@@ -26,12 +26,12 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
     @GetMapping("/staff/index.html")//首页
-    public String index(Model model){
+    public String index(){
         String name = staffService.queryTeaNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
             session.setAttribute("name",name);//名字放进会话
         }
-        model.addAttribute("schedule",staffService.getTodayTeaSchoolTimetable());//获取今日课程
+        session.setAttribute("schedule",mainService.getTodayCoursesSchedule());//获取今日课程
         return "/staff/index.html";
     }
 

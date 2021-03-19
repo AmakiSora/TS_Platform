@@ -226,12 +226,14 @@
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="righttab-statistics" role="tabpanel">
                 <ul class="right_chat list-unstyled list">
-                    <li class="alfabet">上午</li>
-                    <li th:each="schedule:${schedule}">
-                        <a href="javascript:void(0);" class="media">
+                    <li th:if="${session.schedule}==null">
+                        <h6>今日无课</h6>
+                    </li>
+                    <li th:each="schedule:${session.schedule}">
+                        <a th:href="${schedule.link}" class="media">
                             <div class="media-body">
-                                <h6 class="name" th:text="${schedule.name}"></h6>
-                                <span class="message" th:text="${schedule.lesson}+'节'+' '+${schedule.message}"></span>
+                                <h6 class="name" th:text="${schedule.name}">课程名</h6>
+                                <span class="message" th:text="${schedule.lesson}+'节'+' '+${schedule.message}">课程信息</span>
                             </div>
                         </a>
                     </li>

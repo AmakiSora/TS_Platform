@@ -35,6 +35,7 @@ public class StudentController {
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
             session.setAttribute("name",name);//名字放进会话
         }
+        session.setAttribute("schedule",mainService.getTodayCoursesSchedule());//获取今日课程
         return "/student/index.html";
     }
 

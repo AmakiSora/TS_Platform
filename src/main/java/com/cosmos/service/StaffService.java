@@ -41,6 +41,4 @@ public interface StaffService {
     Staff queryStaffById(String teacherID);
     //修改教师个人信息
     void setInformation(Staff staff);
-    //获取教师今日课程表
-    List<Map<String,String>> getTodayTeaSchoolTimetable();
 }
