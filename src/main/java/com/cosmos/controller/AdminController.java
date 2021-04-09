@@ -30,6 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/index.html")//首页
+    // TODO: 2021/3/27 管理员首页设计
     public String adminIndex(){
         return "/admin/index.html";
     }

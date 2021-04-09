@@ -26,6 +26,7 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
     @GetMapping("/staff/index.html")//首页
+    // TODO: 2021/3/27 教师首页设计
     public String index(){
         String name = staffService.queryTeaNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
@@ -47,6 +48,7 @@ public class StaffController {
         return "/staff/students.html";
     }
 
+    // TODO: 2021/4/9 课程按时间排序，过期课程不显示
     @GetMapping("/staff/courses.html")//课程页面
     public String courses(Model model){
         model.addAttribute("coursesList",staffService.queryCourseList());//查询全部课程
@@ -97,7 +99,8 @@ public class StaffController {
         staffService.updateTask(file, task);
         return "redirect:/staff/task/"+task.getId();
     }
-
+    // TODO: 2021/4/9 教师删除作业
+    // TODO: 2021/4/9 作业完成情况
     @ResponseBody
     @PostMapping("/staff/taskCorrecting/{id}")//批改作业
     public String taskCorrecting(@PathVariable("id")String id,Integer score){

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "-Djasypt.encryptor.password",
+      "type": "java.lang.String",
+      "description": "Description for -Djasypt.encryptor.password."
+  }
+] }

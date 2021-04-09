@@ -1,6 +1,5 @@
 package com.cosmos.serviceImpl;
 
-import com.cosmos.aspect.NewsAOP;
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.pojo.ChatRecord;
 import com.cosmos.pojo.Message;
@@ -21,6 +20,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+// TODO: 2021/4/9 在线聊天发送图片
 @ServerEndpoint(value = "/chat.html",configurator = GetHttpSessionConfigurator.class)
 @Component
 @Controller

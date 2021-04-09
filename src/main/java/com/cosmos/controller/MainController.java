@@ -103,6 +103,7 @@ public class MainController {
         }
     }
 
+    // TODO: 2021/4/9 批量下载文件
     @RequestMapping("/download/{url}/{fileName}")//下载文件
     public void download(@PathVariable("fileName")String fileName,@PathVariable("url")String url, HttpSession session, HttpServletResponse response) throws IOException{
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
