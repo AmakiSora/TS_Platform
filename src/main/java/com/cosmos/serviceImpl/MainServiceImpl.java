@@ -1,6 +1,7 @@
 package com.cosmos.serviceImpl;
 
 import com.cosmos.mapper.TSMapper;
+import com.cosmos.pojo.CampusNews;
 import com.cosmos.pojo.Comment;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Task;
@@ -117,5 +118,10 @@ public class MainServiceImpl implements MainService {
 
         }
         return null;
+    }
+    //首页校园新闻
+    @Override
+    public List<CampusNews> getCampusNewsList() {
+        return TSMapper.getCampusNewsList();
     }
 }

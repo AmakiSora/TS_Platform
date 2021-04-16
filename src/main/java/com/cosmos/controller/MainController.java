@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -192,6 +193,19 @@ public class MainController {
             return "redirect:/staff/"+X+"/"+Y;
         }else {
             return null;
+        }
+    }
+    @GetMapping("/campusNewsDetails/{id}")//
+    public String campusNewsDetails(@PathVariable Integer id, Model model){
+        String role = session.getAttribute("role").toString();
+        TSMapper.upCampusNewsViews(id);
+        model.addAttribute("campusNews",TSMapper.getcampusNewsDetails(id));
+        if ("student".equals(role)){
+            return "/student/campusNews-details.html";
+        }else if ("staff".equals(role)){
+            return "/staff/campusNews-details.html";
+        }else {
+            return "/404";
         }
     }
 

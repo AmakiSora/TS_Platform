@@ -27,12 +27,13 @@ public class StaffController {
     private StaffService staffService;
     @GetMapping("/staff/index.html")//首页
     // TODO: 2021/3/27 教师首页设计
-    public String index(){
+    public String index(Model model){
         String name = staffService.queryTeaNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
             session.setAttribute("name",name);//名字放进会话
         }
         session.setAttribute("schedule",mainService.getTodayCoursesSchedule());//获取今日课程
+        model.addAttribute("campusNews",mainService.getCampusNewsList());
         return "/staff/index.html";
     }
 

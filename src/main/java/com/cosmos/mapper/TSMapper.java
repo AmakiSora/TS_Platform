@@ -64,5 +64,7 @@ public interface TSMapper {
     void saveMessage(ChatRecord chatRecord);//保存聊天记录
     List<ChatRecord> showMessage(String id,String chatID);//查询聊天记录
     //分界线---------------------------------------------------------------------------
-
+    List<CampusNews> getCampusNewsList();//首页校园新闻列表
+    CampusNews getcampusNewsDetails(Integer id);//新闻细节
+    void upCampusNewsViews(Integer id);//浏览量+1
 }

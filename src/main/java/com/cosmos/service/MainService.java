@@ -1,5 +1,6 @@
 package com.cosmos.service;
 
+import com.cosmos.pojo.CampusNews;
 import com.cosmos.pojo.Task;
 import org.springframework.ui.Model;
 
@@ -13,4 +14,6 @@ public interface MainService {
     List<Task> queryTaskList(String courseID);
     //获取今日课程表
     List<Map<String,String>> getTodayCoursesSchedule();
+    //首页校园新闻
+    List<CampusNews> getCampusNewsList();
 }

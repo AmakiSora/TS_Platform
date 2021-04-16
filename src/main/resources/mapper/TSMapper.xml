@@ -221,4 +221,19 @@
           and chatID in (#{id},#{chatID})
     </select>
 
+    <!--分界线-->
+
+    <select id="getCampusNewsList" resultType="com.cosmos.pojo.CampusNews">
+        select campusNews.id, campusNews.datetime,campusNews.title
+        from campusNews
+        limit 5
+    </select>
+    <select id="getcampusNewsDetails" resultType="com.cosmos.pojo.CampusNews">
+        select * from campusNews where id = #{id}
+    </select>
+    <update id="upCampusNewsViews">
+        update campusNews
+        set views = campusNews.views+1
+        where id = #{id}
+    </update>
 </mapper>

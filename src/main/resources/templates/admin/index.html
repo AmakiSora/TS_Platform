@@ -91,7 +91,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="header-action"><h1 class="page-title">今日事项</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">周几</li>
+                            <li class="breadcrumb-item active" aria-current="page" id="today1">今天是？？？</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
@@ -488,6 +488,15 @@
 <script th:src="@{/js/index.js}"></script>
 <script th:src="@{/js/summernote.js}"></script>
 <script th:src="@{/Myjs/News.js}"></script>
-
+<script>
+    $(function(){
+        var day = new Date();
+        day.setTime(day.getTime());
+        var w = day.getDay();
+        var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+        var d = day.getFullYear()+"年" + (day.getMonth()+1) + "月" + day.getDate()+ "日" + arr_week[w];
+        $("#today1").text(d);
+    })
+</script>
 </body>
 </html>

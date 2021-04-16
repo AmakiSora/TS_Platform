@@ -100,7 +100,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="header-action"><h1 class="page-title">今日事项</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">今天星期几</li>
+                            <li class="breadcrumb-item active" aria-current="page" id="today1">今天是？？？</li>
                         </ol>
                     </div>
                     <ul class="nav nav-tabs page-header-tab">
@@ -183,9 +183,18 @@
                             </div>
                             <div class="col-xl">
                                 <div class="card cardDiy">
-                                    <div class="card-header"><h3 class="card-title">校园动态</h3></div>
-                                    <div class="card-body">
-
+                                    <div class="card-header">
+                                        <h3 class="card-title">校园动态</h3>
+                                        <a class="card-options" href="/">更多>></a>
+                                    </div>
+                                    <div class="card-body" style="padding-top:0px">
+                                        <div th:each="news:${campusNews}">
+                                            <hr>
+                                            <li>
+                                                <a th:text="${news.title}" th:href="'/campusNewsDetails/'+${news.id}" style="color: black"></a>
+                                                <p th:text="'&emsp;&ensp;'+${#dates.format(news.datetime, 'yyyy-MM-dd')}"></p>
+                                            </li>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -487,6 +496,14 @@
         position: 'static',
         showBottom: false
     });
+    $(function(){
+        var day = new Date();
+        day.setTime(day.getTime());
+        var w = day.getDay();
+        var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+        var d = day.getFullYear()+"年" + (day.getMonth()+1) + "月" + day.getDate()+ "日" + arr_week[w];
+        $("#today1").text(d);
+    })
 </script>
 </body>
 </html>
