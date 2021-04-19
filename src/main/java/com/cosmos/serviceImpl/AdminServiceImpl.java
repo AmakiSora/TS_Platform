@@ -8,6 +8,7 @@ import com.cosmos.pojo.Student;
 import com.cosmos.pojo.User;
 import com.cosmos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,8 @@ public class AdminServiceImpl implements AdminService {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;//加密
     //列出学生
     @Override
     public List<Student> queryStudentList() {
@@ -34,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
         TSMapper.addStudent(student);//增加学生信息进student表
         User user = new User();
         user.setUsername(student.getId());
-        user.setPassword("111");//默认密码111
+        user.setPassword(passwordEncoder.encode("111"));//默认密码111
         user.setRole("student");//设置权限为学生
         userMapper.addUser(user);//增加帐号进user表
     }
@@ -56,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public void ResetPassword(String id) {
         String Password = "000";//重设的密码
-        userMapper.resetPasswordUser(id,Password);
+        userMapper.resetPasswordUser(id,passwordEncoder.encode(Password));
     }
     //列出教师
     @Override
@@ -71,7 +74,7 @@ public class AdminServiceImpl implements AdminService {
         TSMapper.addStaff(staff);//增加教师信息进staff表
         User user = new User();
         user.setUsername(staff.getId());
-        user.setPassword("222");//默认密码222
+        user.setPassword(passwordEncoder.encode("222"));//默认密码222
         user.setRole("staff");//设置权限为教师
         userMapper.addUser(user);//增加帐号进user表
     }

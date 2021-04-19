@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;//数据库
-    @Autowired
-    private PasswordEncoder passwordEncoder;//加密
-
     @Override 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        com.cosmos.pojo.User user = userMapper.selectByName(username);//从数据库取出用户名
@@ -24,8 +21,7 @@ public class MyUserDetailService implements UserDetailsService {
         if(!user.getUsername().equals(username)){
             throw new UsernameNotFoundException("错");//没有深入研究报错
         }
-        String password = passwordEncoder.encode(user.getPassword());
-        return new User(user.getUsername(),password,AuthorityUtils
+        return new User(user.getUsername(),user.getPassword(),AuthorityUtils
                 .commaSeparatedStringToAuthorityList(user.getRole()));
 
 //        if(!"111".equals(username)){

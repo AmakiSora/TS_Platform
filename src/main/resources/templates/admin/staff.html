@@ -88,8 +88,8 @@
                                                    title="修改"><i class="fa fa-check text-success"></i></a>
                                                 <a href="#" class="btn btn-icon btn-sm" th:onclick="changeDisplay([[${staff.id}]])"
                                                    title="编辑"><i class="fa fa-edit text-blue"></i></a>
-                                                <a href="#" th:class="${staff.id}" style="display: none" class="btn btn-icon btn-sm"
-                                                   title="重置"><i class="fa fa-reply text-danger"></i></a>
+                                                <a href="#" th:class="${staff.id}" style="display: none" class="btn btn-icon btn-sm" th:href="@{/resetPassword/}+${staff.id}"
+                                                   title="重置密码"><i class="fa fa-reply text-danger"></i></a>
                                                 <a href="#" th:class="${staff.id}" class="btn btn-icon btn-sm js-sweetalert" th:href="@{/deleteTea/}+${staff.id}"
                                                    title="删除" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></a>
                                             </td>

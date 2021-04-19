@@ -9,6 +9,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +30,8 @@ public class MainServiceImpl implements MainService {
     private TSMapper TSMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;//加密
     //获取头像
     @Override
     public byte[] getAvatar(String id) {
@@ -74,9 +77,10 @@ public class MainServiceImpl implements MainService {
     //改密码
     @Override
     public int changePassword(Map<String, String> Password) {
-        if(Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
+//        Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))
+        if(passwordEncoder.matches(Password.get("oldPassword"),userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
             if(Password.get("newPassword").equals(Password.get("confirmPassword"))){
-                userMapper.changePassword(session.getAttribute("id").toString(),Password.get("newPassword"));
+                userMapper.changePassword(session.getAttribute("id").toString(),passwordEncoder.encode(Password.get("newPassword")));
                 return 1;//改密成功
             }else {
                 return 2;//新密码不一致
