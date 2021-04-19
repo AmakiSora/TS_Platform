@@ -1,18 +1,6 @@
 package com.cosmos.controller;
 
-import com.cosmos.aspect.NewsAOP;
-import com.cosmos.pojo.User;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @Controller
 public class TestController {

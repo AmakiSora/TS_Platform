@@ -1,6 +1,6 @@
 $(function() {//消息加载
     $.ajax({
-        url: "/news/",
+        url: "/notice/",
         type: "get",
         success: function (data) {
             if(data==""){//无新消息
@@ -11,9 +11,9 @@ $(function() {//消息加载
                     "<div class = \"media-body\">" +
                     "<div class=\"message\">暂时没有新的通知</div>" +
                     "<span class=\"badge badge-outline status\"></span></div></a></li>"
-                $("#news").html(n);
+                $("#notice").html(n);
             }else{
-                var newsData = ""
+                var noticeData = ""
                 for(var i in data){//data是map i为key data[i]为value
                     var n ="<li>" +
                         "<a href=\""+i+"\" class = \"media\">" +
@@ -21,16 +21,16 @@ $(function() {//消息加载
                         "<div class = \"media-body\">" +
                         "<div class=\"message\">"+data[i]+"</div>" +
                         "<span class=\"badge badge-outline status\"></span></div></a></li>"
-                    newsData = newsData+n;
+                    noticeData = noticeData+n;
                 }
-                $("#news").html(newsData);
+                $("#notice").html(noticeData);
             }
         }
     })
 })
-$("#newsClear").click(function (){//清空通知
+$("#noticeClear").click(function (){//清空通知
     $.ajax({
-        url: "/newsClear",
+        url: "/noticeClear",
         type: "get",
         success: function (data) {
             $("#point").remove();//关闭提醒
@@ -40,7 +40,7 @@ $("#newsClear").click(function (){//清空通知
             "<div class = \"media-body\">" +
             "<div class=\"message\">暂时没有新的通知</div>" +
             "<span class=\"badge badge-outline status\"></span></div></a></li>"
-            $("#news").html(n);
+            $("#notice").html(n);
         }
     })
 })
