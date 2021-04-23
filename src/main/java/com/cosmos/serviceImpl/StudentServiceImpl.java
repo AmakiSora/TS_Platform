@@ -98,6 +98,7 @@ public class StudentServiceImpl implements StudentService {
                 String taskName = session.getAttribute("taskID").toString()+"-"+
                         session.getAttribute("id").toString()+"-"+
                         file.getOriginalFilename();//原始文件名
+                // TODO: 2021/4/23 文件路径改为通过配置文件获取 
                 file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
                 //将提交时间和文件名存进数据库
                 TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());

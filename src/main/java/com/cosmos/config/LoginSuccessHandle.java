@@ -23,13 +23,13 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
         //获取到登陆者的权限，然后做跳转
         if (roles.contains("admin")){
             session.setAttribute("role","admin");
-            response.sendRedirect("/admin/index.html");
+            response.sendRedirect("admin/index.html");
         }else if (roles.contains("staff")){
             session.setAttribute("role","staff");
-            response.sendRedirect("/staff/index.html");
+            response.sendRedirect("staff/index.html");
         }else if (roles.contains("student")){
             session.setAttribute("role","student");
-            response.sendRedirect("/student/index.html");
+            response.sendRedirect("student/index.html");
         }else {
             response.sendRedirect("/404");
         }

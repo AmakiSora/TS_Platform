@@ -1,5 +1,5 @@
 $(function(){
-    var ws = new WebSocket("ws://localhost:8080/chat.html");
+    var ws = new WebSocket("ws://ts.amaki-sora.cn/chat.html");
     var userID = getUserID();
     ws.onopen = function(){
         //建立连接后触发

@@ -19,7 +19,7 @@ public class StaffController {
     private HttpSession session;
     @RequestMapping("/staff/{staff}")
     public String staff(@PathVariable("staff") String staff){
-        return "/staff/"+staff;
+        return "staff/"+staff;
     }
     @Autowired
     private MainService mainService;
@@ -34,7 +34,7 @@ public class StaffController {
         }
         session.setAttribute("schedule",mainService.getTodayCoursesSchedule());//获取今日课程
         model.addAttribute("campusNews",mainService.getCampusNewsList());
-        return "/staff/index.html";
+        return "staff/index.html";
     }
 
     @GetMapping("/staff/staff.html") //职工页面
@@ -46,7 +46,7 @@ public class StaffController {
     @GetMapping("/staff/students.html")//学生页面
     public String students(Model model){
         model.addAttribute("studentList",staffService.queryStudentList());
-        return "/staff/students.html";
+        return "staff/students.html";
     }
 
     // TODO: 2021/4/9 课程按时间排序，过期课程不显示
@@ -54,7 +54,7 @@ public class StaffController {
     public String courses(Model model){
         model.addAttribute("coursesList",staffService.queryCourseList());//查询全部课程
         model.addAttribute("myCoursesList",staffService.queryTeaCourse(session.getAttribute("id").toString()));//查询教师自己的课程
-        return "/staff/courses.html";
+        return "staff/courses.html";
     }
 
     @PostMapping("/staff/courses.html")//开设课程
@@ -72,19 +72,19 @@ public class StaffController {
         model.addAttribute("taskList",mainService.queryTaskList(id));//作业
         model.addAttribute("studentList",staffService.queryCourseStuList(id));//课程学生列表
         mainService.commentList(id,model);//讨论
-        return "/staff/courses-details.html";
+        return "staff/courses-details.html";
     }
 
     @GetMapping("/staff/task/{id}")//作业详情页
     public String taskDetails(@PathVariable("id")String id, Model model, HttpServletRequest request){
         if(request.getHeader("Referer")==null){//Referer可以获得来源页地址，如果是地址栏输入则值为null
-            return "/404";//防止直接从地址栏直接进入此界面
+            return "404";//防止直接从地址栏直接进入此界面
         }else {
             session.setAttribute("taskID",id);//为后面增添编辑作业保留旧id
             model.addAttribute("task",staffService.queryTask(id));//查询作业详情
             model.addAttribute("StuFileList",staffService.queryStuTask(id));//学生作业情况
             mainService.commentList(id,model);//讨论
-            return "/staff/task-details.html";
+            return "staff/task-details.html";
         }
 
     }
@@ -113,13 +113,13 @@ public class StaffController {
     public String chat(Model model){
         model.addAttribute("studentList",staffService.queryStudentList());
         model.addAttribute("staffList",staffService.queryStaffList());
-        return "/staff/chat.html";
+        return "staff/chat.html";
     }
 
     @GetMapping("/staff/settings.html")//设置页面
     public String settings(Model model){
         model.addAttribute("staff",staffService.queryStaffById(session.getAttribute("id").toString()));
-        return "/staff/settings.html";
+        return "staff/settings.html";
     }
 
     @PostMapping("/staff/settings.html")//修改教师个人信息

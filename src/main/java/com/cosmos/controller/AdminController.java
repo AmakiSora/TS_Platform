@@ -26,13 +26,13 @@ public class AdminController {
 
     @RequestMapping("/admin/{admin}")//默认转发所有
     public String admin(@PathVariable("admin") String admin){
-        return "/admin/"+admin;
+        return "admin/"+admin;
     }
 
     @GetMapping("/admin/index.html")//首页
     // TODO: 2021/3/27 管理员首页设计
     public String adminIndex(){
-        return "/admin/index.html";
+        return "admin/index.html";
     }
 
     //分割线------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ public class AdminController {
     @GetMapping("/admin/students.html")//学生页面
     public String queryStudentList(Model model){
         model.addAttribute("studentList",adminService.queryStudentList());
-        return "/admin/students.html";
+        return "admin/students.html";
 
     }
 
@@ -74,7 +74,7 @@ public class AdminController {
     @RequestMapping("/admin/staff.html")//列出教师
     public String queryStaffList(Model model) {
         model.addAttribute("staffList", adminService.queryStaffList());
-        return "/admin/staff.html";
+        return "admin/staff.html";
     }
 
     @PostMapping("/admin/staff.html")//增加教师
@@ -101,7 +101,7 @@ public class AdminController {
     @GetMapping("/admin/courses.html")//课程页面
     public String courses(Model model){
         model.addAttribute("coursesList",adminService.queryCourseList());//查询全部课程
-        return "/admin/courses.html";
+        return "admin/courses.html";
     }
 
     @PostMapping("/admin/courses.html")//增加课程
@@ -113,7 +113,7 @@ public class AdminController {
 
     @RequestMapping("/admin/settings.html")//设置页面
     public String settings(Model model){
-        return "/admin/settings.html";
+        return "admin/settings.html";
     }
 
     @PostMapping("/admin/settings.html")//修改管理员个人信息
