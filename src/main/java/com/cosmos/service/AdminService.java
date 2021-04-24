@@ -5,7 +5,6 @@ import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AdminService {
     //列出学生

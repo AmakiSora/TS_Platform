@@ -37,6 +37,8 @@ public interface MainService {
     List<Map<String,String>> getTodayCoursesSchedule();
     //首页校园新闻
     List<CampusNews> getCampusNewsList();
+    //更多新闻
+    List<CampusNews> getMoreCampusNewsList();
     //校园新闻详情
-    String campusNewsDetails(Integer id, Model model);
+    CampusNews campusNewsDetails(Integer id);
 }

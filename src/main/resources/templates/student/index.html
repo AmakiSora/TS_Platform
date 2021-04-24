@@ -60,38 +60,12 @@
                         <li th:class="${active == 'Chat'?'active':''}">
                             <a th:href="@{/student/chat.html}"><i class="fa fa-comments-o"></i>
                             <span>交流</span></a></li>
-<!--                        <li th:class="${active == 'Task'?'active':''}">-->
-<!--                            <a th:href="@{/student/task.html}"><i class="fa fa-folder"></i>-->
-<!--                            <span>作业</span></a></li>-->
                         <li th:class="${active == 'Settings'?'active':''}">
                             <a th:href="@{/student/settings.html}"><i class="fa fa-gear"></i>
                             <span>设置</span></a></li>
-
-                        <!--                        <li th:class="${active == ''?'active':''}"><a  th:href="@{professors.html}"><i class="fa fa-user-circle-o"></i><span>教授</span></a></li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{departments.html}"><i class="fa fa-users"></i><span>部门</span></a></li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{library.html}"><i class="fa fa-book"></i><span>图书馆</span></a></li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{holiday.html}"><i class="fa fa-bullhorn"></i><span>假期</span></a></li>-->
-                        <!--                        <li class="g_heading">额外</li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{app-contact.html}"><i class="fa fa-address-book"></i><span>通讯录</span></a></li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{our-centres.html}"><i class="fa fa-map"></i><span>其他</span></a></li>-->
-                        <!--                        <li th:class="${active == ''?'active':''}"><a th:href="@{gallery.html}"><i class="fa fa-camera-retro"></i><span>展示厅</span></a></li>-->
                     </ul>
                 </nav>
             </div>
-<!--            <div class="tab-pane fade" id="menu-admin" role="tabpanel">-->
-<!--                <nav class="sidebar-nav">-->
-<!--                    <ul class="metismenu">-->
-<!--                        <li><a href="payments.html"><i class="fa fa-credit-card"></i><span>付款</span></a></li>-->
-<!--                        <li><a href="noticeboard.html"><i class="fa fa-dashboard"></i><span>布告栏</span></a></li>-->
-<!--                        <li><a href="taskboard.html"><i class="fa fa-list-ul"></i><span>任务板</span></a></li>-->
-<!--                        <li><a href="hostel.html"><i class="fa fa-bed"></i><span>旅馆</span></a></li>-->
-<!--                        <li><a href="transport.html"><i class="fa fa-truck"></i><span>运输</span></a></li>-->
-<!--                        <li><a href="attendance.html"><i class="fa fa-calendar-check-o"></i><span>出勤</span></a></li>-->
-<!--                        <li><a href="leave.html"><i class="fa fa-flag"></i><span>休假</span></a></li>-->
-<!--                        <li><a href="setting.html"><i class="fa fa-gear"></i><span>设置</span></a></li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </div>-->
         </div>
     </div><!-- 菜单 -->
     <div class="page"><!-- 右边页面 -->
@@ -174,7 +148,7 @@
                                 <div class="card cardDiy">
                                     <div class="card-header">
                                         <h3 class="card-title">校园动态</h3>
-                                        <a class="card-options" href="/">更多>></a>
+                                        <a class="card-options" href="/campusNewsMore">更多>></a>
                                     </div>
                                     <div class="card-body" style="padding-top:0px">
                                         <div th:each="news:${campusNews}">

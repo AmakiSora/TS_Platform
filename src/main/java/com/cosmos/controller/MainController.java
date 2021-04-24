@@ -1,7 +1,6 @@
 package com.cosmos.controller;
 
 import com.cosmos.aspect.NoticeAOP;
-import com.cosmos.mapper.TSMapper;
 import com.cosmos.service.MainService;
 import com.cosmos.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,8 +90,28 @@ public class MainController {
     public String noticeReturn(@PathVariable("X")String X,@PathVariable("Y")String Y){
         return noticeService.noticeReturn(X, Y,session.getAttribute("id").toString());
     }
+    @GetMapping("/campusNewsMore")//更多新闻
+    public String campusNewsMore(Model model){
+        String role = session.getAttribute("role").toString();
+        model.addAttribute("campusNewsList",mainService.getMoreCampusNewsList());
+        if ("student".equals(role)){
+            return "student/campusNews-more.html";
+        }else if ("staff".equals(role)){
+            return "staff/campusNews-more.html";
+        }else {
+            return "404";
+        }
+    }
     @GetMapping("/campusNewsDetails/{id}")//新闻详情
     public String campusNewsDetails(@PathVariable Integer id, Model model){
-        return mainService.campusNewsDetails(id, model);
+        String role = session.getAttribute("role").toString();
+        model.addAttribute("campusNews",mainService.campusNewsDetails(id));
+        if ("student".equals(role)){
+            return "student/campusNews-details.html";
+        }else if ("staff".equals(role)){
+            return "staff/campusNews-details.html";
+        }else {
+            return "404";
+        }
     }
 }

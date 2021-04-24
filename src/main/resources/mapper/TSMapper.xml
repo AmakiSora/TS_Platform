@@ -228,6 +228,9 @@
         from campusNews
         limit 5
     </select>
+    <select id="getAllCampusNewsList" resultType="com.cosmos.pojo.CampusNews">
+        select * from campusNews
+    </select>
     <select id="getcampusNewsDetails" resultType="com.cosmos.pojo.CampusNews">
         select * from campusNews where id = #{id}
     </select>

@@ -30,7 +30,6 @@ public class StudentController {
     }
 
     @RequestMapping("/student/index.html")//首页
-    // TODO: 2021/3/27 学生首页设计
     public String index(Model model){
         String name = studentService.queryStuNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字

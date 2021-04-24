@@ -501,13 +501,14 @@
                                         <img th:src="@{/Avatar/}+${session.id}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="avatar">
                                     </span>[[${session.name}]]</a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="dropdown-icon fe fe-user"></i>个人信息</a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="dropdown-icon fe fe-settings"></i>设置</a>
-                                    <div class="dropdown-divider"></div>
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                                        <i class="dropdown-icon fe fe-user"></i>个人信息</a>-->
+<!--                                    <a class="dropdown-item" href="#">-->
+<!--                                        <i class="dropdown-icon fe fe-settings"></i>设置</a>-->
+<!--                                    <div class="dropdown-divider"></div>-->
                                     <a class="dropdown-item" href="/logout">
-                                        <i class="dropdown-icon fe fe-log-out"></i>注销</a></div>
+                                        <i class="dropdown-icon fe fe-log-out"></i>注销</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -518,7 +519,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.83™ </a></div>
+                        <div class="col-md-6 col-sm-12">毕业设计 ® 2021<a th:href="@{/}"> 高校师生交互平台『Beta』◎1.84™ </a></div>
                         <div class="col-md-6 col-sm-12 text-md-right">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item"><a href="#">网络1712</a></li>

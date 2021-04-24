@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -32,6 +31,7 @@ public class AdminController {
     @GetMapping("/admin/index.html")//首页
     // TODO: 2021/3/27 管理员首页设计
     public String adminIndex(){
+        session.setAttribute("name",session.getAttribute("id"));//id为名字
         return "admin/index.html";
     }
 

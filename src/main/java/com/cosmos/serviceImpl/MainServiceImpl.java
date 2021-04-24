@@ -244,18 +244,16 @@ public class MainServiceImpl implements MainService {
     public List<CampusNews> getCampusNewsList() {
         return TSMapper.getCampusNewsList();
     }
+    //更多新闻
+    @Override
+    public List<CampusNews> getMoreCampusNewsList() {
+        // TODO: 2021/4/24 新闻更多页分页 现在只是获得所有
+        return TSMapper.getAllCampusNewsList();
+    }
     //校园新闻详情
     @Override
-    public String campusNewsDetails(Integer id, Model model) {
-        String role = session.getAttribute("role").toString();
+    public CampusNews campusNewsDetails(Integer id) {
         TSMapper.upCampusNewsViews(id);
-        model.addAttribute("campusNews",TSMapper.getcampusNewsDetails(id));
-        if ("student".equals(role)){
-            return "/student/campusNews-details.html";
-        }else if ("staff".equals(role)){
-            return "/staff/campusNews-details.html";
-        }else {
-            return "/404";
-        }
+        return TSMapper.getcampusNewsDetails(id);
     }
 }

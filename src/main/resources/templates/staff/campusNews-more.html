@@ -20,7 +20,7 @@
     <div th:insert="DIY::RightSideBar"></div><!-- 右侧设置-->
     <div th:insert="DIY::ThemeDiv"></div><!-- 主题 -->
     <div th:insert="DIY::UserDiv"></div><!-- 用户 -->
-    <div th:insert="student/index::LeftSideBar(active='')" ></div><!-- 菜单 -->
+    <div th:insert="staff/index::LeftSideBar(active='')" ></div><!-- 菜单 -->
     <div class="page"><!-- 主页面 -->
         <div th:insert="DIY::PageTop"></div><!-- 顶部搜索栏 -->
         <div class="section-body">
@@ -29,8 +29,8 @@
                     <div class="header-action">
                         <h1 class="page-title">校园新闻</h1>
                         <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item" aria-current="page"><a th:href="@{/student/index.html}">首页</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">要闻</li>
+                            <li class="breadcrumb-item" aria-current="page"><a th:href="@{/staff/index.html}">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">更多要闻</li>
                         </ol>
                     </div>
                 </div>
@@ -38,14 +38,31 @@
         </div>
         <div class="section-body mt-4">
             <div class="container-fluid">
-                <h3 style="text-align: center" th:text="${campusNews.title}">标题</h3>
-                <hr>
-                <p style="text-align: center">
-                    <span th:text="'时间：'+${#dates.format(campusNews.datetime, 'yyyy年MM月dd日')}+'&emsp;'"></span>
-                    <span th:text="'浏览：'+${campusNews.views}+'&emsp;'"></span>
-                    <span th:text="'发布者：'+${campusNews.author}"></span>
-                </p>
-                <p th:text="${campusNews.content}"></p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-content mt-3">
+                            <div role="tabpanel" class="tab-pane vivify fadeIn active" aria-expanded="false">
+                                <div class="table-responsive">
+                                    <table class="table table-hover card-table table_custom">
+                                        <tbody th:each="campusNews:${campusNewsList}">
+                                        <tr>
+                                            <td>
+                                                <h6><a target="_blank" th:href="'/campusNewsDetails/'+${campusNews.id}" th:text="${campusNews.title}">标题</a></h6>
+                                                <span class="font-13" th:text="'时间：'+${#dates.format(campusNews.datetime, 'yyyy年MM月dd日')}+'&emsp;'">属性</span>
+<!--                                                <span class="font-13" th:text="'浏览：'+${campusNews.views}+'&emsp;'">属性</span>-->
+                                                <span class="font-13" th:text="'发布者：'+${campusNews.author}">属性</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-success" ><i class="fa fa-eye"></i>[[${campusNews.views}]]</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div><!-- Start main footer -->
         <div th:insert="DIY::PageBottom"></div><!-- 底部版权栏 -->

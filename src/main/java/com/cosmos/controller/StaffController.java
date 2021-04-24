@@ -26,7 +26,6 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
     @GetMapping("/staff/index.html")//首页
-    // TODO: 2021/3/27 教师首页设计
     public String index(Model model){
         String name = staffService.queryTeaNameById(session.getAttribute("id").toString());
         if(session.getAttribute("name")==null||session.getAttribute("name")!=name){//防止重复设置名字
