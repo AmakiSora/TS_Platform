@@ -2,10 +2,7 @@ package com.cosmos.serviceImpl;
 
 import com.cosmos.mapper.TSMapper;
 import com.cosmos.mapper.UserMapper;
-import com.cosmos.pojo.Course;
-import com.cosmos.pojo.Staff;
-import com.cosmos.pojo.Student;
-import com.cosmos.pojo.User;
+import com.cosmos.pojo.*;
 import com.cosmos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -118,5 +115,20 @@ public class AdminServiceImpl implements AdminService {
                 }
             }
             TSMapper.updateCourseStudentNum(courseID);//更新课程的学生人数
+    }
+    //发布校园新闻
+    @Override
+    public void addCampusNews(CampusNews campusNews) {
+        TSMapper.addCampusNews(campusNews);
+    }
+    //编辑校园新闻
+    @Override
+    public void editCampusNews(CampusNews campusNews) {
+        TSMapper.editCampusNews(campusNews);
+    }
+    //删除校园新闻
+    @Override
+    public void deleteCampusNews(Integer id) {
+        TSMapper.deleteCampusNews(id);
     }
 }

@@ -226,10 +226,11 @@
     <select id="getCampusNewsList" resultType="com.cosmos.pojo.CampusNews">
         select campusNews.id, campusNews.datetime,campusNews.title
         from campusNews
+        order by datetime desc
         limit 5
     </select>
     <select id="getAllCampusNewsList" resultType="com.cosmos.pojo.CampusNews">
-        select * from campusNews
+        select * from campusNews order by datetime desc
     </select>
     <select id="getcampusNewsDetails" resultType="com.cosmos.pojo.CampusNews">
         select * from campusNews where id = #{id}
@@ -239,4 +240,20 @@
         set views = campusNews.views+1
         where id = #{id}
     </update>
+    <insert id="addCampusNews">
+        insert into campusNews
+            (title, content, datetime, author, views)
+        values(#{title},#{content},#{datetime},#{author},0)
+    </insert>
+    <update id="editCampusNews">
+        update campusNews
+        set title = #{title},
+            content = #{content},
+            datetime = #{datetime},
+            author = #{author}
+        where id = #{id}
+    </update>
+    <delete id="deleteCampusNews">
+        delete from campusNews where id = #{id}
+    </delete>
 </mapper>

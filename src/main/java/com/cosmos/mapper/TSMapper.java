@@ -68,4 +68,7 @@ public interface TSMapper {
     List<CampusNews> getAllCampusNewsList();//获得所有新闻列表
     CampusNews getcampusNewsDetails(Integer id);//新闻细节
     void upCampusNewsViews(Integer id);//浏览量+1
+    void addCampusNews(CampusNews campusNews);//发布校园新闻
+    void editCampusNews(CampusNews campusNews);//编辑校园新闻
+    void deleteCampusNews(Integer id);//删除校园新闻
 }

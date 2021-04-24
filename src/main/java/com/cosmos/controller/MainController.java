@@ -98,6 +98,8 @@ public class MainController {
             return "student/campusNews-more.html";
         }else if ("staff".equals(role)){
             return "staff/campusNews-more.html";
+        }else if ("admin".equals(role)){
+            return "admin/campusNews-more.html";
         }else {
             return "404";
         }
@@ -110,6 +112,8 @@ public class MainController {
             return "student/campusNews-details.html";
         }else if ("staff".equals(role)){
             return "staff/campusNews-details.html";
+        }else if ("admin".equals(role)){
+            return "admin/campusNews-details.html";
         }else {
             return "404";
         }

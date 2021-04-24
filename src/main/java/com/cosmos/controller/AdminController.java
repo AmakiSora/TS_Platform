@@ -1,10 +1,12 @@
 package com.cosmos.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.cosmos.pojo.CampusNews;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.service.AdminService;
+import com.cosmos.service.MainService;
 import com.cosmos.serviceImpl.ExcelListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class AdminController {
     private HttpSession session;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private MainService mainService;
     //分割线------------------------------------------------------------------------------------
 
     @RequestMapping("/admin/{admin}")//默认转发所有
@@ -30,8 +34,9 @@ public class AdminController {
 
     @GetMapping("/admin/index.html")//首页
     // TODO: 2021/3/27 管理员首页设计
-    public String adminIndex(){
+    public String adminIndex(Model model){
         session.setAttribute("name",session.getAttribute("id"));//id为名字
+        model.addAttribute("campusNews",mainService.getCampusNewsList());
         return "admin/index.html";
     }
 
@@ -139,5 +144,23 @@ public class AdminController {
 
         }
         return "1";
+    }
+
+    //分割线------------------------------------------------------------------------------------
+
+    @PostMapping("/campusNewsMore")//发布校园新闻
+    public String addCampusNews(CampusNews campusNews){
+        adminService.addCampusNews(campusNews);
+        return "redirect:/campusNewsMore";
+    }
+    @PostMapping("/campusNewsDetails/{id}")//编辑校园新闻
+    public String editCampusNews(CampusNews campusNews){
+        adminService.editCampusNews(campusNews);
+        return "redirect:/campusNewsDetails/"+campusNews.getId();
+    }
+    @GetMapping("/deleteCampusNews/{id}")//删除校园新闻
+    public String delCampusNews(@PathVariable Integer id){
+        adminService.deleteCampusNews(id);
+        return "redirect:/campusNewsMore";
     }
 }

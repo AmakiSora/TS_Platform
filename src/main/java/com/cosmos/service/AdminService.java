@@ -1,5 +1,6 @@
 package com.cosmos.service;
 
+import com.cosmos.pojo.CampusNews;
 import com.cosmos.pojo.Course;
 import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
@@ -31,5 +32,10 @@ public interface AdminService {
     void addCourse(Course course);
     //增加课程学生
     void addStudentCourse(String courseID,String studentID);
-
+    //发布校园新闻
+    void addCampusNews(CampusNews campusNews);
+    //编辑校园新闻
+    void editCampusNews(CampusNews campusNews);
+    //删除校园新闻
+    void deleteCampusNews(Integer id);
 }
