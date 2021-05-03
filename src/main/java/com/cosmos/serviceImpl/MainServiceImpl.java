@@ -7,6 +7,7 @@ import com.cosmos.service.MainService;
 import com.cosmos.utils.DateUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +33,8 @@ public class MainServiceImpl implements MainService {
     private UserMapper userMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;//加密
+    @Value("${fileURI}")
+    private String fileURI;
     //获取头像
     @Override
     public byte[] getAvatar(String id) {
@@ -93,7 +96,7 @@ public class MainServiceImpl implements MainService {
     @Override
     public void download(String fileName, String url, HttpSession session, HttpServletResponse response) throws IOException {
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
-        String realPath = "D:/cosmos/tete/"+url+"/"+fileName;
+        String realPath = fileURI+url+"/"+fileName;
         response.setHeader("content-disposition","attachment;filename="+fileName);//设置响应头 告知浏览器要保存内容 filename=浏览器显示的下载文件名
         FileInputStream in= new FileInputStream(realPath);
         OutputStream out = response.getOutputStream();

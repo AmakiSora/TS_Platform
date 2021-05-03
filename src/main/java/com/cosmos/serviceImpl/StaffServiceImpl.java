@@ -8,6 +8,7 @@ import com.cosmos.pojo.Task;
 import com.cosmos.service.StaffService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,8 @@ public class StaffServiceImpl implements StaffService {
     private HttpSession session;
     @Autowired
     private TSMapper TSMapper;
+    @Value("${fileURI}")
+    private String fileURI;
     //查询教师名字(根据id)
     @Override
     public String queryTeaNameById(String studentID) {
@@ -91,7 +94,7 @@ public class StaffServiceImpl implements StaffService {
         task.setId(taskID);
         if(!file.isEmpty()){
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File("D:/cosmos/tete/task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+            file.transferTo(new File(fileURI+"task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
             task.setFileName(fileName);//将文件名加入数据库
         }
         //String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
@@ -116,7 +119,7 @@ public class StaffServiceImpl implements StaffService {
         task.setId(id);
         if(!file.isEmpty()){//如果有文件更新文件
             String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File("D:/cosmos/tete/task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+            file.transferTo(new File(fileURI+"task/"+fileName));
 //            String url = "D:/cosmos/tete/task/"+fileName;
             task.setFileName(fileName);//将文件名加入数据库
             TSMapper.updateTaskF(task,oldID);

@@ -7,6 +7,7 @@ import com.cosmos.pojo.Student;
 import com.cosmos.pojo.Task;
 import com.cosmos.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ public class StudentServiceImpl implements StudentService {
     private HttpSession session;
     @Autowired
     private TSMapper TSMapper;
+    @Value("${fileURI}")
+    String fileURI;
     //查询学生名字(根据id)
     @Override
     public String queryStuNameById(String studentID) {
@@ -99,7 +102,7 @@ public class StudentServiceImpl implements StudentService {
                         session.getAttribute("id").toString()+"-"+
                         file.getOriginalFilename();//原始文件名
                 // TODO: 2021/4/23 文件路径改为通过配置文件获取 
-                file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+                file.transferTo(new File(fileURI+"taskStudent/"+taskName));
                 //将提交时间和文件名存进数据库
                 TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
             }else {//不为空
@@ -108,7 +111,7 @@ public class StudentServiceImpl implements StudentService {
                         session.getAttribute("id").toString()+"-"+
                         task.get("fileName")+
                         f.substring(f.lastIndexOf("."));//后缀名
-                file.transferTo(new File("D:/cosmos/tete/taskStudent/"+taskName));
+                file.transferTo(new File(fileURI+"taskStudent/"+taskName));
                 //将提交时间和文件名存进数据库
                 TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
             }
