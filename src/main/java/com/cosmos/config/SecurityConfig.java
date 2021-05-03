@@ -1,5 +1,7 @@
 package com.cosmos.config;
 
+import com.cosmos.serviceImpl.MyUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -7,12 +9,29 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private MyUserDetailService myUserDetailService;
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private PersistentTokenRepository tokenRepository;
     @Bean//密码加密
     public PasswordEncoder pw(){
         return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public PersistentTokenRepository tokenRepository(){//记住我使用的token存储位置
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);//设置数据源
+//        tokenRepository.setCreateTableOnStartup(true);//启动时是否创建表，第一次运行要，之后注释掉
+        return tokenRepository;
     }
     @Override//授权
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,12 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/staff/**").hasAuthority("staff")
                 .anyRequest().authenticated()//拦截所有请求
                 ;
-//        http.rememberMe()//记住我功能，因为要存进数据库，暂时不用
+        http.rememberMe()//记住我功能
+                .rememberMeParameter("remember")//自定义前端参数字段
 //                .tokenValiditySeconds(100000)//自定义失效时间，默认两周
 //                .rememberMeServices()//自定义功能实现逻辑
-//                .userDetailsService(userService())//自定义登录逻辑
-//                .tokenRepository(tokenRepository)//指定存储位置
-//        ;
+                .userDetailsService(myUserDetailService)//自定义登录逻辑(必要)
+                .authenticationSuccessHandler(new LoginSuccessHandle())//登录成功后逻辑
+                .tokenRepository(tokenRepository)//指定存储位置
+        ;
         http.sessionManagement()//会话
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)//会话配置，默认需要用时创建会话
                 .invalidSessionUrl("/login.html")//会话超时后跳转
