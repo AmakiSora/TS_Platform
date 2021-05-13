@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.COSMOS</groupId>
     <artifactId>ts_platform</artifactId>
-    <version>1.01</version>
+    <version>1.88</version>
     <name>TS_Platform</name>
     <description>Teachers and students exchange platform</description>
 
@@ -112,6 +112,27 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
             </plugin>
 <!--            <plugin>-->
 <!--                <groupId>org.mybatis.generator</groupId>-->
