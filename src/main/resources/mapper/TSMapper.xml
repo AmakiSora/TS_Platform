@@ -256,4 +256,15 @@
     <delete id="deleteCampusNews">
         delete from campusNews where id = #{id}
     </delete>
+    <select id="getNeedRemindTask" resultType="com.cosmos.pojo.Task">
+        select task.id,task.name,task.deadline from task
+        where deadline>now()
+        and deadline-now() &lt;= 2000000
+    </select>
+    <select id="getUnfinishedTask" resultType="string">
+        select taskStudent.studentID
+        from taskStudent
+        where submitDate is null
+          and taskID = #{taskID}
+    </select>
 </mapper>

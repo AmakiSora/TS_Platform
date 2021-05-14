@@ -63,7 +63,7 @@ public interface TSMapper {
     //分界线---------------------------------------------------------------------------chat
     void saveMessage(ChatRecord chatRecord);//保存聊天记录
     List<ChatRecord> showMessage(String id,String chatID);//查询聊天记录
-    //分界线---------------------------------------------------------------------------
+    //分界线---------------------------------------------------------------------------news
     List<CampusNews> getCampusNewsList();//首页校园新闻列表
     List<CampusNews> getAllCampusNewsList();//获得所有新闻列表
     CampusNews getcampusNewsDetails(Integer id);//新闻细节
@@ -71,4 +71,8 @@ public interface TSMapper {
     void addCampusNews(CampusNews campusNews);//发布校园新闻
     void editCampusNews(CampusNews campusNews);//编辑校园新闻
     void deleteCampusNews(Integer id);//删除校园新闻
+    //分界线---------------------------------------------------------------------------task remind
+    List<Task> getNeedRemindTask();//获取需要提醒的作业
+    List<String> getUnfinishedTask(String taskID);//获取未完成作业的学生id，没有上传时间即为未完成
+
 }
