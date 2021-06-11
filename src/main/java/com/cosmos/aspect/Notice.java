@@ -51,7 +51,7 @@ public class Notice {
             redisTemplate.opsForHash().put("notice"+replierID,"/notice/task/"+taskID,name+"回复了你");
         }
     }
-// TODO: 2021/4/9 作业到期提醒，教师发布通知
+// TODO: 2021/4/9 教师发布通知
 
 //    @Pointcut("@annotation(com.cosmos.aspect.NewsAOP.chat)")//聊天切面（弃用）
 //    public void chat(){}

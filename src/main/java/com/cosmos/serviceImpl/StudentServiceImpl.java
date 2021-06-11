@@ -6,6 +6,8 @@ import com.cosmos.pojo.Staff;
 import com.cosmos.pojo.Student;
 import com.cosmos.pojo.Task;
 import com.cosmos.service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
     private TSMapper TSMapper;
     @Value("${fileURI}")
     String fileURI;
+    private static final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
     //查询学生名字(根据id)
     @Override
     public String queryStuNameById(String studentID) {
@@ -87,37 +90,46 @@ public class StudentServiceImpl implements StudentService {
     //提交作业
     @Override
     @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
-    public int submitTask(Map<String, String> task, MultipartFile file) throws ParseException, IOException {
+    public int submitTask(Map<String, String> task, MultipartFile file) {
         Date now = new Date();//当前时间
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now1 = sdf.format(now);
-        if(sdf.parse(now1).getTime()<sdf.parse(task.get("issuedDate")).getTime()){//转成long类型比较
-            return 3;//作业未发布
-        }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("deadline")).getTime()){
-            return 2;//作业已截止
-        }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("issuedDate")).getTime()&&
-                sdf.parse(now1).getTime()<sdf.parse(task.get("deadline")).getTime()){
-            if(task.get("fileName").equals("")){//如果文件名为空
-                String taskName = session.getAttribute("taskID").toString()+"-"+
-                        session.getAttribute("id").toString()+"-"+
-                        file.getOriginalFilename();//原始文件名
-                // TODO: 2021/4/23 文件路径改为通过配置文件获取 
-                file.transferTo(new File(fileURI+"taskStudent/"+taskName));
-                //将提交时间和文件名存进数据库
-                TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
-            }else {//不为空
-                String f = file.getOriginalFilename();//原始文件名
-                String taskName = session.getAttribute("taskID").toString()+"-"+
-                        session.getAttribute("id").toString()+"-"+
-                        task.get("fileName")+
-                        f.substring(f.lastIndexOf("."));//后缀名
-                file.transferTo(new File(fileURI+"taskStudent/"+taskName));
-                //将提交时间和文件名存进数据库
-                TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
+        try {
+            if(sdf.parse(now1).getTime()<sdf.parse(task.get("issuedDate")).getTime()){//转成long类型比较
+                return 3;//作业未发布
+            }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("deadline")).getTime()){
+                return 2;//作业已截止
+            }else if(sdf.parse(now1).getTime()>sdf.parse(task.get("issuedDate")).getTime()&&
+                    sdf.parse(now1).getTime()<sdf.parse(task.get("deadline")).getTime()){
+                try {
+                    if(task.get("fileName").equals("")){//如果文件名为空
+                        String taskName = session.getAttribute("taskID").toString()+"-"+
+                                session.getAttribute("id").toString()+"-"+
+                                file.getOriginalFilename();//原始文件名
+                        file.transferTo(new File(fileURI+"taskStudent/"+taskName));
+                        //将提交时间和文件名存进数据库
+                        TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
+                    }else {//不为空
+                        String f = file.getOriginalFilename();//原始文件名
+                        String taskName = session.getAttribute("taskID").toString()+"-"+
+                                session.getAttribute("id").toString()+"-"+
+                                task.get("fileName")+
+                                f.substring(f.lastIndexOf("."));//后缀名
+                        file.transferTo(new File(fileURI+"taskStudent/"+taskName));
+                        //将提交时间和文件名存进数据库
+                        TSMapper.submitTask(now,taskName,session.getAttribute("id").toString(),session.getAttribute("taskID").toString());
+                    }
+                    return 1;//提交成功
+                }catch (IOException e){
+                    logger.error("提交作业文件上传失败，id为"+task.get("id"));
+                    return 666;
+                }
+            }else {
+                logger.error("出错啦，怎么会来到这里呢，快来修bug!");
+                return 666;
             }
-            return 1;//提交成功
-        }else {
-            System.out.println("出错啦，快来修bug");
+        }catch (ParseException e){
+            logger.error("提交作业时，作业时间比较失败，id为:"+task.get("id"));
             return 666;
         }
     }

@@ -7,6 +7,8 @@ import com.cosmos.pojo.Student;
 import com.cosmos.pojo.Task;
 import com.cosmos.service.StaffService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class StaffServiceImpl implements StaffService {
     private TSMapper TSMapper;
     @Value("${fileURI}")
     private String fileURI;
+    private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
     //查询教师名字(根据id)
     @Override
     public String queryTeaNameById(String studentID) {
@@ -58,6 +61,7 @@ public class StaffServiceImpl implements StaffService {
         course.setTeacher(session.getAttribute("name").toString());
         course.setTeacherID(session.getAttribute("id").toString());
         TSMapper.addCourse(course);
+        logger.info("教师开设课程,id为"+course.getId());
     }
     //课程详情
     @Override
@@ -88,43 +92,54 @@ public class StaffServiceImpl implements StaffService {
     //增添作业
     @Override
     @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
-    public void addTask(MultipartFile file, Task task) throws IOException {
+    public void addTask(MultipartFile file, Task task) {
         task.setCourseID(session.getAttribute("courseID").toString());
         String taskID = session.getAttribute("courseID")+"_"+task.getId();
         task.setId(taskID);
-        if(!file.isEmpty()){
-            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File(fileURI+"task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
-            task.setFileName(fileName);//将文件名加入数据库
-        }
-        //String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
-        TSMapper.addTask(task);
-        //下面是添加学生和作业的联系进taskStudent表里
-        List<String> studentID = TSMapper.queryCourseStuID(session.getAttribute("courseID").toString());
-        if(!studentID.isEmpty()){//如果名单不是空的
-            for(String id:studentID){
-                TSMapper.addTaskStudent(id,TSMapper.queryStuNameById(id),taskID);
+        try {
+            if(!file.isEmpty()){
+                String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
+                file.transferTo(new File(fileURI+"task/"+fileName));// MAC目录/Users/cosmos/Desktop/ Win10目录D:/cosmos/tete/
+                task.setFileName(fileName);//将文件名加入数据库
             }
+            //String realPath = session.getServletContext().getRealPath("/static");//获取某目录的实际路径
+            TSMapper.addTask(task);
+            //下面是添加学生和作业的联系进taskStudent表里
+            List<String> studentID = TSMapper.queryCourseStuID(session.getAttribute("courseID").toString());
+            if(!studentID.isEmpty()){//如果名单不是空的
+                for(String id:studentID){
+                    TSMapper.addTaskStudent(id,TSMapper.queryStuNameById(id),taskID);
+                }
+            }
+            logger.info("增添作业,id为"+taskID);
+        }catch (IOException e){
+            logger.error("增添作业失败,作业id为"+taskID);
         }
+
     }
     //编辑作业
     @Override
     @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
-    public void updateTask(MultipartFile file, Task task) throws IOException {
+    public void updateTask(MultipartFile file, Task task) {
         String oldID = session.getAttribute("taskID").toString();//旧id
         String id= session.getAttribute("courseID").toString()+'_'+task.getId();//新id
         if(!oldID.equals(id)){//如果改变了作业id，作业-学生表也需改变
             TSMapper.changeTaskID(id,oldID);
         }
         task.setId(id);
-        if(!file.isEmpty()){//如果有文件更新文件
-            String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
-            file.transferTo(new File(fileURI+"task/"+fileName));
+        try {
+            if(!file.isEmpty()){//如果有文件更新文件
+                String fileName = task.getId()+"_"+file.getOriginalFilename();//getOriginalFilename()此方法是获取原始文件名称
+                file.transferTo(new File(fileURI+"task/"+fileName));
 //            String url = "D:/cosmos/tete/task/"+fileName;
-            task.setFileName(fileName);//将文件名加入数据库
-            TSMapper.updateTaskF(task,oldID);
-        }else {//如果没有文件不更新文件名
-            TSMapper.updateTask(task,oldID);
+                task.setFileName(fileName);//将文件名加入数据库
+                TSMapper.updateTaskF(task,oldID);
+            }else {//如果没有文件不更新文件名
+                TSMapper.updateTask(task,oldID);
+            }
+            logger.info("编辑作业,id为"+task.getId());
+        }catch (IOException e){
+            logger.error("编辑作业文件失败，作业id为"+task.getId());
         }
     }
     //批改作业

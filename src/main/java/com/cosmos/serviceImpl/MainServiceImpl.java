@@ -6,12 +6,15 @@ import com.cosmos.pojo.*;
 import com.cosmos.service.MainService;
 import com.cosmos.utils.DateUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,43 +38,45 @@ public class MainServiceImpl implements MainService {
     private PasswordEncoder passwordEncoder;//加密
     @Value("${fileURI}")
     private String fileURI;
+    private static final Logger logger = LoggerFactory.getLogger(MainServiceImpl.class);
     //获取头像
     @Override
     public byte[] getAvatar(String id) {
         User user = userMapper.getAvatar(id);
         if(user!=null){
-            byte[] b = user.getAvatar();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-            return b;
+            //HttpHeaders headers = new HttpHeaders();
+            //headers.setContentType(MediaType.IMAGE_PNG);
+            return user.getAvatar();
         }else {//默认头像
             User u = userMapper.getAvatar("Avatar");
-            byte[] b = u.getAvatar();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-            return b;
+            return u.getAvatar();
         }
     }
     //上传头像
     @Override
-    public String setAvatar(MultipartFile file,String id) throws IOException {
+    public String setAvatar(MultipartFile file,String id) {
         if(file.isEmpty()){
             return null;
         }
         String type = file.getContentType();//获取文件后缀名
         if("image/jpeg".equals(type)||"image/png".equals(type)){//判断文件是不是图片
-            byte[] bytes=file.getBytes();//将图片转换成二进制流
-            User user = new User();
-            id = session.getAttribute("id").toString();//防止篡改
-            user.setUsername(id);
-            user.setAvatar(bytes);
-            userMapper.setAvatar(user);
-            if(session.getAttribute("role")=="staff"){
-                return "redirect:/staff/settings.html";
-            }else if(session.getAttribute("role")=="student"){
-                return "redirect:/student/settings.html";
-            }else {
-                return "redirect:/admin/settings.html";
+            try {
+                byte[] bytes=file.getBytes();//将图片转换成二进制流
+                User user = new User();
+                id = session.getAttribute("id").toString();//防止篡改
+                user.setUsername(id);
+                user.setAvatar(bytes);
+                userMapper.setAvatar(user);
+                if(session.getAttribute("role")=="staff"){
+                    return "redirect:/staff/settings.html";
+                }else if(session.getAttribute("role")=="student"){
+                    return "redirect:/student/settings.html";
+                }else {
+                    return "redirect:/admin/settings.html";
+                }
+            }catch (IOException e){
+               logger.error("上传头像失败,用户id为"+session.getAttribute("id"));
+               return null;
             }
         }else {
             return null;
@@ -81,9 +86,11 @@ public class MainServiceImpl implements MainService {
     @Override
     public int changePassword(Map<String, String> Password) {
 //        Password.get("oldPassword").equals(userMapper.queryPasswordByName(session.getAttribute("id").toString()))
-        if(passwordEncoder.matches(Password.get("oldPassword"),userMapper.queryPasswordByName(session.getAttribute("id").toString()))){
+        String id = session.getAttribute("id").toString();
+        if(passwordEncoder.matches(Password.get("oldPassword"),userMapper.queryPasswordByName(id))){
             if(Password.get("newPassword").equals(Password.get("confirmPassword"))){
-                userMapper.changePassword(session.getAttribute("id").toString(),passwordEncoder.encode(Password.get("newPassword")));
+                userMapper.changePassword(id,passwordEncoder.encode(Password.get("newPassword")));
+                logger.info("id:"+id+"更改了密码");
                 return 1;//改密成功
             }else {
                 return 2;//新密码不一致
@@ -94,15 +101,19 @@ public class MainServiceImpl implements MainService {
     }
     //下载文件
     @Override
-    public void download(String fileName, String url, HttpSession session, HttpServletResponse response) throws IOException {
+    public void download(String fileName, String url, HttpSession session, HttpServletResponse response) {
 //        String path = session.getServletContext().getRealPath("/task");//找到xx目录的实际路径
         String realPath = fileURI+url+"/"+fileName;
         response.setHeader("content-disposition","attachment;filename="+fileName);//设置响应头 告知浏览器要保存内容 filename=浏览器显示的下载文件名
-        FileInputStream in= new FileInputStream(realPath);
-        OutputStream out = response.getOutputStream();
-        IOUtils.copy(in,out);
-        out.close();//关闭流
-        in.close();
+        try {
+            FileInputStream in= new FileInputStream(realPath);
+            OutputStream out = response.getOutputStream();
+            IOUtils.copy(in,out);
+            out.close();//关闭流
+            in.close();
+        }catch (IOException e){
+            logger.warn("文件:"+realPath+"下载失败");
+        }
 //        IOUtils.closeQuietly(out);
 //        IOUtils.closeQuietly(in);
 //        System.gc();//调用jvm进行垃圾回收
@@ -120,6 +131,7 @@ public class MainServiceImpl implements MainService {
     }
     //回复评论
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public String reply(String position, String text, String replier, String replierID, HttpServletRequest request) {
         TSMapper.reply(session.getAttribute("id").toString(),
                 session.getAttribute("name").toString(),
@@ -138,6 +150,7 @@ public class MainServiceImpl implements MainService {
     }
     //删除回复
     @Override
+    @Transactional(rollbackFor = Exception.class)//事务声明，如果报错则回滚
     public String deleteReply(int NO, int N, HttpServletRequest request) {
         TSMapper.deleteComment(NO);
         TSMapper.downRepliesNum(N);
@@ -238,7 +251,6 @@ public class MainServiceImpl implements MainService {
             }else {
                 return list;
             }
-
         }
         return null;
     }

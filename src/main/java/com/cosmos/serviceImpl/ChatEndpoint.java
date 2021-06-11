@@ -6,6 +6,8 @@ import com.cosmos.pojo.Message;
 import com.cosmos.config.GetHttpSessionConfigurator;
 import com.cosmos.utils.MessageUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @Controller
 public class ChatEndpoint {
+    private static final Logger logger = LoggerFactory.getLogger(ChatEndpoint.class);
     //用于存储每个客户端对象对应的chatEndpoint对象
     private static final Map<Map<String,Object>,ChatEndpoint> onlineUsers = new ConcurrentHashMap<>();
 
@@ -109,6 +112,7 @@ public class ChatEndpoint {
 
         }catch (Exception e){
             e.printStackTrace();
+            logger.error("聊天接收信息报错，信息为"+message);
         }
 
     }
