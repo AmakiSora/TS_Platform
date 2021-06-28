@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.COSMOS</groupId>
     <artifactId>ts_platform</artifactId>
-    <version>1.88</version>
+    <version>1.91</version>
     <name>TS_Platform</name>
     <description>Teachers and students exchange platform</description>
 
